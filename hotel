@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình bày: Đào tạo KiotViet Hotel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+            display: flex;
+        }
+        .slide-content {
+            width: 100%;
+            max-width: 1200px;
+        }
+        /* Hide all UI navigation elements */
+        .controls, .progress, .slide-number, .slide-navigation {
+            display: none !important;
+        }
+        .special-slide {
+            background: linear-gradient(135deg, #14b8a6 0%, #22c55e 100%);
+            color: white;
+        }
+        .logo-container {
+            position: absolute;
+            top: 2rem;
+            right: 2.5rem;
+            width: 150px;
+        }
+        .room {
+            border: 2px solid #e2e8f0; border-radius: 10px; background-color: #fff; text-align: center;
+            width: 120px; height: 120px; box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .room:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(22, 109, 239, 0.15); }
+        .room.standard { border-left: 10px solid #28a745; }
+        .room.deluxe { border-left: 10px solid #ffc107; }
+        .room.suite { border-left: 10px solid #dc3545; }
+        .room-number { font-size: 2em; font-weight: bold; margin-bottom: 5px; color: #1e293b; }
+        .room-type { font-size: 0.9em; color: #64748b; }
+        
+        .price-table { width: 100%; border-collapse: collapse; }
+        .price-table th, .price-table td { border: 1px solid #e5e7eb; padding: 12px; text-align: center; }
+        .price-table th { background-color: #f3f4f6; color: #374151; font-weight: 600; }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div id="presentation">
+        <!-- Slide 1: Bìa -->
+        <section class="slide active special-slide text-center">
+            <div class="slide-content border-4 border-white p-12 rounded-2xl">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg" alt="KiotViet Logo" class="h-12 mx-auto mb-8">
+                <h1 class="text-6xl font-extrabold tracking-tight">Đào tạo sản phẩm KiotViet Hotel</h1>
+                <p class="mt-4 text-2xl opacity-80">Giải pháp toàn diện cho ngành Khách sạn - Nhà nghỉ - Homestay.</p>
+            </div>
+        </section>
+
+        <!-- NEW Slide 1.1: Image 1 -->
+        <section class="slide bg-black p-0">
+            <div class="w-full h-full">
+                <img src="https://i.postimg.cc/R0st4ccT/i-m-danh-Hotel-17102025.png" alt="Ảnh đào tạo 1" class="w-full h-full object-cover">
+            </div>
+        </section>
+
+        <!-- Slide 2: Mục tiêu khóa học -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Mục tiêu khóa học</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                        <i class="fas fa-book-open text-4xl text-blue-600"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800">Làm quen với KiotViet Hotel</h3>
+                            <p class="text-slate-600 mt-2">Tìm hiểu kiến thức tổng quan về các giải pháp mà KiotViet Hotel cung cấp.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                        <i class="fas fa-chalkboard-teacher text-4xl text-green-500"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800">Học kỹ năng demo & hỏi đáp</h3>
+                            <p class="text-slate-600 mt-2">Nắm vững kỹ năng demo sản phẩm và trả lời câu hỏi thường gặp để tư vấn khách hàng.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                        <i class="fas fa-tasks text-4xl text-yellow-500"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800">Hoàn thành Bài test đánh giá</h3>
+                            <p class="text-slate-600 mt-2">Tham gia bài test trắc nghiệm để đánh giá kiến thức và kỹ năng đã học.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                        <i class="fas fa-tools text-4xl text-purple-500"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800">Làm quen phương pháp học</h3>
+                            <p class="text-slate-600 mt-2">Sử dụng các tài nguyên đào tạo để liên tục cập nhật kiến thức sản phẩm.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Video Giới thiệu -->
+        <section class="slide">
+            <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Video: Giới thiệu KiotViet Hotel</h2>
+            <div class="w-full max-w-4xl bg-white p-4 rounded-xl shadow-2xl">
+                 <div class="aspect-video">
+                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/zZN9N5WhL0U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW Slide 3.1: Interactive Question -->
+        <section class="slide">
+            <div class="slide-content text-center flex flex-col items-center justify-center">
+                <div class="bg-white p-12 rounded-2xl shadow-2xl max-w-4xl mx-auto transform transition-all hover:scale-105 duration-300">
+                    <div class="text-8xl text-pink-500 mb-8">
+                         <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <p class="text-4xl font-semibold text-slate-800 leading-tight">
+                        Bạn hãy tìm kiếm và <span class="text-pink-500">gõ vào khung chat</span> đường link tới thông tin 1 khách hàng tiêu biểu đang sử dụng KiotViet Hotel
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW Slide 3.2: How to search for customers -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Cách tìm kiếm khách hàng KiotViet tiêu biểu</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-blue-500">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-globe mr-3 text-blue-500"></i>Cách 1: KiotViet Web Catalog</h3>
+                        <p class="text-slate-600 mb-4">Tìm kiếm qua website KiotVietWeb, nơi tổng hợp các khách hàng sử dụng website của KiotViet.</p>
+                        <a href="https://sites.google.com/view/kvwebcatalog/" target="_blank" class="inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition-colors">
+                            Truy cập Catalog
+                        </a>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-indigo-500">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fab fa-facebook mr-3 text-indigo-500"></i>Cách 2: Facebook</h3>
+                        <p class="text-slate-600 mb-4">Tìm kiếm trên Facebook với từ khóa <code class="bg-slate-200 text-red-600 font-mono p-1 rounded text-base">bookhotel</code> để xem các trang đang sử dụng tính năng đặt lịch.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 4: Tổng quan KiotViet Hotel -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Tổng quan về KiotViet Hotel</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-info-circle text-blue-600 mr-3"></i>Giới thiệu chung</h3>
+                        <ul class="space-y-3 list-disc list-inside text-slate-600">
+                            <li><strong>Giải pháp toàn diện:</strong> Tối ưu vận hành, quản lý & thúc đẩy doanh thu.</li>
+                            <li><strong>Hoạt động đa nền tảng:</strong> Máy tính & Điện thoại.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-cogs text-green-500 mr-3"></i>Kết nối phần cứng</h3>
+                        <ul class="space-y-3 list-disc list-inside text-slate-600">
+                            <li>Máy in hóa đơn, Máy quét CCCD</li>
+                            <li>Ngăn kéo đựng tiền, Màn hiển thị QR</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-handshake text-purple-500 mr-3"></i>Đối tác liên kết</h3>
+                        <ul class="space-y-3 list-disc list-inside text-slate-600">
+                            <li>Thanh toán, OTA, Khóa từ</li>
+                            <li>Gmail, Zalo ZNS</li>
+                            <li>Mạng xã hội, Hóa đơn điện tử</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 5: Các mô hình Kinh doanh Hotel -->
+        <section class="slide">
+              <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Các mô hình Kinh doanh Hotel</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-hotel text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Khách sạn</h3></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-bed text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Nhà nghỉ</h3></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-home text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Homestay</h3></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-umbrella-beach text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Resort</h3></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-building text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Khu căn hộ dịch vụ</h3></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-campground text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Camping-Glamping</h3></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Tình huống giả định -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Tình huống giả định: Khách sạn Biển Xanh</h2>
+                <div class="flex flex-col gap-6 text-left max-w-4xl mx-auto">
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-3"><i class="fas fa-hotel mr-2"></i>Thông tin Khách sạn</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-700">
+                            <li><strong>Quy mô:</strong> 18 phòng (Standard, Deluxe, Suite).</li>
+                            <li><strong>Nhân sự:</strong> 2 lễ tân, 3 buồng phòng, 1 quản lý.</li>
+                            <li><strong>Khách hàng:</strong> Khách du lịch, khách đặt qua OTA.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-red-800 mb-3"><i class="fas fa-exclamation-triangle mr-2"></i>Vấn đề gặp phải</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-700">
+                           <li>Overbooking do quản lý thủ công nhiều kênh OTA.</li>
+                           <li>Khó theo dõi tình trạng phòng (sạch, bẩn, đang sửa).</li>
+                           <li>Check-in/out chậm, tính tiền dịch vụ phát sinh dễ sai sót.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-green-800 mb-3"><i class="fas fa-lightbulb mr-2"></i>Nhu cầu giải pháp</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-700">
+                            <li>Phần mềm quản lý đặt phòng tập trung, đồng bộ OTA.</li>
+                            <li>Sơ đồ phòng trực quan, cập nhật trạng thái real-time.</li>
+                            <li>Tự động hóa check-in, check-out, tính tiền chính xác.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Minh họa Sơ đồ phòng -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Minh họa Sơ đồ phòng</h2>
+                <div class="space-y-6 max-w-5xl mx-auto">
+                    <div class="floor"><h3 class="text-xl font-semibold mb-3 text-center text-slate-700">Tầng 3</h3><div class="flex justify-center gap-4 flex-wrap"><div class="room suite"><div class="room-number">306</div></div><div class="room deluxe"><div class="room-number">305</div></div><div class="room deluxe"><div class="room-number">304</div></div><div class="room standard"><div class="room-number">303</div></div><div class="room standard"><div class="room-number">302</div></div><div class="room standard"><div class="room-number">301</div></div></div></div>
+                    <div class="floor"><h3 class="text-xl font-semibold mb-3 text-center text-slate-700">Tầng 2</h3><div class="flex justify-center gap-4 flex-wrap"><div class="room suite"><div class="room-number">206</div></div><div class="room deluxe"><div class="room-number">205</div></div><div class="room deluxe"><div class="room-number">204</div></div><div class="room standard"><div class="room-number">203</div></div><div class="room standard"><div class="room-number">202</div></div><div class="room standard"><div class="room-number">201</div></div></div></div>
+                    <div class="floor"><h3 class="text-xl font-semibold mb-3 text-center text-slate-700">Tầng 1</h3><div class="flex justify-center gap-4 flex-wrap"><div class="room suite"><div class="room-number">106</div></div><div class="room deluxe"><div class="room-number">105</div></div><div class="room deluxe"><div class="room-number">104</div></div><div class="room standard"><div class="room-number">103</div></div><div class="room standard"><div class="room-number">102</div></div><div class="room standard"><div class="room-number">101</div></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Minh họa Bảng giá & Quy định -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Minh họa Bảng giá & Quy định</h2>
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <div class="overflow-x-auto bg-white rounded-lg p-4 shadow-md">
+                        <table class="price-table">
+                            <thead><tr><th>Hạng phòng</th><th>Giá theo giờ</th><th>Giá theo ngày</th></tr></thead>
+                            <tbody>
+                                <tr><td>Standard</td><td>200.000đ/2h đầu</td><td>400.000đ/ngày</td></tr>
+                                <tr><td>Deluxe</td><td>250.000đ/2h đầu</td><td>500.000đ/ngày</td></tr>
+                                <tr><td>Suite</td><td>300.000đ/2h đầu</td><td>600.000đ/ngày</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="bg-blue-50 p-6 rounded-lg text-center"><i class="fa-solid fa-clock text-blue-600 text-3xl mb-3"></i><h3 class="font-bold text-blue-800 text-xl">CHECK-IN: 14:00 | CHECK-OUT: 12:00</h3></div>
+                        <div class="bg-yellow-50 p-6 rounded-lg text-center"><i class="fa-solid fa-money-bill-wave text-yellow-600 text-3xl mb-3"></i><h3 class="font-bold text-yellow-800 text-xl">PHỤ PHÍ</h3><p>Từ 50.000đ/h khi nhận/trả phòng sai giờ.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Phân tích nhu cầu: Phòng & Dịch vụ -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8"><i class="fas fa-bed mr-3"></i>Phân tích nhu cầu: Phòng & Dịch vụ</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <table class="w-full text-left text-lg">
+                        <thead class="bg-slate-100">
+                            <tr><th class="p-4 w-1/3"><i class="fas fa-exclamation-circle text-red-500 mr-2"></i>Vấn đề</th><th class="p-4 w-1/3"><i class="fas fa-cogs text-blue-500 mr-2"></i>Tính năng KiotViet</th><th class="p-4 w-1/3"><i class="fas fa-check-circle text-green-500 mr-2"></i>Lợi ích</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="align-top"><td class="p-4">Khó quản lý tình trạng phòng trống, đang ở, bẩn.</td><td class="p-4">Sơ đồ phòng trực quan theo trạng thái.</td><td class="p-4 text-green-600 font-semibold">Nắm bắt tức thời, sắp xếp phòng nhanh.</td></tr>
+                            <tr class="align-top"><td class="p-4">Giá phòng thay đổi theo mùa.</td><td class="p-4">Bảng giá linh hoạt theo thời điểm.</td><td class="p-4 text-green-600 font-semibold">Tối ưu doanh thu, thu hút khách.</td></tr>
+                            <tr class="align-top"><td class="p-4">Quản lý hàng trong minibar, giặt ủi...</td><td class="p-4">Quản lý Dịch vụ và Hàng hóa bán kèm.</td><td class="p-4 text-green-600 font-semibold">Ghi nhận dịch vụ phát sinh vào hóa đơn.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Phân tích nhu cầu: Dòng tiền & Nhân sự -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8"><i class="fas fa-money-bill-wave mr-3"></i>Phân tích nhu cầu: Dòng tiền & Nhân sự</h2>
+                 <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <table class="w-full text-left text-lg">
+                        <thead class="bg-slate-100">
+                            <tr><th class="p-4 w-1/3"><i class="fas fa-exclamation-circle text-red-500 mr-2"></i>Vấn đề</th><th class="p-4 w-1/3"><i class="fas fa-cogs text-blue-500 mr-2"></i>Tính năng KiotViet</th><th class="p-4 w-1/3"><i class="fas fa-check-circle text-green-500 mr-2"></i>Lợi ích</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="align-top"><td class="p-4">Tính lương, hoa hồng cho nhân viên thủ công.</td><td class="p-4">Tự động tính lương, hoa hồng.</td><td class="p-4 text-green-600 font-semibold">Minh bạch, chính xác, tiết kiệm thời gian.</td></tr>
+                            <tr class="align-top"><td class="p-4">Không nắm được doanh thu, lợi nhuận.</td><td class="p-4">Hệ thống Báo cáo chi tiết.</td><td class="p-4 text-green-600 font-semibold">Đánh giá hiệu quả kinh doanh.</td></tr>
+                            <tr class="align-top"><td class="p-4">Không quản lý được các khoản thu-chi lặt vặt.</td><td class="p-4">Sổ quỹ quản lý mọi khoản thu-chi.</td><td class="p-4 text-green-600 font-semibold">Quản lý dòng tiền tổng thể.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 11: Phân tích nhu cầu: Khách hàng & Đặt phòng -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8"><i class="fas fa-users mr-3"></i>Phân tích nhu cầu: Khách hàng & Đặt phòng</h2>
+                 <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <table class="w-full text-left text-lg">
+                        <thead class="bg-slate-100">
+                            <tr><th class="p-4 w-1/3"><i class="fas fa-exclamation-circle text-red-500 mr-2"></i>Vấn đề</th><th class="p-4 w-1/3"><i class="fas fa-cogs text-blue-500 mr-2"></i>Tính năng KiotViet</th><th class="p-4 w-1/3"><i class="fas fa-check-circle text-green-500 mr-2"></i>Lợi ích</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="align-top"><td class="p-4">Quản lý đặt phòng từ nhiều kênh dễ trùng lặp.</td><td class="p-4">Quản lý Đặt phòng tập trung. Tích hợp OTA.</td><td class="p-4 text-green-600 font-semibold">Đồng bộ lịch, tránh overbooking.</td></tr>
+                            <tr class="align-top"><td class="p-4">Không có thông tin lịch sử của khách hàng cũ.</td><td class="p-4">Lưu trữ hồ sơ khách hàng.</td><td class="p-4 text-green-600 font-semibold">Chăm sóc khách hàng thân thiết tốt hơn.</td></tr>
+                            <tr class="align-top"><td class="p-4">Gửi xác nhận, nhắc ngày đến thủ công.</td><td class="p-4">Gửi tin nhắn SMS/Zalo tự động.</td><td class="p-4 text-green-600 font-semibold">Chuyên nghiệp, giảm tỷ lệ khách hủy phòng.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 12: Quy trình Demo 6 bước -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Quy trình Demo 6 bước cơ bản</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center"><div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">1</div><h3 class="font-semibold text-xl mb-3">Khởi tạo dữ liệu</h3><ul class="text-sm text-slate-600 list-disc list-inside text-left"><li>Thiết lập tính tiền</li><li>Khởi tạo Phòng</li><li>Khởi tạo Hàng hóa</li><li>Tạo bảng giá</li></ul></div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center"><div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">2</div><h3 class="font-semibold text-xl mb-3">Tạo đặt phòng</h3><ul class="text-sm text-slate-600 list-disc list-inside text-left"><li>Đặt theo số khách</li><li>Đặt trực tiếp phòng</li></ul></div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center"><div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">3</div><h3 class="font-semibold text-xl mb-3">Nhận phòng</h3><ul class="text-sm text-slate-600 list-disc list-inside text-left"><li>Tìm kiếm đặt phòng</li><li>Thu tiền cọc</li><li>Cập nhật giấy tờ</li></ul></div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center"><div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">4</div><h3 class="font-semibold text-xl mb-3">Trả phòng</h3><ul class="text-sm text-slate-600 list-disc list-inside text-left"><li>Xác nhận phụ thu</li><li>Thêm dịch vụ</li><li>Thanh toán</li></ul></div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center"><div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">5</div><h3 class="font-semibold text-xl mb-3">Trạng thái phòng</h3><ul class="text-sm text-slate-600 list-disc list-inside text-left"><li>Chuyển trạng thái tự động</li><li>Chuyển trạng thái thủ công</li></ul></div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center"><div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">6</div><h3 class="font-semibold text-xl mb-3">Báo cáo</h3><ul class="text-sm text-slate-600 list-disc list-inside text-left"><li>Báo cáo trên lễ tân</li><li>Báo cáo trên quản lý</li></ul></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPDATED Step 1 Details -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-10"><i class="fas fa-database text-blue-500 mr-4"></i>Bước 1: Khởi tạo dữ liệu</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-8 rounded-xl shadow-lg">
+                    <div class="border-r-2 border-slate-200 pr-8">
+                        <h3 class="text-2xl font-bold text-green-600 mb-4">TẠI SAO?</h3>
+                        <p class="text-lg text-slate-700">Tạo thông tin Hạng phòng, Danh sách phòng, Bảng giá phòng và giá sản phẩm, dịch vụ để quản lý hoạt động lưu trú hiệu quả.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-blue-600 mb-4">CÁCH THỰC HIỆN</h3>
+                        <p class="text-lg text-slate-700 mb-2">Trên Màn hình <strong>Quản lý</strong>:</p>
+                        <ul class="space-y-2 text-lg text-slate-700 list-disc list-inside">
+                            <li>Vào <strong>Thiết lập > Thiết lập phương thức tính tiền phòng</strong></li>
+                            <li>Vào <strong>Phòng - Hạng phòng</strong> để khởi tạo Hạng phòng, sau đó thêm Danh sách phòng bằng file Excel</li>
+                            <li>Tạo bảng giá phòng chi tiết theo từng loại phòng</li>
+                            <li>Vào <strong>Hàng hóa > Danh mục</strong> để tạo Hàng hóa, dịch vụ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPDATED Step 2 Details -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-10"><i class="fas fa-calendar-plus text-blue-500 mr-4"></i>Bước 2: Tạo đặt phòng</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-8 rounded-xl shadow-lg">
+                    <div class="border-r-2 border-slate-200 pr-8">
+                        <h3 class="text-2xl font-bold text-green-600 mb-4">LỢI ÍCH</h3>
+                        <p class="text-lg text-slate-700">Nhanh chóng tìm phòng phù hợp để tư vấn khách, báo giá các phương án linh hoạt theo nhu cầu về số người, số phòng.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-blue-600 mb-4">CÁCH THỰC HIỆN</h3>
+                        <p class="text-lg text-slate-700 mb-2">Trên Màn hình <strong>Quản lý</strong>:</p>
+                        <ul class="space-y-2 text-lg text-slate-700 list-disc list-inside">
+                             <li>Vào <strong>Đặt phòng > Thêm mới</strong></li>
+                             <li>Chọn ngày nhận – trả, chọn phòng và nhập thông tin khách đặt phòng</li>
+                             <li>Có thể thêm yêu cầu đặc biệt, dịch vụ kèm theo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPDATED Step 3 Details -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-10"><i class="fas fa-key text-blue-500 mr-4"></i>Bước 3: Nhận phòng</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-8 rounded-xl shadow-lg">
+                    <div class="border-r-2 border-slate-200 pr-8">
+                        <h3 class="text-2xl font-bold text-green-600 mb-4">LỢI ÍCH</h3>
+                        <p class="text-lg text-slate-700">Bổ sung thông tin quản lý giấy tờ khách lưu trú để phục vụ cho việc khai báo lưu trú và lưu trữ hồ sơ chính xác.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-blue-600 mb-4">CÁCH THỰC HIỆN</h3>
+                        <p class="text-lg text-slate-700 mb-2">Trên Màn hình <strong>Lễ tân</strong>:</p>
+                        <ul class="space-y-2 text-lg text-slate-700 list-disc list-inside">
+                             <li>Tìm kiếm đặt phòng bằng ô tìm kiếm hoặc bộ lọc trạng thái <strong>Đặt</strong></li>
+                             <li>Mở đặt phòng và bấm <strong>Nhận phòng</strong></li>
+                             <li>Chọn phòng <strong>Sạch</strong> để cho khách nhận</li>
+                             <li>Cập nhật Căn cước hoặc Passport của khách lưu trú</li>
+                             <li>Xác nhận số tiền đặt cọc</li>
+                             <li>Bấm <strong>Xác nhận nhận phòng</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPDATED Step 4 Details -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-10"><i class="fas fa-receipt text-blue-500 mr-4"></i>Bước 4: Trả phòng</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-8 rounded-xl shadow-lg">
+                    <div class="border-r-2 border-slate-200 pr-8">
+                        <h3 class="text-2xl font-bold text-green-600 mb-4">LỢI ÍCH</h3>
+                        <p class="text-lg text-slate-700">Hoàn tất quá trình lưu trú, tính đúng tiền phòng và dịch vụ phát sinh, đảm bảo doanh thu minh bạch.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-blue-600 mb-4">CÁCH THỰC HIỆN</h3>
+                        <p class="text-lg text-slate-700 mb-2">Trên Màn hình <strong>Lễ tân</strong>:</p>
+                        <ul class="space-y-2 text-lg text-slate-700 list-disc list-inside">
+                             <li>Chọn phòng sắp trả</li>
+                             <li>Có thể thêm sản phẩm, dịch vụ phát sinh trước khi khách trả phòng</li>
+                             <li>Khi khách trả phòng, mở booking và bấm <strong>Trả phòng</strong></li>
+                             <li>Kiểm tra phụ thu, bổ sung các dịch vụ phát sinh</li>
+                             <li>Thao tác thanh toán</li>
+                             <li>Hoàn thành trả phòng</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPDATED Step 5 Details -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-10"><i class="fas fa-broom text-blue-500 mr-4"></i>Bước 5: Trạng thái phòng</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-8 rounded-xl shadow-lg">
+                    <div class="border-r-2 border-slate-200 pr-8">
+                        <h3 class="text-2xl font-bold text-green-600 mb-4">LỢI ÍCH</h3>
+                        <p class="text-lg text-slate-700">Theo dõi và cập nhật tình trạng phòng sau trả để phối hợp dọn dẹp, chuẩn bị đón khách nhanh chóng và hiệu quả.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-blue-600 mb-4">CÁCH THỰC HIỆN</h3>
+                        <p class="text-lg text-slate-700 mb-2">Trên Màn hình <strong>Lễ tân</strong>:</p>
+                        <ul class="space-y-2 text-lg text-slate-700 list-disc list-inside">
+                             <li>Các phòng đã trả sẽ tự động chuyển trạng thái sang <strong>Chưa dọn</strong></li>
+                             <li>Có thể bấm vào Số phòng để đổi trạng thái</li>
+                             <li>Bấm vào <strong>Menu tùy chọn > Buồng phòng</strong> để:</li>
+                             <li class="ml-4">In danh sách phòng chưa dọn</li>
+                             <li class="ml-4">Thay đổi trạng thái dọn phòng hàng loạt</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPDATED Step 6 Details -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-10"><i class="fas fa-chart-line text-blue-500 mr-4"></i>Bước 6: Báo cáo</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-8 rounded-xl shadow-lg">
+                    <div class="border-r-2 border-slate-200 pr-8">
+                        <h3 class="text-2xl font-bold text-green-600 mb-4">LỢI ÍCH</h3>
+                        <p class="text-lg text-slate-700">Theo dõi doanh thu, tình hình hoạt động, công suất phòng và hiệu quả kinh doanh để đưa ra quyết định chính xác và kịp thời.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-blue-600 mb-4">CÁCH THỰC HIỆN</h3>
+                        <p class="text-lg text-slate-700 mb-2">Trên Màn hình <strong>Lễ tân</strong>:</p>
+                        <ul class="space-y-2 text-lg text-slate-700 list-disc list-inside">
+                            <li>Xem nhanh <strong>Báo cáo lễ tân</strong>, <strong>Báo cáo cuối ngày</strong></li>
+                            <li class="list-none mt-2">Trên Màn hình <strong>Quản lý</strong>:</li>
+                            <li>Xem đa dạng báo cáo như:</li>
+                             <li class="ml-4">Báo cáo cuối ngày, Báo cáo đặt phòng</li>
+                             <li class="ml-4">Báo cáo phòng, Báo cáo kênh bán</li>
+                             <li class="ml-4">Báo cáo tài chính, v.v.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 13: Tính năng nâng cao -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Tư vấn những tính năng nâng cao</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-500">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-cogs text-blue-500 mr-3"></i>Vận hành</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-600"><li>Đặt phòng, Nhận phòng</li><li>Đổi phòng, ghép đoàn</li><li>Trả phòng, Thanh toán</li><li>Quản lý thẻ từ</li><li>Cập nhật dọn phòng</li></ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-green-500">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-users-cog text-green-500 mr-3"></i>Quản lý</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-600"><li>Quản lý Giá phòng</li><li>Quản lý Hàng hóa</li><li>Quản lý Khách hàng</li><li>Quản lý Nhân viên</li><li>Báo cáo</li></ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-orange-500">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-chart-line text-orange-500 mr-3"></i>Tăng doanh thu</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-600"><li>Đặt phòng online</li><li>Website khách sạn</li><li>Kết nối kênh bán online</li><li>Vouchers, Tích điểm</li><li>Liên kết Zalo, MXH</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 14: Tài liệu & Hỗ trợ -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Tài liệu & Hỗ trợ</h2>
+                <div class="flex flex-col items-center gap-8 w-full">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+                        <a href="https://bit.ly/kvhotelchecklist" target="_blank" class="block bg-green-500 text-white p-8 rounded-xl shadow-lg text-center hover:scale-105 transition-transform"><i class="fas fa-list-check text-5xl mb-3"></i><h3 class="text-xl font-bold">Checklist ôn tập</h3></a>
+                        <a href="https://sites.google.com/view/kvhotel-faq" target="_blank" class="block bg-blue-600 text-white p-8 rounded-xl shadow-lg text-center hover:scale-105 transition-transform"><i class="fas fa-question-circle text-5xl mb-3"></i><h3 class="text-xl font-bold">Trang Hỏi đáp</h3></a>
+                        <a href="https://kiotvietlnd.github.io/quiz/kiotviet-hotel" target="_blank" class="block bg-yellow-500 text-white p-8 rounded-xl shadow-lg text-center hover:scale-105 transition-transform"><i class="fas fa-gamepad text-5xl mb-3"></i><h3 class="text-xl font-bold">Quiz Game</h3></a>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl">
+                        <a href="https://www.youtube.com/playlist?list=PLjB-7CLwd9mFVJDhJrImrwaCD0TQo1gog" target="_blank" class="block bg-red-500 text-white p-8 rounded-xl shadow-lg text-center hover:scale-105 transition-transform"><i class="fab fa-youtube text-5xl mb-3"></i><h3 class="text-xl font-bold">Playlist Đào tạo</h3></a>
+                        <a href="https://notebooklm.google.com/notebook/d4f89228-4964-48f0-907d-46abd58dbee8" target="_blank" class="block bg-purple-600 text-white p-8 rounded-xl shadow-lg text-center hover:scale-105 transition-transform"><i class="fas fa-robot text-5xl mb-3"></i><h3 class="text-xl font-bold">Hỏi Trợ lý AI</h3></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW Slide 14.1: Image 2 -->
+        <section class="slide bg-black p-0">
+            <div class="w-full h-full">
+                <img src="https://i.postimg.cc/fL3NpWBv/2.png" alt="Ảnh đào tạo 2" class="w-full h-full object-cover">
+            </div>
+        </section>
+
+        <!-- Slide 15: Hỏi đáp & Cảm ơn -->
+        <section class="slide special-slide text-center">
+            <div class="slide-content border-4 border-white p-12 rounded-2xl">
+                 <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg" alt="KiotViet Logo" class="h-12 mx-auto mb-8">
+                <h2 class="text-7xl font-bold mb-6">Q & A</h2>
+                <p class="text-3xl opacity-90">Cảm ơn bạn đã tham gia!</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                });
+                slides[index].classList.add('active');
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+            
+            function toggleFullScreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                }
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevSlide();
+                } else if (e.key.toLowerCase() === 'f') {
+                    e.preventDefault();
+                    toggleFullScreen();
+                }
+            });
+
+            showSlide(currentSlide);
+        });
+    </script>
+
+</body>
+</html>
+
