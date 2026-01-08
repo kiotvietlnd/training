@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Đào Tạo 2026 - KiotViet</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        
+        @keyframes float { 0% { transform: translate(0, 0); } 50% { transform: translate(-20px, 20px); } 100% { transform: translate(0, 0); } }
+        
+        .bg-blob {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-color: #f8fafc; 
+            overflow: hidden;
+        }
+        .blob {
+            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #dbeafe; } 
+        .blob-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: #dcfce7; } 
+        .blob-3 { top: 40%; left: 40%; width: 30vw; height: 30vw; background: #e0f2fe; animation-delay: -5s; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useMemo, useState } = React;
+
+        // --- ICONS (SVG Components replacing Lucide-React for single file portability) ---
+        const CalendarIcon = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        );
+        const AwardIcon = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        );
+        const InfoIcon = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        );
+        const XIcon = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 18 18"/></svg>
+        );
+
+        const currentYear = 2026;
+
+        // --- DỮ LIỆU & LOGIC ---
+
+        const CURRICULUM = [
+            "Tuần 1 - Thứ 2: Onboard - Đào tạo hội nhập",
+            "Tuần 1 - Thứ 3: Đào tạo Sản phẩm B1",
+            "Tuần 1 - Thứ 4: Đào tạo Sản phẩm B2",
+            "Tuần 1 - Thứ 5: Đào tạo Sản phẩm B3",
+            "Tuần 1 - Thứ 6: Test Sản phẩm",
+            "Tuần 2 - Thứ 2: Test COC",
+            "Tuần 2 - Thứ 3: Đào tạo Telesales",
+            "Tuần 2 - Thứ 4: Đào tạo Direct Sales",
+            "Tuần 2 - Thứ 5: Test Telesales",
+            "Tuần 2 - Thứ 6: Test Direct Sales"
+        ];
+
+        const holidays = {
+            "1-1": "Tết Dương Lịch",
+            "1-2": "Nghỉ Tết Dương Lịch",
+            "1-3": "Nghỉ Tết Dương Lịch",
+            "1-4": "Nghỉ Tết Dương Lịch",
+            "2-16": "Giao Thừa",
+            "2-17": "Mùng 1 Tết Nguyên Đán",
+            "2-18": "Mùng 2 Tết Nguyên Đán",
+            "2-19": "Mùng 3 Tết Nguyên Đán",
+            "2-20": "Mùng 4 Tết Nguyên Đán",
+            "2-21": "Mùng 5 Tết Nguyên Đán",
+            "4-27": "Nghỉ Bù Giỗ Tổ Hùng Vương",
+            "4-30": "Ngày Giải Phóng Miền Nam",
+            "5-1": "Ngày Quốc Tế Lao Động",
+            "5-2": "Nghỉ Lễ 30/4 - 1/5",
+            "5-3": "Nghỉ Lễ 30/4 - 1/5",
+            "8-29": "Nghỉ Lễ Quốc Khánh",
+            "8-30": "Nghỉ Lễ Quốc Khánh",
+            "8-31": "Nghỉ Lễ Quốc Khánh",
+            "9-1": "Nghỉ Lễ Quốc Khánh",
+            "9-2": "Quốc Khánh 2/9",
+        };
+
+        const formatDateKey = (date) => `${date.getMonth() + 1}-${date.getDate()}`;
+        const isHoliday = (date) => !!holidays[formatDateKey(date)];
+        const isWeekend = (date) => date.getDay() === 0 || date.getDay() === 6;
+
+        const getClassRange = (startDateObj) => {
+            let endDate = new Date(startDateObj);
+            endDate.setDate(startDateObj.getDate() + 11); 
+            return { start: startDateObj, end: endDate };
+        };
+
+        const generateScheduleData = () => {
+            let events = {};
+            let classCounter = 0; 
+
+            // 1. Khởi tạo ngày lễ
+            Object.keys(holidays).forEach(key => {
+                events[key] = { type: 'holiday', label: holidays[key], markers: [] };
+            });
+
+            // 2. Logic Marker (Test KV1 & Thuế)
+            for (let m = 0; m < 12; m++) {
+                // --- Test KV1 (Ngày 15 hoặc bù) ---
+                let kv1Date = new Date(currentYear, m, 15);
+                while (isWeekend(kv1Date) || isHoliday(kv1Date)) {
+                    kv1Date.setDate(kv1Date.getDate() + 1);
+                }
+                const kv1Key = formatDateKey(kv1Date);
+                if (!events[kv1Key]) events[kv1Key] = { markers: [] };
+                events[kv1Key].markers = [...(events[kv1Key].markers || []), { type: 'kv1', label: 'Test KV1' }];
+
+                // --- Đào tạo Thuế - HĐĐT (Thứ 6 của tuần đầu tiên bắt đầu từ Thứ 2) ---
+                let firstDayOfMonth = new Date(currentYear, m, 1);
+                let taxDate;
+
+                if (firstDayOfMonth.getDay() === 1) {
+                    // Nếu ngày 1 là Thứ 2 -> Tuần này đủ chuẩn -> T6 là ngày 5
+                    taxDate = new Date(currentYear, m, 5);
+                } else {
+                    // Nếu không -> Tìm ngày Thứ 2 đầu tiên tiếp theo
+                    let nextMonday = new Date(firstDayOfMonth);
+                    while (nextMonday.getDay() !== 1) {
+                        nextMonday.setDate(nextMonday.getDate() + 1);
+                    }
+                    // T6 của tuần đó = Thứ 2 + 4 ngày
+                    taxDate = new Date(nextMonday);
+                    taxDate.setDate(nextMonday.getDate() + 4);
+                }
+                
+                const taxKey = formatDateKey(taxDate);
+                if (!events[taxKey]) events[taxKey] = { markers: [] };
+                events[taxKey].markers = [...(events[taxKey].markers || []), { type: 'tax', label: 'Đào tạo Thuế - HĐĐT' }];
+            }
+
+            // Helper gán lịch học
+            const assignTrainingDay = (dateObj, variant, topicLabel) => {
+                const key = formatDateKey(dateObj);
+                
+                if (events[key] && events[key].type === 'holiday') return;
+
+                if (!events[key] || !events[key].type) {
+                    events[key] = { 
+                        ...events[key],
+                        type: 'training', 
+                        label: topicLabel, 
+                        variant: variant 
+                    };
+                    return;
+                }
+
+                if (events[key].type === 'training') {
+                    const existingVariant = events[key].variant;
+                    if (existingVariant !== variant) {
+                        events[key] = { 
+                            ...events[key], 
+                            type: 'overlap', 
+                            label: `Lớp cũ: ${events[key].label} \nLớp mới: ${topicLabel}`,
+                            variant1: existingVariant,
+                            variant2: variant,
+                            topic1: events[key].label,
+                            topic2: topicLabel
+                        };
+                    }
+                }
+            };
+
+            // 3. SEED DATA: Lớp từ 29/12/2025 (Màu Xanh Lá - Green)
+            const seedDec29 = new Date(2025, 11, 29); 
+            const seedRange = getClassRange(seedDec29);
+            let seedCurrent = new Date(seedRange.start);
+            let seedWIdx = 0;
+            
+            while(seedCurrent <= seedRange.end) {
+                if (seedCurrent.getFullYear() === currentYear) {
+                     const dayOfWeek = seedCurrent.getDay();
+                     if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                         const topic = CURRICULUM[seedWIdx] || "Training";
+                         assignTrainingDay(new Date(seedCurrent), 'green', topic);
+                     }
+                }
+                seedCurrent.setDate(seedCurrent.getDate() + 1);
+                if (seedCurrent.getDay() !== 0 && seedCurrent.getDay() !== 6) seedWIdx++;
+            }
+
+            // 4. Main Loop 2026
+            for (let m = 0; m < 12; m++) {
+                let startDates = [];
+
+                if (m === 0) {
+                    startDates = [5, 12];
+                } else {
+                    let d = 2;
+                    if (m === 4) d = 4;
+                    if (m === 7) d = 3;
+                    if (m === 8) d = 7;
+                    if (m === 9) d = 5;
+                    startDates.push(d);
+                }
+
+                if (m !== 5) { // Trừ tháng 6
+                    if (m === 11) {
+                        startDates.push(28, 29, 30, 31);
+                    } else {
+                        let d = 26;
+                        if (m === 6) d = 27;
+                        if (m === 8) d = 28;
+                        startDates.push(d);
+                    }
+                }
+
+                startDates.forEach(d => {
+                    // Loại bỏ lớp 12/1
+                    if (m === 0 && d === 12) return;
+                    
+                    const targetDate = new Date(currentYear, m, d);
+                    const day = targetDate.getDay(); 
+                    let diffToMon = day === 0 ? 6 : day - 1;
+                    let mon = new Date(targetDate);
+                    mon.setDate(targetDate.getDate() - diffToMon);
+
+                    const range = getClassRange(mon);
+                    const variant = classCounter % 2 === 0 ? 'blue' : 'green';
+                    classCounter++;
+
+                    let current = new Date(range.start);
+                    let workingDayIndex = 0;
+
+                    while (current <= range.end) {
+                        const currentDayOfWeek = current.getDay();
+                        if (currentDayOfWeek !== 0 && currentDayOfWeek !== 6) {
+                            const topic = CURRICULUM[workingDayIndex] || "Training";
+                            assignTrainingDay(new Date(current), variant, topic);
+                            workingDayIndex++;
+                        }
+                        current.setDate(current.getDate() + 1);
+                    }
+                });
+            }
+            return events;
+        };
+
+        // --- COMPONENTS ---
+
+        const InfoModal = ({ isOpen, onClose }) => {
+            if (!isOpen) return null;
+
+            return (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm" onClick={onClose}></div>
+                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md relative overflow-hidden animate-in fade-in zoom-in duration-200">
+                        <div className="bg-slate-800 p-4 flex items-center justify-between">
+                            <h2 className="text-white font-bold text-lg flex items-center gap-2">
+                                <InfoIcon size={20} /> Quy tắc & Lộ trình
+                            </h2>
+                            <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
+                                <XIcon size={20} />
+                            </button>
+                        </div>
+                        
+                        <div className="p-6 max-h-[70vh] overflow-y-auto">
+                            <div className="mb-6">
+                                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider mb-3 border-b pb-2">
+                                    Lộ trình Đào tạo (2 Tuần)
+                                </h3>
+                                <div className="space-y-2 text-xs text-slate-600">
+                                    {CURRICULUM.map((item, idx) => (
+                                        <div key={idx} className={`p-2 rounded border ${idx < 5 ? 'bg-blue-50 border-blue-100' : 'bg-emerald-50 border-emerald-100'}`}>
+                                            <span className="font-semibold text-slate-800">{item.split(':')[0]}:</span>
+                                            {item.split(':')[1]}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="mb-6">
+                                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider mb-3 border-b pb-2">
+                                    Ký hiệu & Giao thoa
+                                </h3>
+                                <div className="space-y-3 text-sm">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded bg-blue-600"></div>
+                                        <span>Lớp Nhóm 1 (Xanh Dương)</span>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded bg-emerald-500"></div>
+                                        <span>Lớp Nhóm 2 (Xanh Lá)</span>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded bg-[linear-gradient(to_bottom,#2563eb_50%,#10b981_50%)]"></div>
+                                        <div className="text-xs">
+                                            <span className="font-bold block">Ngày Giao Thoa (Trên/Dưới)</span>
+                                            <span>Trên: Lớp cũ (Tuần 2)</span><br/>
+                                            <span>Dưới: Lớp mới (Tuần 1)</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded bg-white border border-slate-200 relative flex items-center justify-center font-extrabold text-yellow-500">
+                                            15
+                                        </div>
+                                        <span>Ngày Onboard (Chữ Vàng)</span>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded bg-white border border-slate-200 relative">
+                                            <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></div>
+                                        </div>
+                                        <span>Test KV1 (Ngày 15 hoặc bù)</span>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded bg-white border border-slate-200 relative">
+                                            <div className="absolute top-1 right-1 w-2 h-2 bg-orange-400 rounded-full"></div>
+                                        </div>
+                                        <span>Đào tạo Thuế - HĐĐT</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const DayCell = ({ day, month, year, event, isWeekend }) => {
+            let baseClass = "relative group flex items-center justify-center w-full aspect-square text-xs cursor-default rounded-md transition-all duration-200 overflow-hidden";
+            let textClass = "z-10 text-slate-600 font-medium";
+            let bgClass = "bg-transparent"; 
+            
+            let tooltipLines = [];
+            let tooltipTitle = "";
+
+            // FIX: Removed optional chaining for Babel 6 compatibility
+            const markers = (event && event.markers) || [];
+            const hasKV1 = markers.find(m => m.type === 'kv1');
+            const hasTax = markers.find(m => m.type === 'tax');
+
+            if (hasKV1) tooltipLines.push(`• ${hasKV1.label}`);
+            if (hasTax) tooltipLines.push(`• ${hasTax.label}`);
+
+            const isOnboard = (label) => label && label.includes("Onboard");
+
+            if (event) {
+                if (event.type === 'holiday') {
+                    baseClass += " bg-red-100 border border-red-200"; 
+                    textClass = "text-red-800 font-extrabold";
+                    tooltipTitle = "Ngày Lễ";
+                    tooltipLines.unshift(event.label);
+                } 
+                else if (event.type === 'overlap') {
+                    textClass = "text-white font-bold drop-shadow-md";
+                    
+                    if (isOnboard(event.topic2)) {
+                        textClass = "text-yellow-300 font-extrabold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]";
+                    }
+
+                    const v1Color = event.variant1 === 'blue' ? '#2563eb' : '#10b981';
+                    const v2Color = event.variant2 === 'blue' ? '#2563eb' : '#10b981';
+
+                    const gradientStyle = {
+                        background: `linear-gradient(to bottom, ${v1Color} 50%, ${v2Color} 50%)`
+                    };
+                    
+                    tooltipLines.push(`Trên: ${event.topic1}`);
+                    tooltipLines.push(`Dưới: ${event.topic2}`);
+
+                    return (
+                        <div className={`${baseClass} hover:scale-105 hover:shadow-lg`} style={gradientStyle}>
+                            <span className={textClass}>{day}</span>
+                            <div className="absolute top-1 right-1 flex gap-0.5 z-20">
+                                {hasKV1 && <div className="w-1.5 h-1.5 bg-red-500 rounded-full shadow-sm ring-1 ring-white"></div>}
+                                {hasTax && <div className="w-1.5 h-1.5 bg-orange-400 rounded-full shadow-sm ring-1 ring-white"></div>}
+                            </div>
+                            
+                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block z-50 w-64">
+                                <div className="bg-slate-800 text-white text-[10px] p-2 rounded shadow-lg">
+                                    <div className="mb-1 pb-1 border-b border-white/20 font-bold text-yellow-300">GIAO THOA LỚP</div>
+                                    <div className="grid gap-1">
+                                        {tooltipLines.map((line, idx) => (
+                                            <div key={idx} className="flex gap-2 items-start text-left">
+                                                <span className="w-1 h-1 mt-1.5 rounded-full bg-white/50 shrink-0"></span>
+                                                <span>{line}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800"></div>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                }
+                else if (event.type === 'training') {
+                    textClass = "text-white font-bold";
+                    if (isOnboard(event.label)) {
+                        textClass = "text-yellow-300 font-extrabold drop-shadow-md";
+                    }
+
+                    if (event.variant === 'blue') {
+                        baseClass += " bg-blue-600 shadow-sm";
+                        bgClass = "hover:bg-blue-700 hover:shadow-md hover:-translate-y-0.5";
+                    } else {
+                        baseClass += " bg-emerald-500 shadow-sm";
+                        bgClass = "hover:bg-emerald-600 hover:shadow-md hover:-translate-y-0.5";
+                    }
+                    tooltipLines.unshift(event.label);
+                }
+            } else if (isWeekend) {
+                textClass = "text-slate-400 font-semibold"; 
+            } else {
+                bgClass = "hover:bg-slate-50";
+            }
+
+            const tooltip = tooltipLines.length > 0 ? (
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block z-50 w-auto min-w-[120px] max-w-[200px]">
+                    <div className="bg-slate-800 text-white text-[10px] py-1.5 px-2.5 rounded shadow-lg text-left">
+                        {tooltipTitle && <div className="font-bold text-yellow-300 mb-0.5 text-center">{tooltipTitle}</div>}
+                        {tooltipLines.map((line, i) => (
+                            <div key={i} className="mb-0.5 last:mb-0 leading-tight">
+                                {line}
+                            </div>
+                        ))}
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800"></div>
+                    </div>
+                </div>
+            ) : null;
+
+            return (
+                <div className={`${baseClass} ${bgClass}`}>
+                    <span className={textClass}>{day}</span>
+                    <div className="absolute top-1 right-1 flex gap-0.5 z-20">
+                        {hasKV1 && <div className="w-1.5 h-1.5 bg-red-500 rounded-full shadow-sm ring-1 ring-white"></div>}
+                        {hasTax && <div className="w-1.5 h-1.5 bg-orange-400 rounded-full shadow-sm ring-1 ring-white"></div>}
+                    </div>
+                    {tooltip}
+                </div>
+            );
+        };
+
+        const MonthGrid = ({ month, year, events }) => {
+            const monthNames = [
+                "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
+                "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+            ];
+            
+            const firstDayOfMonth = new Date(year, month, 1).getDay(); 
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const startDayIndex = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1; 
+            
+            const days = [];
+            
+            for (let i = 0; i < startDayIndex; i++) {
+                days.push(<div key={`empty-${i}`} className="w-full aspect-square"></div>);
+            }
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dateKey = `${month + 1}-${d}`;
+                const event = events[dateKey] || null;
+                const dateObj = new Date(year, month, d);
+                const dayOfWeek = dateObj.getDay();
+                const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+
+                days.push(
+                    <DayCell 
+                        key={d} 
+                        day={d} 
+                        month={month} 
+                        year={year} 
+                        event={event} 
+                        isWeekend={isWeekend} 
+                    />
+                );
+            }
+
+            const quarter = Math.floor(month / 3) + 1;
+
+            return (
+                // UPDATE: Increased border contrast (border-slate-300)
+                <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-300 hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
+                    <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-50">
+                        <div className="flex items-baseline gap-2">
+                            <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wide">
+                                {monthNames[month]}
+                            </h3>
+                            <span className="text-[10px] font-medium text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded">
+                                Q{quarter}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-7 mb-2">
+                        {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((day, i) => (
+                            <div key={day} className={`text-center text-[10px] font-semibold uppercase tracking-wider ${i >= 5 ? 'text-slate-300' : 'text-slate-400'}`}>
+                                {day}
+                            </div>
+                        ))}
+                    </div>
+                    
+                    <div className="grid grid-cols-7 gap-1 flex-grow content-start">
+                        {days}
+                    </div>
+                </div>
+            );
+        };
+
+        const CalendarApp = () => {
+            const eventData = useMemo(() => generateScheduleData(), []);
+            const months = Array.from({ length: 12 }, (_, i) => i);
+            const [isInfoOpen, setIsInfoOpen] = useState(false);
+
+            return (
+                <div className="min-h-screen text-slate-700 antialiased selection:bg-blue-100 selection:text-blue-900 font-sans">
+                    
+                    <div className="bg-blob">
+                        <div className="blob blob-1"></div>
+                        <div className="blob blob-2"></div>
+                        <div className="blob blob-3"></div>
+                    </div>
+
+                    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 h-16 shadow-sm">
+                        <div className="max-w-[1600px] mx-auto px-6 h-full flex items-center justify-between">
+                            <div className="flex items-center gap-4">
+                                <img 
+                                    src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" 
+                                    alt="KiotViet Logo" 
+                                    className="h-8 md:h-9 object-contain"
+                                />
+                                <div className="h-6 w-px bg-slate-300 hidden sm:block"></div>
+                                <span className="font-bold text-slate-700 tracking-tight text-lg uppercase hidden sm:block">
+                                    Lịch Đào Tạo {currentYear}
+                                </span>
+                            </div>
+
+                            <div className="flex items-center gap-4">
+                                <div className="hidden lg:flex items-center gap-6 text-xs font-medium mr-4">
+                                    <div className="flex items-center gap-2">
+                                        <span className="w-3 h-3 rounded bg-blue-600 shadow-sm"></span>
+                                        <span className="w-3 h-3 rounded bg-emerald-500 shadow-sm"></span>
+                                        <span className="text-slate-600">Lớp học</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <span className="w-3 h-3 rounded bg-red-100 border border-red-200 shadow-sm"></span>
+                                        <span className="text-slate-600">Nghỉ Lễ</span>
+                                    </div>
+                                </div>
+
+                                <button 
+                                    onClick={() => setIsInfoOpen(true)}
+                                    className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-md text-xs font-bold transition-colors border border-blue-100"
+                                >
+                                    <InfoIcon size={16} />
+                                    <span className="hidden sm:inline">Quy tắc & Lộ trình</span>
+                                </button>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className="max-w-[1600px] mx-auto px-4 md:px-6 py-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch">
+                            {months.map((monthIndex) => (
+                                <MonthGrid 
+                                    key={monthIndex} 
+                                    month={monthIndex} 
+                                    year={currentYear} 
+                                    events={eventData} 
+                                />
+                            ))}
+                        </div>
+
+                        <footer className="mt-12 pt-8 border-t border-slate-200 text-center">
+                            <div className="inline-flex items-center justify-center gap-2 mb-2 text-blue-600">
+                                 <AwardIcon size={16} />
+                                 <span className="font-bold text-sm">Learning and Development Department</span>
+                            </div>
+                            <p className="text-slate-400 text-xs">© {currentYear} Internal Use Only.</p>
+                        </footer>
+                    </main>
+
+                    <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<CalendarApp />);
+    </script>
+</body>
+</html>
