@@ -3,45 +3,455 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lịch Đào Tạo 2026 - KiotViet</title>
+    <title>LỊCH ĐÀO TẠO 2026</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- React & ReactDOM -->
+    
+    <!-- React Dependencies for Calendar 2026 -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <!-- Babel for JSX -->
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f0f4f8;
+        }
         
+        /* Custom Scrollbar for clean look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Animation for tab switching */
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 28px;
+            top: 40px;
+            bottom: -20px;
+            width: 2px;
+            background-color: #e2e8f0;
+            z-index: 0;
+        }
+        
+        .timeline-group:last-child .timeline-line { display: none; }
+
+        /* Styles for Calendar 2026 Integration */
         @keyframes float { 0% { transform: translate(0, 0); } 50% { transform: translate(-20px, 20px); } 100% { transform: translate(0, 0); } }
-        
         .bg-blob {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background-color: #f8fafc; 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             overflow: hidden;
+            pointer-events: none;
+            border-radius: 1.5rem; /* Match container border radius */
         }
         .blob {
-            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4;
+            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5;
             animation: float 20s infinite ease-in-out;
         }
-        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #dbeafe; } 
-        .blob-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: #dcfce7; } 
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #bae6fd; } 
+        .blob-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: #cbd5e1; } 
         .blob-3 { top: 40%; left: 40%; width: 30vw; height: 30vw; background: #e0f2fe; animation-delay: -5s; }
+        
+        /* Ensure React content sits above blobs */
+        #react-calendar-root { position: relative; z-index: 10; font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body>
-    <div id="root"></div>
+<body class="min-h-screen py-8 px-4 sm:px-6 lg:px-8 text-slate-800">
 
+    <!-- Changed max-w from 3xl to 1440px to accommodate calendar -->
+    <div class="max-w-[1440px] mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 min-h-[800px] flex flex-col">
+        
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 p-8 text-white text-center relative overflow-hidden flex-shrink-0">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            <h1 class="text-3xl font-extrabold mb-2 relative z-10">LỊCH ĐÀO TẠO 2026</h1>
+            <p class="text-emerald-100 font-medium relative z-10">Kế hoạch đào tạo 2026 & Lộ trình phát triển năng lực</p>
+        </div>
+
+        <!-- Main Tab Navigation (Level 1) -->
+        <div class="flex border-b border-slate-200 bg-slate-50 sticky top-0 z-50 flex-shrink-0 shadow-sm">
+            <button onclick="switchMainTab('calendar')" id="tab-calendar" class="flex-1 py-4 text-center font-bold text-sm sm:text-base border-b-2 border-emerald-600 text-emerald-700 bg-white transition-all duration-200 focus:outline-none">
+                <span class="block">LỊCH ĐÀO TẠO 2026</span>
+                <span class="text-xs font-normal text-slate-500 mt-1">Lịch học chi tiết cả năm</span>
+            </button>
+            <button onclick="switchMainTab('roadmap')" id="tab-roadmap" class="flex-1 py-4 text-center font-bold text-sm sm:text-base border-b-2 border-transparent text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200 focus:outline-none">
+                <span class="block">LỘ TRÌNH CHO SALES</span>
+                <span class="text-xs font-normal text-slate-500 mt-1">Direct Sales & Telesales</span>
+            </button>
+        </div>
+
+        <!-- Content Area -->
+        <div class="p-6 sm:p-8 bg-white flex-grow relative">
+
+            <!-- CALENDAR 2026 (Visible by Default) -->
+            <div id="content-calendar" class="fade-in block relative w-full h-full">
+                <!-- Background Blob container specifically for calendar tab -->
+                <div class="bg-blob">
+                    <div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div>
+                </div>
+                <!-- React Mount Point -->
+                <div id="react-calendar-root"></div>
+            </div>
+
+            <!-- ROADMAP WRAPPER (Hidden by Default) -->
+            <div id="content-roadmap" class="fade-in hidden w-full">
+                
+                <!-- Sub Tab Navigation (Level 2: Direct vs Telesales) -->
+                <div class="flex justify-center mb-10">
+                    <div class="bg-slate-100 p-1.5 rounded-xl inline-flex shadow-inner">
+                        <button onclick="switchSubTab('direct')" id="subtab-direct" class="px-6 py-2.5 rounded-lg text-sm font-bold shadow-sm bg-white text-blue-700 transition-all duration-200">
+                            Direct Sales
+                        </button>
+                        <button onclick="switchSubTab('telesales')" id="subtab-telesales" class="px-6 py-2.5 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition-all duration-200">
+                            Telesales
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Wrapper for Timeline Content to keep it centered and readable -->
+                <div class="max-w-3xl mx-auto">
+                    
+                    <!-- DIRECT SALES TIMELINE -->
+                    <div id="content-direct" class="fade-in block space-y-8">
+                        
+                        <!-- Month 1 -->
+                        <div class="timeline-group relative">
+                            <div class="timeline-line"></div>
+                            <div class="flex items-center mb-6">
+                                <div class="flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-100 text-blue-700 font-bold text-lg shadow-sm z-10 border-4 border-white">
+                                    T1
+                                </div>
+                                <div class="ml-4">
+                                    <h2 class="text-xl font-bold text-slate-800">Gia nhập</h2>
+                                </div>
+                            </div>
+
+                            <div class="pl-20 space-y-6">
+                                <!-- Week 1 -->
+                                <div class="relative group">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-blue-500 border-4 border-white shadow-sm ring-1 ring-blue-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 1</h3>
+                                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-semibold border border-blue-100">Hội nhập văn hóa</span>
+                                            <span class="px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-semibold border border-blue-100">Sản phẩm cơ bản</span>
+                                            <span class="px-3 py-1 rounded-lg bg-red-50 text-red-600 text-sm font-bold border border-red-100 flex items-center">
+                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                Test SP Cơ bản
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Week 2 -->
+                                <div class="relative group">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-blue-500 border-4 border-white shadow-sm ring-1 ring-blue-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 2</h3>
+                                    
+                                    <!-- Cục 1: COC-CRM -->
+                                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 shadow-sm hover:shadow-md transition-shadow mb-3">
+                                        <div class="flex items-center text-slate-700 font-medium">
+                                            <div class="w-2 h-2 rounded-full bg-blue-400 mr-2"></div> Đào tạo COC - CRM
+                                        </div>
+                                    </div>
+
+                                    <!-- Cục 2: Quy trình & Test -->
+                                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center text-slate-700 font-medium">
+                                                <div class="w-2 h-2 rounded-full bg-blue-400 mr-2"></div> Quy trình bán hàng cơ bản
+                                            </div>
+                                            <div class="flex items-center text-red-600 font-bold border-t border-slate-100 pt-2">
+                                                <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                Test Kỹ năng Direct Sales
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Month 2 -->
+                        <div class="timeline-group relative">
+                            <div class="timeline-line"></div>
+                            <div class="flex items-center mb-6">
+                                <div class="flex items-center justify-center w-14 h-14 rounded-2xl bg-green-100 text-green-700 font-bold text-lg shadow-sm z-10 border-4 border-white">
+                                    T2
+                                </div>
+                                <div class="ml-4">
+                                    <h2 class="text-xl font-bold text-slate-800">Thử việc TV1</h2>
+                                </div>
+                            </div>
+
+                            <div class="pl-20 space-y-6">
+                                <!-- Week 1 -->
+                                <div class="relative">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-green-500 border-4 border-white shadow-sm ring-1 ring-green-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 1</h3>
+                                    <div class="bg-green-50/50 rounded-xl p-4 border border-green-100 shadow-sm flex items-center">
+                                        <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        <span class="text-green-800 font-semibold">Đào tạo Hóa Đơn Điện Tử & Chữ ký số</span>
+                                    </div>
+                                </div>
+
+                                <!-- Week 2 -->
+                                <div class="relative">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-green-500 border-4 border-white shadow-sm ring-1 ring-green-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 2 - Mục đào tạo chuyên ngành</h3>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                                        <div class="bg-green-50/50 p-3 rounded-lg border border-green-100 text-sm font-bold text-green-800 shadow-sm">Đào tạo Sản phẩm FNB</div>
+                                        <div class="bg-green-50/50 p-3 rounded-lg border border-green-100 text-sm font-bold text-green-800 shadow-sm">Đào tạo Sản phẩm Booking</div>
+                                    </div>
+                                </div>
+
+                                <!-- Week 3 -->
+                                <div class="relative">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-red-500 border-4 border-white shadow-sm ring-1 ring-red-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 3 - Kiểm tra năng lực</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-4 py-2 rounded-lg bg-red-50 text-red-700 font-bold border border-red-100 shadow-sm">Test Fnb</span>
+                                        <span class="px-4 py-2 rounded-lg bg-red-50 text-red-700 font-bold border border-red-100 shadow-sm">Test Booking</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Month 3 -->
+                        <div class="timeline-group relative">
+                            <div class="flex items-center mb-6">
+                                <div class="flex items-center justify-center w-14 h-14 rounded-2xl bg-purple-100 text-purple-700 font-bold text-lg shadow-sm z-10 border-4 border-white">
+                                    T3
+                                </div>
+                                <div class="ml-4">
+                                    <h2 class="text-xl font-bold text-slate-800">Thử việc TV2 (Chính thức)</h2>
+                                </div>
+                            </div>
+
+                            <div class="pl-20 space-y-6">
+                                <!-- Week 2 -->
+                                <div class="relative">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-purple-500 border-4 border-white shadow-sm ring-1 ring-purple-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 2</h3>
+                                    
+                                    <!-- Bỏ khung bao, tách thành 2 cục riêng -->
+                                    <div class="space-y-3">
+                                        <div class="flex items-center p-3 rounded-lg bg-purple-50 border border-purple-100 text-purple-800 font-bold shadow-sm hover:shadow-md transition-shadow">
+                                            <div class="w-2 h-2 rounded-full bg-purple-500 mr-3"></div>
+                                            Xử lý từ chối
+                                        </div>
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-red-50 border border-red-100 text-red-700 font-bold shadow-sm hover:shadow-md transition-shadow">
+                                            <div class="flex items-center">
+                                                <div class="w-2 h-2 rounded-full bg-red-500 mr-3"></div>
+                                                Test sản phẩm KV1
+                                            </div>
+                                            <span class="text-xs bg-red-200 px-2 py-0.5 rounded text-red-800 ml-2">Ngày 15</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TELESALES TIMELINE (Hidden by default in sub-tab) -->
+                    <div id="content-telesales" class="fade-in hidden space-y-8">
+                        
+                        <!-- Month 1 -->
+                        <div class="timeline-group relative">
+                            <div class="timeline-line"></div>
+                            <div class="flex items-center mb-6">
+                                <div class="flex items-center justify-center w-14 h-14 rounded-2xl bg-teal-100 text-teal-700 font-bold text-lg shadow-sm z-10 border-4 border-white">
+                                    T1
+                                </div>
+                                <div class="ml-4">
+                                    <h2 class="text-xl font-bold text-slate-800">Gia nhập</h2>
+                                </div>
+                            </div>
+
+                            <div class="pl-20 space-y-6">
+                                <!-- Week 1 -->
+                                <div class="relative group">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-teal-500 border-4 border-white shadow-sm ring-1 ring-teal-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 1</h3>
+                                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-semibold border border-blue-100">Hội nhập</span>
+                                            <span class="px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-semibold border border-blue-100">SP Cơ bản</span>
+                                            <span class="px-3 py-1 rounded-lg bg-red-50 text-red-600 text-sm font-bold border border-red-100">Test SP Cơ bản</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Week 2 -->
+                                <div class="relative group">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-teal-500 border-4 border-white shadow-sm ring-1 ring-teal-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 2</h3>
+                                    
+                                    <!-- Cục 1: COC-CRM -->
+                                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 shadow-sm hover:shadow-md transition-shadow mb-3">
+                                        <div class="flex items-center text-slate-700 font-medium">
+                                            <div class="w-2 h-2 rounded-full bg-teal-400 mr-2"></div> Đào tạo COC - CRM
+                                        </div>
+                                    </div>
+
+                                    <!-- Cục 2: Kịch bản & Test -->
+                                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center text-teal-700 font-bold">
+                                                <div class="w-2 h-2 rounded-full bg-teal-600 mr-2"></div> Đào tạo Kịch bản cuộc gọi (Call Scripts)
+                                            </div>
+                                            <div class="flex items-center text-red-600 font-bold border-t border-slate-100 pt-2">
+                                                <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                Test Kỹ năng Call Scripts
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Month 2 -->
+                        <div class="timeline-group relative">
+                            <div class="timeline-line"></div>
+                            <div class="flex items-center mb-6">
+                                <div class="flex items-center justify-center w-14 h-14 rounded-2xl bg-green-100 text-green-700 font-bold text-lg shadow-sm z-10 border-4 border-white">
+                                    T2
+                                </div>
+                                <div class="ml-4">
+                                    <h2 class="text-xl font-bold text-slate-800">Thử việc TV1</h2>
+                                </div>
+                            </div>
+
+                            <div class="pl-20 space-y-6">
+                                <!-- Week 1 -->
+                                <div class="relative">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-green-500 border-4 border-white shadow-sm ring-1 ring-green-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 1</h3>
+                                    <div class="bg-green-50/50 rounded-xl p-4 border border-green-100 shadow-sm flex items-center">
+                                        <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        <span class="text-green-800 font-semibold">Đào tạo Hóa Đơn Điện Tử & Chữ ký số</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Month 3 -->
+                        <div class="timeline-group relative">
+                             <div class="flex items-center mb-6">
+                                <div class="flex items-center justify-center w-14 h-14 rounded-2xl bg-orange-100 text-orange-700 font-bold text-lg shadow-sm z-10 border-4 border-white">
+                                    T3
+                                </div>
+                                <div class="ml-4">
+                                    <h2 class="text-xl font-bold text-slate-800">Thử việc TV2 (Chính thức)</h2>
+                                </div>
+                            </div>
+
+                            <div class="pl-20 space-y-6">
+                                <!-- Week 2: Copy structure from Direct Sales T2 Week 2 but adapt colors -->
+                                <div class="relative">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-orange-500 border-4 border-white shadow-sm ring-1 ring-orange-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 2 - Mục đào tạo chuyên ngành</h3>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                                        <div class="bg-orange-50 p-3 rounded-lg border border-orange-100 text-sm font-bold text-orange-800 shadow-sm">Đào tạo Sản phẩm FNB</div>
+                                        <div class="bg-orange-50 p-3 rounded-lg border border-orange-100 text-sm font-bold text-orange-800 shadow-sm">Đào tạo Sản phẩm Booking</div>
+                                    </div>
+                                </div>
+
+                                <!-- Week 3: Copy structure from Direct Sales T2 Week 3 -->
+                                <div class="relative">
+                                    <div class="absolute -left-[45px] top-2 w-4 h-4 rounded-full bg-red-500 border-4 border-white shadow-sm ring-1 ring-red-100"></div>
+                                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-2">Tuần 3 - Kiểm tra năng lực</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-4 py-2 rounded-lg bg-red-50 text-red-700 font-bold border border-red-100 shadow-sm">Test Fnb</span>
+                                        <span class="px-4 py-2 rounded-lg bg-red-50 text-red-700 font-bold border border-red-100 shadow-sm">Test Booking</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Footer -->
+        <div class="bg-slate-50 p-4 text-center border-t border-slate-200 text-xs text-slate-400 mt-auto relative z-10">
+            Hệ thống quản lý đào tạo nội bộ © 2024
+        </div>
+    </div>
+
+    <!-- MAIN SCRIPT -->
+    <script>
+        // --- LEVEL 1 TABS (Calendar vs Roadmap) ---
+        function switchMainTab(tabName) {
+            const calendarContent = document.getElementById('content-calendar');
+            const roadmapContent = document.getElementById('content-roadmap');
+            
+            const calendarTab = document.getElementById('tab-calendar');
+            const roadmapTab = document.getElementById('tab-roadmap');
+
+            // Reset styles for Main Tabs
+            const inactiveClass = "flex-1 py-4 text-center font-bold text-sm sm:text-base border-b-2 border-transparent text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200 focus:outline-none";
+            const activeClassCalendar = "flex-1 py-4 text-center font-bold text-sm sm:text-base border-b-2 border-emerald-600 text-emerald-700 bg-white transition-all duration-200 focus:outline-none";
+            const activeClassRoadmap = "flex-1 py-4 text-center font-bold text-sm sm:text-base border-b-2 border-blue-600 text-blue-700 bg-white transition-all duration-200 focus:outline-none";
+
+            if (tabName === 'calendar') {
+                calendarContent.classList.remove('hidden');
+                roadmapContent.classList.add('hidden');
+                
+                calendarTab.className = activeClassCalendar;
+                roadmapTab.className = inactiveClass;
+            } else if (tabName === 'roadmap') {
+                calendarContent.classList.add('hidden');
+                roadmapContent.classList.remove('hidden');
+                
+                calendarTab.className = inactiveClass;
+                roadmapTab.className = activeClassRoadmap;
+            }
+        }
+
+        // --- LEVEL 2 SUB-TABS (Direct vs Telesales) ---
+        function switchSubTab(subTabName) {
+            const directContent = document.getElementById('content-direct');
+            const telesalesContent = document.getElementById('content-telesales');
+            
+            const directBtn = document.getElementById('subtab-direct');
+            const telesalesBtn = document.getElementById('subtab-telesales');
+
+            const activeBtnClass = "px-6 py-2.5 rounded-lg text-sm font-bold shadow-sm bg-white text-blue-700 transition-all duration-200";
+            const inactiveBtnClass = "px-6 py-2.5 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition-all duration-200";
+
+            if (subTabName === 'direct') {
+                directContent.classList.remove('hidden');
+                telesalesContent.classList.add('hidden');
+                
+                directBtn.className = activeBtnClass;
+                telesalesBtn.className = inactiveBtnClass;
+            } else {
+                directContent.classList.add('hidden');
+                telesalesContent.classList.remove('hidden');
+                
+                directBtn.className = inactiveBtnClass;
+                telesalesBtn.className = activeBtnClass;
+            }
+        }
+    </script>
+
+    <!-- REACT CALENDAR APP -->
     <script type="text/babel">
         const { useMemo, useState } = React;
 
-        // --- ICONS (SVG Components replacing Lucide-React for single file portability) ---
-        const CalendarIcon = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-        );
+        // --- ICONS ---
         const AwardIcon = ({ size = 24, className = "" }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
         );
@@ -49,47 +459,25 @@
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
         );
         const XIcon = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 18 18"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         );
 
         const currentYear = 2026;
-
-        // --- DỮ LIỆU & LOGIC ---
 
         const CURRICULUM = [
             "Tuần 1 - Thứ 2: Onboard - Đào tạo hội nhập",
             "Tuần 1 - Thứ 3: Đào tạo Sản phẩm B1",
             "Tuần 1 - Thứ 4: Đào tạo Sản phẩm B2",
             "Tuần 1 - Thứ 5: Đào tạo Sản phẩm B3",
-            "Tuần 1 - Thứ 6: Test Sản phẩm",
-            "Tuần 2 - Thứ 2: Test COC",
-            "Tuần 2 - Thứ 3: Đào tạo Telesales",
-            "Tuần 2 - Thứ 4: Đào tạo Direct Sales",
-            "Tuần 2 - Thứ 5: Test Telesales",
-            "Tuần 2 - Thứ 6: Test Direct Sales"
+            "Tuần 1 - Thứ 6: Test Sản phẩm"
         ];
 
         const holidays = {
-            "1-1": "Tết Dương Lịch",
-            "1-2": "Nghỉ Tết Dương Lịch",
-            "1-3": "Nghỉ Tết Dương Lịch",
-            "1-4": "Nghỉ Tết Dương Lịch",
-            "2-16": "Giao Thừa",
-            "2-17": "Mùng 1 Tết Nguyên Đán",
-            "2-18": "Mùng 2 Tết Nguyên Đán",
-            "2-19": "Mùng 3 Tết Nguyên Đán",
-            "2-20": "Mùng 4 Tết Nguyên Đán",
-            "2-21": "Mùng 5 Tết Nguyên Đán",
-            "4-27": "Nghỉ Bù Giỗ Tổ Hùng Vương",
-            "4-30": "Ngày Giải Phóng Miền Nam",
-            "5-1": "Ngày Quốc Tế Lao Động",
-            "5-2": "Nghỉ Lễ 30/4 - 1/5",
-            "5-3": "Nghỉ Lễ 30/4 - 1/5",
-            "8-29": "Nghỉ Lễ Quốc Khánh",
-            "8-30": "Nghỉ Lễ Quốc Khánh",
-            "8-31": "Nghỉ Lễ Quốc Khánh",
-            "9-1": "Nghỉ Lễ Quốc Khánh",
-            "9-2": "Quốc Khánh 2/9",
+            "1-1": "Tết Dương Lịch", "1-2": "Nghỉ Tết Dương Lịch", "1-3": "Nghỉ Tết Dương Lịch", "1-4": "Nghỉ Tết Dương Lịch",
+            "2-16": "Giao Thừa", "2-17": "Mùng 1 Tết Nguyên Đán", "2-18": "Mùng 2 Tết Nguyên Đán", "2-19": "Mùng 3 Tết Nguyên Đán", "2-20": "Mùng 4 Tết Nguyên Đán", "2-21": "Mùng 5 Tết Nguyên Đán",
+            "4-27": "Nghỉ Bù Giỗ Tổ Hùng Vương", "4-30": "Ngày Giải Phóng Miền Nam",
+            "5-1": "Ngày Quốc Tế Lao Động", "5-2": "Nghỉ Lễ 30/4 - 1/5", "5-3": "Nghỉ Lễ 30/4 - 1/5",
+            "8-29": "Nghỉ Lễ Quốc Khánh", "8-30": "Nghỉ Lễ Quốc Khánh", "8-31": "Nghỉ Lễ Quốc Khánh", "9-1": "Nghỉ Lễ Quốc Khánh", "9-2": "Quốc Khánh 2/9",
         };
 
         const formatDateKey = (date) => `${date.getMonth() + 1}-${date.getDate()}`;
@@ -98,133 +486,80 @@
 
         const getClassRange = (startDateObj) => {
             let endDate = new Date(startDateObj);
-            endDate.setDate(startDateObj.getDate() + 11); 
+            endDate.setDate(startDateObj.getDate() + 4); 
             return { start: startDateObj, end: endDate };
         };
 
         const generateScheduleData = () => {
             let events = {};
-            let classCounter = 0; 
 
             // 1. Khởi tạo ngày lễ
             Object.keys(holidays).forEach(key => {
                 events[key] = { type: 'holiday', label: holidays[key], markers: [] };
             });
 
-            // 2. Logic Marker (Test KV1 & Thuế)
+            // 2. Markers
             for (let m = 0; m < 12; m++) {
-                // --- Test KV1 (Ngày 15 hoặc bù) ---
                 let kv1Date = new Date(currentYear, m, 15);
-                while (isWeekend(kv1Date) || isHoliday(kv1Date)) {
-                    kv1Date.setDate(kv1Date.getDate() + 1);
-                }
+                while (isWeekend(kv1Date) || isHoliday(kv1Date)) kv1Date.setDate(kv1Date.getDate() + 1);
                 const kv1Key = formatDateKey(kv1Date);
                 if (!events[kv1Key]) events[kv1Key] = { markers: [] };
                 events[kv1Key].markers = [...(events[kv1Key].markers || []), { type: 'kv1', label: 'Test KV1' }];
 
-                // --- Đào tạo Thuế - HĐĐT (Thứ 6 của tuần đầu tiên bắt đầu từ Thứ 2) ---
                 let firstDayOfMonth = new Date(currentYear, m, 1);
                 let taxDate;
-
-                if (firstDayOfMonth.getDay() === 1) {
-                    // Nếu ngày 1 là Thứ 2 -> Tuần này đủ chuẩn -> T6 là ngày 5
-                    taxDate = new Date(currentYear, m, 5);
-                } else {
-                    // Nếu không -> Tìm ngày Thứ 2 đầu tiên tiếp theo
+                if (firstDayOfMonth.getDay() === 1) taxDate = new Date(currentYear, m, 5);
+                else {
                     let nextMonday = new Date(firstDayOfMonth);
-                    while (nextMonday.getDay() !== 1) {
-                        nextMonday.setDate(nextMonday.getDate() + 1);
-                    }
-                    // T6 của tuần đó = Thứ 2 + 4 ngày
+                    while (nextMonday.getDay() !== 1) nextMonday.setDate(nextMonday.getDate() + 1);
                     taxDate = new Date(nextMonday);
                     taxDate.setDate(nextMonday.getDate() + 4);
                 }
-                
                 const taxKey = formatDateKey(taxDate);
                 if (!events[taxKey]) events[taxKey] = { markers: [] };
                 events[taxKey].markers = [...(events[taxKey].markers || []), { type: 'tax', label: 'Đào tạo Thuế - HĐĐT' }];
             }
 
-            // Helper gán lịch học
-            const assignTrainingDay = (dateObj, variant, topicLabel) => {
+            const assignTrainingDay = (dateObj, topicLabel) => {
                 const key = formatDateKey(dateObj);
-                
+                const m = dateObj.getMonth();
+                const d = dateObj.getDate();
+
+                // LOGIC CHẶN CÁC NGÀY CỤ THỂ
+                if (m === 0) return; // Tháng 1 bỏ
+                if (m === 1 && d >= 2 && d <= 6) return; // Tháng 2 bỏ 2-6
+                if (m === 3) { if ((d >= 20 && d <= 25) || d === 28 || d === 29) return; } // Tháng 4 chặn
+                if (m === 5 && d >= 22 && d <= 26) return; // THÁNG 6 CHẶN 22-26
+                if (m === 7 && d >= 24 && d <= 28) return; // Tháng 8 chặn
+                if (m === 8 && (d === 3 || d === 4)) return; // THÁNG 9 CHẶN 3-4
+                if (m === 10 && d >= 23 && d <= 27) return; // Tháng 11 chặn
+                if (m === 11 && (d === 30 || d === 31)) return; // THÁNG 12 CHẶN 30-31
+
                 if (events[key] && events[key].type === 'holiday') return;
 
                 if (!events[key] || !events[key].type) {
-                    events[key] = { 
-                        ...events[key],
-                        type: 'training', 
-                        label: topicLabel, 
-                        variant: variant 
-                    };
-                    return;
-                }
-
-                if (events[key].type === 'training') {
-                    const existingVariant = events[key].variant;
-                    if (existingVariant !== variant) {
-                        events[key] = { 
-                            ...events[key], 
-                            type: 'overlap', 
-                            label: `Lớp cũ: ${events[key].label} \nLớp mới: ${topicLabel}`,
-                            variant1: existingVariant,
-                            variant2: variant,
-                            topic1: events[key].label,
-                            topic2: topicLabel
-                        };
-                    }
+                    events[key] = { ...events[key], type: 'training', label: topicLabel };
                 }
             };
 
-            // 3. SEED DATA: Lớp từ 29/12/2025 (Màu Xanh Lá - Green)
-            const seedDec29 = new Date(2025, 11, 29); 
-            const seedRange = getClassRange(seedDec29);
-            let seedCurrent = new Date(seedRange.start);
-            let seedWIdx = 0;
-            
-            while(seedCurrent <= seedRange.end) {
-                if (seedCurrent.getFullYear() === currentYear) {
-                     const dayOfWeek = seedCurrent.getDay();
-                     if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-                         const topic = CURRICULUM[seedWIdx] || "Training";
-                         assignTrainingDay(new Date(seedCurrent), 'green', topic);
-                     }
-                }
-                seedCurrent.setDate(seedCurrent.getDate() + 1);
-                if (seedCurrent.getDay() !== 0 && seedCurrent.getDay() !== 6) seedWIdx++;
-            }
+            // 3. Quy trình gán lịch đào tạo
+            const monthlyStartDates = [
+                [], // T1
+                [26], // T2
+                [2, 26, 30], // T3
+                [6, 26], // T4
+                [4, 26], // T5
+                [2, 29], // T6: THÊM 29
+                [6, 27], // T7
+                [3, 31], // T8
+                [7, 28], // T9
+                [5, 26], // T10
+                [2, 30], // T11: THÊM 30
+                [7] // T12: THÊM 7, BỎ 28
+            ];
 
-            // 4. Main Loop 2026
-            for (let m = 0; m < 12; m++) {
-                let startDates = [];
-
-                if (m === 0) {
-                    startDates = [5, 12];
-                } else {
-                    let d = 2;
-                    if (m === 4) d = 4;
-                    if (m === 7) d = 3;
-                    if (m === 8) d = 7;
-                    if (m === 9) d = 5;
-                    startDates.push(d);
-                }
-
-                if (m !== 5) { // Trừ tháng 6
-                    if (m === 11) {
-                        startDates.push(28, 29, 30, 31);
-                    } else {
-                        let d = 26;
-                        if (m === 6) d = 27;
-                        if (m === 8) d = 28;
-                        startDates.push(d);
-                    }
-                }
-
-                startDates.forEach(d => {
-                    // Loại bỏ lớp 12/1
-                    if (m === 0 && d === 12) return;
-                    
+            monthlyStartDates.forEach((dates, m) => {
+                dates.forEach(d => {
                     const targetDate = new Date(currentYear, m, d);
                     const day = targetDate.getDay(); 
                     let diffToMon = day === 0 ? 6 : day - 1;
@@ -232,367 +567,126 @@
                     mon.setDate(targetDate.getDate() - diffToMon);
 
                     const range = getClassRange(mon);
-                    const variant = classCounter % 2 === 0 ? 'blue' : 'green';
-                    classCounter++;
-
                     let current = new Date(range.start);
                     let workingDayIndex = 0;
-
                     while (current <= range.end) {
-                        const currentDayOfWeek = current.getDay();
-                        if (currentDayOfWeek !== 0 && currentDayOfWeek !== 6) {
-                            const topic = CURRICULUM[workingDayIndex] || "Training";
-                            assignTrainingDay(new Date(current), variant, topic);
+                        if (current.getDay() !== 0 && current.getDay() !== 6) {
+                            assignTrainingDay(new Date(current), CURRICULUM[workingDayIndex]);
                             workingDayIndex++;
                         }
                         current.setDate(current.getDate() + 1);
                     }
                 });
-            }
+            });
+
             return events;
         };
 
-        // --- COMPONENTS ---
-
-        const InfoModal = ({ isOpen, onClose }) => {
-            if (!isOpen) return null;
-
-            return (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm" onClick={onClose}></div>
-                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md relative overflow-hidden animate-in fade-in zoom-in duration-200">
-                        <div className="bg-slate-800 p-4 flex items-center justify-between">
-                            <h2 className="text-white font-bold text-lg flex items-center gap-2">
-                                <InfoIcon size={20} /> Quy tắc & Lộ trình
-                            </h2>
-                            <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
-                                <XIcon size={20} />
-                            </button>
-                        </div>
-                        
-                        <div className="p-6 max-h-[70vh] overflow-y-auto">
-                            <div className="mb-6">
-                                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider mb-3 border-b pb-2">
-                                    Lộ trình Đào tạo (2 Tuần)
-                                </h3>
-                                <div className="space-y-2 text-xs text-slate-600">
-                                    {CURRICULUM.map((item, idx) => (
-                                        <div key={idx} className={`p-2 rounded border ${idx < 5 ? 'bg-blue-50 border-blue-100' : 'bg-emerald-50 border-emerald-100'}`}>
-                                            <span className="font-semibold text-slate-800">{item.split(':')[0]}:</span>
-                                            {item.split(':')[1]}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="mb-6">
-                                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider mb-3 border-b pb-2">
-                                    Ký hiệu & Giao thoa
-                                </h3>
-                                <div className="space-y-3 text-sm">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded bg-blue-600"></div>
-                                        <span>Lớp Nhóm 1 (Xanh Dương)</span>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded bg-emerald-500"></div>
-                                        <span>Lớp Nhóm 2 (Xanh Lá)</span>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded bg-[linear-gradient(to_bottom,#2563eb_50%,#10b981_50%)]"></div>
-                                        <div className="text-xs">
-                                            <span className="font-bold block">Ngày Giao Thoa (Trên/Dưới)</span>
-                                            <span>Trên: Lớp cũ (Tuần 2)</span><br/>
-                                            <span>Dưới: Lớp mới (Tuần 1)</span>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded bg-white border border-slate-200 relative flex items-center justify-center font-extrabold text-yellow-500">
-                                            15
-                                        </div>
-                                        <span>Ngày Onboard (Chữ Vàng)</span>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded bg-white border border-slate-200 relative">
-                                            <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></div>
-                                        </div>
-                                        <span>Test KV1 (Ngày 15 hoặc bù)</span>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded bg-white border border-slate-200 relative">
-                                            <div className="absolute top-1 right-1 w-2 h-2 bg-orange-400 rounded-full"></div>
-                                        </div>
-                                        <span>Đào tạo Thuế - HĐĐT</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        const DayCell = ({ day, month, year, event, isWeekend }) => {
-            // UPDATED: Removed overflow-hidden to allow tooltips to be visible.
-            // ADDED: hover:z-20 to ensure the hovered cell (and its tooltip) stacks above others.
+        // --- UI COMPONENTS ---
+        const DayCell = ({ day, event, isWeekend }) => {
             let baseClass = "relative group flex items-center justify-center w-full aspect-square text-xs cursor-default rounded-md transition-all duration-200 hover:z-20";
             let textClass = "z-10 text-slate-600 font-medium";
-            let bgClass = "bg-transparent"; 
             
             let tooltipLines = [];
-            let tooltipTitle = "";
 
-            // FIX: Removed optional chaining for Babel 6 compatibility
             const markers = (event && event.markers) || [];
             const hasKV1 = markers.find(m => m.type === 'kv1');
             const hasTax = markers.find(m => m.type === 'tax');
-
             if (hasKV1) tooltipLines.push(`• ${hasKV1.label}`);
             if (hasTax) tooltipLines.push(`• ${hasTax.label}`);
 
-            const isOnboard = (label) => label && label.includes("Onboard");
-
             if (event) {
                 if (event.type === 'holiday') {
-                    baseClass += " bg-red-100 border border-red-200"; 
-                    textClass = "text-red-800 font-extrabold";
-                    tooltipTitle = "Ngày Lễ";
+                    baseClass += " bg-slate-200 border-slate-300"; // MÀU XÁM CHO NGÀY NGHỈ
+                    textClass = "text-slate-500 font-bold";
                     tooltipLines.unshift(event.label);
                 } 
-                else if (event.type === 'overlap') {
-                    textClass = "text-white font-bold drop-shadow-md";
-                    
-                    if (isOnboard(event.topic2)) {
-                        textClass = "text-yellow-300 font-extrabold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]";
-                    }
-
-                    const v1Color = event.variant1 === 'blue' ? '#2563eb' : '#10b981';
-                    const v2Color = event.variant2 === 'blue' ? '#2563eb' : '#10b981';
-
-                    const gradientStyle = {
-                        background: `linear-gradient(to bottom, ${v1Color} 50%, ${v2Color} 50%)`
-                    };
-                    
-                    tooltipLines.push(`Trên: ${event.topic1}`);
-                    tooltipLines.push(`Dưới: ${event.topic2}`);
-
-                    return (
-                        <div className={`${baseClass} hover:scale-105 hover:shadow-lg`} style={gradientStyle}>
-                            <span className={textClass}>{day}</span>
-                            <div className="absolute top-1 right-1 flex gap-0.5 z-20">
-                                {hasKV1 && <div className="w-1.5 h-1.5 bg-red-500 rounded-full shadow-sm ring-1 ring-white"></div>}
-                                {hasTax && <div className="w-1.5 h-1.5 bg-orange-400 rounded-full shadow-sm ring-1 ring-white"></div>}
-                            </div>
-                            
-                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block z-50 w-64">
-                                <div className="bg-slate-800 text-white text-[10px] p-2 rounded shadow-lg">
-                                    <div className="mb-1 pb-1 border-b border-white/20 font-bold text-yellow-300">GIAO THOA LỚP</div>
-                                    <div className="grid gap-1">
-                                        {tooltipLines.map((line, idx) => (
-                                            <div key={idx} className="flex gap-2 items-start text-left">
-                                                <span className="w-1 h-1 mt-1.5 rounded-full bg-white/50 shrink-0"></span>
-                                                <span>{line}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800"></div>
-                                </div>
-                            </div>
-                        </div>
-                    );
-                }
                 else if (event.type === 'training') {
                     textClass = "text-white font-bold";
-                    if (isOnboard(event.label)) {
-                        textClass = "text-yellow-300 font-extrabold drop-shadow-md";
-                    }
-
-                    if (event.variant === 'blue') {
-                        baseClass += " bg-blue-600 shadow-sm";
-                        bgClass = "hover:bg-blue-700 hover:shadow-md hover:-translate-y-0.5";
-                    } else {
-                        baseClass += " bg-emerald-500 shadow-sm";
-                        bgClass = "hover:bg-emerald-600 hover:shadow-md hover:-translate-y-0.5";
-                    }
+                    if (event.label && event.label.includes("Onboard")) textClass = "text-yellow-300 font-black";
+                    baseClass += " bg-emerald-500 shadow-sm ring-1 ring-emerald-400"; // MÀU XANH LÁ
                     tooltipLines.unshift(event.label);
                 }
-            } else if (isWeekend) {
-                textClass = "text-slate-400 font-semibold"; 
-            } else {
-                bgClass = "hover:bg-slate-50";
-            }
-
-            const tooltip = tooltipLines.length > 0 ? (
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block z-50 w-auto min-w-[120px] max-w-[200px]">
-                    <div className="bg-slate-800 text-white text-[10px] py-1.5 px-2.5 rounded shadow-lg text-left">
-                        {tooltipTitle && <div className="font-bold text-yellow-300 mb-0.5 text-center">{tooltipTitle}</div>}
-                        {tooltipLines.map((line, i) => (
-                            <div key={i} className="mb-0.5 last:mb-0 leading-tight">
-                                {line}
-                            </div>
-                        ))}
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800"></div>
-                    </div>
-                </div>
-            ) : null;
+            } else if (isWeekend) { textClass = "text-slate-300"; }
+            
+            // Adjust hover for calendar cells
+            const hoverClass = (!event && !isWeekend) ? "hover:bg-emerald-50" : "";
 
             return (
-                <div className={`${baseClass} ${bgClass}`}>
+                <div className={`${baseClass} ${hoverClass} ${!event && !isWeekend ? "bg-white/60 border border-slate-100" : ""}`}>
                     <span className={textClass}>{day}</span>
                     <div className="absolute top-1 right-1 flex gap-0.5 z-20">
-                        {hasKV1 && <div className="w-1.5 h-1.5 bg-red-500 rounded-full shadow-sm ring-1 ring-white"></div>}
-                        {hasTax && <div className="w-1.5 h-1.5 bg-orange-400 rounded-full shadow-sm ring-1 ring-white"></div>}
+                        {hasKV1 && <div className="w-1.5 h-1.5 bg-red-500 rounded-full ring-1 ring-white"></div>}
+                        {hasTax && <div className="w-1.5 h-1.5 bg-orange-400 rounded-full ring-1 ring-white"></div>}
                     </div>
-                    {tooltip}
+                    {tooltipLines.length > 0 && (
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block z-50 w-max max-w-[180px]">
+                            <div className="bg-slate-800 text-white text-[9px] p-2 rounded shadow-xl leading-tight border border-white/10">
+                                {tooltipLines.map((l, i) => <div key={i}>{l}</div>)}
+                            </div>
+                        </div>
+                    )}
                 </div>
             );
         };
 
         const MonthGrid = ({ month, year, events }) => {
-            const monthNames = [
-                "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
-                "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
-            ];
-            
-            const firstDayOfMonth = new Date(year, month, 1).getDay(); 
+            const monthNames = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+            const firstDay = new Date(year, month, 1).getDay(); 
             const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const startDayIndex = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1; 
-            
+            const startIdx = firstDay === 0 ? 6 : firstDay - 1; 
             const days = [];
-            
-            for (let i = 0; i < startDayIndex; i++) {
-                days.push(<div key={`empty-${i}`} className="w-full aspect-square"></div>);
-            }
-
+            for (let i = 0; i < startIdx; i++) days.push(<div key={`e-${i}`}></div>);
             for (let d = 1; d <= daysInMonth; d++) {
-                const dateKey = `${month + 1}-${d}`;
-                const event = events[dateKey] || null;
-                const dateObj = new Date(year, month, d);
-                const dayOfWeek = dateObj.getDay();
-                const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-
-                days.push(
-                    <DayCell 
-                        key={d} 
-                        day={d} 
-                        month={month} 
-                        year={year} 
-                        event={event} 
-                        isWeekend={isWeekend} 
-                    />
-                );
+                const isW = new Date(year, month, d).getDay() === 0 || new Date(year, month, d).getDay() === 6;
+                days.push(<DayCell key={d} day={d} event={events[`${month+1}-${d}`]} isWeekend={isW} />);
             }
-
-            const quarter = Math.floor(month / 3) + 1;
 
             return (
-                // UPDATE: Increased border contrast (border-slate-300)
-                <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-300 hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
-                    <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-50">
-                        <div className="flex items-baseline gap-2">
-                            <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wide">
-                                {monthNames[month]}
-                            </h3>
-                            <span className="text-[10px] font-medium text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded">
-                                Q{quarter}
-                            </span>
-                        </div>
+                <div className="bg-white/80 backdrop-blur-md rounded-2xl p-5 shadow-sm border border-white/50 flex flex-col hover:shadow-lg transition-all border-b-2 border-emerald-100">
+                    <h3 className="text-sm font-black text-slate-800 uppercase mb-4 border-b border-emerald-50 pb-2">{monthNames[month]}</h3>
+                    <div className="grid grid-cols-7 gap-1 text-[9px] font-bold text-emerald-300 uppercase mb-2">
+                        {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map(d => <div key={d} className="text-center">{d}</div>)}
                     </div>
-                    
-                    <div className="grid grid-cols-7 mb-2">
-                        {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((day, i) => (
-                            <div key={day} className={`text-center text-[10px] font-semibold uppercase tracking-wider ${i >= 5 ? 'text-slate-300' : 'text-slate-400'}`}>
-                                {day}
-                            </div>
-                        ))}
-                    </div>
-                    
-                    <div className="grid grid-cols-7 gap-1 flex-grow content-start">
-                        {days}
-                    </div>
+                    <div className="grid grid-cols-7 gap-1.5">{days}</div>
                 </div>
             );
         };
 
         const CalendarApp = () => {
             const eventData = useMemo(() => generateScheduleData(), []);
-            const months = Array.from({ length: 12 }, (_, i) => i);
-            const [isInfoOpen, setIsInfoOpen] = useState(false);
 
             return (
-                <div className="min-h-screen text-slate-700 antialiased selection:bg-blue-100 selection:text-blue-900 font-sans">
-                    
-                    <div className="bg-blob">
-                        <div className="blob blob-1"></div>
-                        <div className="blob blob-2"></div>
-                        <div className="blob blob-3"></div>
-                    </div>
-
-                    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 h-16 shadow-sm">
-                        <div className="max-w-[1600px] mx-auto px-6 h-full flex items-center justify-between">
-                            <div className="flex items-center gap-4">
-                                <img 
-                                    src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" 
-                                    alt="KiotViet Logo" 
-                                    className="h-8 md:h-9 object-contain"
-                                />
-                                <div className="h-6 w-px bg-slate-300 hidden sm:block"></div>
-                                <span className="font-bold text-slate-700 tracking-tight text-lg uppercase hidden sm:block">
-                                    Lịch Đào Tạo {currentYear}
-                                </span>
+                <div className="text-slate-700 w-full">
+                    <header className="sticky top-0 z-30 bg-white/60 backdrop-blur-sm border-b border-sky-100 h-16 shadow-sm rounded-t-xl mb-6">
+                        <div className="px-6 h-full flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="Logo" className="h-7"/>
+                                <span className="text-sky-200 text-xl font-light">|</span>
+                                <span className="font-black text-slate-800 tracking-tighter text-lg uppercase hidden sm:inline">Lịch Đào Tạo {currentYear}</span>
                             </div>
-
-                            <div className="flex items-center gap-4">
-                                <div className="hidden lg:flex items-center gap-6 text-xs font-medium mr-4">
-                                    <div className="flex items-center gap-2">
-                                        <span className="w-3 h-3 rounded bg-blue-600 shadow-sm"></span>
-                                        <span className="w-3 h-3 rounded bg-emerald-500 shadow-sm"></span>
-                                        <span className="text-slate-600">Lớp học</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <span className="w-3 h-3 rounded bg-red-100 border border-red-200 shadow-sm"></span>
-                                        <span className="text-slate-600">Nghỉ Lễ</span>
-                                    </div>
-                                </div>
-
-                                <button 
-                                    onClick={() => setIsInfoOpen(true)}
-                                    className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-md text-xs font-bold transition-colors border border-blue-100"
-                                >
-                                    <InfoIcon size={16} />
-                                    <span className="hidden sm:inline">Quy tắc & Lộ trình</span>
-                                </button>
+                            <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-wider">
+                                <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded bg-emerald-500"></div> Đào tạo</div>
+                                <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded bg-slate-200"></div> Nghỉ lễ</div>
                             </div>
                         </div>
                     </header>
-
-                    <main className="max-w-[1600px] mx-auto px-4 md:px-6 py-8">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch">
-                            {months.map((monthIndex) => (
-                                <MonthGrid 
-                                    key={monthIndex} 
-                                    month={monthIndex} 
-                                    year={currentYear} 
-                                    events={eventData} 
-                                />
-                            ))}
+                    <main className="px-2 sm:px-6 pb-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                            {Array.from({length:12}).map((_, i) => <MonthGrid key={i} month={i} year={currentYear} events={eventData} />)}
                         </div>
-
-                        <footer className="mt-12 pt-8 border-t border-slate-200 text-center">
-                            <div className="inline-flex items-center justify-center gap-2 mb-2 text-blue-600">
-                                 <AwardIcon size={16} />
-                                 <span className="font-bold text-sm">Learning and Development Department</span>
+                        <footer className="mt-16 text-center">
+                            <div className="flex justify-center items-center gap-2 text-emerald-600 font-bold text-sm mb-1">
+                                <AwardIcon size={16}/> L&D Department - KiotViet Training
                             </div>
-                            <p className="text-slate-400 text-xs">© {currentYear} Internal Use Only.</p>
+                            <p className="text-emerald-300 text-[10px] font-medium uppercase tracking-widest">© {currentYear} Internal Document</p>
                         </footer>
                     </main>
-
-                    <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
                 </div>
             );
         };
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
+        const root = ReactDOM.createRoot(document.getElementById('react-calendar-root'));
         root.render(<CalendarApp />);
     </script>
 </body>
