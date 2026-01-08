@@ -333,7 +333,9 @@
         };
 
         const DayCell = ({ day, month, year, event, isWeekend }) => {
-            let baseClass = "relative group flex items-center justify-center w-full aspect-square text-xs cursor-default rounded-md transition-all duration-200 overflow-hidden";
+            // UPDATED: Removed overflow-hidden to allow tooltips to be visible.
+            // ADDED: hover:z-20 to ensure the hovered cell (and its tooltip) stacks above others.
+            let baseClass = "relative group flex items-center justify-center w-full aspect-square text-xs cursor-default rounded-md transition-all duration-200 hover:z-20";
             let textClass = "z-10 text-slate-600 font-medium";
             let bgClass = "bg-transparent"; 
             
@@ -579,7 +581,7 @@
                         <footer className="mt-12 pt-8 border-t border-slate-200 text-center">
                             <div className="inline-flex items-center justify-center gap-2 mb-2 text-blue-600">
                                  <AwardIcon size={16} />
-                                 <span className="font-bold text-sm">Learning and Development Department</span>
+                                 <span className="font-bold text-sm">KiotViet Training Department</span>
                             </div>
                             <p className="text-slate-400 text-xs">© {currentYear} Internal Use Only.</p>
                         </footer>
