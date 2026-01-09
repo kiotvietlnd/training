@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Đào Tạo L&D KiotViet | 2025-2026</title>
+    <link rel="icon" type="image/x-icon" href="https://www.kiotviet.vn/wp-content/uploads/2019/11/icon-kv.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        kv: { blue: '#00558F', green: '#4CAF50', orange: '#F39C12' }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f8fafc; color: #334155; }
+        .ambient-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 10% 10%, #eff6ff 0%, transparent 40%), 
+                        radial-gradient(circle at 90% 90%, #f0fdf4 0%, transparent 40%);
+        }
+        
+        /* Tab Styles */
+        .tab-content { display: none; animation: fadeIn 0.5s ease-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .nav-item {
+            position: relative;
+            padding-bottom: 12px;
+            color: #64748b;
+            font-weight: 500;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .nav-item::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px;
+            background: #00558F; transition: width 0.3s; border-radius: 4px 4px 0 0;
+        }
+        .nav-item.active { color: #00558F; font-weight: 700; }
+        .nav-item.active::after { width: 100%; }
+        .nav-item:hover { color: #00558F; }
+
+        /* Custom Bullet Points */
+        ul.check-list li { position: relative; padding-left: 24px; margin-bottom: 8px; }
+        ul.check-list li::before {
+            content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; left: 0; top: 2px; color: #4CAF50; font-size: 14px;
+        }
+        ul.cross-list li { position: relative; padding-left: 24px; margin-bottom: 8px; }
+        ul.cross-list li::before {
+            content: '\f00d'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; left: 0; top: 2px; color: #ef4444; font-size: 14px;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div class="ambient-bg"></div>
+
+    <!-- Header & Navbar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between h-auto md:h-20 py-4 md:py-0 gap-4 md:gap-0">
+                <!-- Logo & Title -->
+                <div class="flex items-center gap-3 w-full md:w-auto justify-center md:justify-start">
+                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="Logo" class="h-6 md:h-8">
+                    <div class="h-6 w-px bg-slate-300 mx-1 hidden md:block"></div>
+                    <span class="font-bold text-slate-700 tracking-tight text-sm md:text-base">L&D REPORT: Hoạt động Đào tạo Direct Sales</span>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="flex space-x-6 overflow-x-auto w-full md:w-auto justify-center pb-2 md:pb-0">
+                    <button onclick="openTab('direct-sale')" id="btn-direct-sale" class="nav-item active">Đào tạo Kỹ năng</button>
+                    <button onclick="openTab('product')" id="btn-product" class="nav-item">Đào tạo Sản phẩm</button>
+                    <button onclick="openTab('roadmap')" id="btn-roadmap" class="nav-item">Kế hoạch Q1/2026</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+
+        <!-- TITLE BLOCK -->
+        <div class="mb-10 text-center" data-aos="fade-down">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3">
+                TỔNG KẾT ĐÀO TẠO 2025 <span class="text-kv-blue">& ĐỀ XUẤT 2026</span>
+            </h1>
+            <p class="text-slate-500 max-w-2xl mx-auto">Báo cáo chi tiết hiệu quả hoạt động, phân tích thực trạng và lộ trình chuyển đổi số toàn diện cho Team L&D.</p>
+        </div>
+
+        <!-- TAB 1: DIRECT SALE -->
+        <section id="direct-sale" class="tab-content active">
+            
+            <!-- Phần 1: Số liệu & Nội dung -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
+                <div class="md:col-span-4 bg-white p-6 rounded-2xl shadow-soft border border-slate-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 text-kv-blue flex items-center justify-center text-xl"><i class="fa-solid fa-chart-pie"></i></div>
+                        <h3 class="font-bold text-lg">Số liệu đào tạo</h3>
+                    </div>
+                    <div class="text-5xl font-extrabold text-kv-blue mb-2">50</div>
+                    <p class="text-sm text-slate-500 font-medium uppercase tracking-wide">Chương trình đã triển khai</p>
+                </div>
+                <div class="md:col-span-8 bg-white p-6 rounded-2xl shadow-soft border border-slate-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 text-kv-blue flex items-center justify-center text-xl"><i class="fa-solid fa-layer-group"></i></div>
+                        <h3 class="font-bold text-lg">Nội dung đã triển khai</h3>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-slate-700 text-sm mb-2">Kỹ năng Nền tảng</h4>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Tổng quan quy trình tư vấn</li>
+                                <li>• Kỹ năng tiếp cận khách hàng</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-slate-700 text-sm mb-2">Kỹ năng Bán hàng</h4>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Workshop Xử lý từ chối</li>
+                                <li>• Tối ưu quy trình chốt Sale</li>
+                                <li>• Xây nguồn KHGT (Referral)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phần 2: Đánh giá Thực trạng -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-2xl shadow-soft border-l-4 border-green-500">
+                    <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-thumbs-up text-green-500"></i> Ưu điểm
+                    </h3>
+                    <ul class="check-list text-slate-600 text-sm leading-relaxed">
+                        <li>Chương trình đa dạng, cung cấp đầy đủ kỹ năng cơ bản nhất.</li>
+                        <li>Công tác tổ chức ổn định, có quy chuẩn đánh giá chất lượng rõ ràng.</li>
+                        <li>Phối hợp đánh giá chéo từ quản lý giúp nhân sự có ý thức ôn luyện, kiểm soát tốt chất lượng đầu vào trước khi tiếp xúc khách.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-soft border-l-4 border-red-500">
+                    <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-red-500"></i> Điểm cần cải thiện
+                    </h3>
+                    <ul class="cross-list text-slate-600 text-sm leading-relaxed">
+                        <li>Hình thức đào tạo còn tập trung vào GV, chưa thực sự linh hoạt.</li>
+                        <li>Sĩ số đông & nguồn lực hạn chế -> Thời lượng thực hành/feedback trên lớp ít -> Khó khăn khi áp dụng thực tế.</li>
+                        <li>Chỉ mới đánh giá được tại lớp, chưa đo lường được mức độ áp dụng trong công việc thực tế tại team.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Phần 3: Đề xuất Cải tiến -->
+            <div class="bg-white p-8 rounded-2xl shadow-soft border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-kv-blue mb-6 border-b pb-2">ĐỀ XUẤT CẢI TIẾN 2026</h3>
+                
+                <!-- 1. Chart Comparison -->
+                <div class="mb-10">
+                    <h4 class="font-bold text-slate-700 mb-4 flex items-center gap-2">
+                        <span class="bg-blue-100 text-blue-600 w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+                        Điều chỉnh cơ cấu buổi học
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="text-sm text-slate-600 space-y-3">
+                            <p>Chuyển dịch từ mô hình truyền thống sang thực chiến:</p>
+                            <p>• <strong>Nâng cấp E-learning:</strong> Tăng tính chủ động, tiếp cận kiến thức sớm.</p>
+                            <p>• <strong>Giảm lý thuyết:</strong> Dành thời gian trên lớp để role-play và sửa lỗi.</p>
+                        </div>
+                        
+                        <!-- The Chart -->
+                        <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                            <!-- Old -->
+                            <div class="mb-4">
+                                <div class="flex justify-between text-xs text-slate-500 mb-1 font-semibold">
+                                    <span>2025 (Cũ)</span>
+                                    <span>50% Lý thuyết - 50% Thực hành</span>
+                                </div>
+                                <div class="h-6 w-full bg-slate-200 rounded-full flex overflow-hidden">
+                                    <div class="w-1/2 bg-slate-400 flex items-center justify-center text-[10px] text-white">50% LT</div>
+                                    <div class="w-1/2 bg-slate-500 flex items-center justify-center text-[10px] text-white">50% TH</div>
+                                </div>
+                            </div>
+                            <!-- New -->
+                            <div>
+                                <div class="flex justify-between text-sm text-slate-700 mb-1 font-bold">
+                                    <span>2026 (Mới)</span>
+                                    <span class="text-green-600">Tối ưu thực chiến</span>
+                                </div>
+                                <div class="h-10 w-full bg-slate-200 rounded-full flex overflow-hidden shadow-inner ring-1 ring-slate-300">
+                                    <div class="w-[20%] bg-slate-400 flex items-center justify-center text-xs font-bold text-white border-r border-white/20">20%</div>
+                                    <div class="w-[80%] bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center text-sm font-bold text-white relative overflow-hidden">
+                                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/diagonal-stripes.png')] opacity-20"></div>
+                                        <span class="relative z-10">80% THỰC HÀNH</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between text-xs text-slate-500 mt-1 px-1">
+                                    <span>Lý thuyết</span>
+                                    <span>Thực hành & Feedback</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Micro-learning Grid -->
+                <div class="mb-10">
+                    <h4 class="font-bold text-slate-700 mb-4 flex items-center gap-2">
+                        <span class="bg-blue-100 text-blue-600 w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+                        Bổ sung lộ trình Micro-learning (LMS)
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                            <div class="text-xs font-bold text-blue-500 uppercase mb-2">Tuần 2</div>
+                            <h5 class="font-bold text-slate-800 text-sm">Tìm kiếm Khách hàng</h5>
+                            <p class="text-xs text-slate-500 mt-1">(Nội bộ tự đào tạo)</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                            <div class="text-xs font-bold text-blue-500 uppercase mb-2">Tuần 3</div>
+                            <h5 class="font-bold text-slate-800 text-sm">Văn hóa KiotViet</h5>
+                            <p class="text-xs text-slate-500 mt-1">Hội nhập & Giá trị cốt lõi</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                            <div class="text-xs font-bold text-blue-500 uppercase mb-2">Tuần 4</div>
+                            <h5 class="font-bold text-slate-800 text-sm">Tư vấn Giải pháp</h5>
+                            <p class="text-xs text-slate-500 mt-1">Cá nhân hóa theo vấn đề</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                            <div class="text-xs font-bold text-blue-500 uppercase mb-2">Tuần 5</div>
+                            <h5 class="font-bold text-slate-800 text-sm">Thuyết phục & Xử lý từ chối</h5>
+                            <p class="text-xs text-slate-500 mt-1">Kỹ năng chốt sale</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Social & Coordination -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-5 rounded-xl border border-blue-100">
+                        <h4 class="font-bold text-kv-blue mb-2">Chia sẻ kinh nghiệm (Social Learning)</h4>
+                        <ul class="text-sm text-slate-700 space-y-2">
+                            <li><i class="fa-solid fa-microphone-lines mr-2 opacity-70"></i>Duy trì ổn định các Talkshow mỗi quý 1 topic.</li>
+                            <li><i class="fa-solid fa-star mr-2 opacity-70"></i>Diễn giả: Sales cứng / Best Sales chia sẻ thực tế.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-5 rounded-xl border border-green-100">
+                        <h4 class="font-bold text-green-700 mb-2">Phối hợp Bộ phận Kinh doanh</h4>
+                        <ul class="text-sm text-slate-700 space-y-2">
+                            <li><i class="fa-solid fa-eye mr-2 opacity-70"></i>Đốc thúc nhân sự hoàn thành lộ trình LMS.</li>
+                            <li><i class="fa-solid fa-door-open mr-2 opacity-70"></i><strong>Đánh giá chéo:</strong> Sau 2 tuần đào tạo (Gatekeeper).</li>
+                            <li><i class="fa-solid fa-user-group mr-2 opacity-70"></i>Kèm cặp nhân sự yếu dựa trên khung năng lực (2 tháng đầu).</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 2: PRODUCT KNOWLEDGE -->
+        <section id="product" class="tab-content">
+            
+            <!-- Tổng quan & Chiến lược - ĐÃ SỬA GRADIENT -->
+            <div class="bg-gradient-to-r from-blue-600 to-green-500 rounded-2xl p-8 text-white mb-8 relative overflow-hidden">
+                <div class="absolute right-0 top-0 h-full w-1/3 bg-white opacity-10 blur-xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold text-white mb-2 text-shadow">CHIẾN LƯỢC SẢN PHẨM 2026</h2>
+                    <p class="text-blue-50 max-w-2xl mb-6">Chuyển đổi số toàn diện hoạt động đào tạo sản phẩm, tập trung vào tính chủ động và kiểm soát dữ liệu.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white/20 px-4 py-2 rounded-lg border border-white/20 text-sm font-semibold backdrop-blur-sm"><i class="fa-solid fa-laptop mr-2"></i>100% Nội dung lên LMS</div>
+                        <div class="bg-white/20 px-4 py-2 rounded-lg border border-white/20 text-sm font-semibold backdrop-blur-sm"><i class="fa-solid fa-lock mr-2"></i>Cơ chế "Điều kiện tiên quyết"</div>
+                        <div class="bg-white/20 px-4 py-2 rounded-lg border border-white/20 text-sm font-semibold backdrop-blur-sm"><i class="fa-solid fa-chart-line mr-2"></i>Tracking Real-time</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chi tiết từng nhóm -->
+            <div class="space-y-6">
+                
+                <!-- Group 1: Retail Cơ bản -->
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <div class="bg-blue-50 px-6 py-4 border-b border-blue-100 flex justify-between items-center">
+                        <h3 class="font-bold text-kv-blue text-lg">1. Sản phẩm Retail Cơ bản (Tuần 1 - New Hire)</h3>
+                        <i class="fa-solid fa-store text-kv-blue opacity-50 text-xl"></i>
+                    </div>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-red-500 uppercase mb-2">Thực trạng 2025</h4>
+                            <p class="text-sm text-slate-600 mb-2"><strong>Ưu điểm:</strong> Tuân thủ tốt bài tập LMS, điểm lý thuyết cao.</p>
+                            <p class="text-sm text-slate-600"><strong>Hạn chế:</strong> Khoảng cách lớn giữa "Học" và "Làm". Tuần 2 kiểm tra vấn đáp/demo vẫn lúng túng, sai quy trình. Chỉ dừng ở mức "nhận biết".</p>
+                        </div>
+                        <div class="border-l-2 border-blue-100 pl-6">
+                            <h4 class="text-xs font-bold text-blue-600 uppercase mb-2">Cải tiến 2026</h4>
+                            <ul class="text-sm text-slate-700 space-y-2">
+                                <li><i class="fa-solid fa-bullseye text-blue-500 mr-2"></i><strong>Định hướng mục tiêu:</strong> Thành thạo 6 bước thao tác cơ bản ngay từ đầu.</li>
+                                <li><i class="fa-solid fa-video text-blue-500 mr-2"></i><strong>Bổ sung Module "Cảnh báo lỗi":</strong> Video/Quiz về các lỗi sai thường gặp để học viên tránh mắc phải.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 2: KV1 Advanced -->
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <div class="bg-green-50 px-6 py-4 border-b border-green-100 flex justify-between items-center">
+                        <h3 class="font-bold text-green-700 text-lg">2. Sản phẩm Retail KV1 (Nâng cao)</h3>
+                        <i class="fa-solid fa-layer-group text-green-700 opacity-50 text-xl"></i>
+                    </div>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-red-500 uppercase mb-2">Thực trạng 2025</h4>
+                            <p class="text-sm text-slate-600 mb-2"><strong>Công cụ:</strong> Quản lý thủ công qua Google Sheet (Checklist) -> Thiếu dữ liệu theo dõi.</p>
+                            <p class="text-sm text-slate-600"><strong>Nội dung:</strong> Quá tải thông tin, học đối phó sát ngày thi. Tỷ lệ pass thấp.</p>
+                        </div>
+                        <div class="border-l-2 border-green-100 pl-6">
+                            <h4 class="text-xs font-bold text-green-600 uppercase mb-2">Cải tiến 2026</h4>
+                            <ul class="text-sm text-slate-700 space-y-2">
+                                <li><i class="fa-solid fa-laptop-code text-green-500 mr-2"></i><strong>100% Tự học trên LMS:</strong> Chia nhỏ module (Vận hành, Quản lý, Doanh thu).</li>
+                                <li><i class="fa-solid fa-key text-green-500 mr-2"></i><strong>Điều kiện tiên quyết:</strong> Bắt buộc hoàn thành 100% tiến độ học mới được mở khóa bài thi Classmarker.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 3: Chuyên ngành -->
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <div class="bg-orange-50 px-6 py-4 border-b border-orange-100 flex justify-between items-center">
+                        <h3 class="font-bold text-orange-700 text-lg">3. Sản phẩm Chuyên ngành (FNB/Salon/Hotel)</h3>
+                        <i class="fa-solid fa-utensils text-orange-700 opacity-50 text-xl"></i>
+                    </div>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-red-500 uppercase mb-2">Thực trạng 2025</h4>
+                            <p class="text-sm text-slate-600">Ý thức học tập chưa cao. Tỷ lệ tham gia thấp, tương tác kém trong lớp Online. Thiếu sự chuẩn bị bài trước.</p>
+                        </div>
+                        <div class="border-l-2 border-orange-100 pl-6">
+                            <h4 class="text-xs font-bold text-orange-600 uppercase mb-2">Cải tiến 2026</h4>
+                            <ul class="text-sm text-slate-700 space-y-2">
+                                <li><i class="fa-solid fa-rotate text-orange-500 mr-2"></i><strong>Chuyển sang 100% E-Learning:</strong> Loại bỏ lớp online định kỳ.</li>
+                                <li><i class="fa-solid fa-list-check text-orange-500 mr-2"></i><strong>Tinh gọn nội dung:</strong> Luồng thao tác -> Tư duy giải pháp -> Top 20 tính năng phổ biến.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Group 4: GTGT -->
+                 <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <div class="bg-indigo-50 px-6 py-4 border-b border-indigo-100 flex justify-between items-center">
+                        <h3 class="font-bold text-indigo-700 text-lg">4. GTGT (Hóa đơn điện tử - Thuế)</h3>
+                        <i class="fa-solid fa-file-invoice-dollar text-indigo-700 opacity-50 text-xl"></i>
+                    </div>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-red-500 uppercase mb-2">Thực trạng 2025</h4>
+                            <p class="text-sm text-slate-600">Kiến thức khó, học viên tiếp thu thụ động, nhiều trường hợp bỏ thi.</p>
+                        </div>
+                        <div class="border-l-2 border-indigo-100 pl-6">
+                            <h4 class="text-xs font-bold text-indigo-600 uppercase mb-2">Cải tiến 2026: Blended Learning</h4>
+                            <ul class="text-sm text-slate-700 space-y-2">
+                                <li><i class="fa-solid fa-1 text-indigo-500 mr-2"></i><strong>Giai đoạn 1 (LMS):</strong> Tự học kiến thức nền tảng & Quy trình.</li>
+                                <li><i class="fa-solid fa-2 text-indigo-500 mr-2"></i><strong>Giai đoạn 2 (Zoom):</strong> Chỉ dành cho nhân sự đã xong GĐ1. GV giải đáp thắc mắc và thi tại lớp.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 3: ROADMAP -->
+        <section id="roadmap" class="tab-content">
+            <div class="bg-white p-8 rounded-2xl shadow-soft border border-slate-200">
+                <h2 class="text-2xl font-bold text-slate-800 mb-8 border-b pb-4">KẾ HOẠCH TRIỂN KHAI Q1/2026</h2>
+                
+                <div class="relative pl-8 md:pl-12 space-y-12">
+                    <!-- Vertical Line -->
+                    <div class="absolute left-4 md:left-6 top-2 bottom-2 w-0.5 bg-slate-200"></div>
+
+                    <!-- Item 1 -->
+                    <div class="relative">
+                        <div class="absolute -left-10 md:-left-12 top-0 w-8 h-8 rounded-full bg-blue-100 border-4 border-white flex items-center justify-center shadow-sm">
+                            <div class="w-3 h-3 bg-blue-600 rounded-full"></div>
+                        </div>
+                        <h3 class="text-lg font-bold text-kv-blue mb-4">Tháng 01/2026: Chuẩn bị nguồn lực & Số hóa</h3>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition">
+                                <h4 class="font-bold text-slate-700 text-sm mb-1"><i class="fa-solid fa-pen-nib mr-2 text-blue-500"></i>Biên tập & Sản xuất học liệu</h4>
+                                <p class="text-sm text-slate-600">Hoàn thiện quay dựng, số hóa cho: KV1, Các ngành hàng chuyên biệt, Hóa đơn điện tử.</p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition">
+                                <h4 class="font-bold text-slate-700 text-sm mb-1"><i class="fa-solid fa-cloud-arrow-up mr-2 text-blue-500"></i>Triển khai hệ thống</h4>
+                                <p class="text-sm text-slate-600">Upload toàn bộ nội dung, cấu hình bài thi lên hệ thống LMS.</p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition">
+                                <h4 class="font-bold text-slate-700 text-sm mb-1"><i class="fa-solid fa-book-medical mr-2 text-blue-500"></i>Cập nhật tài liệu Retail Cơ bản</h4>
+                                <p class="text-sm text-slate-600">Bổ sung quy trình chuẩn và nội dung "Các lỗi thường gặp".</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="relative">
+                        <div class="absolute -left-10 md:-left-12 top-0 w-8 h-8 rounded-full bg-green-100 border-4 border-white flex items-center justify-center shadow-sm">
+                            <div class="w-3 h-3 bg-green-600 rounded-full"></div>
+                        </div>
+                        <h3 class="text-lg font-bold text-green-700 mb-4">Tháng 02/2026: Go-live & Vận hành</h3>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="bg-green-50 p-4 rounded-lg border border-green-200 hover:shadow-md transition">
+                                <h4 class="font-bold text-green-800 text-sm mb-1"><i class="fa-solid fa-rocket mr-2 text-green-600"></i>Chính thức áp dụng</h4>
+                                <p class="text-sm text-green-700">Vận hành quy trình đào tạo mới trên toàn hệ thống.</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg border border-green-200 hover:shadow-md transition">
+                                <h4 class="font-bold text-green-800 text-sm mb-1"><i class="fa-solid fa-toggle-on mr-2 text-green-600"></i>Kích hoạt cơ chế "Điều kiện tiên quyết"</h4>
+                                <p class="text-sm text-green-700">Hệ thống LMS tự động chặn thi/học tiếp nếu nhân sự chưa hoàn thành nội dung bắt buộc.</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg border border-green-200 hover:shadow-md transition">
+                                <h4 class="font-bold text-green-800 text-sm mb-1"><i class="fa-solid fa-bullhorn mr-2 text-green-600"></i>Truyền thông nội bộ</h4>
+                                <p class="text-sm text-green-700">Hướng dẫn đội ngũ Quản lý kinh doanh cách theo dõi tiến độ nhân viên trên hệ thống mới.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-auto">
+        <div class="text-center text-slate-400 text-sm">
+            © 2026 KiotViet Internal Report. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init AOS Animation
+        AOS.init({ once: true, duration: 800 });
+
+        // Tab Switching Function
+        function openTab(tabName) {
+            // Hide all tabs
+            var i, tabContent, navItems;
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+            
+            // Deactivate all nav items
+            navItems = document.getElementsByClassName("nav-item");
+            for (i = 0; i < navItems.length; i++) {
+                navItems[i].classList.remove("active");
+            }
+
+            // Show current tab & activate button
+            document.getElementById(tabName).classList.add("active");
+            document.getElementById('btn-' + tabName).classList.add("active");
+            
+            // Refresh AOS inside hidden tabs
+            setTimeout(function(){ AOS.refresh(); }, 100);
+        }
+    </script>
+</body>
+</html>
