@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giải pháp HĐĐT - Thuế - Kế toán 2026</title>
+    <title>Giải pháp HĐĐT - Thuế - Kế toán (HKD) Toàn diện</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -34,17 +34,27 @@
     </script>
     <style>
         html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
+        
         .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.4s ease-in-out; z-index: 10; flex-direction: column; }
         .slide.active { display: flex; opacity: 1; }
+        
+        /* GLASS EFFECT */
         .glass {
-            background: rgba(255, 255, 255, 0.65); 
+            background: rgba(255, 255, 255, 0.75); 
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
         }
+
         #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
         .animate-zoom-in { opacity: 0; }
         .slide.active .animate-zoom-in { animation-play-state: running; }
+        
+        /* Custom Table Styling */
+        .custom-table th { background-color: #1e3a8a; color: white; padding: 12px; text-align: center; }
+        .custom-table td { padding: 10px; border-bottom: 1px solid #e2e8f0; vertical-align: middle; }
+        .custom-table tr:last-child td { border-bottom: none; }
+        .custom-table tr:nth-child(even) { background-color: #f1f5f9; }
     </style>
 </head>
 <body class="text-gray-800 relative select-none cursor-none">
@@ -60,25 +70,180 @@
     <div id="slide-container" class="relative z-10 w-full h-full flex items-center justify-center">
 
         <div class="slide flex items-center justify-center p-8">
-            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-4xl w-full text-center animate-zoom-in">
-                <h1 class="text-5xl font-extrabold text-blue-900 mb-6 leading-tight">GIẢI PHÁP HĐĐT - THUẾ - KẾ TOÁN (HKD)</h1>
-                <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full mb-6"></div>
-                <p class="text-xl text-gray-600 font-medium">Đồng hành cùng Hộ kinh doanh tuân thủ pháp lý 2026</p>
+            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-5xl w-full text-center animate-zoom-in">
+                <h1 class="text-5xl font-extrabold text-blue-900 mb-6 leading-tight uppercase">GIẢI PHÁP HĐĐT - THUẾ - KẾ TOÁN (HKD) TOÀN DIỆN</h1>
+                <div class="h-1.5 w-32 bg-cyan-500 mx-auto rounded-full mb-6"></div>
+                <p class="text-2xl text-gray-700 font-bold mb-2">Tuân thủ pháp lý 2026 - Tối ưu vận hành - An tâm kinh doanh</p>
+                <p class="text-lg text-gray-500 mt-8">Người trình bày: KiotViet</p>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">KiotViet & Hệ sinh thái Hộ kinh doanh</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="space-y-6 animate-zoom-in delay-100">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-trophy"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Vị thế số 1</h3>
+                            <p class="text-gray-600">Phần mềm Quản lý bán hàng phổ biến nhất Việt Nam.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-bullseye"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Mục tiêu</h3>
+                            <p class="text-gray-600">Tối ưu vận hành, quản lý chặt chẽ, thúc đẩy doanh thu.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6 animate-zoom-in delay-200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-600 shrink-0"><i class="fa-solid fa-rocket"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Bước tiến mới</h3>
+                            <p class="text-gray-600">Tích hợp trọn bộ giải pháp tuân thủ pháp lý <strong>"0 Đồng"</strong>.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-600 shrink-0"><i class="fa-solid fa-check-double"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Lợi ích cốt lõi</h3>
+                            <p class="text-gray-600">Quy trình đồng bộ, không phát sinh chi phí, không lo thủ tục.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="slide glass flex items-center justify-center p-12">
-            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
-                <div class="flex-1 text-right border-r-4 border-blue-600 pr-12 animate-zoom-in">
-                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Bối cảnh pháp lý</h2>
+            <div class="flex flex-col items-center max-w-4xl w-full text-center">
+                <div class="text-6xl text-red-500 mb-6 animate-zoom-in"><i class="fa-solid fa-scale-balanced"></i></div>
+                <h2 class="text-5xl font-extrabold text-blue-900 mb-8 animate-zoom-in">THÁCH THỨC MỚI TỪ NĂM 2026</h2>
+                <div class="grid grid-cols-1 gap-6 w-full text-left bg-white/60 p-8 rounded-2xl shadow-sm border border-white animate-zoom-in delay-100">
+                    <div class="flex items-center gap-4 text-xl">
+                        <i class="fa-solid fa-ban text-red-500 w-8"></i>
+                        <span><strong>Chấm dứt Thuế Khoán:</strong> Bãi bỏ mức nộp cố định. Quản lý theo số liệu thực tế.</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-xl">
+                        <i class="fa-solid fa-user-pen text-blue-600 w-8"></i>
+                        <span><strong>Cơ chế "Tự kê khai - Tự nộp":</strong> Bắt buộc với mọi quy mô HKD.</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-xl">
+                        <i class="fa-solid fa-book-journal-whills text-blue-600 w-8"></i>
+                        <span><strong>Sổ sách kế toán (TT 152/2025):</strong> Bắt buộc ghi nhận doanh thu, chi phí.</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-xl text-red-600 font-bold bg-red-50 p-2 rounded-lg">
+                        <i class="fa-solid fa-triangle-exclamation w-8"></i>
+                        <span>Cảnh báo: Rủi ro bị ấn định thuế phạt cao nếu không minh bạch sổ sách.</span>
+                    </div>
                 </div>
-                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
-                    <ul class="space-y-6">
-                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium">
-                            <i class="fa-solid fa-circle-exclamation text-blue-600"></i> Chấm dứt cơ chế Thuế Khoán
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-4">
+            <h2 class="text-3xl font-bold text-blue-900 mb-4 animate-zoom-in">HỘ KINH DOANH CỦA BẠN THUỘC NHÓM NÀO?</h2>
+            <div class="w-full max-w-7xl overflow-hidden rounded-xl shadow-lg border border-gray-200 animate-zoom-in delay-100 bg-white">
+                <table class="w-full text-sm text-left custom-table">
+                    <thead>
+                        <tr>
+                            <th class="w-1/6 bg-blue-800">ĐẶC ĐIỂM</th>
+                            <th class="w-1/5 bg-cyan-600">NHÓM 1</th>
+                            <th class="w-1/5 bg-cyan-600">NHÓM 2</th>
+                            <th class="w-1/5 bg-cyan-600">NHÓM 3</th>
+                            <th class="w-1/5 bg-cyan-600">NHÓM 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold bg-blue-50">Doanh thu/năm</td>
+                            <td class="font-bold text-center">Dưới 500 triệu</td>
+                            <td class="font-bold text-center">500 triệu - Dưới 3 tỷ</td>
+                            <td class="font-bold text-center">3 tỷ - Dưới 50 tỷ</td>
+                            <td class="font-bold text-center">Trên 50 tỷ</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold bg-blue-50">Nghĩa vụ Thuế</td>
+                            <td class="text-center">Miễn Thuế GTGT & TNCN</td>
+                            <td>Tùy chọn:<br>1. Tỷ lệ % Doanh thu<br>2. 15% trên Lợi nhuận</td>
+                            <td class="text-center">17% trên Lợi nhuận</td>
+                            <td class="text-center">20% trên Lợi nhuận</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold bg-blue-50">Sổ sách Kế toán</td>
+                            <td class="text-center">Chỉ cần Sổ S1a<br>(Doanh thu)</td>
+                            <td>Cách 1: Sổ S2a<br>Cách 2: Bộ 4 sổ (S2b-e)</td>
+                            <td class="text-center font-bold text-blue-700">Bộ 4 sổ chính:<br>S2b, S2c, S2d, S2e</td>
+                            <td class="text-center font-bold text-blue-700">Bộ 4 sổ chính:<br>S2b, S2c, S2d, S2e</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold bg-blue-50">Hóa đơn điện tử</td>
+                            <td class="text-center text-gray-500">Không bắt buộc</td>
+                            <td class="text-center font-bold">Bắt buộc (Nếu > 1 tỷ)</td>
+                            <td class="text-center font-bold text-red-600">Bắt buộc</td>
+                            <td class="text-center font-bold text-red-600">Bắt buộc</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-4 text-gray-600 text-center italic animate-zoom-in delay-200">
+                *Lưu ý: Bộ 4 sổ chính bao gồm: Sổ doanh thu (S2b), Sổ chi phí (S2c), Sổ vật liệu/hàng hóa (S2d) và Sổ tiền (S2e).
+            </p>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-2 text-center animate-zoom-in">GIẢI PHÁP "0 ĐỒNG" - TOÀN DIỆN</h2>
+            <p class="text-xl text-gray-600 mb-10 animate-zoom-in">Dành cho TẤT CẢ các nhóm (1-4). KHÔNG phát sinh chi phí ngoài.</p>
+            
+            <div class="grid grid-cols-5 gap-4 w-full max-w-7xl">
+                <div class="bg-white p-4 rounded-xl shadow-md text-center border-t-4 border-blue-500 animate-zoom-in delay-75">
+                    <i class="fa-solid fa-receipt text-3xl text-blue-600 mb-3"></i>
+                    <h3 class="font-bold text-sm">Hóa đơn điện tử</h3>
+                    <p class="text-xs text-gray-500 mt-1">Khởi tạo từ máy tính tiền</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-md text-center border-t-4 border-blue-500 animate-zoom-in delay-100">
+                    <i class="fa-solid fa-pen-nib text-3xl text-blue-600 mb-3"></i>
+                    <h3 class="font-bold text-sm">Chữ ký số từ xa</h3>
+                    <p class="text-xs text-gray-500 mt-1">Không cần USB Token</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-md text-center border-t-4 border-blue-500 animate-zoom-in delay-150">
+                    <i class="fa-solid fa-calculator text-3xl text-blue-600 mb-3"></i>
+                    <h3 class="font-bold text-sm">Sổ sách Tự động</h3>
+                    <p class="text-xs text-gray-500 mt-1">Chuẩn Thông tư 152</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-md text-center border-t-4 border-blue-500 animate-zoom-in delay-200">
+                    <i class="fa-solid fa-file-contract text-3xl text-blue-600 mb-3"></i>
+                    <h3 class="font-bold text-sm">Tờ khai thuế</h3>
+                    <p class="text-xs text-gray-500 mt-1">Tích hợp sẵn mẫu</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-md text-center border-t-4 border-cyan-500 animate-zoom-in delay-300">
+                    <i class="fa-solid fa-cart-flatbed text-3xl text-cyan-600 mb-3"></i>
+                    <h3 class="font-bold text-sm">Hóa đơn đầu vào</h3>
+                    <p class="text-xs text-gray-500 mt-1">Quản lý chi phí</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex gap-12 max-w-6xl w-full items-center">
+                <div class="w-1/3 text-right animate-zoom-in">
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">NHÓM 1</h2>
+                    <p class="text-2xl text-blue-600 font-bold mt-2">Dưới 500 Triệu</p>
+                </div>
+                <div class="w-2/3 bg-white/80 p-8 rounded-3xl shadow-xl animate-zoom-in delay-100">
+                    <h3 class="text-xl font-bold text-red-500 mb-4"><i class="fa-solid fa-circle-exclamation"></i> Vấn đề: Miễn thuế nhưng KHÔNG miễn sổ sách (S1a).</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-magic text-blue-600"></i>
+                            <span><strong>Tự động hóa:</strong> Bán hàng trên KiotViet -> Tự động ghi Sổ doanh thu (S1a).</span>
                         </li>
-                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium">
-                            <i class="fa-solid fa-book text-blue-600"></i> Nghĩa vụ Sổ sách kế toán bắt buộc
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-file-export text-blue-600"></i>
+                            <span><strong>Báo cáo:</strong> Tự động tổng hợp số liệu lên Tờ khai thuế.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-thumbs-up text-green-600"></i>
+                            <span><strong>Lợi ích:</strong> Không cần thuê kế toán, chứng minh doanh thu dễ dàng.</span>
                         </li>
                     </ul>
                 </div>
@@ -86,56 +251,203 @@
         </div>
 
         <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Phân loại Hộ Kinh Doanh (TT 152)</h2>
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 text-center animate-zoom-in">TỰ ĐỘNG HÓA SỔ SÁCH PHỨC TẠP</h2>
             <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0">
-                        <i class="fa-solid fa-users text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800">Nhóm 1 (< 500tr)</h3>
-                        <p class="text-gray-700 text-sm mt-1">Miễn thuế nhưng phải làm Sổ doanh thu (S1a).</p>
-                    </div>
+                <div class="bg-blue-50 p-6 rounded-2xl border border-blue-200 animate-zoom-in delay-100">
+                    <h3 class="text-xl font-bold text-blue-800 mb-2">Tính thuế trên Doanh thu (Sổ S2a)</h3>
+                    <p class="text-gray-700">Hệ thống tự động phân loại, tổng hợp doanh thu theo từng nhóm ngành hàng chịu thuế.</p>
                 </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0">
-                        <i class="fa-solid fa-file-invoice-dollar text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800">Nhóm 2, 3, 4 (> 500tr)</h3>
-                        <p class="text-gray-700 text-sm mt-1">Bắt buộc nộp thuế & Duy trì bộ 4 sổ kế toán chính.</p>
+                <div class="bg-cyan-50 p-6 rounded-2xl border border-cyan-200 animate-zoom-in delay-200">
+                    <h3 class="text-xl font-bold text-cyan-800 mb-2">Tính thuế trên Lợi nhuận (Bộ 4 Sổ)</h3>
+                    <p class="text-gray-700 mb-2"><strong>Hạch toán "kép" tự động:</strong></p>
+                    <ul class="text-sm list-disc pl-5 space-y-1">
+                        <li>Bán hàng -> Chảy vào Sổ doanh thu (S2b)</li>
+                        <li>Nhập hàng -> Chảy vào Sổ chi phí (S2c), Kho (S2d), Tiền (S2e)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 bg-green-100 px-8 py-4 rounded-full text-green-800 font-bold shadow-sm animate-zoom-in delay-300">
+                <i class="fa-solid fa-check"></i> Lợi ích: Không lo nghiệp vụ kế toán, xuất báo cáo ngay khi Thuế yêu cầu.
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">KV-eINVOICE: HĐĐT TỪ MÁY TÍNH TIỀN</h2>
+            <p class="text-red-600 font-bold mb-4 text-center shrink-0 animate-zoom-in">Bắt buộc nếu Doanh thu >1 tỷ/năm HOẶC ngành Bán lẻ, F&B, Khách sạn.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100 gap-8">
+                <div class="w-1/2 space-y-6">
+                    <div class="flex items-center gap-4 text-lg"><i class="fa-solid fa-bolt text-yellow-500"></i> Xuất hóa đơn chuẩn mẫu Máy tính tiền (2C26M) ngay khi tính tiền.</div>
+                    <div class="flex items-center gap-4 text-lg"><i class="fa-solid fa-cloud-arrow-up text-blue-500"></i> Gửi dữ liệu tự động lên Tổng cục Thuế trong ngày.</div>
+                    <div class="flex items-center gap-4 text-lg"><i class="fa-solid fa-gift text-green-500"></i> Tích hợp <strong>MIỄN PHÍ</strong> phân hệ HĐĐT.</div>
+                </div>
+                <div class="w-1/2 h-full flex items-center justify-center">
+                    <div class="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-400 text-gray-500 font-bold">
+                        [ẢNH MÀN HÌNH THANH TOÁN KIOTVIET]
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Giải pháp "0 Đồng" từ KiotViet</h2>
-            <div class="grid grid-cols-3 gap-6 w-full max-w-6xl">
-                <div class="bg-white/90 p-6 rounded-2xl text-center animate-zoom-in">
-                    <i class="fa-solid fa-receipt text-4xl text-blue-600 mb-4"></i>
-                    <h4 class="font-bold">Hóa đơn điện tử</h4>
-                    <p class="text-sm text-gray-600">Khởi tạo từ máy tính tiền</p>
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">CHỮ KÝ SỐ TỪ XA (REMOTE SIGNING)</h2>
+            <div class="bg-white/90 p-10 rounded-3xl shadow-2xl border border-white/50 max-w-4xl w-full flex items-center gap-10 animate-zoom-in">
+                <div class="flex-1 text-center border-r border-gray-200 pr-10">
+                    <i class="fa-solid fa-signature text-6xl text-blue-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800">MIỄN PHÍ</h3>
+                    <p class="text-gray-500">KiotViet IntrustCA</p>
                 </div>
-                <div class="bg-white/90 p-6 rounded-2xl text-center animate-zoom-in">
-                    <i class="fa-solid fa-pen-nib text-4xl text-blue-600 mb-4"></i>
-                    <h4 class="font-bold">Chữ ký số từ xa</h4>
-                    <p class="text-sm text-gray-600">Ký ngay trên điện thoại</p>
-                </div>
-                <div class="bg-white/90 p-6 rounded-2xl text-center animate-zoom-in">
-                    <i class="fa-solid fa-calculator text-4xl text-blue-600 mb-4"></i>
-                    <h4 class="font-bold">Sổ sách tự động</h4>
-                    <p class="text-sm text-gray-600">Chuẩn Thông tư 152</p>
+                <div class="flex-[2] space-y-4">
+                    <div class="flex items-center gap-4 text-lg">
+                        <i class="fa-solid fa-mobile-screen-button text-blue-600 text-2xl w-8"></i>
+                        <span>Ký xác thực ngay trên điện thoại di động mọi lúc.</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-lg">
+                        <i class="fa-solid fa-ban text-red-500 text-2xl w-8"></i>
+                        <span>Không tốn phí mua thiết bị, không cần USB Token.</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-lg">
+                        <i class="fa-solid fa-stamp text-green-600 text-2xl w-8"></i>
+                        <span>Thay thế hoàn toàn con dấu đỏ & chữ ký tươi.</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
-            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Quy trình triển khai 11 Bước</h2>
-            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Lộ trình từ thiết lập nền tảng đến vận hành hàng ngày.</p>
-            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
-                <div class="bg-white/50 p-8 rounded-3xl border-2 border-dashed border-blue-300 text-blue-900 font-bold text-2xl">
-                    [ẢNH SƠ ĐỒ QUY TRÌNH 11 BƯỚC]
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="text-center w-full max-w-5xl">
+                <h2 class="text-4xl font-bold text-blue-900 mb-12 animate-zoom-in">LỘ TRÌNH TRIỂN KHAI DỄ DÀNG</h2>
+                <div class="flex items-center justify-center gap-4 animate-zoom-in delay-100">
+                    <div class="flex-1 bg-blue-600 text-white p-8 rounded-2xl shadow-lg relative">
+                        <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-blue-900 font-bold px-4 py-1 rounded-full text-sm">LÀM 1 LẦN DUY NHẤT</div>
+                        <h3 class="text-2xl font-bold mb-2">GIAI ĐOẠN 1</h3>
+                        <p class="text-blue-100 mb-4">Thiết lập nền tảng</p>
+                        <div class="text-5xl font-bold">7 <span class="text-2xl font-normal">Bước</span></div>
+                    </div>
+                    
+                    <i class="fa-solid fa-arrow-right text-4xl text-gray-400"></i>
+
+                    <div class="flex-1 bg-white text-blue-900 p-8 rounded-2xl shadow-lg border border-blue-100">
+                        <h3 class="text-2xl font-bold mb-2">GIAI ĐOẠN 2</h3>
+                        <p class="text-gray-500 mb-4">Vận hành hàng ngày</p>
+                        <div class="text-5xl font-bold">4 <span class="text-2xl font-normal">Bước</span></div>
+                    </div>
+                </div>
+                <p class="mt-8 text-gray-500 italic animate-zoom-in delay-200">Lưu ý: Nếu không dùng HĐĐT (Doanh thu < 1 tỷ), bắt đầu từ Giai đoạn 2 (Bước 10 & 11).</p>
+            </div>
+        </div>
+
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="w-full max-w-6xl flex gap-10">
+                <div class="flex-1 animate-zoom-in">
+                    <h2 class="text-4xl font-bold text-blue-900 mb-6">7 BƯỚC THIẾT LẬP</h2>
+                    <ul class="space-y-3">
+                        <li class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-blue-500 flex items-center gap-3">
+                            <span class="bg-blue-100 text-blue-800 font-bold w-6 h-6 rounded flex items-center justify-center text-sm">1</span>
+                            Đăng ký Chữ ký số (Cần CCCD + GPKD)
+                        </li>
+                        <li class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-blue-500 flex items-center gap-3">
+                            <span class="bg-blue-100 text-blue-800 font-bold w-6 h-6 rounded flex items-center justify-center text-sm">2</span>
+                            Thiết lập cấu hình Thuế VAT
+                        </li>
+                        <li class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-blue-500 flex items-center gap-3">
+                            <span class="bg-blue-100 text-blue-800 font-bold w-6 h-6 rounded flex items-center justify-center text-sm">3</span>
+                            Kích hoạt tài khoản HĐĐT
+                        </li>
+                        <li class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-blue-500 flex items-center gap-3">
+                            <span class="bg-blue-100 text-blue-800 font-bold w-6 h-6 rounded flex items-center justify-center text-sm">4</span>
+                            Liên kết Chữ ký số
+                        </li>
+                        <li class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-blue-500 flex items-center gap-3">
+                            <span class="bg-blue-100 text-blue-800 font-bold w-6 h-6 rounded flex items-center justify-center text-sm">5</span>
+                            Lập tờ khai 01/ĐKTĐ
+                        </li>
+                        <li class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-blue-500 flex items-center gap-3">
+                            <span class="bg-blue-100 text-blue-800 font-bold w-6 h-6 rounded flex items-center justify-center text-sm">6</span>
+                            Thiết kế mẫu hóa đơn (2C26M)
+                        </li>
+                        <li class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-blue-500 flex items-center gap-3">
+                            <span class="bg-blue-100 text-blue-800 font-bold w-6 h-6 rounded flex items-center justify-center text-sm">7</span>
+                            Kết nối đồng bộ dữ liệu
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex-1 flex items-center justify-center bg-gray-100 rounded-2xl animate-zoom-in delay-100 border-2 border-dashed border-gray-300">
+                     <div class="text-gray-400 font-bold">[ẢNH GIAO DIỆN THIẾT LẬP]</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-8">
+            <h2 class="text-3xl font-bold text-blue-900 mb-6 animate-zoom-in">TRA CỨU TỶ LỆ THUẾ SUẤT (THAM KHẢO)</h2>
+            <div class="w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden animate-zoom-in delay-100">
+                <table class="w-full text-sm custom-table">
+                    <thead class="bg-blue-800 text-white">
+                        <tr>
+                            <th class="text-left pl-6">Danh mục ngành nghề kinh doanh</th>
+                            <th class="w-32">Thuế GTGT</th>
+                            <th class="w-32">Thuế TNCN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold bg-gray-50 pl-6">Nhóm 1. Phân phối, cung cấp hàng hóa</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td class="pl-10">Bán buôn, bán lẻ hàng hóa các loại</td>
+                            <td class="text-center">1%</td>
+                            <td class="text-center">0,5%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold bg-gray-50 pl-6">Nhóm 2. Dịch vụ, xây dựng (không bao thầu NVL)</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td class="pl-10">Dịch vụ lưu trú, tư vấn, quảng cáo...</td>
+                            <td class="text-center">5%</td>
+                            <td class="text-center">2%</td>
+                        </tr>
+                         <tr>
+                            <td class="pl-10">Cho thuê tài sản (nhà, đất, xe...)</td>
+                            <td class="text-center">5%</td>
+                            <td class="text-center">5%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold bg-gray-50 pl-6">Nhóm 3. Sản xuất, vận tải, dịch vụ có gắn hàng hóa</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td class="pl-10">Dịch vụ ăn uống; Sản xuất, gia công</td>
+                            <td class="text-center">3%</td>
+                            <td class="text-center">1,5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">VẬN HÀNH HÀNG NGÀY & QUẢN LÝ ĐẦU VÀO</h2>
+            <div class="grid grid-cols-2 gap-12 w-full max-w-6xl">
+                <div class="bg-white p-8 rounded-3xl shadow-lg animate-zoom-in delay-100">
+                    <h3 class="text-xl font-bold text-blue-600 mb-4 border-b pb-2">Quy trình vận hành</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3"><span class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center font-bold text-blue-600">8</span> Bán hàng & Phát hành hóa đơn</div>
+                        <div class="flex items-center gap-3"><span class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center font-bold text-blue-600">9</span> Xử lý sai sót (nếu có)</div>
+                        <div class="flex items-center gap-3"><span class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center font-bold text-blue-600">10</span> Tự động ghi nhận Sổ sách</div>
+                        <div class="flex items-center gap-3"><span class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center font-bold text-blue-600">11</span> Lập Tờ khai thuế định kỳ</div>
+                    </div>
+                </div>
+                <div class="bg-cyan-50 p-8 rounded-3xl shadow-lg border border-cyan-200 animate-zoom-in delay-200">
+                    <h3 class="text-xl font-bold text-cyan-700 mb-4 border-b border-cyan-200 pb-2">Quản lý Hóa đơn đầu vào</h3>
+                    <p class="text-sm text-gray-600 mb-4">Quan trọng cho tính thuế Lợi nhuận (Nhóm 3, 4)</p>
+                    <div class="flex flex-col gap-2">
+                        <div class="bg-white p-3 rounded shadow-sm text-center">Kết nối Tổng cục Thuế</div>
+                        <div class="text-center text-cyan-400"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="bg-white p-3 rounded shadow-sm text-center">Đồng bộ HĐ mua hàng & Khớp kho</div>
+                        <div class="text-center text-cyan-400"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="bg-white p-3 rounded shadow-sm text-center font-bold text-cyan-700">Tạo phiếu Nhập/Chi tự động</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,7 +456,7 @@
             <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-2xl w-full text-center animate-zoom-in">
                 <h1 class="text-6xl font-extrabold text-blue-900 mb-6">CẢM ƠN!</h1>
                 <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full mb-6"></div>
-                <p class="text-xl text-gray-600">Chúc anh/chị kinh doanh thuận lợi cùng KiotViet</p>
+                <p class="text-xl text-gray-600">KiotViet - Đồng hành cùng sự phát triển của bạn.</p>
             </div>
         </div>
 
@@ -162,10 +474,6 @@
                     slide.classList.add('active');
                     const animated = slide.querySelectorAll('.animate-zoom-in');
                     animated.forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
-                    
-                    const isInfographic = slide.getAttribute('data-type') === 'infographic';
-                    if (isInfographic) logo.style.opacity = '0';
-                    else logo.style.opacity = '1';
                 } else {
                     slide.classList.remove('active');
                 }
