@@ -60,7 +60,7 @@
         .animate-zoom-in { opacity: 0; }
         .slide.active .animate-zoom-in { animation-play-state: running; }
 
-        /* Custom Scrollbar for tables and content */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
@@ -93,6 +93,19 @@
                 <div class="h-2 w-32 bg-blue-600 mx-auto rounded-full mb-8"></div>
                 <p class="text-2xl text-gray-600 font-medium">Hệ sinh thái tuân thủ pháp lý toàn diện từ KiotViet</p>
             </div>
+        </div>
+
+        <!-- NEW SLIDE: ĐIỂM DANH -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 animate-zoom-in uppercase">Điểm danh Đầu giờ</h2>
+            <div class="bg-white p-4 rounded-2xl shadow-xl animate-zoom-in delay-100 border-4 border-blue-200">
+                <!-- Mã QR trỏ về link điểm danh -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSc0mc4rSkRfttQSkf6jIIoSQYH1xYaO6kEBjFBH3oAn39Wu3A%2Fviewform%3Fusp%3Dsharing%26ouid%3D114233827588486974210" alt="QR Diem Danh" class="w-80 h-80 object-contain">
+            </div>
+            <p class="text-xl text-gray-700 mt-8 font-medium animate-zoom-in delay-200 bg-white/50 px-6 py-3 rounded-full shadow-sm">
+                <i class="fa-solid fa-camera mr-2 text-blue-600"></i>
+                Vui lòng quét mã QR để xác nhận tham dự
+            </p>
         </div>
 
         <!-- Slide 2: Sứ mệnh -->
@@ -258,7 +271,7 @@
                 <!-- Item 5 -->
                 <div class="bg-white/80 p-4 rounded-xl shadow-md border-t-4 border-orange-500 animate-zoom-in flex flex-col items-center text-center" style="animation-delay: 0.5s;">
                     <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mb-3"><i class="fa-solid fa-cloud-arrow-down text-2xl"></i></div>
-                    <h3 class="font-bold text-blue-900 text-sm mb-1">Quản lý Đầu vào</h3>
+                    <h3 class="font-bold text-blue-900 text-sm mb-1">Quản lý Hóa đơn đầu vào</h3>
                     <p class="text-xs text-gray-600">Đáp ứng quy định về chứng minh chi phí hợp lý.</p>
                 </div>
             </div>
@@ -343,11 +356,11 @@
             </div>
         </div>
 
-        <!-- Slide 12: 11 Steps Overview (ĐÃ CẬP NHẬT LƯU Ý) -->
+        <!-- Slide 12: 11 Steps Overview (ĐÃ CẬP NHẬT LAYOUT VÀ FONT) -->
         <div class="slide glass flex flex-col items-center justify-center p-4">
             <h2 class="text-3xl font-extrabold text-blue-900 mb-2 animate-zoom-in">Lộ trình 11 Bước Triển khai HĐĐT</h2>
             
-            <!-- Box Lưu ý mới -->
+            <!-- Box Lưu ý -->
             <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-lg max-w-6xl w-full mb-4 animate-zoom-in text-sm text-gray-800 shadow-sm">
                 <p class="font-bold mb-1"><i class="fa-solid fa-lightbulb text-yellow-600 mr-2"></i>Lưu ý quan trọng:</p>
                 <p class="mb-2">Việc áp dụng các giải pháp tuân thủ quy định mới có thể sẽ gây đôi chút bỡ ngỡ khi mới làm quen. KiotViet đề xuất quy trình chia nhỏ để thực hiện nhanh chóng:</p>
@@ -367,15 +380,37 @@
                             <p class="text-xs text-gray-500 font-medium">Làm 1 lần duy nhất</p>
                          </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-2 flex-1 content-start overflow-y-auto">
-                        <!-- Steps 1-7 -->
-                        <div class="bg-white p-2 rounded-xl border border-blue-100 flex items-center gap-2 shadow-sm"><div class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold border border-blue-200 flex-shrink-0">1</div><span class="text-sm font-medium text-gray-700 leading-tight">Đăng ký Chữ ký số IntrustCA</span></div>
-                        <div class="bg-white p-2 rounded-xl border border-blue-100 flex items-center gap-2 shadow-sm"><div class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold border border-blue-200 flex-shrink-0">2</div><span class="text-sm font-medium text-gray-700 leading-tight">Thiết lập Thuế VAT</span></div>
-                        <div class="bg-white p-2 rounded-xl border border-blue-100 flex items-center gap-2 shadow-sm"><div class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold border border-blue-200 flex-shrink-0">3</div><span class="text-sm font-medium text-gray-700 leading-tight">Bắt đầu dùng HĐĐT KiotViet</span></div>
-                        <div class="bg-white p-2 rounded-xl border border-blue-100 flex items-center gap-2 shadow-sm"><div class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold border border-blue-200 flex-shrink-0">4</div><span class="text-sm font-medium text-gray-700 leading-tight">Thiết lập CKS trên E-Invoice</span></div>
-                        <div class="bg-white p-2 rounded-xl border border-blue-100 flex items-center gap-2 shadow-sm col-span-2"><div class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold border border-blue-200 flex-shrink-0">5</div><span class="text-sm font-medium text-gray-700 leading-tight">Lập Tờ khai đăng ký HĐĐT trên E-Invoice</span></div>
-                        <div class="bg-white p-2 rounded-xl border border-blue-100 flex items-center gap-2 shadow-sm"><div class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold border border-blue-200 flex-shrink-0">6</div><span class="text-sm font-medium text-gray-700 leading-tight">Tạo mẫu Hóa đơn điện tử</span></div>
-                        <div class="bg-white p-2 rounded-xl border border-teal-100 flex items-center gap-2 shadow-sm bg-teal-50/50"><div class="w-6 h-6 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-xs font-bold border border-teal-200 flex-shrink-0">7</div><span class="text-sm font-bold text-teal-800 leading-tight">Kết nối Phần mềm QLBH và HĐĐT</span></div>
+                    <!-- FIXED GRID & FONT SIZE -->
+                    <div class="grid grid-cols-2 gap-3 flex-1 content-start overflow-y-auto">
+                        <!-- Items -->
+                        <div class="bg-white p-3 rounded-xl border border-blue-100 flex items-center gap-3 shadow-sm min-h-[60px]">
+                            <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold border border-blue-200 flex-shrink-0">1</div>
+                            <span class="text-[15px] font-bold text-slate-700 leading-tight">Đăng ký Chữ ký số IntrustCA</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-blue-100 flex items-center gap-3 shadow-sm min-h-[60px]">
+                            <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold border border-blue-200 flex-shrink-0">2</div>
+                            <span class="text-[15px] font-bold text-slate-700 leading-tight">Thiết lập Thuế VAT</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-blue-100 flex items-center gap-3 shadow-sm min-h-[60px]">
+                            <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold border border-blue-200 flex-shrink-0">3</div>
+                            <span class="text-[15px] font-bold text-slate-700 leading-tight">Bắt đầu dùng HĐĐT KiotViet</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-blue-100 flex items-center gap-3 shadow-sm min-h-[60px]">
+                            <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold border border-blue-200 flex-shrink-0">4</div>
+                            <span class="text-[15px] font-bold text-slate-700 leading-tight">Thiết lập CKS trên E-Invoice</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-blue-100 flex items-center gap-3 shadow-sm col-span-2 min-h-[60px]">
+                            <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold border border-blue-200 flex-shrink-0">5</div>
+                            <span class="text-[15px] font-bold text-slate-700 leading-tight">Lập Tờ khai đăng ký HĐĐT trên E-Invoice</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-blue-100 flex items-center gap-3 shadow-sm min-h-[60px]">
+                            <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold border border-blue-200 flex-shrink-0">6</div>
+                            <span class="text-[15px] font-bold text-slate-700 leading-tight">Tạo mẫu Hóa đơn điện tử</span>
+                        </div>
+                        <div class="bg-teal-50/80 p-3 rounded-xl border border-teal-200 flex items-center gap-3 shadow-sm min-h-[60px]">
+                            <div class="w-8 h-8 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-sm font-bold border border-teal-200 flex-shrink-0">7</div>
+                            <span class="text-[15px] font-bold text-teal-800 leading-tight">Kết nối Phần mềm QLBH và HĐĐT</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -393,31 +428,23 @@
                             <p class="text-xs text-gray-500 font-medium">Quy trình hàng ngày</p>
                          </div>
                     </div>
-                    <div class="flex flex-col gap-3 flex-1 content-start">
-                        <!-- Steps 8-11 -->
-                        <div class="bg-white p-3 rounded-xl border border-green-100 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow">
-                            <div class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0">8</div>
-                            <div class="flex-1">
-                                <span class="font-bold text-base text-gray-800 block">Phát hành HĐĐT trên KiotViet</span>
-                            </div>
+                    <!-- FIXED FLEX & FONT SIZE -->
+                    <div class="flex flex-col gap-4 flex-1 content-start justify-center">
+                        <div class="bg-white p-3 rounded-xl border border-green-100 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow min-h-[60px]">
+                            <div class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">8</div>
+                            <span class="text-[15px] font-bold text-slate-700 leading-tight">Phát hành HĐĐT trên KiotViet</span>
                         </div>
-                        <div class="bg-white p-3 rounded-xl border border-yellow-100 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow">
-                            <div class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0">9</div>
-                            <div class="flex-1">
-                                <span class="font-bold text-base text-gray-800 block">Quản lý HĐĐT trên E-Invoice</span>
-                            </div>
+                        <div class="bg-white p-3 rounded-xl border border-yellow-100 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow min-h-[60px]">
+                            <div class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">9</div>
+                            <span class="text-[15px] font-bold text-slate-700 leading-tight">Quản lý HĐĐT trên E-Invoice</span>
                         </div>
-                        <div class="bg-white p-3 rounded-xl border border-purple-100 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow">
-                            <div class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0">10</div>
-                            <div class="flex-1">
-                                <span class="font-bold text-base text-gray-800 block">Sổ kế toán (Tự động)</span>
-                            </div>
+                        <div class="bg-white p-3 rounded-xl border border-purple-100 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow min-h-[60px]">
+                            <div class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">10</div>
+                            <span class="text-[15px] font-bold text-slate-700 leading-tight">Sổ kế toán (Tự động)</span>
                         </div>
-                        <div class="bg-white p-3 rounded-xl border border-red-100 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow">
-                            <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0">11</div>
-                            <div class="flex-1">
-                                <span class="font-bold text-base text-gray-800 block">Tờ khai Thuế (Định kỳ)</span>
-                            </div>
+                        <div class="bg-white p-3 rounded-xl border border-red-100 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow min-h-[60px]">
+                            <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">11</div>
+                            <span class="text-[15px] font-bold text-slate-700 leading-tight">Tờ khai Thuế (Định kỳ)</span>
                         </div>
                     </div>
                 </div>
@@ -690,132 +717,98 @@
             </div>
         </div>
 
-        <!-- SLIDE 23: BƯỚC 9 (ĐÃ CẬP NHẬT CHI TIẾT - SCROLLABLE) -->
+        <!-- SLIDE 23: BƯỚC 9 (RÚT GỌN - VISUAL LAYOUT) -->
         <div class="slide glass flex flex-col items-center justify-center p-8">
-            <h2 class="text-3xl font-extrabold text-blue-900 mb-4 animate-zoom-in uppercase">BƯỚC 9: Quản lý Hóa đơn trên KiotViet E-Invoice</h2>
+            <h2 class="text-3xl font-extrabold text-blue-900 mb-2 animate-zoom-in uppercase">BƯỚC 9: Quản lý Hóa đơn trên KiotViet E-Invoice</h2>
+            <p class="text-gray-600 mb-8 animate-zoom-in text-lg">Trung tâm xử lý nghiệp vụ hóa đơn điện tử</p>
             
-            <div class="flex-1 w-full max-w-6xl bg-white/90 rounded-2xl shadow-2xl border border-white/50 overflow-hidden flex flex-col animate-zoom-in delay-100">
-                <!-- Header -->
-                <div class="bg-yellow-50 p-4 border-b border-yellow-200 text-sm text-gray-700">
-                    <i class="fa-solid fa-circle-info text-yellow-600 mr-2"></i> Toàn bộ nghiệp vụ được thực hiện trên trang quản trị <b>KiotViet eInvoice</b>. Truy cập nhanh từ link trên màn hình thiết lập Hóa đơn của phần mềm bán hàng.
-                </div>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-6xl h-full max-h-[70vh]">
                 
-                <!-- Scrollable Content -->
-                <div class="flex-1 overflow-y-auto p-8 space-y-8">
-                    
-                    <!-- Section 1 -->
-                    <div>
-                        <h3 class="text-2xl font-bold text-blue-800 mb-4 border-b-2 border-blue-100 pb-2">1. Quản lý và Lập Hóa đơn</h3>
-                        
-                        <div class="pl-4 space-y-6">
-                            <!-- 1.1 -->
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-800 mb-2">1.1. Xem danh sách hóa đơn đã phát hành</h4>
-                                <ul class="list-none space-y-2 text-gray-700">
-                                    <li><b>Bước 1:</b> Đăng nhập vào trang quản trị KV-EINVOICE.</li>
-                                    <li><b>Bước 2:</b> Menu <b>Lập hóa đơn</b> → Chọn loại hóa đơn (VD: HĐ GTGT từ máy tính tiền).</li>
-                                    <li><b>Bước 3:</b> Tại màn hình danh sách:
-                                        <ul class="list-disc ml-6 mt-1 space-y-1 text-sm">
-                                            <li><b>Tìm kiếm/Lọc:</b> Theo nhiều tiêu chí.</li>
-                                            <li><b>Trạng thái:</b> 
-                                                <span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded text-xs font-bold">Màu cam (Nháp)</span> chưa cấp số/chưa ký. 
-                                                <span class="px-2 py-0.5 bg-gray-200 text-gray-800 rounded text-xs font-bold">Màu đen (Đã ký)</span> đã cấp số hợp lệ.
-                                            </li>
-                                            <li><b>Xem nhiều HĐ:</b> Tích chọn → Mở rộng → Xem hóa đơn.</li>
-                                            <li><b>Tải HĐ:</b> Tích chọn → Mở rộng → Tải hóa đơn (PDF/XML).</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!-- 1.2 -->
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-800 mb-2">1.2. Chỉnh sửa hóa đơn nháp và phát hành</h4>
-                                <ul class="list-none space-y-2 text-gray-700">
-                                    <li><b>Chỉnh sửa:</b> Chỉ sửa được trạng thái "Ghi tạm". Nhấn icon bút chì <i class="fa-solid fa-pen text-blue-500"></i> → Sửa thông tin → Nhấn <b>Ghi tạm</b>.</li>
-                                    <li><b>Phát hành:</b> Tại chi tiết hóa đơn nháp → Nhấn <b>Xuất hóa đơn</b> → Xem trước & Đồng ý.</li>
-                                    <li><i class="fa-solid fa-bolt text-yellow-500"></i> Hệ thống sẽ ký số (USB/RMS) và gửi lên Thuế (nếu cấu hình).</li>
-                                </ul>
-                            </div>
-
-                            <!-- 1.3 -->
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-800 mb-2">1.3. Xóa hóa đơn nháp</h4>
-                                <p class="text-gray-700">Chỉ xóa được trạng thái "Ghi tạm". Nhấn icon thùng rác <i class="fa-solid fa-trash text-red-500"></i> hoặc tích chọn → Mở rộng → Xóa.</p>
-                            </div>
-                        </div>
+                <!-- Cột Trái: Vận hành Thường Nhật -->
+                <div class="space-y-6 flex flex-col animate-zoom-in delay-100">
+                    <!-- Block 1: Quản lý -->
+                    <div class="bg-white/80 p-6 rounded-2xl shadow-md border-l-8 border-blue-500 flex-1">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-list-check"></i> Quản lý & Phát hành
+                        </h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-filter text-blue-500 mt-1"></i>
+                                <div>
+                                    <span class="font-bold">Tra cứu & Lọc:</span> Xem trạng thái Hóa đơn (Nháp/Đã ký), tải về file PDF/XML lưu trữ.
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-pen-to-square text-blue-500 mt-1"></i>
+                                <div>
+                                    <span class="font-bold">Xử lý HĐ Nháp:</span> Cho phép <span class="text-green-600 font-bold">Sửa</span> / <span class="text-red-500 font-bold">Xóa</span> / <span class="text-blue-600 font-bold">Phát hành</span> (Ký số).
+                                </div>
+                            </li>
+                        </ul>
                     </div>
 
-                    <!-- Section 2 -->
-                    <div>
-                        <h3 class="text-2xl font-bold text-blue-800 mb-4 border-b-2 border-blue-100 pb-2">2. Gửi hóa đơn cho khách hàng và Cơ quan Thuế</h3>
-                        
-                        <div class="pl-4 space-y-6">
-                            <!-- 2.1 -->
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-800 mb-2">2.1. Gửi email hóa đơn cho khách hàng</h4>
-                                <ul class="list-none space-y-2 text-gray-700">
-                                    <li><b>Gửi thủ công:</b> Tích chọn HĐ → Mở rộng → Gửi hóa đơn → Nhập Email.</li>
-                                    <li><b>Cấu hình gửi tự động (Kèm XML):</b>
-                                        <ul class="list-disc ml-6 mt-1 space-y-1 text-sm">
-                                            <li>Truy cập: Quản trị – Hệ thống → Tham số hệ thống → Cấu hình Email.</li>
-                                            <li><b>TẮT</b> "Cấu hình Email".</li>
-                                            <li><b>BẬT</b> "Cấu hình tự động gửi email cho bên mua".</li>
-                                            <li><b>BẬT</b> "Email gửi hóa đơn có file đính kèm không phải file nén" (Gửi PDF & XML riêng lẻ).</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!-- 2.2 -->
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-800 mb-2">2.2. Gửi hóa đơn sang Cơ quan Thuế (HĐ từ MTT)</h4>
-                                <p class="text-gray-700 mb-2">Vào <b>Tham số hệ thống</b> → <b>Hóa đơn khởi tạo từ MTT</b> → Chọn thời điểm gửi:</p>
-                                <ul class="list-disc ml-6 text-gray-700 text-sm">
-                                    <li><b>Tự động gửi ngay:</b> Ngay sau khi xuất HĐ.</li>
-                                    <li><b>Không tự động:</b> Phải vào web bấm gửi thủ công.</li>
-                                    <li><b>Tự động gửi vào lúc...:</b> Gom gửi 1 lần/ngày (Chỉ áp dụng với RMS).</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <!-- Block 2: Gửi -->
+                    <div class="bg-white/80 p-6 rounded-2xl shadow-md border-l-8 border-green-500 flex-1">
+                        <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Gửi Hóa đơn
+                        </h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-envelope text-green-500 mt-1"></i>
+                                <div>
+                                    <span class="font-bold">Gửi Khách hàng:</span> Tự động gửi Email (kèm file XML & PDF) ngay khi phát hành.
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-building-columns text-green-500 mt-1"></i>
+                                <div>
+                                    <span class="font-bold">Gửi Cơ quan Thuế:</span> Tùy chọn gửi ngay lập tức hoặc gom gửi theo ngày (đối với HĐ Máy tính tiền).
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-
-                    <!-- Section 3 -->
-                    <div>
-                        <h3 class="text-2xl font-bold text-blue-800 mb-4 border-b-2 border-blue-100 pb-2">3. Xử lý hóa đơn sai sót</h3>
-                        <p class="mb-4 text-gray-600 italic">Truy cập menu: <b>Xử lý hóa đơn từ MTT</b></p>
-
-                        <div class="grid grid-cols-3 gap-4">
-                            <!-- 3.1 -->
-                            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-                                <h4 class="font-bold text-red-600 mb-2">3.1. Báo sai sót CQT</h4>
-                                <p class="text-sm text-gray-700 mb-2">Thông báo cho Thuế về HĐ sai.</p>
-                                <p class="text-xs bg-white p-2 rounded border">Tích chọn HĐ → Báo CQT HĐ sai → Kiểm tra → Gửi.</p>
-                            </div>
-                            <!-- 3.2 -->
-                            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-                                <h4 class="font-bold text-orange-600 mb-2">3.2. Thay thế</h4>
-                                <p class="text-sm text-gray-700 mb-2">Hủy HĐ cũ, lập HĐ mới hoàn toàn.</p>
-                                <ul class="text-xs bg-white p-2 rounded border space-y-1">
-                                    <li>1. Tích chọn → Thay thế.</li>
-                                    <li>2. Lập biên bản → Ký & Gửi.</li>
-                                    <li>3. Lập HĐ thay thế (Điền nội dung đúng) → Xuất.</li>
-                                </ul>
-                            </div>
-                            <!-- 3.3 -->
-                            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-                                <h4 class="font-bold text-blue-600 mb-2">3.3. Điều chỉnh</h4>
-                                <p class="text-sm text-gray-700 mb-2">Tăng/giảm một phần nội dung.</p>
-                                <ul class="text-xs bg-white p-2 rounded border space-y-1">
-                                    <li>1. Tích chọn → Điều chỉnh.</li>
-                                    <li>2. Lập biên bản → Ký & Gửi.</li>
-                                    <li>3. Lập HĐ điều chỉnh: Nhập phần <b>CHÊNH LỆCH</b> (Dương=Tăng, Âm=Giảm) → Xuất.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+
+                <!-- Cột Phải: Xử lý Sai sót (Quan trọng) -->
+                <div class="bg-red-50/80 p-8 rounded-2xl shadow-md border border-red-200 animate-zoom-in delay-200 flex flex-col">
+                    <h3 class="text-2xl font-bold text-red-800 mb-6 flex items-center gap-3 border-b border-red-200 pb-4">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Xử lý Hóa đơn Sai sót
+                    </h3>
+                    
+                    <div class="space-y-6 flex-1">
+                        <!-- Case 1 -->
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex gap-4 items-center">
+                            <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-file-circle-xmark"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">1. Hủy bỏ & Thay thế</h4>
+                                <p class="text-sm text-gray-600">Dùng khi sai sót nghiêm trọng. Hủy HĐ cũ -> Lập HĐ mới hoàn toàn.</p>
+                            </div>
+                        </div>
+
+                        <!-- Case 2 -->
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex gap-4 items-center">
+                            <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-file-pen"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">2. Điều chỉnh</h4>
+                                <p class="text-sm text-gray-600">Dùng khi sai tiền/số lượng. Lập HĐ mới ghi nhận phần <b>CHÊNH LỆCH</b> (Tăng/Giảm).</p>
+                            </div>
+                        </div>
+
+                        <!-- Case 3 -->
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex gap-4 items-center">
+                            <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-bell"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">3. Thông báo CQT</h4>
+                                <p class="text-sm text-gray-600">Gửi Mẫu 04/SS-HĐĐT thông báo cho Thuế về việc hủy/giải trình hóa đơn.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-red-600 text-white p-3 rounded-lg text-center text-sm font-bold">
+                        Hệ thống tự động hỗ trợ lập biên bản & ký số cho mọi trường hợp
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -870,12 +863,12 @@
         <div class="slide glass flex items-center justify-center p-12">
             <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
                 <div class="flex-1 text-right border-r-4 border-orange-500 pr-12 animate-zoom-in">
-                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Quản lý<br>Đầu vào</h2>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Quản lý<br>Hóa đơn đầu vào</h2>
                 </div>
                 <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
                     <ul class="space-y-6 text-xl text-gray-800 font-medium">
                         <li class="flex items-center gap-4"><i class="fa-solid fa-cloud-arrow-down text-orange-600 w-8"></i> Tự động đồng bộ</li>
-                        <li class="flex items-center gap-4"><i class="fa-solid fa-magnifying-glass-chart text-orange-600 w-8"></i> Khớp nối thông minh</li>
+                        <li class="flex items-center gap-4"><i class="fa-solid fa-magnifying-glass-chart text-orange-600 w-8"></i> Khớp dữ liệu</li>
                     </ul>
                 </div>
             </div>
@@ -899,7 +892,7 @@
                 <div class="mt-8 text-gray-300 animate-zoom-in"><i class="fa-solid fa-chevron-right text-2xl"></i></div>
                 <div class="flex flex-col items-center text-center w-1/4 animate-zoom-in delay-200">
                     <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-3xl mb-4 shadow-sm"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                    <h3 class="font-bold text-lg mb-2">3. Khớp nối</h3>
+                    <h3 class="font-bold text-lg mb-2">3. Khớp dữ liệu</h3>
                     <p class="text-sm text-gray-600">Ghép mã hàng tự động.</p>
                 </div>
                 <div class="mt-8 text-gray-300 animate-zoom-in"><i class="fa-solid fa-chevron-right text-2xl"></i></div>
@@ -928,6 +921,19 @@
                         <p class="text-gray-500 text-sm">Tối ưu vận hành</p>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- NEW SLIDE: KHẢO SÁT -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-4 animate-zoom-in uppercase">Khảo sát Sau khóa học</h2>
+            <p class="text-gray-600 mb-8 text-center max-w-2xl animate-zoom-in text-lg">Ý kiến của anh/chị giúp KiotViet hoàn thiện chất lượng đào tạo tốt hơn.</p>
+            <div class="bg-white p-4 rounded-2xl shadow-xl animate-zoom-in delay-100 border-4 border-green-200">
+                 <!-- Mã QR trỏ về link khảo sát -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSfUjSF4NzBAf9AQhWhs09eE-a7InRHjAFcc_ZdeqlQl3F7R0A%2Fviewform" alt="QR Khao Sat" class="w-80 h-80 object-contain">
+            </div>
+            <div class="mt-8 flex gap-4 animate-zoom-in delay-200">
+                <span class="bg-blue-100 text-blue-800 px-6 py-2 rounded-full font-bold text-lg shadow-sm"><i class="fa-solid fa-clock mr-2"></i>Chỉ mất 1 phút</span>
             </div>
         </div>
 
