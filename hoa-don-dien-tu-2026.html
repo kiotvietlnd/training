@@ -67,7 +67,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #64748b; }
     </style>
 </head>
-<body class="text-gray-800 relative select-none cursor-none">
+<body class="text-gray-800 relative select-none">
 
     <!-- 1. LOGO -->
     <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
@@ -188,10 +188,21 @@
             </div>
         </div>
 
-        <!-- Slide 6: Infographic (Table) -->
+        <!-- Slide 6: Infographic (Table) - WITH LINK -->
         <div class="slide flex items-center justify-center w-full h-full p-4" data-type="infographic">
             <div class="bg-white/95 w-[95%] h-[95%] rounded-3xl shadow-2xl p-6 flex flex-col animate-zoom-in border-4 border-white/50">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 text-center">Phân loại Hộ Kinh Doanh & Nghĩa Vụ (TT 152)</h2>
+                <!-- LINK ĐÃ ĐƯỢC THÊM VÀO ĐÂY -->
+                <h2 class="text-3xl font-bold text-blue-900 mb-4 text-center relative z-20">
+                    <a href="https://kiotvietlnd.github.io/elearning/thuehkd/tinh-thue-hkd" 
+                       target="_blank" 
+                       class="group inline-flex items-center gap-3 hover:text-blue-600 transition-colors cursor-pointer"
+                       title="Bấm để xem chi tiết">
+                        <span class="border-b-2 border-transparent group-hover:border-blue-600">Phân loại Hộ Kinh Doanh & Nghĩa Vụ (TT 152)</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-2xl opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"></i>
+                    </a>
+                </h2>
+                <!-- End Link -->
+
                 <div class="flex-1 overflow-auto rounded-xl border border-gray-200">
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -271,7 +282,7 @@
                 <!-- Item 5 -->
                 <div class="bg-white/80 p-4 rounded-xl shadow-md border-t-4 border-orange-500 animate-zoom-in flex flex-col items-center text-center" style="animation-delay: 0.5s;">
                     <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mb-3"><i class="fa-solid fa-cloud-arrow-down text-2xl"></i></div>
-                    <h3 class="font-bold text-blue-900 text-sm mb-1">Quản lý Hóa đơn đầu vào</h3>
+                    <h3 class="font-bold text-blue-900 text-sm mb-1">Quản lý Đầu vào</h3>
                     <p class="text-xs text-gray-600">Đáp ứng quy định về chứng minh chi phí hợp lý.</p>
                 </div>
             </div>
@@ -863,12 +874,12 @@
         <div class="slide glass flex items-center justify-center p-12">
             <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
                 <div class="flex-1 text-right border-r-4 border-orange-500 pr-12 animate-zoom-in">
-                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Quản lý<br>Hóa đơn đầu vào</h2>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Quản lý<br>Đầu vào</h2>
                 </div>
                 <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
                     <ul class="space-y-6 text-xl text-gray-800 font-medium">
                         <li class="flex items-center gap-4"><i class="fa-solid fa-cloud-arrow-down text-orange-600 w-8"></i> Tự động đồng bộ</li>
-                        <li class="flex items-center gap-4"><i class="fa-solid fa-magnifying-glass-chart text-orange-600 w-8"></i> Khớp dữ liệu</li>
+                        <li class="flex items-center gap-4"><i class="fa-solid fa-magnifying-glass-chart text-orange-600 w-8"></i> Khớp nối thông minh</li>
                     </ul>
                 </div>
             </div>
@@ -892,7 +903,7 @@
                 <div class="mt-8 text-gray-300 animate-zoom-in"><i class="fa-solid fa-chevron-right text-2xl"></i></div>
                 <div class="flex flex-col items-center text-center w-1/4 animate-zoom-in delay-200">
                     <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-3xl mb-4 shadow-sm"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                    <h3 class="font-bold text-lg mb-2">3. Khớp dữ liệu</h3>
+                    <h3 class="font-bold text-lg mb-2">3. Khớp nối</h3>
                     <p class="text-sm text-gray-600">Ghép mã hàng tự động.</p>
                 </div>
                 <div class="mt-8 text-gray-300 animate-zoom-in"><i class="fa-solid fa-chevron-right text-2xl"></i></div>
@@ -1016,7 +1027,7 @@
         // Click navigation
         document.addEventListener('click', (e) => {
              // Only navigate if not clicking inside a scrollable container
-             if (e.target.closest('.overflow-y-auto')) return;
+             if (e.target.closest('.overflow-y-auto') || e.target.closest('a')) return;
 
              if(e.clientX > window.innerWidth / 2) {
                  nextSlide();
