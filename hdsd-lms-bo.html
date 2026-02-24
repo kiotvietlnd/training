@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng dẫn sử dụng LMS - Dành cho BO - KiotViet</title>
+    <title>Hướng dẫn sử dụng LMS - Non-Sales & BO - KiotViet</title>
     <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for icons -->
@@ -73,16 +73,21 @@
         .btn-simulate { display: inline-block; padding: 0.5rem 1rem; border-radius: 0.375rem; font-weight: 600; margin: 0.25rem 0; text-align: center; transition: all 0.15s; }
         .btn-primary { background-color: #2563EB; color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
         .btn-submit { background-color: #10B981; color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-        .btn-amber { background-color: #F59E0B; color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
         .login-note-box { padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #10B981; background-color: #ECFDF5; color: #065F46; font-size: 0.95rem; margin-top: 0.75rem; }
         .note-box { padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #3B82F6; background-color: #EFF6FF; color: #1E40AF; font-size: 0.95rem; margin-top: 0.75rem; }
         .warning-box { padding: 1.25rem; border-radius: 0.5rem; border-left: 4px solid #F59E0B; background-color: #FFFBEB; color: #92400E; font-size: 0.95rem; margin-top: 0.75rem; }
         .figure-caption { font-size: 0.75rem; font-style: italic; color: #6B7280; margin-top: 0.5rem; text-align: center; }
         .sub-heading { font-size: 1.25rem; font-weight: 700; color: #1E40AF; margin-bottom: 0.75rem; padding-bottom: 0.25rem; border-bottom: 2px dashed #BFDBFE; }
-        .image-uniform-height { max-height: 550px; width: 100%; height: auto; object-fit: contain; }
         .summary-box { background-color: #F3F4F6; border: 2px solid #3B82F6; padding: 1.5rem; border-radius: 0.75rem; margin-bottom: 2.5rem; }
         .highlight { background-color: yellow; font-weight: bold; }
         #search-message { margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280; }
+
+        /* Path Cards */
+        .path-card { border-radius: 0.5rem; padding: 1.25rem; border-width: 1px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); height: 100%; display: flex; flex-direction: column;}
+        .path-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom-width: 1px;}
+        .path-dept { font-size: 0.85rem; font-style: italic; color: #4B5563; margin-bottom: 1rem; flex-grow: 1;}
+        .path-courses { font-size: 0.9rem; font-weight: 500; color: #1F2937; }
+        .path-courses ul { margin-top: 0.5rem; list-style-type: decimal; padding-left: 1.25rem; color: #374151; font-weight: 400;}
 
         /* ----- Responsive ----- */
         @media (max-width: 1024px) {
@@ -114,31 +119,31 @@
             <i class="fas fa-times clear-icon" id="clearSearch"></i>
              <div id="search-message" class="absolute top-full left-0 w-full text-sm text-gray-500 mt-1"></div>
         </div>
-        <h1 class="header-title">HƯỚNG DẪN LMS - KHỐI BO</h1>
+        <h1 class="header-title">HƯỚNG DẪN LMS - NON-SALES & BO</h1>
     </header>
 
     <!-- Sidebar -->
     <aside id="sidebar" class="sidebar">
          <h3>Mục lục</h3>
          <ul>
-             <li> <a href="#tongquan" class="active"> <span class="item-number">1</span> <span>Tổng quan lộ trình</span> </a> </li>
+             <li> <a href="#tongquan" class="active"> <span class="item-number">1</span> <span>Tổng quan 4 Lộ trình</span> </a> </li>
              <li> <a href="#dangnhap"> <span class="item-number">2</span> <span>Đăng nhập hệ thống</span> </a> </li>
              <li> 
-                 <a href="#lotrinh"> <span class="item-number">3</span> <span>Lộ trình chi tiết</span> </a> 
+                 <a href="#lotrinh"> <span class="item-number">3</span> <span>Quy trình học chi tiết</span> </a> 
                  <ul>
-                    <li><a href="#buoi1">3.1 Buổi 1: Đào tạo Hội nhập</a></li>
-                    <li><a href="#chuoi-san-pham">3.2 Khóa Sản phẩm & Văn hóa</a></li>
+                    <li><a href="#khoa-hoinhap">3.1 Khóa Hội nhập</a></li>
+                    <li><a href="#chuoi-san-pham">3.2 Các khóa Sản phẩm</a></li>
+                    <li><a href="#khoa-vanhoa">3.3 Khóa Văn hóa</a></li>
                  </ul>
              </li>
              <li> 
-                <a href="#tu-hoc"> <span class="item-number">4</span> <span>Thao tác Tự học</span> </a> 
+                <a href="#tu-hoc"> <span class="item-number">4</span> <span>Thao tác Tự học (UI)</span> </a> 
                 <ul>
-                    <li><a href="#tu-hoc-video">4.1 Học Video & Lý thuyết</a></li>
+                    <li><a href="#tu-hoc-video">4.1 Xem Video & Lý thuyết</a></li>
                     <li><a href="#tu-hoc-quiz">4.2 Làm bài tập Quiz</a></li>
                  </ul>
             </li>
              <li> <a href="#chungchi"> <span class="item-number">5</span> <span>Chứng chỉ & Báo cáo</span> </a> </li>
-             <li> <a href="#onthi"> <span class="item-number">6</span> <span>Ôn tập & Test sáng Thứ 6</span> </a> </li>
         </ul>
     </aside>
 
@@ -149,14 +154,78 @@
             <!-- 1. TỔNG QUAN -->
             <section id="tongquan">
                 <div class="summary-box">
-                    <h3 class="text-xl font-bold text-blue-800 mb-3 uppercase">Tổng quan lộ trình học & Điều kiện thi</h3>
+                    <h3 class="text-xl font-bold text-blue-800 mb-3 uppercase">Tổng quan lộ trình học & Điều kiện hoàn thành</h3>
                     <p class="mb-3 text-gray-700">Chào mừng các bạn gia nhập KiotViet! Trong tuần đầu tiên, các bạn sẽ tham gia lộ trình tự học trên hệ thống LMS. Mục tiêu của lộ trình này là trang bị kiến thức cơ bản nhất về công ty và sản phẩm.</p>
-                    <ul class="list-disc list-inside ml-4 space-y-2 text-gray-800 font-medium">
-                        <li><span class="text-blue-700 font-bold">Thứ 2:</span> Các bạn sẽ nhận được Email công ty. Sử dụng email này để đăng nhập LMS.</li>
-                        <li><span class="text-blue-700 font-bold">Thứ 2 - Thứ 5:</span> Hoàn thành lộ trình tự học gồm 5 khóa (Hội nhập, Sản phẩm 1-2-3, Văn hóa).</li>
-                        <li><span class="text-red-600 font-bold">ĐIỀU KIỆN TIÊN QUYẾT:</span> Các bạn phải học hoàn thành 100% tiến độ và có điểm các bài Thi trong khóa đạt mức <span class="font-bold text-red-700">"Đạt"</span> để đủ điều kiện tham gia bài Test tổng hợp vào sáng Thứ 6.</li>
-                        <li><span class="text-blue-700 font-bold">10:00 Sáng Thứ 6:</span> Làm bài thi trắc nghiệm Online (30 phút).</li>
+                    
+                    <ul class="list-disc list-inside ml-4 space-y-2 text-gray-800 font-medium mb-6">
+                        <li><span class="text-blue-700 font-bold">Tài khoản:</span> Các bạn sẽ nhận được Email công ty <span class="font-bold text-red-600">trước ngày đi làm</span>. Sử dụng email này để đăng nhập LMS.</li>
+                        <li><span class="text-blue-700 font-bold">Nhiệm vụ:</span> Tùy thuộc vào phòng ban, các bạn sẽ được phân bổ lộ trình gồm 3 đến 5 khóa học khác nhau.</li>
+                        <li><span class="text-red-600 font-bold">ĐIỀU KIỆN HOÀN THÀNH:</span> Hoàn thành 100% tiến độ các khóa học. Các khóa có bài Thi cuối khóa phải đạt mức <span class="font-bold text-red-700">"Đạt"</span>. Kết quả sẽ được gửi về cho Line Manager vào chiều Thứ 5.</li>
                     </ul>
+
+                    <h4 class="font-bold text-gray-900 mb-4 border-t border-blue-200 pt-4"><i class="fas fa-sitemap text-blue-600 mr-2"></i>Chi tiết 4 Lộ trình theo Đối tượng/Phòng ban:</h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Path 1 -->
+                        <div class="path-card bg-blue-50 border-blue-200">
+                            <h5 class="path-title text-blue-800">1. Lộ trình học cho Non-Sales</h5>
+                            <p class="path-dept"><strong>Đội nhóm:</strong> Marketing, PTSP, Tái ký, Customer Service, Back Office, KV Retail</p>
+                            <div class="path-courses">
+                                <span>Số khóa học: <strong class="text-blue-700 text-lg">5</strong></span>
+                                <ul>
+                                    <li>Đào tạo hội nhập</li>
+                                    <li>Đào tạo sản phẩm KiotViet Retail 1</li>
+                                    <li>Đào tạo sản phẩm KiotViet Retail 2</li>
+                                    <li>Đào tạo sản phẩm KiotViet Retail 3</li>
+                                    <li>Đào tạo Văn hóa</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Path 2 -->
+                        <div class="path-card bg-emerald-50 border-emerald-200">
+                            <h5 class="path-title text-emerald-800">2. Lộ trình cho KV Employee</h5>
+                            <p class="path-dept"><strong>Đội nhóm:</strong> KV Employee</p>
+                            <div class="path-courses">
+                                <span>Số khóa học: <strong class="text-emerald-700 text-lg">3</strong></span>
+                                <ul>
+                                    <li>Đào tạo hội nhập</li>
+                                    <li>Đào tạo sản phẩm KiotViet Salon</li>
+                                    <li>Đào tạo Văn hóa</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Path 3 -->
+                        <div class="path-card bg-amber-50 border-amber-200">
+                            <h5 class="path-title text-amber-800">3. Lộ trình cho KV FNB</h5>
+                            <p class="path-dept"><strong>Đội nhóm:</strong> KV FNB</p>
+                            <div class="path-courses">
+                                <span>Số khóa học: <strong class="text-amber-700 text-lg">4</strong></span>
+                                <ul>
+                                    <li>Đào tạo hội nhập</li>
+                                    <li>Đào tạo sản phẩm KiotViet FNB - Phần mềm</li>
+                                    <li>Đào tạo FNB - Phần cứng</li>
+                                    <li>Đào tạo Văn hóa</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Path 4 -->
+                        <div class="path-card bg-purple-50 border-purple-200">
+                            <h5 class="path-title text-purple-800">4. Lộ trình cho KV Booking</h5>
+                            <p class="path-dept"><strong>Đội nhóm:</strong> KV Booking</p>
+                            <div class="path-courses">
+                                <span>Số khóa học: <strong class="text-purple-700 text-lg">4</strong></span>
+                                <ul>
+                                    <li>Đào tạo hội nhập</li>
+                                    <li>Đào tạo sản phẩm KiotViet Salon</li>
+                                    <li>Đào tạo sản phẩm KiotViet Hotel</li>
+                                    <li>Đào tạo Văn hóa</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -169,255 +238,163 @@
                         <p class="font-bold text-lg">THÔNG TIN ĐĂNG NHẬP:</p>
                         <ul class="list-disc list-inside ml-4 mt-2 space-y-2 text-base">
                             <li>Website: <a href="https://daotao.kiotviet.vn/dang-nhap/" target="_blank" class="font-bold text-blue-700 hover:text-blue-900 hover:underline">https://daotao.kiotviet.vn/dang-nhap/</a></li>
-                            <li>Tài khoản: <span class="font-bold text-blue-800">Mail công ty</span> (Nhận vào sáng Thứ 2)</li>
+                            <li>Tài khoản: <span class="font-bold text-blue-800">Mail công ty</span> (Bạn sẽ nhận được <span class="underline">trước ngày đi làm</span>)</li>
                             <li>Mật khẩu mặc định: <span class="font-bold text-green-700 text-lg">123456A@</span></li>
                         </ul>
                     </div>
                 </div>
                 <div class="mb-6">
-                    <h3 class="sub-heading">Xem lộ trình học</h3>
-                    <p class="text-gray-700 mb-2">Sau khi đăng nhập thành công, các bạn vào mục <span class="font-bold text-blue-700">"Khóa học bắt buộc"</span> để xem lộ trình các khóa cần học trong tuần.</p>
-                    <div class="flex flex-col items-center mt-4">
-                        <img src="https://i.postimg.cc/Ls2cvhBw/Lo-trinh-cho-BO.jpg" alt="[Giao diện lộ trình học cho BO]" class="w-full h-auto rounded-md shadow-md object-contain max-h-[500px] border">
-                        <p class="figure-caption">Hình 1: Các khóa học hiển thị trong mục Khóa học bắt buộc</p>
+                    <h3 class="sub-heading">Xem lộ trình học thực tế của bạn</h3>
+                    <p class="text-gray-700 mb-2">Sau khi đăng nhập thành công, các bạn vào mục <span class="font-bold text-blue-700">"Khóa học bắt buộc"</span>. Hệ thống sẽ hiển thị đúng các khóa học dành riêng cho bộ phận của bạn (như đã liệt kê ở phần Tổng quan).</p>
+                    <div class="flex flex-col items-center mt-4 bg-gray-50 p-4 rounded border">
+                        <img src="https://i.postimg.cc/Ls2cvhBw/Lo-trinh-cho-BO.jpg" alt="[Giao diện lộ trình học]" class="w-full h-auto rounded shadow-sm object-contain max-h-[400px]">
+                        <p class="figure-caption mt-2">Hình 1: Giao diện các khóa học hiển thị trong mục Khóa học bắt buộc (Hình ảnh mang tính minh họa)</p>
                     </div>
                 </div>
             </section>
 
-            <!-- 3. LỘ TRÌNH CHI TIẾT -->
+            <!-- 3. QUY TRÌNH HỌC CHI TIẾT -->
             <section id="lotrinh" class="bg-white p-6 rounded-lg shadow border border-gray-200">
-                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">2. LỘ TRÌNH HỌC CHI TIẾT</h2>
+                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">2. HƯỚNG DẪN QUY TRÌNH HỌC</h2>
+                <p class="text-gray-700 mb-6 italic">Dưới đây là hướng dẫn cách học cho từng <strong>loại khóa học</strong> có trong lộ trình của bạn. Hãy học lần lượt từ trên xuống dưới theo danh sách hiển thị trên LMS.</p>
                 
-                <!-- Buổi 1 -->
-                <div id="buoi1" class="mb-10">
-                    <h3 class="text-xl font-bold text-blue-700 mb-3"><i class="fas fa-calendar-day mr-2"></i>Buổi 1 (Thứ 2): Khóa Đào tạo Hội nhập</h3>
+                <!-- Khóa Hội nhập -->
+                <div id="khoa-hoinhap" class="mb-10">
+                    <h3 class="text-xl font-bold text-blue-700 mb-3"><i class="fas fa-handshake mr-2"></i>2.1 Khóa Đào tạo Hội nhập (Khóa đầu tiên)</h3>
                     <div class="note-box">
-                        <p class="font-bold mb-2">Sẽ có 2 trường hợp tùy theo thông báo bạn nhận được:</p>
-                        <ul class="list-disc list-inside ml-4 space-y-2 text-gray-800">
-                            <li><span class="font-bold text-green-700">TH1: Học tập trung (Online)</span><br>
-                                Vào lúc 14:00 chiều Thứ 2, click vào link Zoom có trong khóa học để tham gia. Sau khi kết thúc buổi Zoom, bạn vào lại khóa này trên LMS để làm Quiz. <br>
-                                <i class="fas fa-check text-green-600"></i> Tiến độ khóa đạt 100% = Đã hoàn thành.
+                        <p class="font-bold mb-2 text-gray-900">Sẽ có 2 trường hợp tùy theo thông báo bạn nhận được từ Đào tạo:</p>
+                        <ul class="list-disc list-inside ml-4 space-y-3 text-gray-800">
+                            <li><span class="font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded">TH1: Học tập trung (Online)</span><br>
+                                Vào lúc 14:00 chiều Thứ 2, click vào link Zoom có trong khóa học để tham gia cùng giảng viên. Sau khi kết thúc buổi Zoom, bạn vào lại khóa này trên LMS để làm Quiz. <br>
+                                &rarr; <i class="fas fa-check text-green-600"></i> Tiến độ khóa đạt 100% = Đã hoàn thành.
                             </li>
-                            <li class="mt-2"><span class="font-bold text-amber-600">TH2: Được thông báo tự học</span><br>
-                                Bạn vào khóa này để tự xem Slide bài giảng, sau đó làm bài tập Quiz.<br>
-                                <i class="fas fa-check text-green-600"></i> Tiến độ khóa đạt 100% = Đã hoàn thành.
+                            <li class="border-t border-blue-200 pt-3"><span class="font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">TH2: Được thông báo Tự học</span><br>
+                                Bạn vào khóa này để tự xem Slide bài giảng từ đầu đến cuối, sau đó làm bài tập Quiz.<br>
+                                &rarr; <i class="fas fa-check text-green-600"></i> Tiến độ khóa đạt 100% = Đã hoàn thành.
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Chuỗi Sản phẩm & Văn hóa -->
-                <div id="chuoi-san-pham">
-                    <h3 class="text-xl font-bold text-blue-700 mb-4"><i class="fas fa-layer-group mr-2"></i>Chuỗi Khóa học Sản phẩm cơ bản (Thứ 3 - Thứ 5)</h3>
+                <!-- Chuỗi Sản phẩm -->
+                <div id="chuoi-san-pham" class="mb-10">
+                    <h3 class="text-xl font-bold text-blue-700 mb-4"><i class="fas fa-layer-group mr-2"></i>2.2 Các Khóa học Sản phẩm (Retail, Salon, FNB, Hotel...)</h3>
+                    <p class="text-gray-700 mb-4">Tùy vào nhóm phòng ban, bạn sẽ có từ 1 đến 3 khóa Sản phẩm. <strong>ĐỐI VỚI BẤT KỲ KHÓA SẢN PHẨM NÀO</strong>, bạn đều phải áp dụng triệt để bộ quy tắc sau:</p>
                     
-                    <!-- QUY TẮC CHUNG ĐƯỢC ĐƯA LÊN TRÊN CÙNG -->
-                    <div class="warning-box mb-6 shadow-sm">
-                        <p class="font-bold text-base mb-2 uppercase text-amber-700"><i class="fas fa-exclamation-triangle mr-2"></i>Quy tắc bắt buộc đối với các khóa Sản phẩm:</p>
-                        <ul class="list-decimal list-inside ml-2 space-y-2 text-gray-800">
-                            <li>Học theo trình tự từ trên xuống dưới.</li>
-                            <li><span class="text-red-600 font-bold">KHÔNG tua nhanh</span>, <span class="text-red-600 font-bold">KHÔNG mở cửa sổ (tab) khác</span> trong quá trình học.</li>
-                            <li>Học xong clip nào thì nút <strong>"Làm bài tập"</strong> (Quiz) của clip đó sẽ hiển thị để làm.</li>
-                            <li>Sau khi hoàn thành tất cả Video và Quiz từng phần, nút <strong>"LÀM BÀI THI"</strong> sẽ hiển thị ở phía dưới cùng. Bạn bắt buộc phải làm bài thi này.</li>
-                            <li><span class="font-bold text-green-700">Tiêu chí hoàn thành khóa:</span> Bài thi phải đạt trên <span class="font-bold text-red-600">80%</span>. Trạng thái khóa học hiển thị <span class="font-bold text-blue-700">"Đạt"</span>.</li>
+                    <div class="warning-box shadow-sm">
+                        <p class="font-bold text-lg mb-3 uppercase text-amber-700 border-b border-amber-200 pb-2"><i class="fas fa-exclamation-triangle mr-2"></i>Quy tắc bắt buộc khi học Sản phẩm:</p>
+                        <ul class="list-decimal list-inside ml-2 space-y-3 text-gray-800">
+                            <li><strong>Học theo trình tự:</strong> Bắt buộc xem bài giảng từ trên xuống dưới.</li>
+                            <li><strong>Giữ luồng học:</strong> <span class="text-red-600 font-bold bg-red-50 px-1">KHÔNG tua nhanh</span>, <span class="text-red-600 font-bold bg-red-50 px-1">KHÔNG mở cửa sổ (tab) khác</span> trong quá trình xem video. Hệ thống sẽ không ghi nhận tiến độ nếu phát hiện vi phạm.</li>
+                            <li><strong>Làm Quiz từng phần:</strong> Học xong clip nào thì nút <strong>"Làm bài tập"</strong> (Quiz) của clip đó sẽ tự động hiển thị để bạn làm ngay.</li>
+                            <li><strong>Bài thi cuối khóa:</strong> Sau khi hoàn thành TẤT CẢ Video và Quiz nhỏ, nút <strong>"LÀM BÀI THI"</strong> tổng hợp sẽ xuất hiện ở cuối trang. Bắt buộc phải làm bài thi này.</li>
+                            <li class="bg-amber-100/50 p-2 rounded"><strong>Tiêu chí ghi nhận:</strong> Bài thi cuối khóa phải đạt điểm trên <span class="font-bold text-red-600 text-lg">80%</span>. Lúc này, trạng thái khóa học sẽ chuyển thành <span class="font-bold text-blue-700 uppercase">"Đạt"</span>.</li>
                         </ul>
                     </div>
+                </div>
 
-                    <!-- Layout dạng lưới cho các buổi học cho đồng đều -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                        
-                        <!-- Buổi 2 -->
-                        <div class="bg-blue-50/50 border border-blue-100 rounded-lg p-4">
-                            <h4 class="font-bold text-blue-800 border-b border-blue-200 pb-2 mb-3"><i class="fas fa-calendar-day mr-2"></i>Buổi 2 (Thứ 3)</h4>
-                            <p class="text-gray-800 font-medium mb-1">Khóa học:</p>
-                            <p class="text-blue-700 font-bold bg-white px-2 py-1 rounded border inline-block mb-3 text-sm">Đào tạo sản phẩm cơ bản buổi 1</p>
-                            <p class="text-gray-600 text-sm">Học viên vào khóa này để tự học. Hãy đảm bảo tuân thủ đầy đủ các <strong class="text-amber-700">Quy tắc chung</strong> ở phía trên.</p>
+                <!-- Khóa Văn hóa -->
+                <div id="khoa-vanhoa">
+                    <h3 class="text-xl font-bold text-blue-700 mb-3"><i class="fas fa-users mr-2"></i>2.3 Khóa Đào tạo Văn hóa (Khóa cuối cùng)</h3>
+                    <p class="text-gray-700 mb-3">Sau khi hoàn thành xong tất cả các khóa Hội nhập và Sản phẩm ở trên, học viên chốt lại lộ trình bằng khóa <span class="font-bold text-blue-700">Đào tạo văn hóa KiotViet</span>.</p>
+                    
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 flex flex-col md:flex-row gap-6 items-center">
+                        <div class="flex-1">
+                            <ul class="list-disc list-inside ml-2 space-y-2 text-gray-800">
+                                <li>Vào xem Video và làm các bài Quiz tương ứng.</li>
+                                <li><strong>Tiêu chí hoàn thành:</strong> Tiến độ đạt <span class="font-bold text-green-700">100%</span> sẽ được hệ thống tự động ghi nhận là hoàn thành khóa học.</li>
+                            </ul>
                         </div>
-
-                        <!-- Buổi 3 -->
-                        <div class="bg-blue-50/50 border border-blue-100 rounded-lg p-4">
-                            <h4 class="font-bold text-blue-800 border-b border-blue-200 pb-2 mb-3"><i class="fas fa-calendar-day mr-2"></i>Buổi 3 (Thứ 4)</h4>
-                            <p class="text-gray-800 font-medium mb-1">Khóa học:</p>
-                            <p class="text-blue-700 font-bold bg-white px-2 py-1 rounded border inline-block mb-3 text-sm">Đào tạo sản phẩm cơ bản buổi 2</p>
-                            <p class="text-gray-600 text-sm">Tiếp tục lộ trình. Hãy đảm bảo tuân thủ đầy đủ các <strong class="text-amber-700">Quy tắc chung</strong> ở phía trên.</p>
-                        </div>
-
-                        <!-- Buổi 4 - Sản phẩm -->
-                        <div class="bg-blue-50/50 border border-blue-100 rounded-lg p-4">
-                            <h4 class="font-bold text-blue-800 border-b border-blue-200 pb-2 mb-3"><i class="fas fa-calendar-day mr-2"></i>Buổi 4 (Thứ 5) - Phần 1</h4>
-                            <p class="text-gray-800 font-medium mb-1">Khóa học:</p>
-                            <p class="text-blue-700 font-bold bg-white px-2 py-1 rounded border inline-block mb-3 text-sm">Đào tạo sản phẩm cơ bản buổi 3</p>
-                            <p class="text-gray-600 text-sm">Buổi cuối của chuỗi sản phẩm. Áp dụng toàn bộ <strong class="text-amber-700">Quy tắc chung</strong> để hoàn thành.</p>
-                        </div>
-
-                    </div>
-
-                    <!-- Khóa Văn hóa (Phần 2 của ngày thứ 5) -->
-                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-5">
-                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-users text-blue-600 mr-2"></i>Buổi 4 (Thứ 5) - Phần 2: Đào tạo Văn hóa</h4>
-                        <p class="text-gray-700 mb-3">Sau khi hoàn thành xong 4 khóa trên, học viên tiếp tục vào khóa <span class="font-bold text-blue-700">Đào tạo văn hóa KiotViet</span>.</p>
-                        <div class="flex flex-col md:flex-row gap-6 items-center">
-                            <div class="flex-1">
-                                <ul class="list-disc list-inside ml-2 space-y-2 text-gray-700 text-sm">
-                                    <li>Học Video và làm Quiz.</li>
-                                    <li>Tiến độ đạt <span class="font-bold text-green-700">100%</span> sẽ được ghi nhận là hoàn thành khóa học.</li>
-                                </ul>
-                            </div>
-                            <div class="flex-1 w-full">
-                                <img src="https://i.postimg.cc/rs2yVqLp/Dao-tao-van-hoa.jpg" alt="[Khóa Đào tạo Văn hóa]" class="w-full h-auto rounded shadow border object-cover">
-                            </div>
+                        <div class="flex-1 w-full">
+                            <img src="https://i.postimg.cc/rs2yVqLp/Dao-tao-van-hoa.jpg" alt="[Khóa Đào tạo Văn hóa]" class="w-full h-auto rounded shadow border border-gray-300 object-cover">
                         </div>
                     </div>
-
                 </div>
             </section>
 
-            <!-- 4. THAO TÁC TỰ HỌC -->
+            <!-- 4. THAO TÁC TỰ HỌC (GIAO DIỆN) -->
             <section id="tu-hoc" class="bg-white p-6 rounded-lg shadow border border-gray-200">
-                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">3. HƯỚNG DẪN THAO TÁC TRÊN GIAO DIỆN (VIDEO & QUIZ)</h2>
+                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">3. HƯỚNG DẪN THAO TÁC TRÊN GIAO DIỆN HỆ THỐNG</h2>
                 
                 <div id="tu-hoc-video" class="mb-8">
-                    <h3 class="sub-heading">Học Lý thuyết (Video/Slide)</h3>
-                    <p class="text-gray-700 mb-2">Nhấn vào nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">BẮT ĐẦU HỌC KHÓA HỌC NGAY</span> để bắt đầu.</p>
+                    <h3 class="sub-heading">Thao tác Học Video/Slide</h3>
+                    <p class="text-gray-700 mb-2">Bấm vào tên khóa học, sau đó nhấn nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">BẮT ĐẦU HỌC KHÓA HỌC NGAY</span> để vào lớp.</p>
                     <div class="flex flex-col items-center mt-4">
-                        <img src="https://i.postimg.cc/MpGBNT1m/Noi-dung-khoa-hoc.jpg" alt="[Giao diện nội dung khóa học]" class="w-full h-auto rounded-md shadow-md object-contain max-h-[400px] border">
+                        <img src="https://i.postimg.cc/MpGBNT1m/Noi-dung-khoa-hoc.jpg" alt="[Giao diện nội dung khóa học]" class="w-full h-auto rounded-md shadow border border-gray-200 object-contain max-h-[400px]">
                         <p class="figure-caption">Hình 2: Giao diện học Video từ trên xuống dưới</p>
                     </div>
                     
-                    <p class="text-gray-700 mt-6 mb-2">Sau khi xem xong 1 video/slide, bài học sẽ hiển thị cập nhật:</p>
+                    <p class="text-gray-700 mt-6 mb-2">Sau khi xem xong 1 video/slide, bài học sẽ hiển thị các cập nhật sau:</p>
                     <div class="note-box !bg-gray-50 !border-gray-400">
                         <ul class="list-disc list-inside ml-4 mt-1 space-y-1 font-semibold !text-gray-800">
                             <li> <i class="fas fa-check-circle text-green-600"></i> Đánh dấu Hoàn thành </li>
-                            <li>Tăng <span class="text-blue-600">% tiến độ</span> hiện tại</li>
-                            <li>Hiển thị Nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">Làm bài tập</span></li>
+                            <li>Tăng <span class="text-blue-600">% tiến độ</span> tổng thể của khóa học</li>
+                            <li>Hiển thị Nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">Làm bài tập</span> (nếu có)</li>
                         </ul>
                     </div>
                 </div>
 
                 <div id="tu-hoc-quiz" class="mb-6">
-                    <h3 class="sub-heading">Làm bài tập Quiz</h3>
+                    <h3 class="sub-heading">Thao tác Làm bài tập Quiz</h3>
                     <p class="text-gray-700 mb-2">Nhấn vào nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">Bắt đầu kiểm tra</span>. Hệ thống sẽ hiển thị các câu hỏi trắc nghiệm.</p>
                     
                     <div class="warning-box !bg-red-50 !border-red-600 !text-red-800 mb-4 p-4">
-                        <p class="font-bold">🚫 CẢNH BÁO CHUYỂN TAB:</p>
-                        <p>Hệ thống sẽ cảnh báo hoặc hủy kết quả nếu bạn chuyển đổi Tab/Cửa sổ trong quá trình làm bài kiểm tra.</p>
+                        <p class="font-bold">🚫 CẢNH BÁO HỦY KẾT QUẢ:</p>
+                        <p>Hệ thống sẽ bật cảnh báo hoặc <strong>hủy kết quả làm bài</strong> ngay lập tức nếu phát hiện bạn chuyển đổi Tab (thẻ trình duyệt) hoặc mở phần mềm khác trong quá trình làm Quiz/Thi.</p>
                     </div>
 
-                    <p class="text-gray-700 mb-2">Sau khi chọn đáp án, nhấn nút <span class="btn-simulate btn-submit !p-1 !px-2 !text-sm">Nộp bài</span>.</p>
+                    <p class="text-gray-700 mb-2">Sau khi chọn xong đáp án, nhấn nút <span class="btn-simulate btn-submit !p-1 !px-2 !text-sm">Nộp bài</span> ở cuối trang.</p>
                     
                     <div class="flex flex-col items-center mt-4">
-                        <img src="https://i.postimg.cc/L4bh5TPR/13.jpg" alt="[Giao diện sau khi hoàn thành câu Quiz]" class="w-full h-auto rounded-md shadow-md object-contain max-h-[350px] border">
+                        <img src="https://i.postimg.cc/L4bh5TPR/13.jpg" alt="[Giao diện sau khi hoàn thành câu Quiz]" class="w-full h-auto rounded-md shadow border border-gray-200 object-contain max-h-[350px]">
                         <p class="figure-caption">Hình 3: Nộp bài và chọn Tiếp tục khóa học</p>
                     </div>
-                    <p class="text-gray-700 mt-4">Chọn <span class="btn-simulate !bg-gray-300 !text-gray-800 !p-1 !px-2 !text-sm">Rời khỏi trang web</span> (nếu có thông báo popup) để tiếp tục sang video tiếp theo.</p>
+                    <p class="text-gray-700 mt-4">Mẹo: Chọn <span class="btn-simulate !bg-gray-300 !text-gray-800 !p-1 !px-2 !text-sm">Rời khỏi trang web</span> (nếu trình duyệt hiện thông báo popup xác nhận) để có thể tiếp tục xem video tiếp theo.</p>
                 </div>
             </section>
 
             <!-- 5. CHỨNG CHỈ & BÁO CÁO -->
             <section id="chungchi" class="bg-white p-6 rounded-lg shadow border border-gray-200">
-                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">4. CHỨNG CHỈ & THEO DÕI TIẾN ĐỘ</h2>
+                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">4. CHỨNG CHỈ & THEO DÕI KẾT QUẢ</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-200">
-                        <h4 class="font-bold text-blue-800 mb-2"><i class="fas fa-certificate mr-2"></i>Nhận Chứng chỉ</h4>
-                        <p class="text-sm text-gray-700 mb-3">Sau khi hoàn thành toàn bộ lộ trình học cho nhân viên mới, hệ thống sẽ cấp chứng chỉ. Các bạn vào mục <strong>"Quản lý Chứng chỉ"</strong> trên menu trái để xem và tải về.</p>
-                        <img src="https://i.postimg.cc/pT3DZ5MN/Quan-ly-chung-chi.jpg" alt="[Quản lý chứng chỉ]" class="w-full rounded shadow-sm border border-gray-200">
+                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-200 flex flex-col">
+                        <h4 class="font-bold text-blue-800 mb-2"><i class="fas fa-certificate mr-2"></i>Nhận Chứng chỉ hoàn thành</h4>
+                        <p class="text-sm text-gray-700 mb-3 flex-grow">Sau khi hoàn thành toàn bộ lộ trình học cho nhân viên mới (tất cả các khóa đều Đạt 100% hoặc trạng thái Đạt), hệ thống sẽ cấp chứng chỉ. Các bạn vào mục <strong>"Quản lý Chứng chỉ"</strong> trên menu trái để xem và tải về.</p>
+                        <img src="https://i.postimg.cc/pT3DZ5MN/Quan-ly-chung-chi.jpg" alt="[Quản lý chứng chỉ]" class="w-full rounded shadow-sm border border-gray-200 mt-2">
                     </div>
                     
-                    <div class="bg-green-50 p-5 rounded-lg border border-green-200">
-                        <h4 class="font-bold text-green-800 mb-2"><i class="fas fa-paper-plane mr-2"></i>Báo cáo tiến độ</h4>
-                        <p class="text-sm text-gray-700">Vào <strong>chiều Thứ 5</strong>, Bộ phận Đào tạo sẽ tổng hợp và gửi kết quả tiến độ học tập của bạn về cho Line Manager (Quản lý trực tiếp).</p>
-                        <div class="mt-6 flex items-start bg-white p-3 rounded border border-green-100 shadow-sm">
+                    <div class="bg-green-50 p-5 rounded-lg border border-green-200 flex flex-col">
+                        <h4 class="font-bold text-green-800 mb-2"><i class="fas fa-paper-plane mr-2"></i>Báo cáo tiến độ về Quản lý</h4>
+                        <p class="text-sm text-gray-700 mb-3">Vào <strong>chiều Thứ 5</strong>, Bộ phận Đào tạo sẽ tiến hành xuất dữ liệu, tổng hợp kết quả tiến độ học tập của bạn và gửi email báo cáo trực tiếp cho Line Manager (Quản lý trực tiếp) của bạn.</p>
+                        <div class="mt-auto flex items-start bg-white p-3 rounded border border-green-100 shadow-sm">
                             <i class="fas fa-envelope-open-text text-2xl text-blue-600 mr-3 mt-1"></i>
                             <div class="text-sm">
-                                <p class="font-bold text-gray-900">HỖ TRỢ LỖI KỸ THUẬT:</p>
-                                <p class="text-gray-600">Nếu có thắc mắc trong quá trình học, liên hệ Đào tạo qua email: <a href="mailto:daotao@kiotviet.com" class="font-bold text-blue-700 hover:underline">daotao@kiotviet.com</a></p>
+                                <p class="font-bold text-gray-900">HỖ TRỢ LỖI KỸ THUẬT LMS:</p>
+                                <p class="text-gray-600">Nếu có thắc mắc hoặc lỗi trong quá trình học, vui lòng liên hệ Đào tạo qua email: <a href="mailto:daotao@kiotviet.com" class="font-bold text-blue-700 hover:underline">daotao@kiotviet.com</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <h3 class="sub-heading">Cách xem lại kết quả của bản thân</h3>
+                <h3 class="sub-heading">Tự kiểm tra lại kết quả học tập của bản thân</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <div class="flex flex-col items-center">
-                        <p class="text-gray-800 font-semibold mb-2 w-full text-center">1. Lịch sử học (Tiến độ bài giảng)</p>
+                    <div class="flex flex-col items-center bg-gray-50 p-4 rounded border border-gray-100">
+                        <p class="text-gray-800 font-semibold mb-3 w-full text-center"><i class="fas fa-history text-blue-600 mr-2"></i>1. Lịch sử học (Xem % Tiến độ)</p>
                         <img src="https://i.postimg.cc/WzfwxYZk/Lich-su-hoc.jpg" alt="[Lịch sử học]" class="w-full h-auto rounded-md shadow border border-gray-200 object-cover">
                     </div>
-                    <div class="flex flex-col items-center">
-                        <p class="text-gray-800 font-semibold mb-2 w-full text-center">2. Lịch sử kiểm tra (Kết quả Quiz/Thi)</p>
+                    <div class="flex flex-col items-center bg-gray-50 p-4 rounded border border-gray-100">
+                        <p class="text-gray-800 font-semibold mb-3 w-full text-center"><i class="fas fa-clipboard-check text-green-600 mr-2"></i>2. Lịch sử kiểm tra (Xem Điểm Thi/Quiz)</p>
                         <img src="https://i.postimg.cc/435trFCD/Lich-su-kiem-tra.jpg" alt="[Lịch sử kiểm tra]" class="w-full h-auto rounded-md shadow border border-gray-200 object-cover">
-                    </div>
-                </div>
-            </section>
-
-            <!-- 6. ÔN TẬP & THI THỨ 6 -->
-            <section id="onthi" class="bg-white p-6 rounded-lg shadow border border-gray-200">
-                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">5. TÀI LIỆU ÔN TẬP & BÀI TEST SÁNG THỨ 6</h2>
-                
-                <div class="mb-6">
-                    <p class="text-lg font-bold text-red-700 uppercase mb-2">📌 THÔNG TIN BÀI TEST SẢN PHẨM CƠ BẢN</p>
-                    <ul class="list-none ml-2 space-y-1 text-gray-800 font-medium">
-                        <li><i class="far fa-clock text-blue-600 w-5"></i> <strong>Thời gian thi:</strong> 10:00 Sáng Thứ 6</li>
-                        <li><i class="fas fa-desktop text-blue-600 w-5"></i> <strong>Hình thức:</strong> Thi Online trên phần mềm Classmarker</li>
-                        <li><i class="fas fa-list-ol text-blue-600 w-5"></i> <strong>Cấu trúc:</strong> 30 câu trắc nghiệm / 30 phút</li>
-                        <li><i class="fas fa-mouse-pointer text-blue-600 w-5"></i> <strong>Đặc quyền:</strong> Được phép sử dụng phần mềm KiotViet trong quá trình làm test để thao tác thử.</li>
-                    </ul>
-                </div>
-
-                <div class="mb-8">
-                    <h3 class="sub-heading">I. Tài liệu ôn tập để thi</h3>
-                    <ul class="list-disc list-inside ml-4 space-y-4 text-gray-700">
-                        <li><strong>Video ôn tập + Quiz trên LMS:</strong> Có thể xem lại Video buổi 1 + 2 và làm lại Quiz tổng hợp của buổi.</li>
-                        
-                        <li><strong>Tài liệu Text:</strong> 
-                            <ul class="list-none ml-8 mt-2 space-y-2 text-sm border-l-2 border-blue-200 pl-4">
-                                <li><strong>Vào LMS Buổi 1 &rarr; Tab Tài liệu:</strong>
-                                    <ul class="list-circle list-inside ml-4 mt-1 space-y-1">
-                                        <li><a href="https://www.kiotviet.vn/ho-tro/?type=retailer" target="_blank" class="text-blue-600 font-semibold hover:underline">Trang HDSD KiotViet Retail</a></li>
-                                        <li><a href="https://sites.google.com/view/sanphamkv2025/tong-quan" target="_blank" class="text-blue-600 font-semibold hover:underline">Tổng hợp tài liệu đào tạo cơ bản (Luồng cơ bản 6 bước, FAQs)</a></li>
-                                    </ul>
-                                </li>
-                                <li><strong>Vào LMS Buổi 3 &rarr; Tab Tài liệu:</strong>
-                                    <ul class="list-circle list-inside ml-4 mt-1 space-y-1">
-                                        <li><a href="https://kiotvietlnd.github.io/quiz/san-pham-co-ban" target="_blank" class="text-blue-600 font-semibold hover:underline">Link Quiz ôn thi</a> <span class="italic text-red-600 font-medium ml-1">(Lưu ý: Bài test chỉ trong phạm vi kiến thức phần mềm cơ bản đã học, không bao gồm kiến thức phần cứng)</span></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li><strong>Học các thao tác trên YouTube:</strong>
-                            <ul class="list-circle list-inside ml-8 mt-1 text-sm">
-                                <li>Kênh YouTube Đào tạo KiotViet (Videos ngắn giới thiệu tính năng cơ bản &rarr; nâng cao): <a href="https://www.youtube.com/@daotaokiotviet" target="_blank" class="text-blue-600 font-semibold hover:underline">https://www.youtube.com/@daotaokiotviet</a></li>
-                                <li><strong>Mẹo:</strong> Search YouTube nhanh clip ngắn theo từ khóa: <em>“Làm quen KiotViet + &lt;Tính năng mình quan tâm&gt;”</em></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="sub-heading">II. Lưu ý quan trọng khi làm Bài Test</h3>
-                    <div class="bg-yellow-50 border border-yellow-300 rounded-lg p-5 text-gray-800 shadow-sm leading-relaxed">
-                        <ol class="list-decimal list-inside space-y-3 font-medium">
-                            <li>Gần đến giờ Test (10:00), mọi người đăng nhập vào trang <a href="https://classmarker.com" target="_blank" class="text-blue-700 font-bold hover:underline">https://classmarker.com</a> theo tài khoản ghi ở email. Đúng 10:00 mọi người <strong>F5 (Refresh)</strong> sẽ có nút <strong>Start</strong> để làm bài.</li>
-                            <li>Trong quá trình làm bài <span class="text-green-700 font-bold">CÓ THỂ</span> mở kèm Phần mềm KiotViet để thao tác. (<span class="text-red-600 font-bold underline">Nhưng KHÔNG mở tài liệu</span>).</li>
-                            <li>Câu nào chưa chắc chắn, có thể đánh dấu <strong>Bookmark</strong> để khi làm xong hết bài có thể quay lại xem và thay đổi phương án nếu cần.</li>
-                            <li>Mọi người có thể nộp bài sớm nhưng khuyến khích nên <span class="text-blue-700">tận dụng hết thời gian 30 phút</span> rà soát lại rồi hãy bấm <strong>Confirm Finish</strong> để nộp bài.</li>
-                            <li>Nộp bài xong là có điểm luôn, đạt từ <span class="font-bold text-green-700 text-lg">80% trở lên</span> là vào bờ ⛵⛵.</li>
-                        </ol>
-                        
-                        <div class="text-center mt-6">
-                            <span class="inline-block bg-blue-100 text-blue-800 font-bold px-4 py-2 rounded-full border border-blue-200 shadow-sm text-lg">
-                                Chúc các bạn làm bài tốt!
-                            </span>
-                        </div>
                     </div>
                 </div>
             </section>
 
         </main>
         
-        <footer class="mt-12 text-center text-gray-500 text-sm">
+        <footer class="mt-12 text-center text-gray-500 text-sm pb-8">
             <p>&copy; 2025 KiotViet. Mọi quyền được bảo lưu.</p>
-            <p class="italic mt-2">Phòng Đào tạo - Dành cho Khối BO</p>
+            <p class="italic mt-2">Phòng Đào tạo - Dành cho Khối Non-Sales & BO</p>
         </footer>
 
     </div>
