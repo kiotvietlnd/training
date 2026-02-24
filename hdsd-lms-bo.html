@@ -76,7 +76,7 @@
         .login-note-box { padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #10B981; background-color: #ECFDF5; color: #065F46; font-size: 0.95rem; margin-top: 0.75rem; }
         .note-box { padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #3B82F6; background-color: #EFF6FF; color: #1E40AF; font-size: 0.95rem; margin-top: 0.75rem; }
         .warning-box { padding: 1.25rem; border-radius: 0.5rem; border-left: 4px solid #F59E0B; background-color: #FFFBEB; color: #92400E; font-size: 0.95rem; margin-top: 0.75rem; }
-        .figure-caption { font-size: 0.75rem; font-style: italic; color: #6B7280; margin-top: 0.5rem; text-align: center; }
+        .figure-caption { font-size: 0.75rem; font-style: italic; color: #6B7280; margin-top: 0.75rem; text-align: center; }
         .sub-heading { font-size: 1.25rem; font-weight: 700; color: #1E40AF; margin-bottom: 0.75rem; padding-bottom: 0.25rem; border-bottom: 2px dashed #BFDBFE; }
         .summary-box { background-color: #F3F4F6; border: 2px solid #3B82F6; padding: 1.5rem; border-radius: 0.75rem; margin-bottom: 2.5rem; }
         .highlight { background-color: yellow; font-weight: bold; }
@@ -266,13 +266,22 @@
                         <ul class="list-disc list-inside ml-4 space-y-3 text-gray-800">
                             <li><span class="font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded">TH1: Học tập trung (Online)</span><br>
                                 Vào lúc 14:00 chiều Thứ 2, click vào link Zoom có trong khóa học để tham gia cùng giảng viên. Sau khi kết thúc buổi Zoom, bạn vào lại khóa này trên LMS để làm Quiz. <br>
-                                &rarr; <i class="fas fa-check text-green-600"></i> Tiến độ khóa đạt 100% = Đã hoàn thành.
+                                <span class="block mt-2 font-semibold text-red-600">Lưu ý khi học Zoom:</span>
+                                <ul class="list-circle list-inside ml-4 mt-1 text-sm font-normal text-gray-700">
+                                    <li>Các bạn cần đổi tên khi tham gia trên Zoom theo cú pháp: <span class="font-bold text-gray-900">Phòng ban - Họ tên</span></li>
+                                </ul>
+                                &rarr; <i class="fas fa-check text-green-600 mt-2"></i> Tiến độ khóa đạt 100% = Đã hoàn thành.
                             </li>
                             <li class="border-t border-blue-200 pt-3"><span class="font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">TH2: Được thông báo Tự học</span><br>
                                 Bạn vào khóa này để tự xem Slide bài giảng từ đầu đến cuối, sau đó làm bài tập Quiz.<br>
                                 &rarr; <i class="fas fa-check text-green-600"></i> Tiến độ khóa đạt 100% = Đã hoàn thành.
                             </li>
                         </ul>
+                    </div>
+                    
+                    <div class="flex flex-col items-center mt-4">
+                        <img src="https://i.postimg.cc/zGRsGPnX/Khoa-hoi-nhap.jpg" alt="Khóa học Hội nhập" class="w-full h-auto rounded shadow border border-gray-200 object-cover max-h-[400px]">
+                        <p class="figure-caption">Hình 2: Giao diện Khóa Đào tạo Hội nhập</p>
                     </div>
                 </div>
 
@@ -321,35 +330,44 @@
                     <p class="text-gray-700 mb-2">Bấm vào tên khóa học, sau đó nhấn nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">BẮT ĐẦU HỌC KHÓA HỌC NGAY</span> để vào lớp.</p>
                     <div class="flex flex-col items-center mt-4">
                         <img src="https://i.postimg.cc/MpGBNT1m/Noi-dung-khoa-hoc.jpg" alt="[Giao diện nội dung khóa học]" class="w-full h-auto rounded-md shadow border border-gray-200 object-contain max-h-[400px]">
-                        <p class="figure-caption">Hình 2: Giao diện học Video từ trên xuống dưới</p>
+                        <p class="figure-caption">Hình 3: Giao diện học Video từ trên xuống dưới</p>
                     </div>
                     
-                    <p class="text-gray-700 mt-6 mb-2">Sau khi xem xong 1 video/slide, bài học sẽ hiển thị các cập nhật sau:</p>
-                    <div class="note-box !bg-gray-50 !border-gray-400">
-                        <ul class="list-disc list-inside ml-4 mt-1 space-y-1 font-semibold !text-gray-800">
-                            <li> <i class="fas fa-check-circle text-green-600"></i> Đánh dấu Hoàn thành </li>
-                            <li>Tăng <span class="text-blue-600">% tiến độ</span> tổng thể của khóa học</li>
-                            <li>Hiển thị Nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">Làm bài tập</span> (nếu có)</li>
+                    <h4 class="font-bold text-lg text-blue-800 mt-8 mb-4 border-l-4 border-blue-500 pl-3">Trạng thái của Bài học và Nút bài tập</h4>
+                    <div class="flex flex-col items-center mt-2">
+                        <img src="https://i.postimg.cc/yxDHX6S1/Trang-thai-hoc.jpg" alt="Trạng thái học" class="w-full h-auto rounded shadow border border-gray-200 object-cover max-h-[450px]">
+                        <p class="figure-caption">Hình 4: Sự thay đổi trạng thái của Nút Bài tập qua từng giai đoạn</p>
+                    </div>
+
+                    <div class="note-box !bg-blue-50 !border-blue-400 mt-4">
+                        <p class="font-bold text-blue-800 mb-2 uppercase">Giải thích trạng thái Nút Bài Tập:</p>
+                        <ul class="list-disc list-inside ml-4 space-y-2 text-gray-800">
+                            <li><span class="font-semibold text-gray-500">Giai đoạn 1 (Chưa học xong):</span> Nút <span class="bg-gray-300 px-2 py-0.5 rounded text-sm text-white">Làm bài tập</span> bị mờ, bạn không thể click vào.</li>
+                            <li><span class="font-semibold text-blue-600">Giai đoạn 2 (Đã xem xong Video):</span> Hệ thống tự động đánh dấu hoàn thành <i class="fas fa-check-circle text-green-600"></i> cho video đó, phần trăm tiến độ tổng sẽ tăng lên. Lúc này, nút <span class="bg-blue-600 px-2 py-0.5 rounded text-sm text-white">Làm bài tập</span> sẽ sáng lên để bạn vào làm.</li>
+                            <li><span class="font-semibold text-green-700">Giai đoạn 3 (Sau khi làm & Nộp bài):</span> Nút sẽ tự động đổi tên thành <span class="border border-blue-500 text-blue-600 px-2 py-0.5 rounded text-sm">Xem kết quả</span>. Bạn có thể click vào để xem lại chi tiết bài mình vừa làm.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div id="tu-hoc-quiz" class="mb-6">
                     <h3 class="sub-heading">Thao tác Làm bài tập Quiz</h3>
-                    <p class="text-gray-700 mb-2">Nhấn vào nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">Bắt đầu kiểm tra</span>. Hệ thống sẽ hiển thị các câu hỏi trắc nghiệm.</p>
+                    <p class="text-gray-700 mb-2">Sau khi nhấn nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">Làm bài tập</span> (hoặc Bắt đầu kiểm tra), hệ thống sẽ hiển thị các câu hỏi trắc nghiệm.</p>
                     
                     <div class="warning-box !bg-red-50 !border-red-600 !text-red-800 mb-4 p-4">
-                        <p class="font-bold">🚫 CẢNH BÁO HỦY KẾT QUẢ:</p>
-                        <p>Hệ thống sẽ bật cảnh báo hoặc <strong>hủy kết quả làm bài</strong> ngay lập tức nếu phát hiện bạn chuyển đổi Tab (thẻ trình duyệt) hoặc mở phần mềm khác trong quá trình làm Quiz/Thi.</p>
+                        <p class="font-bold">🚫 CẢNH BÁO HỦY KẾT QUẢ TỰ ĐỘNG:</p>
+                        <p>Hệ thống sẽ bật cảnh báo hoặc <strong>hủy kết quả làm bài</strong> ngay lập tức nếu phát hiện bạn chuyển đổi Tab (thẻ trình duyệt) hoặc mở sang phần mềm khác trong quá trình đang làm Quiz/Thi.</p>
                     </div>
 
-                    <p class="text-gray-700 mb-2">Sau khi chọn xong đáp án, nhấn nút <span class="btn-simulate btn-submit !p-1 !px-2 !text-sm">Nộp bài</span> ở cuối trang.</p>
+                    <p class="text-gray-700 mb-2">Sau khi tích chọn xong các đáp án, bạn kéo xuống cuối trang và nhấn nút <span class="btn-simulate btn-submit !p-1 !px-2 !text-sm">Nộp bài</span>.</p>
                     
                     <div class="flex flex-col items-center mt-4">
-                        <img src="https://i.postimg.cc/L4bh5TPR/13.jpg" alt="[Giao diện sau khi hoàn thành câu Quiz]" class="w-full h-auto rounded-md shadow border border-gray-200 object-contain max-h-[350px]">
-                        <p class="figure-caption">Hình 3: Nộp bài và chọn Tiếp tục khóa học</p>
+                        <img src="https://i.postimg.cc/5Njr0kwb/lam-bai-tap-va-nop-bai.jpg" alt="Làm bài tập và nộp bài" class="w-full h-auto rounded-md shadow border border-gray-200 object-contain max-h-[500px]">
+                        <p class="figure-caption">Hình 5: Giao diện chọn đáp án trắc nghiệm và thao tác Nộp bài</p>
                     </div>
-                    <p class="text-gray-700 mt-4">Mẹo: Chọn <span class="btn-simulate !bg-gray-300 !text-gray-800 !p-1 !px-2 !text-sm">Rời khỏi trang web</span> (nếu trình duyệt hiện thông báo popup xác nhận) để có thể tiếp tục xem video tiếp theo.</p>
+                    
+                    <div class="bg-gray-100 p-3 rounded mt-4 text-sm text-gray-700">
+                        <i class="fas fa-lightbulb text-yellow-500 mr-2"></i> <strong>Mẹo nhỏ:</strong> Nếu sau khi nộp bài trình duyệt hiện lên một cửa sổ popup xác nhận nhỏ, hãy bấm chọn <span class="font-semibold bg-gray-300 px-1 rounded">Rời khỏi trang web</span> (hoặc Leave) để hệ thống chuyển bạn quay lại màn hình tiếp tục xem video tiếp theo.
+                    </div>
                 </div>
             </section>
 
@@ -362,6 +380,7 @@
                         <h4 class="font-bold text-blue-800 mb-2"><i class="fas fa-certificate mr-2"></i>Nhận Chứng chỉ hoàn thành</h4>
                         <p class="text-sm text-gray-700 mb-3 flex-grow">Sau khi hoàn thành toàn bộ lộ trình học cho nhân viên mới (tất cả các khóa đều Đạt 100% hoặc trạng thái Đạt), hệ thống sẽ cấp chứng chỉ. Các bạn vào mục <strong>"Quản lý Chứng chỉ"</strong> trên menu trái để xem và tải về.</p>
                         <img src="https://i.postimg.cc/pT3DZ5MN/Quan-ly-chung-chi.jpg" alt="[Quản lý chứng chỉ]" class="w-full rounded shadow-sm border border-gray-200 mt-2">
+                        <p class="figure-caption">Hình 6: Xem chứng chỉ sau khi hoàn thành lộ trình</p>
                     </div>
                     
                     <div class="bg-green-50 p-5 rounded-lg border border-green-200 flex flex-col">
@@ -382,10 +401,12 @@
                     <div class="flex flex-col items-center bg-gray-50 p-4 rounded border border-gray-100">
                         <p class="text-gray-800 font-semibold mb-3 w-full text-center"><i class="fas fa-history text-blue-600 mr-2"></i>1. Lịch sử học (Xem % Tiến độ)</p>
                         <img src="https://i.postimg.cc/WzfwxYZk/Lich-su-hoc.jpg" alt="[Lịch sử học]" class="w-full h-auto rounded-md shadow border border-gray-200 object-cover">
+                        <p class="figure-caption">Hình 7: Mục Lịch sử học để theo dõi tiến độ</p>
                     </div>
                     <div class="flex flex-col items-center bg-gray-50 p-4 rounded border border-gray-100">
                         <p class="text-gray-800 font-semibold mb-3 w-full text-center"><i class="fas fa-clipboard-check text-green-600 mr-2"></i>2. Lịch sử kiểm tra (Xem Điểm Thi/Quiz)</p>
                         <img src="https://i.postimg.cc/435trFCD/Lich-su-kiem-tra.jpg" alt="[Lịch sử kiểm tra]" class="w-full h-auto rounded-md shadow border border-gray-200 object-cover">
+                        <p class="figure-caption">Hình 8: Mục Lịch sử kiểm tra xem lại điểm số</p>
                     </div>
                 </div>
             </section>
