@@ -127,7 +127,7 @@
             <section id="dangnhap" class="bg-white p-6 rounded-lg shadow border border-gray-200">
                 <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">1. ĐĂNG NHẬP HỆ THỐNG LMS</h2>
                 <div class="login-note-box shadow-sm">
-                    <p class="font-bold text-lg mb-2 uppercase">Thông tin đăng nhập:</p>
+                    <p class="font-bold text-lg mb-2 uppercase">Thôngৃদ tin đăng nhập:</p>
                     <ul class="list-disc list-inside ml-4 space-y-2 text-base text-gray-800">
                         <li>Website học tập: <a href="https://daotao.kiotviet.vn/dang-nhap/" target="_blank" class="font-bold text-blue-700 hover:text-blue-900 hover:underline">https://daotao.kiotviet.vn/dang-nhap/</a></li>
                         <li>Tài khoản: <span class="font-bold text-red-600 uppercase text-lg bg-red-50 px-2 py-0.5 rounded">Mail Cá Nhân</span> (Email bạn đã dùng để ứng tuyển)</li>
@@ -171,19 +171,34 @@
             <section id="buoi-1" class="bg-white p-6 rounded-lg shadow border border-gray-200">
                 <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">3. KHÓA HỘI NHẬP (THỨ 2)</h2>
                 
-                <div class="warning-box">
-                    <p class="font-bold mb-2 text-gray-900">Cách thức tham gia (Tùy theo thông báo từ Giảng viên):</p>
-                    <ul class="list-disc list-inside ml-4 space-y-3 text-gray-800">
-                        <li><span class="font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded">TH1: Học tập trung (Online Zoom)</span><br>
-                            Click vào link Zoom có trong khóa học để tham gia cùng giảng viên. <strong>Sau khi kết thúc buổi Zoom</strong>, bạn vào lại khóa này trên LMS để làm Quiz. <br>
+                <div class="note-box">
+                    <p class="font-bold mb-3 text-gray-900 text-lg">Sẽ có 2 trường hợp tùy theo thông báo bạn nhận được từ Đào tạo:</p>
+                    <ul class="list-none space-y-5 text-gray-800">
+                        <!-- TH1 -->
+                        <li class="relative pl-5 border-l-[3px] border-green-400">
+                            <span class="font-bold text-green-700 bg-green-100 px-3 py-1 rounded inline-block mb-2">TH1: Học tập trung (Online)</span>
+                            <p class="mb-2">Vào lúc 14:00 chiều Thứ 2, click vào link Zoom có trong khóa học để tham gia cùng giảng viên. <strong>Sau khi kết thúc buổi Zoom</strong>, bạn vào lại khóa này trên LMS để làm Quiz.</p>
+                            
+                            <div class="bg-white border border-gray-200 p-3 rounded shadow-sm mb-2 w-fit">
+                                <span class="font-bold text-red-600 text-sm"><i class="fas fa-exclamation-triangle mr-1"></i>Lưu ý khi học Zoom:</span>
+                                <ul class="list-disc list-inside ml-2 mt-1 text-sm text-gray-700">
+                                    <li>Các bạn cần đổi tên khi tham gia trên Zoom theo cú pháp: <span class="font-bold text-gray-900">Phòng ban - Họ tên</span></li>
+                                </ul>
+                            </div>
+                            
+                            <p class="text-green-700 font-bold">&rarr; <i class="fas fa-check-circle mr-1"></i>Tiến độ khóa đạt 100% = Đã hoàn thành.</p>
                         </li>
-                        <li class="border-t border-amber-200 pt-3"><span class="font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">TH2: Được thông báo Tự học</span><br>
-                            Bạn vào khóa này để tự xem Slide bài giảng từ đầu đến cuối, sau đó làm bài tập Quiz.<br>
+                        
+                        <!-- TH2 -->
+                        <li class="relative pl-5 border-l-[3px] border-amber-400">
+                            <span class="font-bold text-amber-600 bg-amber-100 px-3 py-1 rounded inline-block mb-2">TH2: Được thông báo Tự học</span>
+                            <p class="mb-2">Bạn vào khóa này để tự xem Slide bài giảng từ đầu đến cuối, sau đó làm bài tập Quiz.</p>
+                            <p class="text-green-700 font-bold">&rarr; <i class="fas fa-check-circle mr-1"></i>Tiến độ khóa đạt 100% = Đã hoàn thành.</p>
                         </li>
                     </ul>
                 </div>
                 
-                <div class="flex flex-col items-center mt-5">
+                <div class="flex flex-col items-center mt-6">
                     <img src="https://i.postimg.cc/zGRsGPnX/Khoa-hoi-nhap.jpg" alt="Khóa học Hội nhập" class="w-full h-auto rounded shadow border border-gray-200 object-cover max-h-[400px]">
                     <p class="figure-caption">Hình 2: Giao diện Khóa Đào tạo Hội nhập</p>
                 </div>
@@ -210,6 +225,12 @@
                     
                     <p class="mb-4 text-gray-800">Tại trang Github, chọn tên học phần và bấm <strong>"Vào học"</strong>.</p>
                     
+                    <!-- HÌNH CHƯA ĐÁNH DẤU (Khôi phục) -->
+                    <div class="flex flex-col items-center mb-6">
+                        <img src="https://i.postimg.cc/bwMLzVxc/Chua-danh-dau.jpg" alt="Bấm vào học" class="w-full max-w-2xl rounded shadow border object-cover">
+                        <p class="figure-caption">Hình 4: Giao diện ban đầu chưa đánh dấu, bấm "Vào học" từng học phần</p>
+                    </div>
+
                     <div class="bg-gray-50 p-5 rounded-lg border border-gray-200 mb-6">
                         <p class="font-bold text-gray-900 mb-3">Quy trình tự học trên Github:</p>
                         <ul class="list-decimal list-inside space-y-3 text-gray-800">
@@ -227,12 +248,19 @@
                     <div class="img-grid-2 mb-6">
                         <div class="flex flex-col items-center">
                             <img src="https://i.postimg.cc/6pQ16GFd/hoc-phan-chi-tiet.jpg" alt="Học phần chi tiết" class="w-full rounded shadow border">
-                            <p class="figure-caption">Hình 4: Chi tiết nội dung tự học</p>
+                            <p class="figure-caption">Hình 5: Chi tiết nội dung tự học</p>
                         </div>
                         <div class="flex flex-col items-center">
                             <img src="https://i.postimg.cc/dQHCPkRT/Thao-tac-hoc-tren-github.jpg" alt="Thao tác học" class="w-full rounded shadow border">
-                            <p class="figure-caption">Hình 5: Thao tác đánh dấu hoàn thành trên máy tính</p>
+                            <p class="figure-caption">Hình 6: Thao tác mở các tab bài học trên máy tính</p>
                         </div>
+                    </div>
+
+                    <!-- BOX TICK ĐÁNH DẤU E-LEARNING (Khôi phục) -->
+                    <div class="note-box !border-green-500 !bg-green-50 mt-6 shadow-sm">
+                        <p class="font-bold text-green-800 mb-2"><i class="fas fa-check-square mr-2"></i>Đánh dấu hoàn thành E-Learning:</p>
+                        <p class="text-sm text-gray-700 mb-3">Sau khi hoàn thành bài Quiz Game ôn tập trên Github, bạn quay lại danh sách bài học và <strong>tích chọn vào ô vuông E-Learning</strong> của học phần đó để tự theo dõi tiến độ bản thân.</p>
+                        <img src="https://i.postimg.cc/J4jR3Shn/Github.jpg" alt="Đánh dấu tiến độ Github" class="w-full max-w-2xl mx-auto rounded shadow border object-cover">
                     </div>
                 </div>
 
@@ -253,7 +281,14 @@
 
                     <div class="flex flex-col items-center mb-8">
                         <img src="https://i.postimg.cc/tgpJVptG/Lam-bai-tap-tren-LMS-de-ghi-nhan-ket-qua-hoc.jpg" alt="Làm bài tập LMS" class="w-full max-w-3xl h-auto rounded shadow border object-cover">
-                        <p class="figure-caption">Hình 6: Giao diện trắc nghiệm và nộp bài trên LMS</p>
+                        <p class="figure-caption">Hình 7: Giao diện trắc nghiệm và nộp bài trên LMS</p>
+                    </div>
+
+                    <!-- BOX TICK ĐÁNH DẤU LMS ĐỂ QUA BÀI (Khôi phục) -->
+                    <div class="bg-gray-50 border border-gray-200 p-5 rounded-lg mb-8 shadow-sm">
+                        <p class="font-bold text-gray-900 mb-2">🎉 Hoàn tất học phần & Chuyển bài:</p>
+                        <p class="text-sm text-gray-700 mb-4">Khi bạn nộp bài thành công trên LMS, học phần này coi như đã hoàn tất. Lúc này, bạn có thể <strong>quay lại trang Github tích chọn hoàn thành nốt ô LMS</strong> để tự tin chuyển sang học phần tiếp theo.</p>
+                        <img src="https://i.postimg.cc/xTm1xc6C/danh-dau-da-hoc-lms-va-qua-hoc-phan-tiep-theo.jpg" alt="Đánh dấu đã học LMS" class="w-full max-w-2xl mx-auto rounded shadow border object-cover">
                     </div>
 
                     <h4 class="font-bold text-gray-800 mb-3 border-b pb-2">Giải thích trạng thái nút "Làm bài tập" LMS:</h4>
@@ -284,7 +319,7 @@
 
                 <h3 class="text-lg font-bold text-gray-900 mb-5 text-center uppercase tracking-wide">Quy định điểm số Bài Kiểm Tra Tổng Hợp</h3>
                 
-                <!-- Bố cục 2 khối ngang (Trọng tâm thay đổi) -->
+                <!-- Bố cục 2 khối ngang -->
                 <div class="flex flex-col gap-8">
                     
                     <!-- Khối Chưa Đạt -->
