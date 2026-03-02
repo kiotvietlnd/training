@@ -3,546 +3,468 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng dẫn sử dụng LMS - Non-Sales & BO - KiotViet</title>
+    <title>HDSD LMS - Non-Sales & BO - KiotViet</title>
     <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-        body {
-            font-family: 'Inter', sans-serif;
-            padding-left: 270px; /* Sidebar width + padding */
-            padding-top: 64px; /* header height */
-            background-color: #f8fafc;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        /* ----- Header ----- */
-        .top-header {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 64px;
-            background-color: white;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex; align-items: center;
-            padding: 0 1.5rem;
-            z-index: 60;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .top-header .logo { height: 32px; margin-right: 2rem; }
-        .search-bar { position: relative; margin-right: auto; width: 300px; display: flex; align-items: center; }
-        .search-bar input { padding-left: 2.5rem; border-radius: 0.375rem; border: 1px solid #d1d5db; height: 38px; font-size: 0.875rem; flex-grow: 1; }
-        .search-bar .search-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #9ca3af; pointer-events: none; }
-        .search-bar .clear-icon { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); color: #9ca3af; cursor: pointer; display: none; }
-        .header-title { font-size: 1.15rem; font-weight: 700; color: #1E3A8A; text-transform: uppercase; }
-
-        /* ----- Sidebar (Mục lục) ----- */
-        .sidebar {
-            position: fixed;
-            top: 64px;
-            left: 0;
-            height: calc(100vh - 64px);
-            width: 270px;
-            background-color: white;
-            border-right: 1px solid #e5e7eb;
-            padding: 1.5rem 1rem;
-            overflow-y: auto;
-            z-index: 50;
-        }
-        .sidebar h3 { font-size: 1.125rem; font-weight: 700; color: #374151; margin-bottom: 1.5rem; padding-left: 0.5rem; text-transform: uppercase;}
-        .sidebar ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar ul li { margin-bottom: 0.5rem; }
-        .sidebar ul li a { text-decoration: none; color: #4b5563; font-weight: 500; display: flex; align-items: center; padding: 0.6rem 0.75rem; border-radius: 0.375rem; transition: background-color 0.2s, color 0.2s; font-size: 0.9rem; line-height: 1.3; }
-        .sidebar ul li a .item-number { display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background-color: #e0e7ff; color: #3b82f6; font-weight: 600; margin-right: 0.75rem; font-size: 0.75rem; flex-shrink: 0; }
-        .sidebar ul li a:hover { background-color: #f3f4f6; color: #1f2937; }
-        .sidebar ul li a.active { background-color: #3b82f6; color: white; font-weight: 600; }
-        .sidebar ul li a.active .item-number { background-color: white; color: #3b82f6; }
+        body { font-family: 'Inter', sans-serif; padding-left: 280px; padding-top: 64px; background-color: #f3f4f6; color: #1f2937; }
         
-        /* Sub-menu sidebar */
-        .sidebar ul ul { margin-left: 1.5rem; margin-top: 0.5rem; padding-left: 0.75rem; border-left: 2px solid #e5e7eb; }
-        .sidebar ul ul li a { padding: 0.4rem 0.5rem; font-size: 0.85rem; color: #6b7280; }
-        .sidebar ul ul li a .item-number { display: none; }
-        .sidebar ul ul li a:hover { background-color: #f3f4f6; color: #1f2937; }
-        .sidebar ul ul li a.active { background-color: #eff6ff; color: #3b82f6; font-weight: 600; }
+        /* ----- 1. Header & Sidebar ----- */
+        .top-header { position: fixed; top: 0; left: 0; right: 0; height: 64px; background-color: white; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; padding: 0 1.5rem; z-index: 60; }
+        .logo { height: 32px; margin-right: 2rem; }
+        .header-title { font-weight: 700; color: #1e40af; text-transform: uppercase; margin-left: auto; }
 
-        /* ----- Main Content ----- */
-        .main-container { max-width: none; padding: 1.5rem 2rem; }
-        .btn-simulate { display: inline-block; padding: 0.5rem 1rem; border-radius: 0.375rem; font-weight: 600; margin: 0.25rem 0; text-align: center; transition: all 0.15s; }
-        .btn-primary { background-color: #2563EB; color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-        .btn-submit { background-color: #10B981; color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-        .login-note-box { padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #10B981; background-color: #ECFDF5; color: #065F46; font-size: 0.95rem; margin-top: 0.75rem; }
-        .note-box { padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #3B82F6; background-color: #EFF6FF; color: #1E40AF; font-size: 0.95rem; margin-top: 0.75rem; }
-        .warning-box { padding: 1.25rem; border-radius: 0.5rem; border-left: 4px solid #F59E0B; background-color: #FFFBEB; color: #92400E; font-size: 0.95rem; margin-top: 0.75rem; }
-        .figure-caption { font-size: 0.75rem; font-style: italic; color: #6B7280; margin-top: 0.75rem; text-align: center; }
-        .sub-heading { font-size: 1.25rem; font-weight: 700; color: #1E40AF; margin-bottom: 0.75rem; padding-bottom: 0.25rem; border-bottom: 2px dashed #BFDBFE; }
-        .summary-box { background-color: #F3F4F6; border: 2px solid #3B82F6; padding: 1.5rem; border-radius: 0.75rem; margin-bottom: 2.5rem; }
-        .highlight { background-color: yellow; font-weight: bold; }
-        #search-message { margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280; }
+        /* Search Bar Tối giản */
+        .search-container { position: relative; width: 300px; display: flex; align-items: center; }
+        .search-input { width: 100%; padding: 0.5rem 2.5rem 0.5rem 1rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.9rem; transition: all 0.2s; }
+        .search-input:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .search-icon { position: absolute; right: 10px; color: #9ca3af; }
+        
+        /* Sidebar */
+        .sidebar { position: fixed; top: 64px; left: 0; height: calc(100vh - 64px); width: 280px; background-color: white; border-right: 1px solid #e5e7eb; padding: 1.5rem 1rem; overflow-y: auto; z-index: 50; }
+        .sidebar h3 { font-size: 0.85rem; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; padding-left: 0.75rem; }
+        .sidebar ul li a { display: flex; align-items: center; padding: 0.75rem; border-radius: 6px; color: #4b5563; text-decoration: none; font-size: 0.95rem; margin-bottom: 4px; transition: all 0.2s; cursor: pointer;}
+        .sidebar ul li a:hover { background-color: #f3f4f6; color: #111827; }
+        
+        /* Active State cho Sidebar */
+        .sidebar ul li a.active { background-color: #eff6ff; color: #1d4ed8; font-weight: 600; }
+        .sidebar ul li a.active .item-number { background-color: #1d4ed8; color: white; }
+        
+        .item-number { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background-color: #e5e7eb; border-radius: 6px; font-size: 0.75rem; font-weight: 700; color: #6b7280; margin-right: 12px; transition: all 0.2s;}
+        
+        /* Submenu */
+        .sidebar ul ul { padding-left: 2.75rem; margin-top: 2px; display: none; }
+        .sidebar ul li a.active + ul, .sidebar ul ul.show { display: block; } 
+        .sidebar ul ul li a { font-size: 0.9rem; padding: 0.5rem; color: #6b7280; border-left: 2px solid #e5e7eb; border-radius: 0; }
+        .sidebar ul ul li a:hover { border-left-color: #9ca3af; background: none; color: #111827; }
+        .sidebar ul ul li a.active { border-left-color: #1d4ed8; color: #1d4ed8; background: none; font-weight: 500;}
 
-        /* Path Cards */
-        .path-card { border-radius: 0.5rem; padding: 1.25rem; border-width: 1px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); height: 100%; display: flex; flex-direction: column;}
-        .path-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom-width: 1px;}
-        .path-dept { font-size: 0.85rem; font-style: italic; color: #4B5563; margin-bottom: 1rem; flex-grow: 1;}
-        .path-courses { font-size: 0.9rem; font-weight: 500; color: #1F2937; }
-        .path-courses ul { margin-top: 0.5rem; list-style-type: decimal; padding-left: 1.25rem; color: #374151; font-weight: 400;}
+        /* ----- 2. Main Content Logic (Tab View) ----- */
+        .main-container { max-width: 900px; margin: 0 auto; padding: 2rem; min-height: calc(100vh - 64px); }
+        
+        .content-section { display: none; animation: fadeIn 0.4s ease-out; }
+        .content-section.active-section { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ----- Responsive ----- */
+        /* Content Styling */
+        h2.section-title { font-size: 1.75rem; font-weight: 800; color: #111827; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb; line-height: 1.3; }
+        h3.step-title { font-size: 1.25rem; font-weight: 700; color: #374151; margin-top: 2.5rem; margin-bottom: 1rem; display: flex; align-items: center; }
+        p { color: #374151; line-height: 1.6; margin-bottom: 1rem; }
+        
+        /* Info Boxes */
+        .info-box { background-color: #f9fafb; border: 1px solid #e5e7eb; border-left: 4px solid #3b82f6; padding: 1.25rem; border-radius: 4px; margin: 1.5rem 0; }
+        .info-box.warning { border-left-color: #f59e0b; }
+        .info-box.danger { border-left-color: #ef4444; }
+        .info-box.success { border-left-color: #10b981; }
+        .info-box-title { font-weight: 700; display: block; margin-bottom: 0.5rem; color: #111827; display: flex; align-items: center; gap: 0.5rem; }
+
+        /* Path Cards (Grid for text cards is fine) */
+        .path-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .path-card { background: white; padding: 1.5rem; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .path-card h4 { font-weight: 700; color: #1f2937; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .path-meta { font-size: 0.85rem; color: #6b7280; font-style: italic; margin-bottom: 1rem; border-bottom: 1px solid #f3f4f6; padding-bottom: 0.5rem;}
+
+        /* Image Styling */
+        .image-container { margin: 1.5rem 0 2.5rem 0; width: 100%; text-align: center; }
+        img.screenshot { width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); cursor: zoom-in; transition: transform 0.2s; background: white; }
+        img.screenshot:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transform: translateY(-2px); }
+        .caption { font-size: 0.85rem; color: #6b7280; margin-top: 0.75rem; font-style: italic; }
+
+        /* Floating Nav */
+        .floating-nav { position: fixed; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; gap: 0.5rem; z-index: 50; }
+        .nav-btn { width: 3rem; height: 3rem; background-color: white; border: 1px solid #d1d5db; color: #4b5563; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.2s; font-size: 1.2rem; }
+        .nav-btn:hover { background-color: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; transform: scale(1.1); }
+        .nav-btn.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
+        /* Lightbox */
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; display: none; align-items: center; justify-content: center; cursor: zoom-out; }
+        .lightbox.active { display: flex; animation: fadeIn 0.2s; }
+        .lightbox img { max-width: 95%; max-height: 95vh; border-radius: 4px; }
+
+        /* Responsive */
         @media (max-width: 1024px) {
-             body { padding-left: 0; padding-top: 64px; }
-             .sidebar { display: none !important; } 
-             .main-container { padding: 1rem; }
-             .top-header { padding: 0 1rem; }
-             .search-bar { width: 150px; }
-             .header-title { font-size: 1rem; }
-             section[id] { scroll-margin-top: 80px; } 
+            body { padding-left: 0; }
+            .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+            .sidebar.open { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
+            .header-title { display: none; }
+            .search-container { flex-grow: 1; max-width: none; margin-right: 1rem; }
         }
-         @media (max-width: 640px) {
-             .top-header .logo { margin-right: 1rem; height: 28px;}
-             .search-bar { display: none; }
-             .header-title { margin-left: auto; }
-             section[id] { scroll-margin-top: 80px; } 
-         }
-         section[id] { scroll-margin-top: 80px; } 
     </style>
 </head>
-<body class="text-gray-800">
+<body>
 
-    <!-- Header cố định -->
+    <!-- Header -->
     <header class="top-header">
-        <img src="https://i.postimg.cc/h45fyBKL/Kiot-Viet_Logo_Horizontal.png" alt="KiotViet Logo" class="logo">
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Tìm kiếm tài liệu..." class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button id="menuToggle" class="lg:hidden mr-4 text-gray-600 text-xl"><i class="fas fa-bars"></i></button>
+        <img src="https://i.postimg.cc/h45fyBKL/Kiot-Viet_Logo_Horizontal.png" alt="Logo" class="logo">
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm nội dung...">
             <i class="fas fa-search search-icon"></i>
-            <i class="fas fa-times clear-icon" id="clearSearch"></i>
-             <div id="search-message" class="absolute top-full left-0 w-full text-sm text-gray-500 mt-1"></div>
         </div>
-        <h1 class="header-title">HƯỚNG DẪN LMS - NON-SALES & BO</h1>
+        
+        <h1 class="header-title hidden lg:block">HDSD LMS - NON-SALES</h1>
     </header>
 
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <aside id="sidebar" class="sidebar">
-         <h3>Mục lục</h3>
-         <ul>
-             <li> <a href="#tongquan" class="active"> <span class="item-number">1</span> <span>Tổng quan 4 Lộ trình</span> </a> </li>
-             <li> <a href="#dangnhap"> <span class="item-number">2</span> <span>Đăng nhập hệ thống</span> </a> </li>
-             <li> 
-                 <a href="#lotrinh"> <span class="item-number">3</span> <span>Quy trình học chi tiết</span> </a> 
-                 <ul>
-                    <li><a href="#khoa-hoinhap">3.1 Khóa Hội nhập</a></li>
-                    <li><a href="#chuoi-san-pham">3.2 Các khóa Sản phẩm</a></li>
-                    <li><a href="#khoa-vanhoa">3.3 Khóa Văn hóa</a></li>
-                 </ul>
-             </li>
-             <li> 
-                <a href="#tu-hoc"> <span class="item-number">4</span> <span>Thao tác Tự học</span> </a> 
-                <ul>
-                    <li><a href="#tu-hoc-video">4.1 Xem Video & Lý thuyết</a></li>
-                    <li><a href="#tu-hoc-quiz">4.2 Làm bài tập Quiz</a></li>
-                 </ul>
+        <h3>MỤC LỤC KHÓA HỌC</h3>
+        <ul id="nav-list">
+            <li><a href="#" data-target="section-overview" class="nav-item active"><span class="item-number">1</span> Tổng quan Lộ trình</a></li>
+            <li><a href="#" data-target="section-login" class="nav-item"><span class="item-number">2</span> Đăng nhập hệ thống</a></li>
+            <li>
+                <a href="#" data-target="section-process-intro" class="nav-item"><span class="item-number">3</span> Quy trình học tập</a>
+                <ul class="show">
+                    <li><a href="#" data-target="section-process-intro" class="nav-item">3.1 Khóa Hội nhập</a></li>
+                    <li><a href="#" data-target="section-process-product" class="nav-item">3.2 Các khóa Sản phẩm</a></li>
+                    <li><a href="#" data-target="section-process-culture" class="nav-item">3.3 Khóa Văn hóa</a></li>
+                </ul>
             </li>
-             <li> <a href="#chungchi"> <span class="item-number">5</span> <span>Chứng chỉ & Báo cáo</span> </a> </li>
+            <li>
+                <a href="#" data-target="section-guide-video" class="nav-item"><span class="item-number">4</span> Thao tác hệ thống</a>
+                <ul>
+                    <li><a href="#" data-target="section-guide-video" class="nav-item">4.1 Xem Video/Lý thuyết</a></li>
+                    <li><a href="#" data-target="section-guide-quiz" class="nav-item">4.2 Làm bài tập Quiz</a></li>
+                </ul>
+            </li>
+            <li><a href="#" data-target="section-cert" class="nav-item"><span class="item-number">5</span> Chứng chỉ & Báo cáo</a></li>
         </ul>
     </aside>
 
-    <div class="container mx-auto main-container">
-        
-        <main id="mainContent" class="space-y-12">
+    <!-- Overlay cho Mobile -->
+    <div id="overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="toggleMenu()"></div>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+
+        <!-- SECTION 1: TỔNG QUAN -->
+        <section id="section-overview" class="content-section active-section">
+            <h2 class="section-title">1. Tổng quan lộ trình & Điều kiện hoàn thành</h2>
             
-            <!-- 1. TỔNG QUAN -->
-            <section id="tongquan">
-                <div class="summary-box">
-                    <h3 class="text-xl font-bold text-blue-800 mb-3 uppercase">Tổng quan lộ trình học & Điều kiện hoàn thành</h3>
-                    <p class="mb-3 text-gray-700">Chào mừng các bạn gia nhập KiotViet! Trong tuần đầu tiên, các bạn sẽ tham gia lộ trình tự học trên hệ thống LMS. Mục tiêu của lộ trình này là trang bị kiến thức cơ bản nhất về công ty và sản phẩm.</p>
-                    
-                    <ul class="list-disc list-inside ml-4 space-y-2 text-gray-800 font-medium mb-6">
-                        <li><span class="text-blue-700 font-bold">Tài khoản:</span> Các bạn sẽ nhận được Email công ty <span class="font-bold text-red-600">trước ngày đi làm</span>. Sử dụng email này để đăng nhập LMS.</li>
-                        <li><span class="text-blue-700 font-bold">Nhiệm vụ:</span> Tùy thuộc vào phòng ban, các bạn sẽ được phân bổ lộ trình gồm 3 đến 5 khóa học khác nhau.</li>
-                        <li><span class="text-green-600 font-bold">ĐIỀU KIỆN ĐƯỢC XEM LÀ HOÀN THÀNH CHUỖI KHÓA HỌC:</span> Hoàn thành 100% tiến độ các khóa học trong lộ trình. Các khóa có bài Thi cuối khóa phải đạt mức <span class="font-bold text-green-700">"Đạt"</span>. Kết quả sẽ được gửi về cho Line Manager vào chiều Thứ 5.</li>
+            <div class="info-box success">
+                <span class="info-box-title"><i class="fas fa-check-circle text-green-600"></i> Điều kiện hoàn thành</span>
+                <p class="mb-0 mt-1">Bạn cần hoàn thành <strong>100% tiến độ</strong> các khóa học. Các khóa có bài Thi cuối khóa (Sản phẩm) phải đạt kết quả <span class="font-bold text-green-700">"ĐẠT"</span> (trên 80%).</p>
+            </div>
+
+            <p>Dưới đây là chi tiết lộ trình học cho 4 nhóm đối tượng. Hãy xác định đúng phòng ban của mình:</p>
+
+            <div class="path-grid">
+                <!-- Path 1 -->
+                <div class="path-card border-l-4 border-l-blue-500">
+                    <h4>1. Nhóm Non-Sales</h4>
+                    <p class="path-meta">MKT, PTSP, Tái ký, CS, Back Office, Retail</p>
+                    <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                        <li>Hội nhập</li>
+                        <li>Sản phẩm Retail 1, 2, 3</li>
+                        <li>Văn hóa KiotViet</li>
                     </ul>
-
-                    <h4 class="font-bold text-gray-900 mb-4 border-t border-blue-200 pt-4"><i class="fas fa-sitemap text-blue-600 mr-2"></i>Chi tiết 4 Lộ trình theo Đối tượng/Phòng ban:</h4>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Path 1 -->
-                        <div class="path-card bg-blue-50 border-blue-200">
-                            <h5 class="path-title text-blue-800">1. Lộ trình học cho Non-Sales</h5>
-                            <p class="path-dept"><strong>Đội nhóm:</strong> Marketing, PTSP, Tái ký, Customer Service, Back Office, KV Retail</p>
-                            <div class="path-courses">
-                                <span>Số khóa học: <strong class="text-blue-700 text-lg">5</strong></span>
-                                <ul>
-                                    <li>Đào tạo Hội nhập</li>
-                                    <li>Đào tạo Sản phẩm KiotViet Retail 1</li>
-                                    <li>Đào tạo Sản phẩm KiotViet Retail 2</li>
-                                    <li>Đào tạo Sản phẩm KiotViet Retail 3</li>
-                                    <li>Đào tạo Văn hóa</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Path 2 -->
-                        <div class="path-card bg-emerald-50 border-emerald-200">
-                            <h5 class="path-title text-emerald-800">2. Lộ trình cho KV Employee</h5>
-                            <p class="path-dept"><strong>Đội nhóm:</strong> KV Employee</p>
-                            <div class="path-courses">
-                                <span>Số khóa học: <strong class="text-emerald-700 text-lg">3</strong></span>
-                                <ul>
-                                    <li>Đào tạo Hội nhập</li>
-                                    <li>Đào tạo Sản phẩm KiotViet Salon</li>
-                                    <li>Đào tạo Văn hóa</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Path 3 -->
-                        <div class="path-card bg-amber-50 border-amber-200">
-                            <h5 class="path-title text-amber-800">3. Lộ trình cho KV FNB</h5>
-                            <p class="path-dept"><strong>Đội nhóm:</strong> KV FNB</p>
-                            <div class="path-courses">
-                                <span>Số khóa học: <strong class="text-amber-700 text-lg">4</strong></span>
-                                <ul>
-                                    <li>Đào tạo Hội nhập</li>
-                                    <li>Đào tạo Sản phẩm KiotViet FNB - Phần mềm</li>
-                                    <li>Đào tạo Sản phẩm KiotViet FNB - Phần cứng</li>
-                                    <li>Đào tạo Văn hóa</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Path 4 -->
-                        <div class="path-card bg-purple-50 border-purple-200">
-                            <h5 class="path-title text-purple-800">4. Lộ trình cho KV Booking</h5>
-                            <p class="path-dept"><strong>Đội nhóm:</strong> KV Booking</p>
-                            <div class="path-courses">
-                                <span>Số khóa học: <strong class="text-purple-700 text-lg">4</strong></span>
-                                <ul>
-                                    <li>Đào tạo Hội nhập</li>
-                                    <li>Đào tạo Sản phẩm KiotViet Salon</li>
-                                    <li>Đào tạo Sản phẩm KiotViet Hotel</li>
-                                    <li>Đào tạo Văn hóa</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </section>
-
-            <!-- 2. ĐĂNG NHẬP -->
-            <section id="dangnhap" class="bg-white p-6 rounded-lg shadow border border-gray-200">
-                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">1. ĐĂNG NHẬP HỆ THỐNG</h2>
-                <div class="mb-6">
-                    <h3 class="sub-heading">Đăng nhập bằng Mail công ty</h3>
-                    <div class="login-note-box">
-                        <p class="font-bold text-lg">THÔNG TIN ĐĂNG NHẬP:</p>
-                        <ul class="list-disc list-inside ml-4 mt-2 space-y-2 text-base">
-                            <li>Website: <a href="https://daotao.kiotviet.vn/dang-nhap/" target="_blank" class="font-bold text-blue-700 hover:text-blue-900 hover:underline">https://daotao.kiotviet.vn/dang-nhap/</a></li>
-                            <li>Tài khoản: <span class="font-bold text-blue-800">Mail công ty</span> (Bạn sẽ nhận được <span class="underline">trước ngày đi làm</span>)</li>
-                            <li>Mật khẩu mặc định: <span class="font-bold text-green-700 text-lg">123456A@</span></li>
-                        </ul>
-                    </div>
+                <!-- Path 2 -->
+                <div class="path-card border-l-4 border-l-emerald-500">
+                    <h4>2. Nhóm KV Employee</h4>
+                    <p class="path-meta">Nhân viên nội bộ khối khác</p>
+                    <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                        <li>Hội nhập</li>
+                        <li>Sản phẩm Salon</li>
+                        <li>Văn hóa KiotViet</li>
+                    </ul>
                 </div>
-                <div class="mb-6">
-                    <h3 class="sub-heading">Xem lộ trình học thực tế của bạn</h3>
-                    <p class="text-gray-700 mb-2">Sau khi đăng nhập thành công, các bạn vào mục <span class="font-bold text-blue-700">"Khóa học bắt buộc"</span>. Hệ thống sẽ hiển thị đúng các khóa học dành riêng cho bộ phận của bạn (như đã liệt kê ở phần Tổng quan).</p>
-                    <div class="flex flex-col items-center mt-4 bg-gray-50 p-4 rounded border">
-                        <img src="https://i.postimg.cc/Ls2cvhBw/Lo-trinh-cho-BO.jpg" alt="[Giao diện lộ trình học]" class="w-full h-auto rounded shadow-sm object-contain max-h-[400px]">
-                        <p class="figure-caption mt-2">Hình 1: Giao diện các khóa học hiển thị trong mục Khóa học bắt buộc (Hình ảnh mang tính minh họa)</p>
-                    </div>
+                <!-- Path 3 -->
+                <div class="path-card border-l-4 border-l-amber-500">
+                    <h4>3. Nhóm KV FNB</h4>
+                    <p class="path-meta">Khối FnB</p>
+                    <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                        <li>Hội nhập</li>
+                        <li>Sản phẩm FNB (Phần mềm)</li>
+                        <li>Sản phẩm FNB (Phần cứng)</li>
+                        <li>Văn hóa KiotViet</li>
+                    </ul>
                 </div>
-            </section>
-
-            <!-- 3. QUY TRÌNH HỌC CHI TIẾT -->
-            <section id="lotrinh" class="bg-white p-6 rounded-lg shadow border border-gray-200">
-                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">2. HƯỚNG DẪN QUY TRÌNH HỌC</h2>
-                <p class="text-gray-700 mb-6 italic">Dưới đây là hướng dẫn cách học cho từng <strong>loại khóa học</strong> có trong lộ trình của bạn. Hãy học lần lượt từ trên xuống dưới theo danh sách hiển thị trên LMS.</p>
-                
-                <!-- Khóa Hội nhập -->
-                <div id="khoa-hoinhap" class="mb-10">
-                    <h3 class="text-xl font-bold text-blue-700 mb-3"><i class="fas fa-handshake mr-2"></i>2.1 Khóa Đào tạo Hội nhập (Khóa đầu tiên)</h3>
-                    <div class="note-box">
-                        <p class="font-bold mb-2 text-gray-900">Sẽ có 2 trường hợp tùy theo thông báo bạn nhận được từ Đào tạo:</p>
-                        <ul class="list-disc list-inside ml-4 space-y-3 text-gray-800">
-                            <li><span class="font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded">TH1: Học tập trung (Online)</span><br>
-                                Vào lúc 14:00 chiều Thứ 2, click vào link Zoom có trong khóa học để tham gia cùng giảng viên. Sau khi kết thúc buổi Zoom, bạn vào lại khóa này trên LMS để làm Quiz. <br>
-                                <span class="block mt-2 font-semibold text-red-600">Lưu ý khi học Zoom:</span>
-                                <ul class="list-circle list-inside ml-4 mt-1 text-sm font-normal text-gray-700">
-                                    <li>Các bạn cần đổi tên khi tham gia trên Zoom theo cú pháp: <span class="font-bold text-gray-900">Phòng ban - Họ tên</span></li>
-                                </ul>
-                                &rarr; <i class="fas fa-check text-green-600 mt-2"></i> Tiến độ khóa đạt 100% = Đã hoàn thành.
-                            </li>
-                            <li class="border-t border-blue-200 pt-3"><span class="font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">TH2: Được thông báo Tự học</span><br>
-                                Bạn vào khóa này để tự xem Slide bài giảng từ đầu đến cuối, sau đó làm bài tập Quiz.<br>
-                                &rarr; <i class="fas fa-check text-green-600"></i> Tiến độ khóa đạt 100% = Đã hoàn thành.
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="flex flex-col items-center mt-4">
-                        <img src="https://i.postimg.cc/zGRsGPnX/Khoa-hoi-nhap.jpg" alt="Khóa học Hội nhập" class="w-full h-auto rounded shadow border border-gray-200 object-cover max-h-[400px]">
-                        <p class="figure-caption">Hình 2: Giao diện Khóa Đào tạo Hội nhập</p>
-                    </div>
+                <!-- Path 4 -->
+                <div class="path-card border-l-4 border-l-purple-500">
+                    <h4>4. Nhóm KV Booking</h4>
+                    <p class="path-meta">Khối Salon/Spa/Hotel</p>
+                    <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                        <li>Hội nhập</li>
+                        <li>Sản phẩm Salon</li>
+                        <li>Sản phẩm Hotel</li>
+                        <li>Văn hóa KiotViet</li>
+                    </ul>
                 </div>
+            </div>
+        </section>
 
-                <!-- Chuỗi Sản phẩm -->
-                <div id="chuoi-san-pham" class="mb-10">
-                    <h3 class="text-xl font-bold text-blue-700 mb-4"><i class="fas fa-layer-group mr-2"></i>2.2 Các Khóa học Sản phẩm (Retail, Salon, FNB, Hotel...)</h3>
-                    <p class="text-gray-700 mb-4">Tùy vào nhóm phòng ban, bạn sẽ có từ 1 đến 3 khóa Sản phẩm. <strong>ĐỐI VỚI BẤT KỲ KHÓA SẢN PHẨM NÀO</strong>, bạn đều phải áp dụng triệt để bộ quy tắc sau:</p>
-                    
-                    <div class="warning-box shadow-sm">
-                        <p class="font-bold text-lg mb-3 uppercase text-amber-700 border-b border-amber-200 pb-2"><i class="fas fa-exclamation-triangle mr-2"></i>Quy tắc bắt buộc khi học Sản phẩm:</p>
-                        <ul class="list-decimal list-inside ml-2 space-y-3 text-gray-800">
-                            <li><strong>Học theo trình tự:</strong> Bắt buộc xem bài giảng từ trên xuống dưới.</li>
-                            <li><strong>Giữ luồng học:</strong> <span class="text-red-600 font-bold bg-red-50 px-1">KHÔNG tua nhanh</span>, <span class="text-red-600 font-bold bg-red-50 px-1">KHÔNG mở cửa sổ (tab) khác</span> trong quá trình xem video. Hệ thống sẽ không ghi nhận tiến độ nếu phát hiện vi phạm.</li>
-                            <li><strong>Làm Quiz từng phần:</strong> Học xong clip nào thì nút <strong>"Làm bài tập"</strong> (Quiz) của clip đó sẽ tự động hiển thị để bạn làm ngay.</li>
-                            <li><strong>Bài thi cuối khóa:</strong> Sau khi hoàn thành TẤT CẢ Video và Quiz nhỏ, nút <strong>"LÀM BÀI THI"</strong> tổng hợp sẽ xuất hiện ở cuối trang. Bắt buộc phải làm bài thi này.</li>
-                            <li class="bg-amber-100/50 p-2 rounded"><strong>Tiêu chí ghi nhận:</strong> Bài thi cuối khóa phải đạt điểm trên <span class="font-bold text-green-600 text-lg">80%</span>. Lúc này, trạng thái khóa học sẽ chuyển thành <span class="font-bold text-green-700 uppercase">"Đạt"</span>.</li>
-                        </ul>
-                    </div>
-                </div>
+        <!-- SECTION 2: ĐĂNG NHẬP -->
+        <section id="section-login" class="content-section">
+            <h2 class="section-title">2. Đăng nhập hệ thống</h2>
+            
+            <div class="info-box">
+                <span class="info-box-title"><i class="fas fa-key text-blue-600"></i> Thông tin tài khoản</span>
+                <ul class="list-disc pl-5 space-y-2 mt-2">
+                    <li>Link: <a href="https://daotao.kiotviet.vn/dang-nhap/" class="text-blue-600 font-medium hover:underline">daotao.kiotviet.vn/dang-nhap/</a></li>
+                    <li>Tài khoản: <span class="font-bold">Email Công ty</span> (Nhận trước ngày đi làm)</li>
+                    <li>Mật khẩu: <span class="font-mono bg-gray-200 px-2 rounded">123456A@</span></li>
+                </ul>
+            </div>
 
-                <!-- Khóa Văn hóa -->
-                <div id="khoa-vanhoa">
-                    <h3 class="text-xl font-bold text-blue-700 mb-3"><i class="fas fa-users mr-2"></i>2.3 Khóa Đào tạo Văn hóa (Khóa cuối cùng)</h3>
-                    <p class="text-gray-700 mb-3">Sau khi hoàn thành xong tất cả các khóa Hội nhập và Sản phẩm ở trên, học viên chốt lại lộ trình bằng khóa <span class="font-bold text-blue-700">Đào tạo văn hóa KiotViet</span>.</p>
-                    
-                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 flex flex-col md:flex-row gap-6 items-center">
-                        <div class="flex-1">
-                            <ul class="list-disc list-inside ml-2 space-y-2 text-gray-800">
-                                <li>Vào xem Video và làm các bài Quiz tương ứng.</li>
-                                <li><strong>Tiêu chí hoàn thành:</strong> Tiến độ đạt <span class="font-bold text-green-700">100%</span> sẽ được hệ thống tự động ghi nhận là hoàn thành khóa học.</li>
-                            </ul>
-                        </div>
-                        <div class="flex-1 w-full">
-                            <img src="https://i.postimg.cc/rs2yVqLp/Dao-tao-van-hoa.jpg" alt="[Khóa Đào tạo Văn hóa]" class="w-full h-auto rounded shadow border border-gray-300 object-cover">
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <p>Truy cập mục <strong>"Khóa học bắt buộc"</strong> để thấy lộ trình của bạn.</p>
+            <div class="image-container">
+                <img src="https://i.postimg.cc/Ls2cvhBw/Lo-trinh-cho-BO.jpg" alt="Lộ trình học" class="screenshot">
+                <p class="caption">Hình 1: Danh sách khóa học bắt buộc</p>
+            </div>
+        </section>
 
-            <!-- 4. THAO TÁC TỰ HỌC (GIAO DIỆN) -->
-            <section id="tu-hoc" class="bg-white p-6 rounded-lg shadow border border-gray-200">
-                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">3. HƯỚNG DẪN THAO TÁC TRÊN GIAO DIỆN HỆ THỐNG</h2>
-                
-                <div id="tu-hoc-video" class="mb-8">
-                    <h3 class="sub-heading">Thao tác Học Video/Slide</h3>
-                    <p class="text-gray-700 mb-2">Bấm vào tên khóa học, sau đó nhấn nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">BẮT ĐẦU HỌC KHÓA HỌC NGAY</span> để vào lớp.</p>
-                    <div class="flex flex-col items-center mt-4">
-                        <img src="https://i.postimg.cc/MpGBNT1m/Noi-dung-khoa-hoc.jpg" alt="[Giao diện nội dung khóa học]" class="w-full h-auto rounded-md shadow border border-gray-200 object-contain max-h-[400px]">
-                        <p class="figure-caption">Hình 3: Giao diện học Video từ trên xuống dưới</p>
-                    </div>
-                    
-                    <h4 class="font-bold text-lg text-blue-800 mt-8 mb-4 border-l-4 border-blue-500 pl-3">Trạng thái của Bài học và Nút bài tập</h4>
-                    <div class="flex flex-col items-center mt-2">
-                        <img src="https://i.postimg.cc/yxDHX6S1/Trang-thai-hoc.jpg" alt="Trạng thái học" class="w-full h-auto rounded shadow border border-gray-200 object-cover max-h-[450px]">
-                        <p class="figure-caption">Hình 4: Sự thay đổi trạng thái của Nút Bài tập qua từng giai đoạn</p>
-                    </div>
+        <!-- SECTION 3.1: HỘI NHẬP -->
+        <section id="section-process-intro" class="content-section">
+            <h2 class="section-title">3.1 Khóa Đào tạo Hội nhập</h2>
+            
+            <p>Đây là khóa học đầu tiên. Tùy thông báo, bạn sẽ học theo 1 trong 2 hình thức:</p>
 
-                    <div class="note-box !bg-blue-50 !border-blue-400 mt-4">
-                        <p class="font-bold text-blue-800 mb-2 uppercase">Giải thích trạng thái Nút Bài Tập:</p>
-                        <ul class="list-disc list-inside ml-4 space-y-2 text-gray-800">
-                            <li><span class="font-semibold text-gray-500">Giai đoạn 1 (Chưa học xong):</span> Nút <span class="bg-gray-300 px-2 py-0.5 rounded text-sm text-white">Làm bài tập</span> bị mờ, bạn không thể click vào.</li>
-                            <li><span class="font-semibold text-blue-600">Giai đoạn 2 (Đã xem xong Video):</span> Hệ thống tự động đánh dấu hoàn thành <i class="fas fa-check-circle text-green-600"></i> cho video đó, phần trăm tiến độ tổng sẽ tăng lên. Lúc này, nút <span class="bg-blue-600 px-2 py-0.5 rounded text-sm text-white">Làm bài tập</span> sẽ sáng lên để bạn vào làm.</li>
-                            <li><span class="font-semibold text-green-700">Giai đoạn 3 (Sau khi làm & Nộp bài):</span> Nút sẽ tự động đổi tên thành <span class="border border-blue-500 text-blue-600 px-2 py-0.5 rounded text-sm">Xem kết quả</span>. Bạn có thể click vào để xem lại chi tiết bài mình vừa làm.</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="info-box">
+                <span class="info-box-title"><i class="fas fa-video text-blue-600"></i> TH1: Học Online qua Zoom</span>
+                <p class="mt-1 mb-0">Học lúc 14:00 chiều Thứ 2. Click link Zoom trong khóa học. Sau khi học xong nhớ vào làm Quiz.</p>
+            </div>
 
-                <div id="tu-hoc-quiz" class="mb-6">
-                    <h3 class="sub-heading">Thao tác Làm bài tập Quiz</h3>
-                    <p class="text-gray-700 mb-2">Sau khi nhấn nút <span class="btn-simulate btn-primary !p-1 !px-2 !text-sm">Làm bài tập</span> (hoặc Bắt đầu kiểm tra), hệ thống sẽ hiển thị các câu hỏi trắc nghiệm.</p>
-                    
-                    <div class="warning-box !bg-red-50 !border-red-600 !text-red-800 mb-4 p-4">
-                        <p class="font-bold">🚫 CẢNH BÁO HỦY KẾT QUẢ TỰ ĐỘNG:</p>
-                        <p>Hệ thống sẽ bật cảnh báo hoặc <strong>hủy kết quả làm bài</strong> ngay lập tức nếu phát hiện bạn chuyển đổi Tab (thẻ trình duyệt) hoặc mở sang phần mềm khác trong quá trình đang làm Quiz/Thi.</p>
-                    </div>
+            <div class="info-box warning">
+                <span class="info-box-title"><i class="fas fa-laptop-house text-amber-600"></i> TH2: Tự học E-learning</span>
+                <p class="mt-1 mb-0">Tự xem hết Slide/Video bài giảng và làm bài Quiz cuối khóa.</p>
+            </div>
 
-                    <p class="text-gray-700 mb-2">Sau khi tích chọn xong các đáp án, bạn kéo xuống cuối trang và nhấn nút <span class="btn-simulate btn-submit !p-1 !px-2 !text-sm">Nộp bài</span>.</p>
-                    
-                    <div class="flex flex-col items-center mt-4">
-                        <img src="https://i.postimg.cc/5Njr0kwb/lam-bai-tap-va-nop-bai.jpg" alt="Làm bài tập và nộp bài" class="w-full h-auto rounded-md shadow border border-gray-200 object-contain max-h-[500px]">
-                        <p class="figure-caption">Hình 5: Giao diện chọn đáp án trắc nghiệm và thao tác Nộp bài</p>
-                    </div>
-                    
-                    <div class="bg-gray-100 p-3 rounded mt-4 text-sm text-gray-700">
-                        <i class="fas fa-lightbulb text-yellow-500 mr-2"></i> <strong>Mẹo nhỏ:</strong> Nếu sau khi nộp bài trình duyệt hiện lên một cửa sổ popup xác nhận nhỏ, hãy bấm chọn <span class="font-semibold bg-gray-300 px-1 rounded">Rời khỏi trang web</span> (hoặc Leave) để hệ thống chuyển bạn quay lại màn hình tiếp tục xem video tiếp theo.
-                    </div>
-                </div>
-            </section>
+            <div class="image-container">
+                <img src="https://i.postimg.cc/zGRsGPnX/Khoa-hoi-nhap.jpg" alt="Khóa hội nhập" class="screenshot">
+                <p class="caption">Hình 2: Giao diện khóa Hội nhập</p>
+            </div>
+        </section>
 
-            <!-- 5. CHỨNG CHỈ & BÁO CÁO -->
-            <section id="chungchi" class="bg-white p-6 rounded-lg shadow border border-gray-200">
-                <h2 class="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-gray-200">4. CHỨNG CHỈ & THEO DÕI KẾT QUẢ</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-200 flex flex-col">
-                        <h4 class="font-bold text-blue-800 mb-2"><i class="fas fa-certificate mr-2"></i>Nhận Chứng chỉ hoàn thành</h4>
-                        <p class="text-sm text-gray-700 mb-3 flex-grow">Sau khi hoàn thành toàn bộ lộ trình học cho nhân viên mới (tất cả các khóa đều Đạt 100% hoặc trạng thái Đạt), hệ thống sẽ cấp chứng chỉ. Các bạn vào mục <strong>"Quản lý Chứng chỉ"</strong> trên menu trái để xem và tải về.</p>
-                        <img src="https://i.postimg.cc/pT3DZ5MN/Quan-ly-chung-chi.jpg" alt="[Quản lý chứng chỉ]" class="w-full rounded shadow-sm border border-gray-200 mt-2">
-                        <p class="figure-caption">Hình 6: Xem chứng chỉ sau khi hoàn thành lộ trình</p>
-                    </div>
-                    
-                    <div class="bg-green-50 p-5 rounded-lg border border-green-200 flex flex-col">
-                        <h4 class="font-bold text-green-800 mb-2"><i class="fas fa-paper-plane mr-2"></i>Báo cáo tiến độ về Quản lý</h4>
-                        <p class="text-sm text-gray-700 mb-3">Vào <strong>chiều Thứ 5</strong>, Bộ phận Đào tạo sẽ tiến hành xuất dữ liệu, tổng hợp kết quả tiến độ học tập của bạn và gửi email báo cáo trực tiếp cho Line Manager (Quản lý trực tiếp) của bạn.</p>
-                        <div class="mt-auto flex items-start bg-white p-3 rounded border border-green-100 shadow-sm">
-                            <i class="fas fa-envelope-open-text text-2xl text-blue-600 mr-3 mt-1"></i>
-                            <div class="text-sm">
-                                <p class="font-bold text-gray-900">HỖ TRỢ LỖI KỸ THUẬT LMS:</p>
-                                <p class="text-gray-600">Nếu có thắc mắc hoặc lỗi trong quá trình học, vui lòng liên hệ Đào tạo qua email: <a href="mailto:daotao@kiotviet.com" class="font-bold text-blue-700 hover:underline">daotao@kiotviet.com</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- SECTION 3.2: SẢN PHẨM -->
+        <section id="section-process-product" class="content-section">
+            <h2 class="section-title">3.2 Các khóa học Sản phẩm</h2>
+            <p>Áp dụng cho các khóa Retail, Salon, FNB, Hotel...</p>
+            
+            <div class="info-box danger">
+                <span class="info-box-title"><i class="fas fa-exclamation-triangle text-red-600"></i> QUY TẮC BẮT BUỘC</span>
+                <ul class="list-decimal pl-5 mt-2 space-y-2">
+                    <li><strong>Không tua nhanh:</strong> Hệ thống sẽ không ghi nhận tiến độ.</li>
+                    <li><strong>Không mở tab khác:</strong> Video sẽ tự dừng nếu bạn chuyển cửa sổ.</li>
+                    <li><strong>Làm bài thi cuối khóa:</strong> Sau khi học hết các phần, nút "LÀM BÀI THI" sẽ hiện ra. Phải đạt >80% điểm.</li>
+                </ul>
+            </div>
+        </section>
 
-                <h3 class="sub-heading">Tự kiểm tra lại kết quả học tập của bản thân</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <div class="flex flex-col items-center bg-gray-50 p-4 rounded border border-gray-100">
-                        <p class="text-gray-800 font-semibold mb-3 w-full text-center"><i class="fas fa-history text-blue-600 mr-2"></i>1. Lịch sử học (Xem % Tiến độ)</p>
-                        <img src="https://i.postimg.cc/WzfwxYZk/Lich-su-hoc.jpg" alt="[Lịch sử học]" class="w-full h-auto rounded-md shadow border border-gray-200 object-cover">
-                        <p class="figure-caption">Hình 7: Mục Lịch sử học để theo dõi tiến độ</p>
-                    </div>
-                    <div class="flex flex-col items-center bg-gray-50 p-4 rounded border border-gray-100">
-                        <p class="text-gray-800 font-semibold mb-3 w-full text-center"><i class="fas fa-clipboard-check text-green-600 mr-2"></i>2. Lịch sử kiểm tra (Xem Điểm Thi/Quiz)</p>
-                        <img src="https://i.postimg.cc/435trFCD/Lich-su-kiem-tra.jpg" alt="[Lịch sử kiểm tra]" class="w-full h-auto rounded-md shadow border border-gray-200 object-cover">
-                        <p class="figure-caption">Hình 8: Mục Lịch sử kiểm tra xem lại điểm số</p>
-                    </div>
-                </div>
-            </section>
+        <!-- SECTION 3.3: VĂN HÓA -->
+        <section id="section-process-culture" class="content-section">
+            <h2 class="section-title">3.3 Khóa Đào tạo Văn hóa</h2>
+            <p>Khóa học cuối cùng trong lộ trình.</p>
+            <div class="image-container">
+                <img src="https://i.postimg.cc/rs2yVqLp/Dao-tao-van-hoa.jpg" alt="Khóa Văn hóa" class="screenshot">
+                <p class="caption">Hình 3: Hoàn thành 100% tiến độ để được ghi nhận</p>
+            </div>
+        </section>
 
-        </main>
-        
-        <footer class="mt-12 text-center text-gray-500 text-sm pb-8">
-            <p>&copy; 2026 KiotViet. Mọi quyền được bảo lưu.</p>
-            <p class="italic mt-2">Phòng Đào tạo - Dành cho Khối Non-Sales & BO</p>
-        </footer>
+        <!-- SECTION 4.1: VIDEO -->
+        <section id="section-guide-video" class="content-section">
+            <h2 class="section-title">4.1 Thao tác: Xem Video & Lý thuyết</h2>
+            <p>Học lần lượt từ trên xuống dưới. Bấm nút <strong>"BẮT ĐẦU HỌC"</strong> để vào lớp.</p>
 
+            <div class="image-container">
+                <img src="https://i.postimg.cc/MpGBNT1m/Noi-dung-khoa-hoc.jpg" alt="Nội dung khóa học" class="screenshot">
+                <p class="caption">Hình 4: Giao diện bài học Video</p>
+            </div>
+
+            <h3 class="step-title">Trạng thái nút Bài tập</h3>
+            <div class="image-container">
+                <img src="https://i.postimg.cc/yxDHX6S1/Trang-thai-hoc.jpg" alt="Trạng thái nút" class="screenshot">
+            </div>
+            <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                <li><strong>Màu xám:</strong> Chưa xem xong video (Chưa được làm).</li>
+                <li><strong>Màu xanh dương:</strong> Đã xem xong, cần làm bài tập ngay.</li>
+                <li><strong>Nút "Xem kết quả":</strong> Đã nộp bài thành công.</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 4.2: QUIZ -->
+        <section id="section-guide-quiz" class="content-section">
+            <h2 class="section-title">4.2 Thao tác: Làm bài tập Quiz</h2>
+            
+            <div class="info-box warning">
+                <span class="info-box-title"><i class="fas fa-ban text-amber-600"></i> CẢNH BÁO</span>
+                <p class="mt-1 mb-0">Tuyệt đối không chuyển Tab trình duyệt khi đang làm bài thi. Hệ thống sẽ cảnh báo vi phạm hoặc hủy kết quả.</p>
+            </div>
+
+            <p>Chọn đáp án đúng và bấm <strong>"Nộp bài"</strong> ở cuối trang.</p>
+            <div class="image-container">
+                <img src="https://i.postimg.cc/5Njr0kwb/lam-bai-tap-va-nop-bai.jpg" alt="Nộp bài" class="screenshot">
+                <p class="caption">Hình 5: Giao diện làm bài trắc nghiệm</p>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CHỨNG CHỈ -->
+        <section id="section-cert" class="content-section">
+            <h2 class="section-title">5. Chứng chỉ & Báo cáo kết quả</h2>
+            
+            <h3 class="step-title">A. Quản lý chứng chỉ</h3>
+            <p>Sau khi hoàn thành tất cả các khóa, bạn có thể tải chứng chỉ tại đây.</p>
+            <div class="image-container">
+                <img src="https://i.postimg.cc/pT3DZ5MN/Quan-ly-chung-chi.jpg" alt="Chứng chỉ" class="screenshot">
+            </div>
+
+            <h3 class="step-title">B. Kiểm tra tiến độ & Điểm số</h3>
+            <div class="info-box">
+                <span class="info-box-title"><i class="fas fa-chart-line text-blue-600"></i> Báo cáo tự động</span>
+                <p class="mt-1 mb-0">Kết quả học tập sẽ được gửi cho Quản lý trực tiếp của bạn vào <strong>Chiều Thứ 5</strong> hàng tuần.</p>
+            </div>
+
+            <p>Bạn có thể tự xem lại tại menu bên trái:</p>
+            <div class="image-container">
+                <img src="https://i.postimg.cc/WzfwxYZk/Lich-su-hoc.jpg" alt="Lịch sử học" class="screenshot">
+                <p class="caption">Hình 7: Xem % tiến độ chung</p>
+            </div>
+            <div class="image-container">
+                <img src="https://i.postimg.cc/435trFCD/Lich-su-kiem-tra.jpg" alt="Lịch sử kiểm tra" class="screenshot">
+                <p class="caption">Hình 8: Xem điểm số chi tiết từng bài</p>
+            </div>
+        </section>
+
+    </div> <!-- End Main Container -->
+
+    <!-- Floating Navigation Buttons -->
+    <div class="floating-nav">
+        <button id="prevBtn" class="nav-btn" title="Phần trước"><i class="fas fa-chevron-up"></i></button>
+        <button id="nextBtn" class="nav-btn" title="Phần tiếp theo"><i class="fas fa-chevron-down"></i></button>
     </div>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <img id="lightboxImg" src="" alt="Zoom">
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- Active Link Highlighting for Sidebar ---
-         document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('main section[id]');
-            const navLinks = document.querySelectorAll('.sidebar ul li a');
-
-            function changeActiveLink() {
-                 if (!sections || sections.length === 0) return; 
-
-                 let index = sections.length;
-                 let offset = window.innerWidth <= 1024 ? 100 : 80;
-
-                 while(--index >= 0 && window.scrollY + offset < sections[index].offsetTop) {}
-
-                 navLinks.forEach((link) => link.classList.remove('active'));
-
-                 if (index < 0) {
-                     if (navLinks.length > 0) navLinks[0].classList.add('active');
-                     return;
-                 }
-
-                 let currentSectionId = sections[index].id;
-                 let activeLink = document.querySelector(`.sidebar a[href="#${currentSectionId}"]`);
-
-                 if (activeLink) { 
-                    activeLink.classList.add('active');
-                     // Xử lý sub-menu
-                     let parentUl = activeLink.closest('ul');
-                     if (parentUl && parentUl.previousElementSibling && parentUl.previousElementSibling.tagName === 'A') {
-                        parentUl.previousElementSibling.classList.add('active');
-                    }
-                 } 
-            }
-
-             navLinks.forEach(link => {
-                 link.addEventListener('click', (e) => {
-                      const targetId = link.getAttribute('href');
-                      if (!targetId || !targetId.startsWith('#')) return;
-
-                     navLinks.forEach(l => l.classList.remove('active'));
-                     link.classList.add('active');
-
-                     let parentUl = link.closest('ul');
-                     if (parentUl && parentUl.previousElementSibling && parentUl.previousElementSibling.tagName === 'A') {
-                         parentUl.previousElementSibling.classList.add('active');
-                     }
-                 });
-             });
-
-             changeActiveLink();
-             window.addEventListener('scroll', changeActiveLink);
-        });
-
-         // --- Search Functionality ---
-         document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.content-section');
+            const mobileMenuBtn = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
             const searchInput = document.getElementById('searchInput');
-            const clearButton = document.getElementById('clearSearch');
-            const searchMessage = document.getElementById('search-message');
+            
+            // Floating Nav Elements
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentIndex = 0;
 
-            function removeHighlights() {
-                 const activeContent = document.querySelector('main');
-                 if (!activeContent) return;
-                 const highlightedElements = activeContent.querySelectorAll('mark.highlight');
-                highlightedElements.forEach(el => {
-                     const parent = el.parentNode;
-                     if (parent) {
-                        parent.replaceChild(document.createTextNode(el.textContent), el);
-                        parent.normalize();
-                    }
-                });
-                searchMessage.textContent = '';
-             }
-
-             function performSearch() {
-                removeHighlights();
-                 const activeContent = document.querySelector('main');
-                 if (!activeContent) return;
-                const searchTerm = searchInput.value.trim().toLowerCase();
-                 if (searchTerm === '') { clearButton.style.display = 'none'; return; }
-                 clearButton.style.display = 'block';
-                 if (searchTerm.length < 1) { searchMessage.textContent = 'Vui lòng nhập ít nhất 1 ký tự.'; return; }
-
-                 const regex = new RegExp(`(${searchTerm.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
-                let count = 0;
-                let firstMatchElement = null;
-
-                function highlightTextNodes(element) {
-                     if (!element) return;
-                    if (element.nodeType === Node.TEXT_NODE) {
-                         const parent = element.parentNode;
-                         if (parent && parent.tagName !== 'SCRIPT' && parent.tagName !== 'STYLE') {
-                             const text = element.textContent;
-                             if (text.toLowerCase().includes(searchTerm)) {
-                                 const newNode = document.createElement('span');
-                                newNode.innerHTML = text.replace(regex, '<mark class="highlight">$1</mark>');
-                                 if (!firstMatchElement) firstMatchElement = newNode.querySelector('mark.highlight');
-                                count += (text.match(regex) || []).length;
-                                 parent.replaceChild(newNode, element);
-                             }
-                         }
-                    } else if (element.nodeType === Node.ELEMENT_NODE && element.tagName !== 'SCRIPT' && element.tagName !== 'STYLE' && !element.classList.contains('highlight')) {
-                         const children = Array.from(element.childNodes);
-                         children.forEach(child => highlightTextNodes(child));
-                    }
+            // 1. Logic chuyển Tab (Show/Hide Section)
+            function showSection(targetId) {
+                sections.forEach(sec => sec.classList.remove('active-section'));
+                
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.add('active-section');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
 
-                highlightTextNodes(activeContent);
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.target === targetId) {
+                        link.classList.add('active');
+                        // Nếu là submenu item, active cả cha
+                        const parentUl = link.closest('ul');
+                        if (parentUl && parentUl.previousElementSibling) {
+                            parentUl.previousElementSibling.classList.add('active');
+                        }
+                    }
+                });
 
-                 if (count > 0) {
-                     searchMessage.textContent = `Tìm thấy ${count} kết quả.`;
-                    if (firstMatchElement) {
-                         const offset = 100;
-                        window.scrollTo({ top: firstMatchElement.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
-                     }
-                 } else {
-                     searchMessage.textContent = 'Không tìm thấy kết quả nào.';
-                 }
-             }
+                const sectionArray = Array.from(sections);
+                currentIndex = sectionArray.findIndex(s => s.id === targetId);
+                updateNavButtons();
+            }
 
-            searchInput.addEventListener('input', () => { clearTimeout(searchInput.timer); searchInput.timer = setTimeout(performSearch, 300); });
-            searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { clearTimeout(searchInput.timer); performSearch(); } });
-            clearButton.addEventListener('click', () => { searchInput.value = ''; removeHighlights(); clearButton.style.display = 'none'; searchInput.focus(); });
-            if (searchInput.value.trim() !== '') clearButton.style.display = 'block';
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.dataset.target;
+                    if(targetId) {
+                        showSection(targetId);
+                        if (window.innerWidth <= 1024) {
+                            sidebar.classList.remove('open');
+                            overlay.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+
+            // 2. Logic Floating Navigation
+            function updateNavButtons() {
+                prevBtn.classList.toggle('disabled', currentIndex === 0);
+                nextBtn.classList.toggle('disabled', currentIndex === sections.length - 1);
+            }
+
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    const prevSectionId = sections[currentIndex - 1].id;
+                    showSection(prevSectionId);
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < sections.length - 1) {
+                    const nextSectionId = sections[currentIndex + 1].id;
+                    showSection(nextSectionId);
+                }
+            });
+
+            // 3. Logic Tìm kiếm
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const term = searchInput.value.toLowerCase();
+                    if (term.length < 2) return;
+                    
+                    let found = false;
+                    for (let i = 0; i < sections.length; i++) {
+                        const sectionText = sections[i].textContent.toLowerCase();
+                        if (sectionText.includes(term)) {
+                            showSection(sections[i].id);
+                            alert(`Đã tìm thấy nội dung tại mục: ${sections[i].querySelector('.section-title').innerText}`);
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) alert('Không tìm thấy nội dung phù hợp.');
+                }
+            });
+
+            // 4. Mobile Menu
+            mobileMenuBtn.addEventListener('click', () => {
+                sidebar.classList.add('open');
+                overlay.classList.remove('hidden');
+            });
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                overlay.classList.add('hidden');
+            });
+
+            // 5. Lightbox Logic
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+
+            document.querySelectorAll('.screenshot').forEach(img => {
+                img.addEventListener('click', () => {
+                    lightboxImg.src = img.src;
+                    lightbox.classList.add('active');
+                });
+            });
+
+            lightbox.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+            });
+
+            // Init
+            updateNavButtons();
         });
     </script>
 </body>
