@@ -1,426 +1,721 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HDSD LMS - Non-Sales & BO - KiotViet</title>
-    <!-- Tải Tailwind CSS -->
+    <title>HDSD LMS - Khối Non-Sales & BO</title>
+    
+    <!-- Cấu hình Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: {
+                    colors: {
+                        kvBlue: '#166def',
+                        kvBlueHover: '#1259c7'
+                    }
+                } 
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { 
+            font-family: 'Inter', sans-serif;
+            font-size: 14px; 
+            -webkit-tap-highlight-color: transparent;
+        }
 
-        body { font-family: 'Inter', sans-serif; padding-left: 280px; padding-top: 64px; background-color: #f3f4f6; color: #1f2937; }
+        /* Tùy chỉnh Scrollbar chung */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* Nền Tech-Vibe */
+        .tech-bg { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -10; transition: all 0.5s;
+            background: radial-gradient(circle at top right, #f0f7ff 0%, #f8fafc 50%, #e0f2fe 100%);
+        }
+
+        /* Glassmorphism */
+        .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3); }
+
+        /* Animations */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in-stagger { animation: fadeInUp 0.5s ease-out forwards; }
+        .content-section { display: none; animation: fadeInUp 0.4s ease-out forwards; }
+        .content-section.active { display: block; }
+
+        .btn-interact { transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s; cursor: pointer; }
+        .btn-interact:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .btn-interact:active { transform: translateY(0) scale(0.97); }
+
+        /* Highlight Text Tìm Kiếm */
+        mark.highlight { background-color: #fef08a; padding: 0.1rem 0.2rem; border-radius: 2px; font-weight: bold; color: #0f172a;}
+        mark.highlight.active-match { background-color: #f97316; color: white; }
+
+        /* Modal Fullscreen */
+        #learning-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: #fff; opacity: 0; transition: opacity 0.3s ease; }
+        #learning-modal.open { display: flex; align-items: center; justify-content: center; opacity: 1; }
+        .modal-content { width: 100vw; height: 100vh; border-radius: 0; display: flex; flex-direction: column; transform: scale(0.98); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; }
+        #learning-modal.open .modal-content { transform: scale(1); }
+
+        /* Component Slider Trượt */
+        .slider-wrapper { position: relative; width: 100%; margin-bottom: 1.5rem; }
+        .slider-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding-bottom: 0.5rem; }
         
-        /* ----- 1. Header & Sidebar ----- */
-        .top-header { position: fixed; top: 0; left: 0; right: 0; height: 64px; background-color: white; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; padding: 0 1.5rem; z-index: 60; }
-        .logo { height: 32px; margin-right: 2rem; }
-        .header-title { font-weight: 700; color: #1e40af; text-transform: uppercase; margin-left: auto; }
-
-        /* Search Bar */
-        .search-container { position: relative; width: 300px; display: flex; align-items: center; }
-        .search-input { width: 100%; padding: 0.5rem 2.5rem 0.5rem 1rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.9rem; transition: all 0.2s; }
-        .search-input:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
-        .search-icon { position: absolute; right: 10px; color: #9ca3af; }
+        .slider-slide { 
+            flex: 0 0 100%; 
+            min-width: 100%; 
+            max-width: 100%; 
+            scroll-snap-align: center; 
+            box-sizing: border-box;
+        }
         
-        /* Sidebar */
-        .sidebar { position: fixed; top: 64px; left: 0; height: calc(100vh - 64px); width: 280px; background-color: white; border-right: 1px solid #e5e7eb; padding: 1.5rem 1rem; overflow-y: auto; z-index: 50; }
-        .sidebar h3 { font-size: 0.85rem; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; padding-left: 0.75rem; }
-        .sidebar ul li a { display: flex; align-items: center; padding: 0.75rem; border-radius: 6px; color: #4b5563; text-decoration: none; font-size: 0.95rem; margin-bottom: 4px; transition: all 0.2s; cursor: pointer;}
-        .sidebar ul li a:hover { background-color: #f3f4f6; color: #111827; }
+        .slider-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+        .slider-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #cbd5e1; cursor: pointer; transition: all 0.3s; }
+        .slider-dot.active { background-color: #166def; width: 24px; }
         
-        /* Active State cho Sidebar */
-        .sidebar ul li a.active { background-color: #eff6ff; color: #1d4ed8; font-weight: 600; }
-        .sidebar ul li a.active .item-number { background-color: #1d4ed8; color: white; }
-        
-        .item-number { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background-color: #e5e7eb; border-radius: 6px; font-size: 0.75rem; font-weight: 700; color: #6b7280; margin-right: 12px; transition: all 0.2s;}
-        
-        /* Submenu */
-        .sidebar ul ul { padding-left: 2.75rem; margin-top: 2px; display: none; }
-        .sidebar ul li a.active + ul, .sidebar ul ul.show { display: block; } 
-        .sidebar ul ul li a { font-size: 0.9rem; padding: 0.5rem; color: #6b7280; border-left: 2px solid #e5e7eb; border-radius: 0; }
-        .sidebar ul ul li a:hover { border-left-color: #9ca3af; background: none; color: #111827; }
-        .sidebar ul ul li a.active { border-left-color: #1d4ed8; color: #1d4ed8; background: none; font-weight: 500;}
-
-        /* ----- 2. Main Content Logic ----- */
-        .main-container { max-width: 1000px; margin: 0 auto; padding: 2rem; min-height: calc(100vh - 64px); }
-        
-        .content-section { display: none; animation: fadeIn 0.4s ease-out; }
-        .content-section.active-section { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Content Styling */
-        h2.section-title { font-size: 1.75rem; font-weight: 800; color: #111827; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb; line-height: 1.3; }
-        h3.step-title { font-size: 1.25rem; font-weight: 700; color: #374151; margin-top: 2.5rem; margin-bottom: 1rem; display: flex; align-items: center; }
-        p { color: #374151; line-height: 1.6; margin-bottom: 1rem; }
-        
-        /* Info Boxes */
-        .info-box { background-color: #f9fafb; border: 1px solid #e5e7eb; border-left: 4px solid #3b82f6; padding: 1.25rem; border-radius: 4px; margin: 1.5rem 0; }
-        .info-box.warning { border-left-color: #f59e0b; }
-        .info-box.danger { border-left-color: #ef4444; }
-        .info-box.success { border-left-color: #10b981; }
-        .info-box-title { font-weight: 700; display: block; margin-bottom: 0.5rem; color: #111827; display: flex; align-items: center; gap: 0.5rem; }
-
-        /* Image Styling */
-        .image-container { margin: 1.5rem 0 2.5rem 0; width: 100%; text-align: center; }
-        img.screenshot { width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); cursor: zoom-in; transition: transform 0.2s; background: white; }
-        img.screenshot:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transform: translateY(-2px); }
-        .caption { font-size: 0.85rem; color: #6b7280; margin-top: 0.75rem; font-style: italic; }
-
-        /* Floating Nav */
-        .floating-nav { position: fixed; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; gap: 0.5rem; z-index: 50; }
-        .nav-btn { width: 3rem; height: 3rem; background-color: white; border: 1px solid #d1d5db; color: #4b5563; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.2s; font-size: 1.2rem; }
-        .nav-btn:hover { background-color: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; transform: scale(1.1); }
-        .nav-btn.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
-
-        /* Lightbox */
-        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; display: none; align-items: center; justify-content: center; cursor: zoom-out; }
-        .lightbox.active { display: flex; animation: fadeIn 0.2s; }
-        .lightbox img { max-width: 95%; max-height: 95vh; border-radius: 4px; }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            body { padding-left: 0; }
-            .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
-            .sidebar.open { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
-            .header-title { display: none; }
+        /* Slider Navigation Buttons */
+        .slider-btn-prev, .slider-btn-next { 
+            position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; 
+            width: 40px; height: 40px; border-radius: 50%; background-color: white; 
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); 
+            border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; 
+            color: #166def; transition: all 0.2s; cursor: pointer; opacity: 0; pointer-events: none;
+        }
+        .slider-wrapper:hover .slider-btn-prev, .slider-wrapper:hover .slider-btn-next { opacity: 1; pointer-events: auto; }
+        .slider-btn-prev:hover, .slider-btn-next:hover { background-color: #166def; color: white; }
+        .slider-btn-prev { left: -15px; }
+        .slider-btn-next { right: -15px; }
+        @media (min-width: 768px) {
+            .slider-btn-prev { left: -20px; }
+            .slider-btn-next { right: -20px; }
         }
     </style>
 </head>
-<body>
+<body id="top" class="text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900 flex flex-col min-h-screen transition-colors duration-300">
 
-    <!-- Header -->
-    <header class="top-header">
-        <button id="menuToggle" class="lg:hidden mr-4 text-gray-600 text-xl"><i class="fas fa-bars"></i></button>
-        <img src="https://i.postimg.cc/h45fyBKL/Kiot-Viet_Logo_Horizontal.png" alt="Logo" class="logo">
-        
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm nội dung...">
-            <i class="fas fa-search search-icon"></i>
+    <div class="tech-bg"></div>
+
+    <!-- GLOBAL HEADER: RETAIL COLOR THEME (BLUE) -->
+    <header id="main-header" class="sticky top-0 z-50 flex-shrink-0 transition-all duration-300 shadow-md bg-gradient-to-r from-[#1259c7] to-[#166def] border-b border-blue-800/50">
+        <div class="h-16 lg:h-[72px] transition-all">
+            <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between gap-4">
+                
+                <!-- Logo & Title -->
+                <div class="flex items-center gap-4">
+                    <div onclick="window.filterSection('overview')" class="cursor-pointer flex-shrink-0 select-none hover:opacity-90 transition-opacity flex items-center bg-white p-1.5 rounded-lg shadow-sm">
+                        <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="h-[22px]">
+                    </div>
+                    <div class="hidden lg:flex items-center gap-3 border-l border-blue-400/50 pl-4 py-1">
+                        <div>
+                            <h1 class="text-[15px] font-bold text-white tracking-tight">Hướng dẫn sử dụng LMS</h1>
+                            <p class="text-[11px] font-medium text-blue-50 uppercase tracking-widest mt-0.5 opacity-90">Khối Non-Sales & Back Office</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Global Search DOM -->
+                <div class="flex-1 flex justify-end items-center">
+                    <div class="relative w-full max-w-xs flex items-center gap-2" id="search-container">
+                        <div class="relative w-full">
+                            <input type="text" id="global-search" placeholder="Tìm kiếm từ khóa..." class="w-full bg-white border border-transparent text-sm rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all text-slate-800 placeholder-slate-400 shadow-inner">
+                            <i class="fa-solid fa-search absolute left-3.5 top-2.5 text-slate-400 transition-colors" id="search-icon"></i>
+                        </div>
+                        <div class="hidden items-center gap-1 shrink-0" id="search-nav">
+                            <button id="prevMatch" class="w-8 h-8 bg-white/20 hover:bg-white/40 text-white rounded-full transition-colors flex items-center justify-center backdrop-blur-sm" title="Lên"><i class="fa-solid fa-chevron-up text-xs"></i></button>
+                            <button id="nextMatch" class="w-8 h-8 bg-white/20 hover:bg-white/40 text-white rounded-full transition-colors flex items-center justify-center backdrop-blur-sm" title="Xuống"><i class="fa-solid fa-chevron-down text-xs"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <h1 class="header-title hidden lg:block">HDSD LMS - NON-SALES</h1>
     </header>
 
-    <!-- Sidebar Navigation -->
-    <aside id="sidebar" class="sidebar">
-        <h3>MỤC LỤC HƯỚNG DẪN</h3>
-        <ul id="nav-list">
-            <li><a href="#" data-target="section-login-path" class="nav-item active"><span class="item-number">1</span> Đăng nhập & Lộ trình</a></li>
-            <li>
-                <a href="#" data-target="section-process-intro" class="nav-item"><span class="item-number">2</span> Quy trình học tập</a>
-                <ul class="show">
-                    <li><a href="#" data-target="section-process-intro" class="nav-item">2.1 Khóa Hội nhập</a></li>
-                    <li><a href="#" data-target="section-process-product" class="nav-item">2.2 Các khóa Sản phẩm</a></li>
-                    <li><a href="#" data-target="section-process-culture" class="nav-item">2.3 Khóa Văn hóa</a></li>
-                    <li><a href="#" data-target="section-process-security" class="nav-item">2.4 Khóa An toàn thông tin</a></li>
-                </ul>
-            </li>
-            <li><a href="#" data-target="section-sales-exam" class="nav-item"><span class="item-number">3</span> Phiên kiểm tra (Sales)</a></li>
-        </ul>
-    </aside>
+    <!-- FLOATING FILTER MENU -->
+    <div id="floating-menu" class="fixed bottom-4 left-4 right-4 lg:left-auto lg:right-6 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-0 z-40 glass shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-2 lg:p-4 rounded-2xl flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto no-scrollbar lg:max-h-[85vh] justify-start lg:justify-center border border-slate-200">
+        <div class="hidden lg:block text-[11px] font-black text-slate-400 uppercase text-center mb-1 pb-2 border-b border-slate-200">Điều hướng</div>
+        <button onclick="window.filterSection('overview')" id="btn-filter-overview" class="filter-btn active btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-kvBlue text-white shadow-md whitespace-nowrap text-center shrink-0">Tổng quan</button>
+        <button onclick="window.filterSection('dangnhap')" id="btn-filter-dangnhap" class="filter-btn btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-slate-100 text-slate-600 transition-colors whitespace-nowrap text-center shrink-0">Đăng nhập & Lộ trình</button>
+        <button onclick="window.filterSection('hoinhap')" id="btn-filter-hoinhap" class="filter-btn btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-slate-100 text-slate-600 transition-colors whitespace-nowrap text-center shrink-0">Đào tạo Hội nhập</button>
+        <button onclick="window.filterSection('sanpham')" id="btn-filter-sanpham" class="filter-btn btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-slate-100 text-slate-600 transition-colors whitespace-nowrap text-center shrink-0">Đào tạo Sản phẩm</button>
+        <button onclick="window.filterSection('vanhoa')" id="btn-filter-vanhoa" class="filter-btn btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-slate-100 text-slate-600 transition-colors whitespace-nowrap text-center shrink-0">Văn hóa & ATTT</button>
+    </div>
 
-    <!-- Overlay cho Mobile -->
-    <div id="overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+    <!-- TĂNG CHIỀU RỘNG MAX-W 5XL -->
+    <main class="flex-grow w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 pb-32 lg:pb-12 relative min-h-screen">
+        
+        <div id="search-alert" class="hidden mb-6 p-4 bg-orange-50 border border-orange-200 rounded-xl text-orange-700 text-sm font-medium shadow-sm flex justify-between items-center">
+            <span id="search-alert-text"></span>
+            <button onclick="window.clearSearch()" class="px-3 py-1.5 bg-white border border-orange-300 hover:bg-orange-100 rounded-lg text-xs font-bold text-orange-600 shadow-sm shrink-0 ml-3 transition-colors">Hủy tìm kiếm</button>
+        </div>
 
-    <!-- Main Content Area -->
-    <div class="main-container">
-
-        <!-- SECTION 1: ĐĂNG NHẬP & LỘ TRÌNH -->
-        <section id="section-login-path" class="content-section active-section">
-            <h2 class="section-title">1. Đăng nhập và lộ trình đào tạo</h2>
-            
-            <h3 class="step-title">A. Đăng nhập hệ thống</h3>
-            <p>Truy cập địa chỉ: <a href="https://daotao.kiotviet.vn" class="text-blue-600 font-medium hover:underline">daotao.kiotviet.vn</a></p>
-            
-            <div class="info-box">
-                <span class="info-box-title"><i class="fas fa-user-circle text-blue-600"></i> Thông tin tài khoản đăng nhập</span>
-                <ul class="list-disc pl-5 space-y-2 mt-2 text-gray-700">
-                    <li><strong>Đối với các bạn đã có mail công ty:</strong> Đăng nhập bằng Email công ty.</li>
-                    <li><strong>Đối với Sales/Nhân sự chưa có mail công ty:</strong> Đăng nhập bằng Email cá nhân.</li>
-                    <li><strong>Mật khẩu mặc định:</strong> <code class="bg-gray-200 px-2 py-0.5 rounded font-mono text-blue-700 font-bold">123456A@</code></li>
-                </ul>
-            </div>
-
-            <div class="image-container">
-                <img src="https://i.postimg.cc/DwpJ492m/Screenshot_2026_03_30_155318.png" alt="Giao diện đăng nhập" class="screenshot">
-                <p class="caption">Hình 1: Giao diện đăng nhập phần mềm KiotViet LMS</p>
-            </div>
-
-            <h3 class="step-title">B. Lộ trình đào tạo</h3>
-            <div class="info-box success">
-                <span class="info-box-title"><i class="fas fa-route text-green-600"></i> Xác định lộ trình học cá nhân</span>
-                <p class="mt-1">Mỗi cá nhân hoặc phòng ban sẽ có lộ trình đào tạo khác nhau. Bạn cần click vào mục <strong>"Khóa học bắt buộc"</strong> tại menu bên trái để xem chi tiết và hoàn thành đầy đủ các khóa học được giao.</p>
-            </div>
-
-            <div class="image-container">
-                <img src="https://i.postimg.cc/pLch5w25/Screenshot_2026_03_30_155513.png" alt="Thống kê lộ trình học" class="screenshot">
-                <p class="caption">Hình 2: Danh sách các khóa học bắt buộc trong lộ trình của học viên</p>
-            </div>
-        </section>
-
-        <!-- SECTION 2.1: HỘI NHẬP -->
-        <section id="section-process-intro" class="content-section">
-            <h2 class="section-title">2.1 Khóa Đào tạo Hội nhập</h2>
-            
-            <p>Đây là khóa học đầu tiên dành cho nhân viên mới. Bạn sẽ tham gia học theo thông báo của bộ phận Đào tạo (Qua Zoom trực tuyến hoặc tự học qua hệ thống E-learning).</p>
-
-            <div class="info-box warning">
-                <span class="info-box-title"><i class="fas fa-edit text-amber-600"></i> Bài thi cuối khóa</span>
-                <p class="mt-1 mb-0">Sau khi hoàn thành việc xem Slide bài giảng/Video và các bài Quiz nhỏ, bạn <strong>bắt buộc phải nhấn làm Bài thi cuối khóa</strong>. Chỉ khi đạt kết quả bài thi này, hệ thống mới ghi nhận bạn hoàn thành 100% khóa học.</p>
-            </div>
-
-            <div class="image-container">
-                <img src="https://i.postimg.cc/NjC923gr/Screenshot_2026_03_30_155727.png" alt="Nút làm bài thi cuối khóa" class="screenshot">
-                <p class="caption">Hình 3: Nút "LÀM BÀI THI" sẽ hiện ra ở góc phải sau khi hoàn thành các nội dung bài học</p>
-            </div>
-        </section>
-
-        <!-- SECTION 2.2: SẢN PHẨM -->
-        <section id="section-process-product" class="content-section">
-            <h2 class="section-title">2.2 Các khóa học Sản phẩm</h2>
-            <p>Áp dụng cho các khóa đào tạo chi tiết về các nghiệp vụ phần mềm (Retail, Salon, FNB, Hotel...).</p>
-            
-            <div class="info-box danger">
-                <span class="info-box-title"><i class="fas fa-exclamation-triangle text-red-600"></i> QUY ĐỊNH BẮT BUỘC KHI HỌC</span>
-                <ul class="list-disc pl-5 mt-2 space-y-2 text-gray-700">
-                    <li><strong>Đối với Video:</strong> Yêu cầu <strong>không tua nhanh, không tăng speed</strong> để hệ thống ghi nhận chính xác tiến độ hoàn thành.</li>
-                    <li><strong>Đối với các dạng bài học khác:</strong> Đọc kỹ nội dung và thực hiện đúng theo các bước hướng dẫn để hoàn thành bài học.</li>
-                </ul>
-            </div>
-
-            <div class="image-container">
-                <img src="https://i.postimg.cc/X7fFD1np/Screenshot_2026_03_30_161912.png" alt="Trạng thái bài học" class="screenshot">
-                <p class="caption">Hình 4: Theo dõi trạng thái hoàn thành từng bài học trong khóa Sản phẩm</p>
-            </div>
-
-            <h3 class="step-title">Bài tập Quiz sau mỗi bài học</h3>
-            <p>Sau khi kết thúc nội dung học (Video hoặc Slide), mọi người sẽ cần <strong>hoàn thành bài Quiz</strong> ngay tại bài học đó để củng cố kiến thức vừa tiếp nhận.</p>
-
-            <div class="image-container">
-                <img src="https://i.postimg.cc/KvPLspmk/Screenshot_2026_03_30_162022.png" alt="Làm bài tập Quiz" class="screenshot">
-                <p class="caption">Hình 5: Nút làm bài tập Quiz tương ứng với mỗi bài học</p>
-            </div>
-
-            <h3 class="step-title">Bài kiểm tra tổng hợp cuối khóa</h3>
-            <p>Tại cuối mỗi khóa học sẽ có một <strong>BÀI KIỂM TRA TỔNG HỢP</strong>. Đây là bước quan trọng nhất để ôn tập và đánh giá lại toàn bộ kiến thức của khóa học.</p>
-            
-            <p>Học viên click <strong>"Làm bài thi"</strong> để thực hiện bài kiểm tra tổng hợp của khóa học.</p>
-
-            <div class="info-box success">
-                <span class="info-box-title"><i class="fas fa-check-double text-green-600"></i> Điều kiện hoàn thành</span>
-                <ul class="list-disc pl-5 mt-1 text-gray-700">
-                    <li>Điểm số đạt yêu cầu: <strong>Trên 80%</strong>.</li>
-                    <li>Bạn được phép <strong>làm lại nhiều lần</strong> cho đến khi đạt kết quả tối đa (100%).</li>
-                </ul>
-            </div>
-
-            <div class="image-container">
-                <img src="https://i.postimg.cc/TYVmHNTw/Screenshot_2026_03_30_162727.png" alt="Bài kiểm tra tổng hợp" class="screenshot">
-                <p class="caption">Hình 6: Giao diện bài kiểm tra tổng hợp cuối khóa học</p>
-            </div>
-        </section>
-
-        <!-- SECTION 2.3: VĂN HÓA -->
-        <section id="section-process-culture" class="content-section">
-            <h2 class="section-title">2.3 Khóa Đào tạo Văn hóa</h2>
-            <p>Khóa học giúp nhân viên hiểu rõ về giá trị cốt lõi, tầm nhìn và môi trường làm việc chuyên nghiệp tại KiotViet thông qua hình thức học tập trải nghiệm đầy thú vị.</p>
-            
-            <div class="info-box">
-                <span class="info-box-title"><i class="fas fa-desktop text-blue-600"></i> Trải nghiệm học tập tốt nhất</span>
-                <p class="mt-1">Đối với khóa học này, mọi người nên <strong>Phóng to (Full screen)</strong> trình duyệt để có trải nghiệm tốt nhất. Bạn sẽ cần thao tác bằng cách <strong>click chuột trực tiếp trên màn hình</strong> bài giảng để vượt qua các vòng thử thách.</p>
-            </div>
-
-            <p>Khóa học bao gồm <strong>3 vòng thi thử thách</strong>. Học viên cần tập trung quan sát và tương tác để hoàn thành từng giai đoạn.</p>
-
-            <div class="image-container space-y-4">
-                <img src="https://i.postimg.cc/hvjDbj4G/A.png" alt="Thử thách văn hóa 1" class="screenshot">
-                <img src="https://i.postimg.cc/Vv6fB6sc/B.png" alt="Thử thách văn hóa 2" class="screenshot">
-                <img src="https://i.postimg.cc/PxKfwZHG/C.png" alt="Thử thách văn hóa 3" class="screenshot">
-                <p class="caption">Hình 7: Các vòng thử thách tương tác trong khóa Đào tạo Văn hóa</p>
-            </div>
-
-            <div class="info-box success">
-                <span class="info-box-title"><i class="fas fa-award text-green-600"></i> Kết thúc khóa học</span>
-                <p class="mt-1">Sau khi hoàn thành đủ 3 vòng thi, mọi người sẽ có một <strong>bài kiểm tra cuối khóa</strong> tương tự như các khóa học Sản phẩm để được ghi nhận hoàn thành.</p>
-            </div>
-        </section>
-
-        <!-- SECTION 2.4: AN TOÀN THÔNG TIN -->
-        <section id="section-process-security" class="content-section">
-            <h2 class="section-title">2.4 Khóa Đào tạo An toàn thông tin</h2>
-            <p>Tương tự như khóa Văn hóa, đây là khóa học yêu cầu sự tương tác trực tiếp của người học để nắm bắt các kiến thức về bảo mật thông tin tại công ty.</p>
-            
-            <div class="info-box">
-                <span class="info-box-title"><i class="fas fa-shield-alt text-blue-600"></i> Lưu ý thao tác</span>
-                <p class="mt-1">Khóa học này cũng yêu cầu <strong>Phóng to màn hình</strong> và <strong>click chuột tương tác</strong>.</p>
-            </div>
-
-            <div class="image-container">
-                <img src="https://i.postimg.cc/Bb9WtnLq/Screenshot-2026-03_30_164311.png" alt="Giao diện khóa An toàn thông tin" class="screenshot">
-                <p class="caption">Hình 8: Giao diện vòng thử thách trong khóa An toàn thông tin</p>
-            </div>
-
-            <div class="info-box success">
-                <span class="info-box-title"><i class="fas fa-check-circle text-green-600"></i> Hoàn thành khóa học</span>
-                <p class="mt-1">Sau khi vượt qua vòng thử thách, học viên cần thực hiện bài kiểm tra cuối khóa để chính thức hoàn thành nội dung đào tạo này.</p>
-            </div>
-        </section>
-
-        <!-- SECTION 3: PHIÊN KIỂM TRA (SALES) -->
-        <section id="section-sales-exam" class="content-section">
-            <h2 class="section-title">3. Phiên kiểm tra (Dành cho Sales)</h2>
-            <p>Bài kiểm tra này dành cho các bạn Sales tham gia kì thi tập trung như: Khóa đào tạo sản phẩm cơ bản, Khóa KV1,... (Học viên sẽ nhận được email thông báo từ trước).</p>
-            
-            <h3 class="step-title">Quy trình thực hiện</h3>
-            <ul class="list-decimal pl-6 space-y-4 text-gray-700 mt-4">
-                <li><strong>Bước 1:</strong> Đăng nhập hệ thống theo hướng dẫn tại Mục 1.</li>
-                <li>
-                    <strong>Bước 2:</strong> Click vào Mục <strong>Kiểm tra sắp diễn ra</strong> tại thanh menu bên trái. 
-                    <div class="bg-gray-100 p-4 rounded-md mt-2 border-l-4 border-blue-500">
-                        <p class="font-bold">Lưu ý trước khi thi:</p>
-                        <ul class="list-disc pl-6 mt-1">
-                            <li>Check đúng tên lớp tham gia.</li>
-                            <li>Check đúng tên bài thi cần thực hiện.</li>
-                        </ul>
+        <!-- ================= OVERVIEW ================= -->
+        <section id="section-overview" class="content-section active">
+            <div class="glass rounded-2xl shadow-lg border border-slate-200 p-6 md:p-8 relative overflow-hidden mb-10">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-kvBlue/5 rounded-bl-full -z-10 blur-3xl"></div>
+                
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center text-3xl text-kvBlue shadow-sm border border-blue-100 shrink-0">
+                        <i class="fa-solid fa-rocket"></i>
                     </div>
-                    <p class="mt-3 text-sm">Sau khi xác nhận đúng thông tin, hãy click vào nút <strong>Làm bài kiểm tra</strong>.</p>
-                </li>
-            </ul>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-kvBlue to-blue-400">Chào mừng bạn!</h2>
+                        <p class="text-[14px] font-bold text-slate-600 mt-1">👋 Dưới đây là sổ tay hướng dẫn sử dụng LMS dành cho khối Non-Sales & BO.</p>
+                    </div>
+                </div>
 
-            <div class="image-container">
-                <img src="https://i.postimg.cc/nVKZMNZH/Screenshot-2026-03-30-170916.png" alt="Giao diện Phiên kiểm tra" class="screenshot">
-                <p class="caption">Hình 9: Giao diện danh sách các phiên kiểm tra tập trung dành cho Sales</p>
+                <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 mb-10 flex flex-col items-start gap-5 shadow-sm relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 text-kvBlue/10 text-8xl"><i class="fa-solid fa-circle-info"></i></div>
+                    <div class="flex gap-4 items-start z-10 w-full">
+                        <div class="text-kvBlue text-3xl shrink-0 mt-1"><i class="fa-solid fa-circle-info"></i></div>
+                        <div class="flex-1">
+                            <h4 class="text-[15px] font-bold text-kvBlue mb-3 leading-snug">Quy trình học tập Hệ thống đào tạo LMS</h4>
+                            <div class="text-[14px] text-blue-900/90 leading-relaxed space-y-2 font-medium">
+                                <p>Trang này cung cấp thông tin chi tiết các bước đăng nhập, các khóa học Văn hóa, An toàn thông tin, Sản phẩm và cách thức tham gia kiểm tra.</p>
+                                <p class="text-kvBlue font-bold italic mt-2">Vui lòng click vào các chuyên đề bên dưới hoặc thanh Menu để bắt đầu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-[15px] font-black text-slate-800 mb-6 flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-layer-group text-kvBlue"></i> CÁC NỘI DUNG CHÍNH:
+                    </h4>
+                    <!-- Xếp chồng 1 cột -->
+                    <div class="flex flex-col gap-4">
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex items-center gap-4 hover:-translate-y-1 hover:border-kvBlue hover:shadow-md transition-all cursor-pointer shadow-sm group" onclick="window.filterSection('dangnhap')">
+                            <div class="w-12 h-12 rounded-full bg-blue-50 text-kvBlue flex items-center justify-center text-xl shrink-0 transition-transform group-hover:scale-110"><i class="fa-solid fa-sign-in-alt"></i></div>
+                            <div class="text-[15px] font-bold text-slate-800 leading-snug uppercase w-full">1. Đăng nhập & Lộ trình</div>
+                            <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-kvBlue"></i>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex items-center gap-4 hover:-translate-y-1 hover:border-kvBlue hover:shadow-md transition-all cursor-pointer shadow-sm group" onclick="window.filterSection('hoinhap')">
+                            <div class="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-xl shrink-0 transition-transform group-hover:scale-110"><i class="fa-solid fa-handshake"></i></div>
+                            <div class="text-[15px] font-bold text-slate-800 leading-snug uppercase w-full">2. Đào tạo Hội nhập</div>
+                            <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-kvBlue"></i>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex items-center gap-4 hover:-translate-y-1 hover:border-kvBlue hover:shadow-md transition-all cursor-pointer shadow-sm group" onclick="window.filterSection('sanpham')">
+                            <div class="w-12 h-12 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xl shrink-0 transition-transform group-hover:scale-110"><i class="fa-solid fa-cube"></i></div>
+                            <div class="text-[15px] font-bold text-slate-800 leading-snug uppercase w-full">3. Các khóa Đào tạo Sản phẩm</div>
+                            <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-kvBlue"></i>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex items-center gap-4 hover:-translate-y-1 hover:border-kvBlue hover:shadow-md transition-all cursor-pointer shadow-sm group" onclick="window.filterSection('vanhoa')">
+                            <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-xl shrink-0 transition-transform group-hover:scale-110"><i class="fa-solid fa-shield-cat"></i></div>
+                            <div class="text-[15px] font-bold text-slate-800 leading-snug uppercase w-full">4. Văn hóa & An toàn thông tin</div>
+                            <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-kvBlue"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-    </div> <!-- End Main Container -->
+        <!-- ================= ĐĂNG NHẬP ================= -->
+        <section id="section-dangnhap" class="content-section searchable-area">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-8 w-1.5 bg-[#166def] rounded-full"></div>
+                <h2 class="text-2xl font-black text-slate-800 uppercase">1. Đăng nhập và lộ trình đào tạo</h2>
+            </div>
 
-    <!-- Floating Navigation Buttons -->
-    <div class="floating-nav">
-        <button id="prevBtn" class="nav-btn" title="Phần trước"><i class="fas fa-chevron-up"></i></button>
-        <button id="nextBtn" class="nav-btn" title="Phần tiếp theo"><i class="fas fa-chevron-down"></i></button>
-    </div>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-        <img id="lightboxImg" src="" alt="Phóng to hình ảnh">
-    </div>
-
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-item');
-            const sections = document.querySelectorAll('.content-section');
-            const mobileMenuBtn = document.getElementById('menuToggle');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            const searchInput = document.getElementById('searchInput');
-            
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            let currentIndex = 0;
-
-            // 1. Logic chuyển Tab
-            function showSection(targetId) {
-                sections.forEach(sec => sec.classList.remove('active-section'));
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.classList.add('active-section');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.dataset.target === targetId) {
-                        link.classList.add('active');
-                        const parentUl = link.closest('ul');
-                        if (parentUl && parentUl.id !== 'nav-list') {
-                           parentUl.style.display = 'block';
-                        }
-                    }
-                });
-
-                currentIndex = Array.from(sections).findIndex(s => s.id === targetId);
-                updateNavButtons();
-            }
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.dataset.target;
-                    if(targetId) {
-                        showSection(targetId);
-                        if (window.innerWidth <= 1024) {
-                            sidebar.classList.remove('open');
-                            overlay.classList.add('hidden');
-                        }
-                    }
-                });
-            });
-
-            // 2. Logic Điều hướng mũi tên
-            function updateNavButtons() {
-                prevBtn.classList.toggle('disabled', currentIndex === 0);
-                nextBtn.classList.toggle('disabled', currentIndex === sections.length - 1);
-            }
-
-            prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) showSection(sections[currentIndex - 1].id);
-            });
-
-            nextBtn.addEventListener('click', () => {
-                if (currentIndex < sections.length - 1) showSection(sections[currentIndex + 1].id);
-            });
-
-            // 3. Logic Tìm kiếm
-            searchInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    const term = searchInput.value.toLowerCase();
-                    if (term.length < 2) return;
+            <div class="flex flex-col gap-10">
+                <!-- Phần Đăng nhập -->
+                <div class="glass p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="text-[18px] font-black text-kvBlue mb-5 uppercase tracking-wide border-b border-slate-100 pb-3">A. Đăng nhập hệ thống</h3>
+                    <p class="text-[15px] text-slate-700 font-medium mb-6">Truy cập địa chỉ: <a href="https://daotao.kiotviet.vn" target="_blank" class="text-orange-600 font-bold hover:underline">daotao.kiotviet.vn</a></p>
                     
-                    let found = false;
-                    for (let i = 0; i < sections.length; i++) {
-                        if (sections[i].textContent.toLowerCase().includes(term)) {
-                            showSection(sections[i].id);
-                            found = true;
-                            break;
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow-sm mb-6 flex flex-col md:flex-row gap-5">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-2xl text-kvBlue shrink-0 border border-blue-100 shadow-sm">
+                            <i class="fa-solid fa-user-circle"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-[16px] font-bold text-blue-900 mb-3">Thông tin tài khoản đăng nhập</h4>
+                            <ul class="text-[14px] text-blue-900/90 leading-relaxed space-y-3 font-medium bg-white p-4 rounded-lg shadow-sm border border-blue-100">
+                                <li class="flex gap-2 items-start"><i class="fa-solid fa-circle text-[6px] text-kvBlue mt-2 shrink-0"></i> <span><strong>Đối với các bạn đã có mail công ty:</strong> Đăng nhập bằng Email công ty.</span></li>
+                                <li class="flex gap-2 items-start"><i class="fa-solid fa-circle text-[6px] text-kvBlue mt-2 shrink-0"></i> <span><strong>Đối với Sales/Nhân sự chưa có mail công ty:</strong> Đăng nhập bằng Email cá nhân.</span></li>
+                                <li class="flex gap-2 items-start"><i class="fa-solid fa-circle text-[6px] text-kvBlue mt-2 shrink-0"></i> <span><strong>Mật khẩu mặc định:</strong> <code class="bg-slate-100 px-2 py-0.5 rounded font-mono text-kvBlue border border-slate-200 font-bold ml-1">123456A@</code></span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center p-4 relative group cursor-pointer" onclick="window.openModal('https://i.postimg.cc/DwpJ492m/Screenshot_2026_03_30_155318.png', 'Giao diện đăng nhập')">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 rounded-xl">
+                            <span class="bg-white text-slate-800 font-bold px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><i class="fa-solid fa-magnifying-glass-plus"></i> Phóng to ảnh</span>
+                        </div>
+                        <img src="https://i.postimg.cc/DwpJ492m/Screenshot_2026_03_30_155318.png" class="max-w-full max-h-[400px] object-contain transition-transform duration-500 group-hover:scale-[1.02]" alt="Giao diện đăng nhập">
+                    </div>
+                    <p class="text-[14px] text-slate-500 italic mt-3 text-center font-medium">Hình 1: Giao diện đăng nhập phần mềm KiotViet LMS</p>
+                </div>
+
+                <!-- Phần Lộ trình -->
+                <div class="glass p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="text-[18px] font-black text-green-600 mb-5 uppercase tracking-wide border-b border-slate-100 pb-3">B. Lộ trình đào tạo</h3>
+                    
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-5 mb-6 shadow-sm flex flex-col md:flex-row gap-4">
+                        <i class="fa-solid fa-route text-green-600 text-2xl mt-1 shrink-0 bg-white w-10 h-10 flex items-center justify-center rounded-full border border-green-100 shadow-sm"></i>
+                        <div>
+                            <h4 class="text-[15px] font-bold text-green-800 mb-2">Xác định lộ trình học cá nhân</h4>
+                            <p class="text-[14px] text-green-900 leading-relaxed font-medium">Mỗi cá nhân hoặc phòng ban sẽ có lộ trình đào tạo khác nhau. Bạn cần click vào mục <strong class="bg-white px-2 py-0.5 rounded border border-green-100 uppercase mx-1">"Khóa học bắt buộc"</strong> tại menu bên trái để xem chi tiết và hoàn thành đầy đủ các khóa học được giao.</p>
+                        </div>
+                    </div>
+
+                    <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center p-4 relative group cursor-pointer" onclick="window.openModal('https://i.postimg.cc/pLch5w25/Screenshot_2026_03_30_155513.png', 'Thống kê lộ trình học')">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 rounded-xl">
+                            <span class="bg-white text-slate-800 font-bold px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><i class="fa-solid fa-magnifying-glass-plus"></i> Phóng to ảnh</span>
+                        </div>
+                        <img src="https://i.postimg.cc/pLch5w25/Screenshot_2026_03_30_155513.png" class="max-w-full max-h-[400px] object-contain transition-transform duration-500 group-hover:scale-[1.02]" alt="Thống kê lộ trình học">
+                    </div>
+                    <p class="text-[14px] text-slate-500 italic mt-3 text-center font-medium">Hình 2: Danh sách các khóa học bắt buộc trong lộ trình của học viên</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HỘI NHẬP ================= -->
+        <section id="section-hoinhap" class="content-section searchable-area">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-8 w-1.5 bg-[#166def] rounded-full"></div>
+                <h2 class="text-2xl font-black text-slate-800 uppercase">2.1 Khóa Đào tạo Hội nhập</h2>
+            </div>
+            
+            <div class="glass p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-6">
+                <p class="text-[15px] font-medium text-slate-700 leading-relaxed">Đây là khóa học đầu tiên dành cho nhân viên mới. Bạn sẽ tham gia học theo thông báo của bộ phận Đào tạo (Qua Zoom trực tuyến hoặc tự học qua hệ thống E-learning).</p>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 shadow-sm flex flex-col md:flex-row gap-4 items-start">
+                    <i class="fa-solid fa-edit text-amber-500 text-2xl mt-1 shrink-0 bg-white w-10 h-10 flex items-center justify-center rounded-full border border-amber-100 shadow-sm"></i>
+                    <div>
+                        <h4 class="text-[16px] font-bold text-amber-800 mb-2 uppercase">Bài thi cuối khóa</h4>
+                        <p class="text-[14px] text-amber-900 leading-relaxed font-medium">Sau khi hoàn thành việc xem Slide bài giảng/Video và các bài Quiz nhỏ, bạn <strong>bắt buộc phải nhấn làm Bài thi cuối khóa</strong>. Chỉ khi đạt kết quả bài thi này, hệ thống mới ghi nhận bạn hoàn thành 100% khóa học.</p>
+                    </div>
+                </div>
+
+                <div class="w-full bg-slate-50 border border-slate-200 rounded-xl flex flex-col items-center justify-center p-4">
+                    <img src="https://i.postimg.cc/NjC923gr/Screenshot_2026_03_30_155727.png" class="w-full max-h-[400px] object-contain rounded-lg border border-slate-200 cursor-pointer shadow-sm bg-white hover:scale-[1.02] transition-transform" onclick="window.openModal(this.src, 'Nút làm bài thi cuối khóa')">
+                    <p class="text-[14px] text-slate-500 italic mt-4 text-center font-medium">Hình 3: Nút "LÀM BÀI THI" sẽ hiện ra ở góc phải sau khi hoàn thành các nội dung bài học</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SẢN PHẨM ================= -->
+        <section id="section-sanpham" class="content-section searchable-area">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-8 w-1.5 bg-[#166def] rounded-full"></div>
+                <h2 class="text-2xl font-black text-slate-800 uppercase">2.2 Các khóa học Sản phẩm</h2>
+            </div>
+            
+            <p class="text-[15px] font-medium text-slate-700 mb-8 bg-slate-50 p-5 border border-slate-200 rounded-xl shadow-sm">Áp dụng cho các khóa đào tạo chi tiết về các nghiệp vụ phần mềm (Retail, Salon, FNB, Hotel...).</p>
+
+            <div class="glass p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <!-- SLIDER SẢN PHẨM -->
+                <div class="slider-wrapper group" id="slider-sanpham">
+                    <button class="slider-btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="slider-container gap-4">
+                        
+                        <!-- Slide 1: Quy định -->
+                        <div class="slider-slide bg-white border border-orange-200 p-6 rounded-xl shadow-sm flex flex-col">
+                            <h4 class="font-black text-[17px] text-orange-600 mb-4 flex items-center gap-3 border-b border-orange-100 pb-3"><i class="fa-solid fa-exclamation-triangle text-2xl"></i> QUY ĐỊNH BẮT BUỘC KHI HỌC</h4>
+                            <ul class="list-none space-y-4 mb-6 text-[15px] text-slate-700 font-medium flex-1">
+                                <li class="flex items-start gap-3 bg-slate-50 p-4 rounded-lg border border-slate-100"><i class="fa-solid fa-video text-kvBlue mt-1 w-5 shrink-0 text-center"></i> <span><strong>Đối với Video:</strong> Yêu cầu <strong class="text-orange-600 uppercase">không tua nhanh, không tăng speed</strong> để hệ thống ghi nhận chính xác tiến độ hoàn thành.</span></li>
+                                <li class="flex items-start gap-3 bg-slate-50 p-4 rounded-lg border border-slate-100"><i class="fa-solid fa-book-open text-kvBlue mt-1 w-5 shrink-0 text-center"></i> <span><strong>Đối với các dạng bài học khác:</strong> Đọc kỹ nội dung và thực hiện đúng theo các bước hướng dẫn để hoàn thành bài học.</span></li>
+                            </ul>
+                            <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center p-2 mt-auto">
+                                <img src="https://i.postimg.cc/X7fFD1np/Screenshot_2026_03_30_161912.png" class="max-w-full max-h-[300px] md:max-h-[400px] object-contain cursor-pointer hover:scale-[1.02] transition-transform shadow-sm bg-white rounded" onclick="window.openModal(this.src, 'Trạng thái bài học')">
+                            </div>
+                            <p class="text-[13px] text-slate-500 italic mt-3 text-center font-medium">Hình 4: Theo dõi trạng thái hoàn thành từng bài học</p>
+                        </div>
+                        
+                        <!-- Slide 2: Quiz -->
+                        <div class="slider-slide bg-white border border-blue-200 p-6 rounded-xl shadow-sm flex flex-col">
+                            <h4 class="font-black text-[17px] text-kvBlue mb-3 flex items-center gap-2 border-b border-blue-100 pb-3"><i class="fa-solid fa-pen-to-square"></i> Bài tập Quiz sau mỗi bài học</h4>
+                            <p class="text-[15px] text-slate-700 font-medium mb-6 flex-1">Sau khi kết thúc nội dung học (Video hoặc Slide), mọi người sẽ cần <strong>hoàn thành bài Quiz</strong> ngay tại bài học đó để củng cố kiến thức vừa tiếp nhận.</p>
+                            <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center p-2 mt-auto">
+                                <img src="https://i.postimg.cc/KvPLspmk/Screenshot_2026_03_30_162022.png" class="max-w-full max-h-[300px] md:max-h-[400px] object-contain cursor-pointer hover:scale-[1.02] transition-transform shadow-sm bg-white rounded" onclick="window.openModal(this.src, 'Làm bài tập Quiz')">
+                            </div>
+                            <p class="text-[13px] text-slate-500 italic mt-3 text-center font-medium">Hình 5: Nút làm bài tập Quiz tương ứng với mỗi bài học</p>
+                        </div>
+
+                        <!-- Slide 3: Tổng hợp -->
+                        <div class="slider-slide bg-white border border-green-200 p-6 rounded-xl shadow-sm flex flex-col">
+                            <h4 class="font-black text-[17px] text-green-600 mb-3 flex items-center gap-2 border-b border-green-100 pb-3"><i class="fa-solid fa-check-double"></i> Bài kiểm tra tổng hợp cuối khóa</h4>
+                            <p class="text-[15px] text-slate-700 font-medium mb-4">Tại cuối mỗi khóa học sẽ có một <strong>BÀI KIỂM TRA TỔNG HỢP</strong>. Đây là bước quan trọng nhất để ôn tập và đánh giá lại toàn bộ kiến thức.</p>
+                            
+                            <div class="bg-green-50 border border-green-200 p-4 rounded-xl mb-4 flex-1">
+                                <p class="font-bold text-[14px] text-green-800 mb-2 uppercase tracking-wide">Điều kiện hoàn thành:</p>
+                                <ul class="list-none space-y-2 text-[14px] text-green-900 font-medium">
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500 w-4"></i> <span>Điểm số đạt yêu cầu: <strong>Trên 80%</strong>.</span></li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500 w-4"></i> <span>Được phép <strong>làm lại nhiều lần</strong> cho đến khi đạt kết quả tối đa (100%).</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center p-2 mt-auto">
+                                <img src="https://i.postimg.cc/TYVmHNTw/Screenshot_2026_03_30_162727.png" class="max-w-full max-h-[300px] md:max-h-[400px] object-contain cursor-pointer hover:scale-[1.02] transition-transform shadow-sm bg-white rounded" onclick="window.openModal(this.src, 'Bài kiểm tra tổng hợp')">
+                            </div>
+                            <p class="text-[13px] text-slate-500 italic mt-3 text-center font-medium">Hình 6: Giao diện bài kiểm tra tổng hợp cuối khóa học</p>
+                        </div>
+
+                    </div>
+                    <button class="slider-btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="slider-dots">
+                        <div class="slider-dot active" data-target="0"></div>
+                        <div class="slider-dot" data-target="1"></div>
+                        <div class="slider-dot" data-target="2"></div>
+                    </div>
+                </div>
+                <!-- SLIDER KẾT THÚC -->
+            </div>
+        </section>
+
+        <!-- ================= VĂN HÓA & ATTT ================= -->
+        <section id="section-vanhoa" class="content-section searchable-area">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-8 w-1.5 bg-[#166def] rounded-full"></div>
+                <h2 class="text-2xl font-black text-slate-800 uppercase">2.3 Văn hóa & 2.4 An toàn thông tin</h2>
+            </div>
+
+            <div class="glass p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-8">
+                
+                <div class="bg-blue-50 border border-blue-200 p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fa-solid fa-desktop text-2xl text-kvBlue"></i>
+                        <h3 class="text-[17px] font-black text-kvBlue uppercase tracking-wide">Trải nghiệm học tập tương tác</h3>
+                    </div>
+                    <p class="text-[15px] text-blue-900 font-medium leading-relaxed">Đối với 2 khóa học này, mọi người nên <strong>Phóng to (Full screen)</strong> trình duyệt để có trải nghiệm tốt nhất. Bạn sẽ cần thao tác bằng cách <strong>click chuột trực tiếp trên màn hình</strong> bài giảng để vượt qua các vòng thử thách.</p>
+                </div>
+
+                <!-- SLIDER VĂN HÓA & ATTT -->
+                <div class="slider-wrapper group" id="slider-vanhoa">
+                    <button class="slider-btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="slider-container gap-4">
+                        
+                        <!-- Slide VH1 -->
+                        <div class="slider-slide bg-white border border-purple-200 p-6 rounded-xl shadow-sm flex flex-col">
+                            <h4 class="font-black text-[17px] text-purple-600 mb-3 border-b border-purple-100 pb-3 uppercase"><i class="fa-solid fa-heart mr-2"></i> Khóa Văn hóa (Vòng 1)</h4>
+                            <p class="text-[15px] text-slate-700 font-medium mb-4 flex-1">Khóa học giúp nhân viên hiểu rõ về giá trị cốt lõi, tầm nhìn và môi trường làm việc thông qua 3 vòng thi trải nghiệm. Yêu cầu tập trung quan sát và tương tác.</p>
+                            <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center p-2 mt-auto">
+                                <img src="https://i.postimg.cc/hvjDbj4G/A.png" class="max-w-full max-h-[300px] md:max-h-[400px] object-contain cursor-pointer hover:scale-[1.02] transition-transform shadow-sm bg-white rounded" onclick="window.openModal(this.src, 'Thử thách văn hóa 1')">
+                            </div>
+                        </div>
+
+                        <!-- Slide VH2 -->
+                        <div class="slider-slide bg-white border border-purple-200 p-6 rounded-xl shadow-sm flex flex-col">
+                            <h4 class="font-black text-[17px] text-purple-600 mb-3 border-b border-purple-100 pb-3 uppercase"><i class="fa-solid fa-heart mr-2"></i> Khóa Văn hóa (Vòng 2)</h4>
+                            <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center p-2 mt-auto">
+                                <img src="https://i.postimg.cc/Vv6fB6sc/B.png" class="max-w-full max-h-[300px] md:max-h-[400px] object-contain cursor-pointer hover:scale-[1.02] transition-transform shadow-sm bg-white rounded" onclick="window.openModal(this.src, 'Thử thách văn hóa 2')">
+                            </div>
+                        </div>
+
+                        <!-- Slide VH3 -->
+                        <div class="slider-slide bg-white border border-purple-200 p-6 rounded-xl shadow-sm flex flex-col">
+                            <h4 class="font-black text-[17px] text-purple-600 mb-3 border-b border-purple-100 pb-3 uppercase"><i class="fa-solid fa-heart mr-2"></i> Khóa Văn hóa (Vòng 3)</h4>
+                            <p class="text-[15px] text-slate-700 font-medium mb-4 flex-1">Sau khi hoàn thành đủ 3 vòng thi, mọi người sẽ làm <strong>bài kiểm tra cuối khóa</strong> để được ghi nhận hoàn thành.</p>
+                            <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center p-2 mt-auto">
+                                <img src="https://i.postimg.cc/PxKfwZHG/C.png" class="max-w-full max-h-[300px] md:max-h-[400px] object-contain cursor-pointer hover:scale-[1.02] transition-transform shadow-sm bg-white rounded" onclick="window.openModal(this.src, 'Thử thách văn hóa 3')">
+                            </div>
+                        </div>
+
+                        <!-- Slide ATTT -->
+                        <div class="slider-slide bg-white border border-emerald-200 p-6 rounded-xl shadow-sm flex flex-col">
+                            <h4 class="font-black text-[17px] text-emerald-600 mb-3 border-b border-emerald-100 pb-3 uppercase"><i class="fa-solid fa-shield-halved mr-2"></i> Khóa An toàn thông tin</h4>
+                            <p class="text-[15px] text-slate-700 font-medium mb-4 flex-1">Yêu cầu sự tương tác trực tiếp để nắm bắt kiến thức bảo mật. Vượt qua thử thách và làm bài kiểm tra cuối khóa để hoàn thành.</p>
+                            <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center p-2 mt-auto">
+                                <img src="https://i.postimg.cc/Bb9WtnLq/Screenshot-2026-03_30_164311.png" class="max-w-full max-h-[300px] md:max-h-[400px] object-contain cursor-pointer hover:scale-[1.02] transition-transform shadow-sm bg-white rounded" onclick="window.openModal(this.src, 'Khóa An toàn thông tin')">
+                            </div>
+                        </div>
+
+                    </div>
+                    <button class="slider-btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="slider-dots">
+                        <div class="slider-dot active" data-target="0"></div>
+                        <div class="slider-dot" data-target="1"></div>
+                        <div class="slider-dot" data-target="2"></div>
+                        <div class="slider-dot" data-target="3"></div>
+                    </div>
+                </div>
+                <!-- SLIDER KẾT THÚC -->
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="glass border-t border-slate-200 mt-auto pt-8 pb-32 lg:pb-8 relative z-10 w-full">
+        <div class="max-w-screen-xl mx-auto px-4 text-center text-slate-500">
+            <p class="font-medium mb-4 text-[14px]">Cần hỗ trợ? Liên hệ ngay: <a href="mailto:daotao@kiotviet.com" class="text-kvBlue font-bold underline">daotao@kiotviet.com</a></p>
+            <p class="text-slate-400 text-[12px] uppercase tracking-wider font-bold">© 2026 KiotViet Learning & Development</p>
+        </div>
+    </footer>
+
+    <!-- Modal Fullscreen cho Hình ảnh -->
+    <div id="learning-modal">
+        <div class="modal-content bg-white" id="modal-box">
+            <div class="modal-header border-b border-slate-200 flex justify-between items-center p-3 shrink-0">
+                <div class="flex items-center gap-3 overflow-hidden text-slate-800">
+                    <div class="doc-tag bg-blue-100 text-kvBlue px-3 py-1.5 rounded-lg text-[13px] font-black uppercase shrink-0"><i class="fa-solid fa-image"></i> Hình ảnh</div>
+                    <h3 id="modal-title" class="font-bold text-[16px] truncate">Chi tiết</h3>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <button onclick="window.closeModal()" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-red-500 hover:text-white transition-colors flex items-center justify-center shadow-sm border border-slate-200">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body bg-slate-100/50 relative flex-grow overflow-hidden flex items-center justify-center p-4 md:p-8">
+                <img id="course-image" class="max-w-full max-h-full object-contain drop-shadow-2xl rounded-xl bg-white border border-slate-200" src="" />
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT XỬ LÝ GIAO DIỆN -->
+    <script>
+        // Xử lý logic Slider trượt (Carousel)
+        document.addEventListener('DOMContentLoaded', () => {
+            const sliders = document.querySelectorAll('.slider-wrapper');
+            
+            sliders.forEach(wrapper => {
+                const container = wrapper.querySelector('.slider-container');
+                const dots = wrapper.querySelectorAll('.slider-dot');
+                const prevBtn = wrapper.querySelector('.slider-btn-prev');
+                const nextBtn = wrapper.querySelector('.slider-btn-next');
+                
+                // Đồng bộ Dot khi người dùng cuộn ngang
+                container.addEventListener('scroll', () => {
+                    const slideWidth = container.clientWidth;
+                    const currentIndex = Math.round(container.scrollLeft / slideWidth);
+                    
+                    dots.forEach((dot, index) => {
+                        if (index === currentIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
                         }
-                    }
-                    if(!found) {
-                        alert('Không tìm thấy nội dung phù hợp cho từ khóa: ' + searchInput.value);
-                    }
+                    });
+                });
+                
+                // Bấm Dot để chuyển Slide
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        const slideWidth = container.clientWidth;
+                        container.scrollTo({
+                            left: index * slideWidth,
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+
+                // Nút Prev/Next
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        const slideWidth = container.clientWidth;
+                        container.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+                    });
+                }
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => {
+                        const slideWidth = container.clientWidth;
+                        container.scrollBy({ left: slideWidth, behavior: 'smooth' });
+                    });
                 }
             });
+        });
 
-            // 4. Mobile Menu
-            mobileMenuBtn.addEventListener('click', () => {
-                sidebar.classList.add('open');
-                overlay.classList.remove('hidden');
+        // Xử lý Modal Ảnh Fullscreen
+        window.closeModal = () => {
+            const modal = document.getElementById('learning-modal');
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+            setTimeout(() => { document.getElementById('course-image').src = ''; }, 300);
+        };
+
+        window.openModal = (url, title) => {
+            if(!url) return;
+            const modal = document.getElementById('learning-modal');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('course-image').src = url;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        };
+
+        // Xử lý Navigation (Menu nổi)
+        window.filterSection = (sectionId) => {
+            window.clearSearch(false); 
+
+            // Cập nhật Buttons Menu
+            document.querySelectorAll('.filter-btn').forEach(btn => { 
+                btn.classList.remove('bg-kvBlue', 'text-white', 'shadow-md'); 
+                btn.classList.add('bg-slate-100', 'text-slate-600'); 
             });
-            overlay.addEventListener('click', () => {
-                sidebar.classList.remove('open');
-                overlay.classList.add('hidden');
+            const activeBtn = document.getElementById(`btn-filter-${sectionId}`);
+            if (activeBtn) { 
+                activeBtn.classList.add('bg-kvBlue', 'text-white', 'shadow-md'); 
+                activeBtn.classList.remove('bg-slate-100', 'text-slate-600'); 
+                // Cuộn menu ngang trên mobile để nút active luôn hiển thị
+                activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+            
+            // Chuyển đổi Sections
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+            const activeSec = document.getElementById(`section-${sectionId}`);
+            if (activeSec) {
+                activeSec.classList.add('active');
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        };
+
+        // Hệ thống Tìm kiếm Nội bộ (Highlight text)
+        let matchElements = [];
+        let currentIndex = -1;
+        const searchInput = document.getElementById('global-search');
+        const searchNav = document.getElementById('search-nav');
+        const searchAlert = document.getElementById('search-alert');
+        const searchAlertText = document.getElementById('search-alert-text');
+
+        window.clearSearch = (switchToOverview = true) => {
+            searchInput.value = '';
+            removeHighlights();
+            searchAlert.classList.add('hidden');
+            if(switchToOverview) window.filterSection('overview');
+        };
+
+        function removeHighlights() {
+            const highlights = document.querySelectorAll('mark.highlight');
+            highlights.forEach(el => {
+                const parent = el.parentNode;
+                parent.replaceChild(document.createTextNode(el.textContent), el);
+                parent.normalize();
             });
+            matchElements = [];
+            currentIndex = -1;
+            searchNav.classList.add('hidden');
+            searchNav.classList.remove('flex');
+        }
 
-            // 5. Lightbox Logic
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightboxImg');
+        function updateSearchNav() {
+            if(matchElements.length === 0) return;
+            matchElements.forEach(el => el.classList.remove('active-match'));
+            
+            if (currentIndex >= 0 && currentIndex < matchElements.length) {
+                const currentEl = matchElements[currentIndex];
+                currentEl.classList.add('active-match');
+                
+                // Mở section chứa kết quả tìm kiếm
+                const parentSection = currentEl.closest('.content-section');
+                if (parentSection && !parentSection.classList.contains('active')) {
+                    const secId = parentSection.id.replace('section-', '');
+                    
+                    document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('bg-kvBlue', 'text-white'); b.classList.add('bg-slate-100', 'text-slate-600'); });
+                    const activeBtn = document.getElementById(`btn-filter-${secId}`);
+                    if(activeBtn) { 
+                        activeBtn.classList.add('bg-kvBlue', 'text-white'); 
+                        activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+                        activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                    
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                    parentSection.classList.add('active');
+                }
+                
+                // Mở slide chứa kết quả nếu nằm trong slider
+                const sliderContainer = currentEl.closest('.slider-container');
+                if (sliderContainer) {
+                    const slide = currentEl.closest('.slider-slide');
+                    if(slide) {
+                        sliderContainer.scrollTo({
+                            left: slide.offsetLeft,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
 
-            document.querySelectorAll('.screenshot').forEach(img => {
-                img.addEventListener('click', () => {
-                    lightboxImg.src = img.src;
-                    lightbox.classList.add('active');
+                // Cuộn trang đến kết quả
+                setTimeout(() => {
+                    const y = currentEl.getBoundingClientRect().top + window.scrollY - 150;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }, 100);
+
+                searchAlert.classList.remove('hidden');
+                searchAlertText.innerHTML = `<i class="fa-solid fa-magnifying-glass mr-2"></i> Kết quả: <strong>${currentIndex + 1} / ${matchElements.length}</strong> cho từ khóa "<span class="text-orange-600">${searchInput.value}</span>"`;
+            }
+        }
+
+        function performSearch() {
+            removeHighlights();
+            const term = searchInput.value.trim().toLowerCase();
+            if (term.length < 2) {
+                searchAlert.classList.add('hidden');
+                return;
+            }
+
+            // Chỉ tìm trong các vùng nội dung chính
+            const areas = document.querySelectorAll('.searchable-area');
+            const regex = new RegExp(`(${term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+
+            areas.forEach(area => {
+                const walker = document.createTreeWalker(area, NodeFilter.SHOW_TEXT, null, false);
+                let node;
+                const nodesToReplace = [];
+                
+                while (node = walker.nextNode()) {
+                    if (node.parentNode.tagName !== 'SCRIPT' && node.parentNode.tagName !== 'STYLE' && node.nodeValue.trim() !== '') {
+                        if (regex.test(node.nodeValue)) nodesToReplace.push(node);
+                    }
+                }
+
+                nodesToReplace.forEach(n => {
+                    const span = document.createElement('span');
+                    span.innerHTML = n.nodeValue.replace(regex, '<mark class="highlight">$1</mark>');
+                    n.parentNode.replaceChild(span, n);
                 });
             });
 
-            lightbox.addEventListener('click', () => {
-                lightbox.classList.remove('active');
-            });
+            matchElements = Array.from(document.querySelectorAll('mark.highlight'));
 
-            updateNavButtons();
+            if (matchElements.length > 0) {
+                searchNav.classList.remove('hidden');
+                searchNav.classList.add('flex');
+                currentIndex = 0;
+                updateSearchNav();
+            } else {
+                searchAlert.classList.remove('hidden');
+                searchAlertText.innerHTML = `<i class="fa-solid fa-circle-exclamation mr-2"></i> Không tìm thấy nội dung cho "<span class="text-orange-600">${term}</span>"`;
+            }
+        }
+
+        let searchTimeout;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(performSearch, 400);
         });
+
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if(matchElements.length > 0) {
+                    currentIndex = (currentIndex + 1) % matchElements.length;
+                    updateSearchNav();
+                } else performSearch();
+            }
+        });
+
+        document.getElementById('nextMatch').addEventListener('click', () => {
+            if (matchElements.length > 0) {
+                currentIndex = (currentIndex + 1) % matchElements.length;
+                updateSearchNav();
+            }
+        });
+        
+        document.getElementById('prevMatch').addEventListener('click', () => {
+            if (matchElements.length > 0) {
+                currentIndex = (currentIndex - 1 + matchElements.length) % matchElements.length;
+                updateSearchNav();
+            }
+        });
+
     </script>
 </body>
 </html>
