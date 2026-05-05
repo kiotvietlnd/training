@@ -140,13 +140,14 @@
     </header>
 
     <!-- FLOATING FILTER MENU -->
-    <div id="floating-menu" class="fixed bottom-4 left-4 right-4 lg:left-auto lg:right-6 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-0 z-40 glass shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-2 lg:p-4 rounded-2xl flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto no-scrollbar lg:max-h-[85vh] justify-start lg:justify-center border border-slate-200">
-        <div class="hidden lg:block text-[11px] font-black text-slate-400 uppercase text-center mb-1 pb-2 border-b border-slate-200">Điều hướng</div>
+    <div id="floating-menu" class="fixed bottom-4 left-4 right-4 lg:left-auto lg:right-6 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-0 z-40 glass shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-2 lg:p-3 rounded-2xl flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-y-auto no-scrollbar lg:max-h-[95vh] justify-start lg:justify-center border border-slate-200">
+        <div class="hidden lg:block text-[11px] font-black text-slate-400 uppercase text-center mb-1 pb-1 border-b border-slate-200">Điều hướng</div>
         <button onclick="window.filterSection('overview')" id="btn-filter-overview" class="filter-btn active btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-kvBlue text-white shadow-md whitespace-nowrap text-center shrink-0">Tổng quan</button>
         <button onclick="window.filterSection('dangnhap')" id="btn-filter-dangnhap" class="filter-btn btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-slate-100 text-slate-600 transition-colors whitespace-nowrap text-center shrink-0">Đăng nhập & Lộ trình</button>
         <button onclick="window.filterSection('hoinhap')" id="btn-filter-hoinhap" class="filter-btn btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-slate-100 text-slate-600 transition-colors whitespace-nowrap text-center shrink-0">Đào tạo Hội nhập</button>
         <button onclick="window.filterSection('sanpham')" id="btn-filter-sanpham" class="filter-btn btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-slate-100 text-slate-600 transition-colors whitespace-nowrap text-center shrink-0">Đào tạo Sản phẩm</button>
-        <button onclick="window.filterSection('vanhoa')" id="btn-filter-vanhoa" class="filter-btn btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-slate-100 text-slate-600 transition-colors whitespace-nowrap text-center shrink-0">Văn hóa & ATTT</button>
+        <button onclick="window.filterSection('vanhoa')" id="btn-filter-vanhoa" class="filter-btn btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-slate-100 text-slate-600 transition-colors whitespace-nowrap text-center shrink-0">Đào tạo Văn hóa</button>
+        <button onclick="window.filterSection('attt')" id="btn-filter-attt" class="filter-btn btn-interact px-5 py-2.5 rounded-xl text-[14px] font-bold bg-slate-100 text-slate-600 transition-colors whitespace-nowrap text-center shrink-0">Đào tạo ATTT</button>
     </div>
 
     <!-- TĂNG CHIỀU RỘNG MAX-W 5XL -->
@@ -207,9 +208,14 @@
                             <div class="text-[15px] font-bold text-slate-800 leading-snug uppercase w-full">3. Các khóa Đào tạo Sản phẩm</div>
                             <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-kvBlue"></i>
                         </div>
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex items-center gap-4 hover:-translate-y-1 hover:border-kvBlue hover:shadow-md transition-all cursor-pointer shadow-sm group" onclick="window.filterSection('vanhoa')">
-                            <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-xl shrink-0 transition-transform group-hover:scale-110"><i class="fa-solid fa-shield-cat"></i></div>
-                            <div class="text-[15px] font-bold text-slate-800 leading-snug uppercase w-full">4. Văn hóa & An toàn thông tin</div>
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex items-center gap-4 hover:-translate-y-1 hover:border-purple-300 hover:shadow-md transition-all cursor-pointer shadow-sm group" onclick="window.filterSection('vanhoa')">
+                            <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-xl shrink-0 transition-transform group-hover:scale-110"><i class="fa-solid fa-heart"></i></div>
+                            <div class="text-[15px] font-bold text-slate-800 leading-snug uppercase w-full">4. Đào tạo Văn hóa</div>
+                            <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-kvBlue"></i>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex items-center gap-4 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-md transition-all cursor-pointer shadow-sm group" onclick="window.filterSection('attt')">
+                            <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl shrink-0 transition-transform group-hover:scale-110"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div class="text-[15px] font-bold text-slate-800 leading-snug uppercase w-full">5. Đào tạo ATTT</div>
                             <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-kvBlue"></i>
                         </div>
                     </div>
@@ -280,7 +286,7 @@
         <section id="section-hoinhap" class="content-section searchable-area">
             <div class="flex items-center gap-3 mb-6">
                 <div class="h-8 w-1.5 bg-[#166def] rounded-full"></div>
-                <h2 class="text-2xl font-black text-slate-800 uppercase">2.1 Khóa Đào tạo Hội nhập</h2>
+                <h2 class="text-2xl font-black text-slate-800 uppercase">2. Đào tạo Hội nhập</h2>
             </div>
             
             <div class="glass p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-6">
@@ -305,7 +311,7 @@
         <section id="section-sanpham" class="content-section searchable-area">
             <div class="flex items-center gap-3 mb-6">
                 <div class="h-8 w-1.5 bg-[#166def] rounded-full"></div>
-                <h2 class="text-2xl font-black text-slate-800 uppercase">2.2 Các khóa học Sản phẩm</h2>
+                <h2 class="text-2xl font-black text-slate-800 uppercase">3. Các khóa học Sản phẩm</h2>
             </div>
             
             <p class="text-[15px] font-medium text-slate-700 mb-8 bg-slate-50 p-5 border border-slate-200 rounded-xl shadow-sm">Áp dụng cho các khóa đào tạo chi tiết về các nghiệp vụ phần mềm (Retail, Salon, FNB, Hotel...).</p>
@@ -370,11 +376,11 @@
             </div>
         </section>
 
-        <!-- ================= VĂN HÓA & ATTT ================= -->
+        <!-- ================= VĂN HÓA ================= -->
         <section id="section-vanhoa" class="content-section searchable-area">
             <div class="flex items-center gap-3 mb-6">
                 <div class="h-8 w-1.5 bg-[#166def] rounded-full"></div>
-                <h2 class="text-2xl font-black text-slate-800 uppercase">2.3 Văn hóa & 2.4 An toàn thông tin</h2>
+                <h2 class="text-2xl font-black text-slate-800 uppercase">4. Đào tạo Văn hóa</h2>
             </div>
 
             <div class="glass p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-8">
@@ -384,10 +390,10 @@
                         <i class="fa-solid fa-desktop text-2xl text-kvBlue"></i>
                         <h3 class="text-[17px] font-black text-kvBlue uppercase tracking-wide">Trải nghiệm học tập tương tác</h3>
                     </div>
-                    <p class="text-[15px] text-blue-900 font-medium leading-relaxed">Đối với 2 khóa học này, mọi người nên <strong>Phóng to (Full screen)</strong> trình duyệt để có trải nghiệm tốt nhất. Bạn sẽ cần thao tác bằng cách <strong>click chuột trực tiếp trên màn hình</strong> bài giảng để vượt qua các vòng thử thách.</p>
+                    <p class="text-[15px] text-blue-900 font-medium leading-relaxed">Đối với khóa học này, mọi người nên <strong>Phóng to (Full screen)</strong> trình duyệt để có trải nghiệm tốt nhất. Bạn sẽ cần thao tác bằng cách <strong>click chuột trực tiếp trên màn hình</strong> bài giảng để vượt qua các vòng thử thách.</p>
                 </div>
 
-                <!-- SLIDER VĂN HÓA & ATTT -->
+                <!-- SLIDER VĂN HÓA -->
                 <div class="slider-wrapper group" id="slider-vanhoa">
                     <button class="slider-btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
                     <div class="slider-container gap-4">
@@ -418,25 +424,43 @@
                             </div>
                         </div>
 
-                        <!-- Slide ATTT -->
-                        <div class="slider-slide bg-white border border-emerald-200 p-6 rounded-xl shadow-sm flex flex-col">
-                            <h4 class="font-black text-[17px] text-emerald-600 mb-3 border-b border-emerald-100 pb-3 uppercase"><i class="fa-solid fa-shield-halved mr-2"></i> Khóa An toàn thông tin</h4>
-                            <p class="text-[15px] text-slate-700 font-medium mb-4 flex-1">Yêu cầu sự tương tác trực tiếp để nắm bắt kiến thức bảo mật. Vượt qua thử thách và làm bài kiểm tra cuối khóa để hoàn thành.</p>
-                            <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center p-2 mt-auto">
-                                <img src="https://i.postimg.cc/Bb9WtnLq/Screenshot-2026-03_30_164311.png" class="max-w-full max-h-[300px] md:max-h-[400px] object-contain cursor-pointer hover:scale-[1.02] transition-transform shadow-sm bg-white rounded" onclick="window.openModal(this.src, 'Khóa An toàn thông tin')">
-                            </div>
-                        </div>
-
                     </div>
                     <button class="slider-btn-next"><i class="fa-solid fa-chevron-right"></i></button>
                     <div class="slider-dots">
                         <div class="slider-dot active" data-target="0"></div>
                         <div class="slider-dot" data-target="1"></div>
                         <div class="slider-dot" data-target="2"></div>
-                        <div class="slider-dot" data-target="3"></div>
                     </div>
                 </div>
                 <!-- SLIDER KẾT THÚC -->
+
+            </div>
+        </section>
+
+        <!-- ================= ATTT ================= -->
+        <section id="section-attt" class="content-section searchable-area">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-8 w-1.5 bg-[#166def] rounded-full"></div>
+                <h2 class="text-2xl font-black text-slate-800 uppercase">5. Đào tạo An toàn thông tin (ATTT)</h2>
+            </div>
+
+            <div class="glass p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-8">
+                
+                <div class="bg-blue-50 border border-blue-200 p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fa-solid fa-desktop text-2xl text-kvBlue"></i>
+                        <h3 class="text-[17px] font-black text-kvBlue uppercase tracking-wide">Trải nghiệm học tập tương tác</h3>
+                    </div>
+                    <p class="text-[15px] text-blue-900 font-medium leading-relaxed">Đối với khóa học này, mọi người nên <strong>Phóng to (Full screen)</strong> trình duyệt để có trải nghiệm tốt nhất. Bạn sẽ cần thao tác bằng cách <strong>click chuột trực tiếp trên màn hình</strong> bài giảng để vượt qua các vòng thử thách.</p>
+                </div>
+
+                <div class="bg-white border border-emerald-200 p-6 rounded-xl shadow-sm flex flex-col">
+                    <h4 class="font-black text-[17px] text-emerald-600 mb-3 border-b border-emerald-100 pb-3 uppercase"><i class="fa-solid fa-shield-halved mr-2"></i> Khóa An toàn thông tin</h4>
+                    <p class="text-[15px] text-slate-700 font-medium mb-4 flex-1">Yêu cầu sự tương tác trực tiếp để nắm bắt kiến thức bảo mật. Vượt qua thử thách và làm bài kiểm tra cuối khóa để hoàn thành.</p>
+                    <div class="aspect-video w-full bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center p-2 mt-auto">
+                        <img src="https://i.postimg.cc/Bb9WtnLq/Screenshot-2026-03_30_164311.png" class="max-w-full max-h-[300px] md:max-h-[500px] object-contain cursor-pointer hover:scale-[1.02] transition-transform shadow-sm bg-white rounded" onclick="window.openModal(this.src, 'Khóa An toàn thông tin')">
+                    </div>
+                </div>
 
             </div>
         </section>
