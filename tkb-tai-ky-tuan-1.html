@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời Khóa Biểu Đào Tạo Sản Phẩm Tuần 1 - KiotViet</title>
+    <style>
+        :root {
+            /* Hệ màu Nhã nhặn (Pastel & Soft Tones) */
+            --kv-primary: #2563eb; /* Xanh dương mềm mại hơn */
+            --kv-blue-soft: #eff6ff; 
+            --kv-blue-border: #bfdbfe;
+            --kv-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            
+            --fnb-primary: #d97706; /* Cam đất dịu mắt */
+            --fnb-soft: #fff7ed;
+            --fnb-border: #fed7aa;
+            --fnb-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+
+            --text-dark: #1e293b;
+            --text-gray: #475569;
+            --bg-body: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(219, 234, 254, 0.5) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, rgba(243, 244, 246, 0.8) 0, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Bóng mờ không gian (Rất nhạt) */
+        .blob {
+            position: fixed; border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.25; animation: float 12s infinite alternate;
+        }
+        .blob-1 { top: -5%; left: -5%; width: 400px; height: 400px; background: #60a5fa; }
+        .blob-2 { bottom: -5%; right: -5%; width: 500px; height: 500px; background: #93c5fd; animation-delay: -5s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 30px) scale(1.05); }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* Header 3D nhẹ */
+        header {
+            text-align: center; margin-bottom: 2rem; padding: 2rem; border-radius: 24px;
+            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 10px 30px rgba(37, 99, 235, 0.05);
+        }
+        .logo { max-width: 170px; margin-bottom: 0.8rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));}
+        h1 { font-size: 2.1rem; background: var(--kv-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-weight: 800;}
+
+        /* ================= TABS CHÍNH ================= */
+        .main-tabs-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 2.5rem; }
+        
+        .main-tab-btn {
+            background: #ffffff; border: 1px solid #e2e8f0; color: var(--text-gray);
+            padding: 12px 24px; font-size: 1.05rem; font-weight: 600; border-radius: 14px;
+            cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .main-tab-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.05); }
+        .main-tab-btn.active { background: var(--kv-gradient); color: #ffffff; border-color: transparent; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2); }
+        
+        /* Highlight Tab mềm mại (Cam đào) */
+        .main-tab-btn.highlight { border-color: #fdba74; color: #ea580c; background: #fff7ed; }
+        .main-tab-btn.highlight.active { background: var(--fnb-gradient); color: white; border-color: transparent; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25); }
+
+        .main-tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .main-tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2.section-title { font-size: 1.6rem; color: var(--kv-primary); margin: 1rem 0 1.5rem; padding-left: 1rem; border-left: 5px solid var(--kv-primary); }
+
+        .notice-box {
+            background: rgba(255, 251, 235, 0.8); border-left: 5px solid #fbbf24; padding: 1.2rem; 
+            border-radius: 12px; margin-bottom: 2rem; color: #92400e; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.05); backdrop-filter: blur(5px);
+        }
+
+        /* ================= TAB 1: TỔNG QUAN ================= */
+        .overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .overview-card {
+            background: #ffffff; padding: 2rem; border-radius: 20px; text-align: center;
+            border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;
+        }
+        .overview-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(37, 99, 235, 0.08); }
+        .overview-icon { font-size: 3.5rem; margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+
+        /* ================= TAB 2: LỊCH TRÌNH 7 NGÀY ================= */
+        .calendar-wrapper { width: 100%; overflow-x: auto; padding-bottom: 15px; }
+        .week-calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; min-width: 1000px; }
+        .cal-day {
+            background: rgba(255,255,255,0.7); border: 1px solid #e2e8f0; border-radius: 16px;
+            display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.02); backdrop-filter: blur(10px); transition: transform 0.3s;
+        }
+        .cal-day:hover { transform: translateY(-5px); border-color: var(--kv-blue-border); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.08); }
+        .cal-day.weekend { background: rgba(241, 245, 249, 0.5); border: 1px dashed #cbd5e1; box-shadow: none; }
+        .cal-day.weekend:hover { transform: none; }
+        .cal-day.weekend * { color: #94a3b8 !important; }
+        
+        .cal-header { background: var(--kv-blue-soft); color: var(--kv-primary); padding: 12px; text-align: center; font-weight: bold; font-size: 1.05rem; }
+        .cal-day.weekend .cal-header { background: transparent; border-bottom: 1px dashed #cbd5e1; }
+        
+        .cal-body { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; gap: 10px; }
+        .cal-event {
+            background: #ffffff; border: 1px solid #f1f5f9; border-left: 4px solid var(--kv-primary);
+            padding: 10px; border-radius: 8px; font-size: 0.85rem; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .cal-event.review { border-left-color: #8b5cf6; background: #f5f3ff; } /* Đổi màu review sang Tím nhạt cho dịu */
+        .cal-event.empty { background: transparent; border: none; text-align: center; margin-top: 20px; font-style: italic; box-shadow: none;}
+        .time { font-weight: 700; color: #b45309; display: block; font-size: 0.85rem; margin-bottom: 4px;}
+
+        /* ================= TAB 3: THẺ LỘ TRÌNH 5D DỊU MẮT ================= */
+        .sub-tabs-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 2rem; background: rgba(255,255,255,0.6); padding: 8px; border-radius: 50px; width: fit-content; margin-left: auto; margin-right: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.03); backdrop-filter: blur(5px);}
+        
+        .sub-tab-btn {
+            background: transparent; border: none; color: var(--text-gray); padding: 10px 25px;
+            font-size: 1.05rem; font-weight: bold; border-radius: 30px; cursor: pointer; transition: all 0.3s;
+        }
+        .sub-tab-btn.retail.active { background: #ffffff; color: var(--kv-primary); box-shadow: 0 4px 10px rgba(37, 99, 235, 0.1); }
+        .sub-tab-btn.fnb.active { background: #ffffff; color: var(--fnb-primary); box-shadow: 0 4px 10px rgba(217, 119, 6, 0.1); }
+
+        .day-group { background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; padding: 1.5rem; margin-bottom: 2.5rem; }
+        .day-title {
+            font-size: 1.25rem; font-weight: bold; margin-bottom: 1.5rem; display: inline-block;
+            padding: 6px 18px; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .day-title.retail { color: var(--kv-primary); border-left: 4px solid var(--kv-primary); }
+        .day-title.fnb { color: var(--fnb-primary); border-left: 4px solid var(--fnb-primary); }
+
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        
+        /* Hiệu ứng Thẻ 5D nhã nhặn */
+        .card-5d {
+            background: #ffffff; border-radius: 20px; padding: 1.5rem; position: relative;
+            display: flex; flex-direction: column; justify-content: space-between;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03), inset 0 0 0 1px rgba(255,255,255,0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #e2e8f0;
+        }
+        .card-5d:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06), 0 5px 15px rgba(37, 99, 235, 0.04);
+            z-index: 10;
+        }
+        
+        .card-5d.retail-theme:hover { border-color: var(--kv-blue-border); }
+        .card-5d.fnb-theme { background: linear-gradient(135deg, #ffffff 0%, #fffcf8 100%); }
+        .card-5d.fnb-theme:hover { border-color: var(--fnb-border); box-shadow: 0 15px 35px rgba(0,0,0,0.06), 0 5px 15px rgba(217, 119, 6, 0.04);}
+
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; border-bottom: 1px dashed #e2e8f0; padding-bottom: 0.8rem; }
+        .card-header h3 { font-size: 1.15rem; }
+        .retail-theme .card-header h3 { color: var(--kv-primary); }
+        .fnb-theme .card-header h3 { color: var(--fnb-primary); }
+
+        .badge { background: #f1f5f9; color: #475569; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
+        
+        .course-name { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 1.2rem; }
+        
+        .steps { list-style: none; margin-bottom: 1.5rem; }
+        .steps li { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 0.95rem; color: #334155; }
+        .steps li::before { content: "•"; position: absolute; left: 0; top: -2px; font-size: 1.2rem; font-weight: bold; }
+        .retail-theme .steps li::before { color: var(--kv-primary); }
+        .fnb-theme .steps li::before { color: var(--fnb-primary); }
+        
+        /* Pass 80% xanh lá dịu */
+        .text-pass { color: #166534; font-weight: 700; background: #dcfce7; padding: 3px 8px; border-radius: 6px; display: inline-block; margin-top: 4px; font-size: 0.85rem;}
+
+        /* Các nút Link mềm mại dạng Pill */
+        .soft-pill {
+            display: inline-block; text-decoration: none; font-weight: 600; font-size: 0.85rem;
+            padding: 4px 12px; border-radius: 20px; margin-left: 4px; transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02); margin-bottom: 4px;
+        }
+        .retail-pill { background: var(--kv-blue-soft); color: var(--kv-primary); border: 1px solid var(--kv-blue-border); }
+        .retail-pill:hover { background: var(--kv-blue-border); color: #1e3a8a; transform: translateY(-1px);}
+        
+        .fnb-pill { background: var(--fnb-soft); color: var(--fnb-primary); border: 1px solid var(--fnb-border); }
+        .fnb-pill:hover { background: var(--fnb-border); color: #92400e; transform: translateY(-1px);}
+
+        /* Hộp cảnh báo (Tím pastel/ Xám nhạt cho dịu) */
+        .review-note {
+            background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px 14px; border-radius: 10px;
+            font-size: 0.85rem; color: #475569; margin-bottom: 15px; display: flex; gap: 8px;
+        }
+        .review-note strong { color: #6366f1; } /* Chữ giờ giấc màu tím indigo nhẹ */
+
+        .deadline {
+            color: #9a3412; font-weight: 600; background: #ffedd5; padding: 10px; border-radius: 10px;
+            text-align: center; font-size: 0.85rem; margin-top: auto; border: 1px dashed #fdba74;
+        }
+
+        /* Tool Definitions Box */
+        .def-box {
+            background: rgba(255,255,255,0.7); border: 1px solid #e2e8f0; border-radius: 20px; padding: 1.8rem; 
+            margin-bottom: 2.5rem; display: flex; flex-wrap: wrap; gap: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.03); backdrop-filter: blur(10px);
+        }
+        .def-item { flex: 1; min-width: 250px; }
+        .def-item h4 { color: var(--kv-primary); margin-bottom: 8px; font-size: 1.1rem;}
+        .def-item p { font-size: 0.95rem; color: var(--text-gray); }
+
+        .btn-link { 
+            display: inline-block; background: var(--kv-gradient); color: white; text-decoration: none; 
+            padding: 10px 20px; border-radius: 12px; font-weight: bold; text-align: center; border: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        }
+        .btn-link:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3); }
+
+    </style>
+</head>
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo" class="logo">
+            <h1>Thời Khóa Biểu Đào Tạo Sản Phẩm Tuần 1</h1>
+            <p style="color: var(--text-gray); font-size: 1.1rem;">Lộ trình học tập & Hướng dẫn dành cho nhân viên Tái Ký</p>
+        </header>
+
+        <!-- THANH ĐIỀU HƯỚNG TABS CHÍNH -->
+        <div class="main-tabs-container">
+            <button class="main-tab-btn active" onclick="openMainTab(event, 'TabOverview')">🏠 Tổng Quan</button>
+            <button class="main-tab-btn" onclick="openMainTab(event, 'TabSchedule')">📅 Mục 1: Lịch Trình Chung</button>
+            <button class="main-tab-btn highlight" onclick="openMainTab(event, 'TabProduct')">✨ Mục 2: Lộ Trình Đào Tạo</button>
+            <button class="main-tab-btn" onclick="openMainTab(event, 'TabResource')">📚 Mục 3: Tài Nguyên & HD</button>
+        </div>
+
+        <!-- ======================= TAB 1: TỔNG QUAN ======================= -->
+        <div id="TabOverview" class="main-tab-content active">
+            <div class="notice-box" style="text-align: center; border-left: none; background: white; border: 1px solid #e2e8f0; color: var(--text-dark);">
+                👋 Chào mừng bạn tham gia khóa đào tạo dành cho nhân viên Tái Ký. <br> Hãy xem tổng quan các phần dưới đây và nhấp vào từng ô để đi đến nội dung chi tiết.
+            </div>
+            
+            <div class="overview-grid">
+                <div class="overview-card" onclick="document.querySelectorAll('.main-tab-btn')[1].click()">
+                    <div class="overview-icon">📅</div>
+                    <h3 style="color: var(--kv-primary); margin-bottom: 10px;">Mục 1: Lịch Trình Chung</h3>
+                    <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px;">Khung thời gian 1 tuần các hoạt động: Thủ tục, Hội nhập, Đào tạo SP.</p>
+                </div>
+                
+                <div class="overview-card" style="border: 1px solid #fdba74;" onclick="document.querySelectorAll('.main-tab-btn')[2].click()">
+                    <div class="overview-icon">✨</div>
+                    <h3 style="color: var(--fnb-primary); margin-bottom: 10px;">Mục 2: Lộ Trình Đào Tạo</h3>
+                    <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px;">Chi tiết bài học từng buổi (Retail/F&B). Đầy đủ Link Quiz, Bài tập, Hạn chót.</p>
+                </div>
+
+                <div class="overview-card" onclick="document.querySelectorAll('.main-tab-btn')[3].click()">
+                    <div class="overview-icon">📚</div>
+                    <h3 style="color: var(--kv-primary); margin-bottom: 10px;">Mục 3: Tài Nguyên & HD</h3>
+                    <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px;">Thông tin về E-learning, LMS và 4 bước học tập tiêu chuẩn để Pass khóa.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================= TAB 2: LỊCH TRÌNH 7 NGÀY (MỤC 1) ======================= -->
+        <div id="TabSchedule" class="main-tab-content">
+            <h2 class="section-title">Lịch Trình Các Hoạt Động (Chung)</h2>
+            <div class="calendar-wrapper">
+                <div class="week-calendar">
+                    <div class="cal-day">
+                        <div class="cal-header">Thứ 2</div>
+                        <div class="cal-body">
+                            <div class="cal-event"><span class="time">08:00 - 09:00</span>Thủ tục gia nhập <br> <em style="color:#64748b">(Tại VP)</em></div>
+                            <div class="cal-event"><span class="time">14:00 - 16:00</span>Đào tạo Hội nhập <br> <em style="color:#64748b">(Online tại VP)</em></div>
+                        </div>
+                    </div>
+                    <div class="cal-day">
+                        <div class="cal-header">Thứ 3</div>
+                        <div class="cal-body">
+                            <div class="cal-event"><span class="time">08:30 - 11:30</span>Đào tạo SP + TH (B1A)</div>
+                            <div class="cal-event"><span class="time">14:00 - 16:00</span>Đào tạo SP + TH (B1B)</div>
+                            <div class="cal-event review"><span class="time">16:00 - 17:00</span>🎥 Review Online</div>
+                        </div>
+                    </div>
+                    <div class="cal-day">
+                        <div class="cal-header">Thứ 4</div>
+                        <div class="cal-body">
+                            <div class="cal-event"><span class="time">08:30 - 11:30</span>Đào tạo SP + TH (B2A)</div>
+                            <div class="cal-event"><span class="time">14:00 - 16:00</span>Đào tạo SP + TH (B2B)</div>
+                            <div class="cal-event review"><span class="time">16:00 - 17:00</span>🎥 Review Online</div>
+                        </div>
+                    </div>
+                    <div class="cal-day">
+                        <div class="cal-header">Thứ 5</div>
+                        <div class="cal-body">
+                            <div class="cal-event" style="background: var(--kv-blue-soft); border-color:var(--kv-blue-border);">
+                                <span class="time">08:30 - 15:30</span><strong>Đào tạo SP + TH (B3)</strong><br><em style="color:#64748b">Kế toán 01</em>
+                            </div>
+                            <div class="cal-event review"><span class="time">16:00 - 17:00</span>🎥 Review Online</div>
+                        </div>
+                    </div>
+                    <div class="cal-day">
+                        <div class="cal-header">Thứ 6</div>
+                        <div class="cal-body">
+                            <div class="cal-event"><span class="time">10:00 - 10:30</span>Gửi kết quả Đánh giá</div>
+                        </div>
+                    </div>
+                    <div class="cal-day weekend">
+                        <div class="cal-header">Thứ 7</div>
+                        <div class="cal-body"><div class="cal-event empty">Nghỉ</div></div>
+                    </div>
+                    <div class="cal-day weekend">
+                        <div class="cal-header">Chủ Nhật</div>
+                        <div class="cal-body"><div class="cal-event empty">Nghỉ</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================= TAB 3: LỘ TRÌNH ĐÀO TẠO (MỤC 2) ======================= -->
+        <div id="TabProduct" class="main-tab-content">
+            <h2 class="section-title">Lộ Trình Đào Tạo Sản Phẩm (Tái Ký)</h2>
+            <div class="notice-box">
+                👉 <strong>Lưu ý:</strong> Các bạn vui lòng chọn Tab Ngành (RETAIL hoặc F&B) theo lộ trình bên dưới để lấy chính xác Link Ôn tập và Bài tập thực hành của từng buổi.
+            </div>
+
+            <!-- Sub Tabs (Retail / F&B) -->
+            <div class="sub-tabs-container">
+                <button class="sub-tab-btn retail active" onclick="openSubTab(event, 'SubRetail')">🛒 Ngành RETAIL</button>
+                <button class="sub-tab-btn fnb" onclick="openSubTab(event, 'SubFNB')">🍔 Ngành F&B</button>
+            </div>
+
+            <!-- ================= NỘI DUNG RETAIL ================= -->
+            <div id="SubRetail" class="sub-tab-content" style="display: block;">
+                <!-- Buổi 1 -->
+                <div class="day-group">
+                    <div class="day-title retail">Thứ 3 - Buổi 1: Vận hành Cơ Bản</div>
+                    <div class="card-grid">
+                        <div class="card-5d retail-theme">
+                            <div>
+                                <div class="card-header"><h3>Sáng (B1A)</h3><span class="badge">LMS</span></div>
+                                <div class="course-name">Tổng quan Hàng hóa ngành Bán Lẻ</div>
+                                <ul class="steps">
+                                    <li>Nghiên cứu E-Learning <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/dao-tao-san-pham-retail" target="_blank" class="soft-pill retail-pill">👉 Học liệu</a></li>
+                                    <li>Ôn tập trắc nghiệm <a href="https://kiotvietlnd.github.io/quiz/khoa-hoc/retail-tk1a" target="_blank" class="soft-pill retail-pill">👉 Làm Quiz</a></li>
+                                    <li>Thực hành thao tác <a href="https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/practice.html?roadmap=Retail&session=session_1a" target="_blank" class="soft-pill retail-pill">👉 Bài tập</a></li>
+                                </ul>
+                            </div>
+                            <div class="deadline">Hạn chót: 12h00 trưa buổi 1</div>
+                        </div>
+                        <div class="card-5d retail-theme">
+                            <div>
+                                <div class="card-header"><h3>Chiều (B1B)</h3><span class="badge">LMS</span></div>
+                                <div class="course-name">Giao dịch, Giá bán & Quản lý Kho</div>
+                                <ul class="steps">
+                                    <li>Nghiên cứu E-Learning <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/dao-tao-san-pham-retail" target="_blank" class="soft-pill retail-pill">👉 Học liệu</a></li>
+                                    <li>Ôn tập trắc nghiệm <a href="https://kiotvietlnd.github.io/quiz/khoa-hoc/retail-tk1b" target="_blank" class="soft-pill retail-pill">👉 Làm Quiz</a></li>
+                                    <li>Thực hành thao tác <a href="https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/practice.html?roadmap=Retail&session=session_1b" target="_blank" class="soft-pill retail-pill">👉 Bài tập</a></li>
+                                </ul>
+                            </div>
+                            <div class="review-note">🎥 <span><strong>16h00 - 17h00:</strong> Check Email lấy link Google Meet Review.</span></div>
+                            <div class="deadline">Hạn chót: 15h30 chiều buổi 1</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 2 -->
+                <div class="day-group">
+                    <div class="day-title retail">Thứ 4 - Buổi 2: Nâng Cao & Kiểm Tra</div>
+                    <div class="card-grid">
+                        <div class="card-5d retail-theme">
+                            <div>
+                                <div class="card-header"><h3>Sáng (B2A)</h3><span class="badge">LMS</span></div>
+                                <div class="course-name">Vận hành Bán hàng & Khách hàng</div>
+                                <ul class="steps">
+                                    <li>Nghiên cứu E-Learning <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/dao-tao-san-pham-retail" target="_blank" class="soft-pill retail-pill">👉 Học liệu</a></li>
+                                    <li>Ôn tập trắc nghiệm <a href="https://kiotvietlnd.github.io/quiz/khoa-hoc/retail-tk2a" target="_blank" class="soft-pill retail-pill">👉 Làm Quiz</a></li>
+                                    <li>Thực hành thao tác <a href="https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/practice.html?roadmap=Retail&session=session_2a" target="_blank" class="soft-pill retail-pill">👉 Bài tập</a></li>
+                                </ul>
+                            </div>
+                            <div class="deadline">Hạn chót: 12h00 trưa buổi 2</div>
+                        </div>
+                        <div class="card-5d retail-theme">
+                            <div>
+                                <div class="card-header"><h3>Chiều (B2B)</h3><span class="badge">Thi Cuối Khóa</span></div>
+                                <div class="course-name">Nhân sự, Báo cáo & Mở rộng</div>
+                                <ul class="steps">
+                                    <li>Nghiên cứu E-Learning <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/dao-tao-san-pham-retail" target="_blank" class="soft-pill retail-pill">👉 Học liệu</a></li>
+                                    <li>Ôn tập trắc nghiệm <a href="https://kiotvietlnd.github.io/quiz/khoa-hoc/retail-tk2b" target="_blank" class="soft-pill retail-pill">👉 Làm Quiz</a></li>
+                                    <li>Thực hành thao tác <a href="https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/practice.html?roadmap=Retail&session=session_2b" target="_blank" class="soft-pill retail-pill">👉 Bài tập</a></li>
+                                    <li>Kiểm tra cuối khóa: 40 câu <span class="text-pass">Pass 80%</span></li>
+                                </ul>
+                            </div>
+                            <div class="review-note">🎥 <span><strong>16h00 - 17h00:</strong> Check Email lấy link Google Meet Review.</span></div>
+                            <div class="deadline">Hạn chót: 15h30 chiều buổi 2</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 3 -->
+                <div class="day-group">
+                    <div class="day-title retail">Thứ 5 - Buổi 3: Lộ trình Kế Toán</div>
+                    <div class="card-5d retail-theme" style="width: 100%; max-width: 600px;">
+                        <div>
+                            <div class="card-header"><h3>08:30 - 15:30 (Cả ngày)</h3><span class="badge">Thi Kế Toán</span></div>
+                            <div class="course-name">Lộ trình khóa Kế toán 01</div>
+                            <ul class="steps">
+                                <li>Nghiên cứu E-Learning <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc/dao-tao-san-pham-ke-toan-01" target="_blank" class="soft-pill retail-pill">👉 Học liệu</a></li>
+                                <li>Ôn tập trắc nghiệm <a href="https://kiotvietlnd.github.io/quiz/khoa-hoc/ke-toan-01" target="_blank" class="soft-pill retail-pill">👉 Làm Quiz</a></li>
+                                <li>Thực hành thao tác <a href="https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/practice.html?roadmap=Retail&session=session_3" target="_blank" class="soft-pill retail-pill">👉 Bài tập</a></li>
+                                <li>Kiểm tra cuối khóa: 40 câu <span class="text-pass">Pass 80%</span></li>
+                            </ul>
+                        </div>
+                        <div class="review-note" style="margin-top: 15px;">🎥 <span><strong>16h00 - 17h00:</strong> Check Email lấy link Google Meet Review.</span></div>
+                        <div class="deadline">Hạn chót: 15h30 chiều buổi 3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= NỘI DUNG F&B ================= -->
+            <div id="SubFNB" class="sub-tab-content" style="display: none;">
+                 <!-- Buổi 1 FNB -->
+                 <div class="day-group" style="background: rgba(255, 251, 235, 0.4); border-color: rgba(254, 215, 170, 0.6);">
+                    <div class="day-title fnb">Thứ 3 - Buổi 1 (F&B)</div>
+                    <div class="card-grid">
+                        <div class="card-5d fnb-theme">
+                            <div>
+                                <div class="card-header"><h3>Sáng (B1A)</h3><span class="badge">LMS</span></div>
+                                <div class="course-name">Tổng quan Thực đơn & Kho hàng</div>
+                                <ul class="steps">
+                                    <li>Nghiên cứu E-Learning <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/dao-tao-san-pham-fnb" target="_blank" class="soft-pill fnb-pill">👉 Học liệu</a></li>
+                                    <li>Ôn tập trắc nghiệm <a href="https://kiotvietlnd.github.io/quiz/khoa-hoc/fnb-tk1a" target="_blank" class="soft-pill fnb-pill">👉 Làm Quiz</a></li>
+                                    <li>Thực hành thao tác <a href="https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/practice.html?roadmap=FNB&session=session_1a" target="_blank" class="soft-pill fnb-pill">👉 Bài tập</a></li>
+                                </ul>
+                            </div>
+                            <div class="deadline">Hạn chót: 12h00 trưa buổi 1</div>
+                        </div>
+                        <div class="card-5d fnb-theme">
+                            <div>
+                                <div class="card-header"><h3>Chiều (B1B)</h3><span class="badge">LMS</span></div>
+                                <div class="course-name">Món đặc thù ngành F&B</div>
+                                <ul class="steps">
+                                    <li>Nghiên cứu E-Learning <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/dao-tao-san-pham-fnb" target="_blank" class="soft-pill fnb-pill">👉 Học liệu</a></li>
+                                    <li>Ôn tập trắc nghiệm <a href="https://kiotvietlnd.github.io/quiz/khoa-hoc/fnb-tk1b" target="_blank" class="soft-pill fnb-pill">👉 Làm Quiz</a></li>
+                                    <li>Thực hành thao tác <a href="https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/practice.html?roadmap=FNB&session=session_1b" target="_blank" class="soft-pill fnb-pill">👉 Bài tập</a></li>
+                                </ul>
+                            </div>
+                            <div class="review-note">🎥 <span><strong>16h00 - 17h00:</strong> Check Email lấy link Google Meet Review.</span></div>
+                            <div class="deadline">Hạn chót: 15h30 chiều buổi 1</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 2 FNB -->
+                <div class="day-group" style="background: rgba(255, 251, 235, 0.4); border-color: rgba(254, 215, 170, 0.6);">
+                    <div class="day-title fnb">Thứ 4 - Buổi 2 (F&B)</div>
+                    <div class="card-grid">
+                        <div class="card-5d fnb-theme">
+                            <div>
+                                <div class="card-header"><h3>Sáng (B2A)</h3><span class="badge">LMS</span></div>
+                                <div class="course-name">Vận hành Bán hàng & Thanh toán</div>
+                                <ul class="steps">
+                                    <li>Nghiên cứu E-Learning <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/dao-tao-san-pham-fnb" target="_blank" class="soft-pill fnb-pill">👉 Học liệu</a></li>
+                                    <li>Ôn tập trắc nghiệm <a href="https://kiotvietlnd.github.io/quiz/khoa-hoc/fnb-tk2a" target="_blank" class="soft-pill fnb-pill">👉 Làm Quiz</a></li>
+                                    <li>Thực hành thao tác <a href="https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/practice.html?roadmap=FNB&session=session_2a" target="_blank" class="soft-pill fnb-pill">👉 Bài tập</a></li>
+                                </ul>
+                            </div>
+                            <div class="deadline">Hạn chót: 12h00 trưa buổi 2</div>
+                        </div>
+                        <div class="card-5d fnb-theme">
+                            <div>
+                                <div class="card-header"><h3>Chiều (B2B)</h3><span class="badge">Thi Cuối Khóa</span></div>
+                                <div class="course-name">Thiết lập Phần cứng</div>
+                                <ul class="steps">
+                                    <li>Nghiên cứu E-Learning <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/dao-tao-san-pham-fnb" target="_blank" class="soft-pill fnb-pill">👉 Học liệu</a></li>
+                                    <li>Ôn tập trắc nghiệm <a href="https://kiotvietlnd.github.io/quiz/khoa-hoc/fnb-tk2b" target="_blank" class="soft-pill fnb-pill">👉 Làm Quiz</a></li>
+                                    <li>Thực hành thao tác <a href="https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/practice.html?roadmap=FNB&session=session_2b" target="_blank" class="soft-pill fnb-pill">👉 Bài tập</a></li>
+                                    <li>Kiểm tra cuối khóa: 40 câu <span class="text-pass">Pass 80%</span></li>
+                                </ul>
+                            </div>
+                            <div class="review-note">🎥 <span><strong>16h00 - 17h00:</strong> Check Email lấy link Google Meet Review.</span></div>
+                            <div class="deadline">Hạn chót: 15h30 chiều buổi 2</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 3 FNB -->
+                <div class="day-group" style="background: rgba(255, 251, 235, 0.4); border-color: rgba(254, 215, 170, 0.6);">
+                    <div class="day-title fnb">Thứ 5 - Buổi 3 (Kế toán)</div>
+                    <div class="card-5d fnb-theme" style="width: 100%; max-width: 600px;">
+                        <div>
+                            <div class="card-header"><h3>08:30 - 15:30 (Cả ngày)</h3><span class="badge">Thi Kế Toán</span></div>
+                            <div class="course-name">Lộ trình khóa Kế toán 01</div>
+                            <ul class="steps">
+                                <li>Nghiên cứu E-Learning <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc/dao-tao-san-pham-ke-toan-01" target="_blank" class="soft-pill fnb-pill">👉 Học liệu</a></li>
+                                <li>Ôn tập trắc nghiệm <a href="https://kiotvietlnd.github.io/quiz/khoa-hoc/ke-toan-01" target="_blank" class="soft-pill fnb-pill">👉 Làm Quiz</a></li>
+                                <li>Thực hành thao tác <a href="https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/practice.html?roadmap=FNB&session=session_3" target="_blank" class="soft-pill fnb-pill">👉 Bài tập</a></li>
+                                <li>Kiểm tra cuối khóa: 40 câu <span class="text-pass">Pass 80%</span></li>
+                            </ul>
+                        </div>
+                        <div class="review-note" style="margin-top: 15px;">🎥 <span><strong>16h00 - 17h00:</strong> Check Email lấy link Google Meet Review.</span></div>
+                        <div class="deadline">Hạn chót: 15h30 chiều buổi 3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================= TAB 4: TÀI NGUYÊN & HD (MỤC 3) ======================= -->
+        <div id="TabResource" class="main-tab-content">
+            <h2 class="section-title">Hướng Dẫn & Tài Nguyên Học Tập</h2>
+            
+            <div class="def-box">
+                <div class="def-item">
+                    <h4>📘 Nền tảng E-Learning</h4>
+                    <p>Là thư viện để các bạn tự do học tập, ôn luyện kiến thức trắc nghiệm, làm bài tập thực hành phần mềm và tham khảo các tình huống tư vấn.</p>
+                </div>
+                <div class="def-item" style="border-left: 1px dashed #cbd5e1; padding-left: 20px;">
+                    <h4>🎓 Hệ thống LMS</h4>
+                    <p>Là nơi ghi nhận kết quả chính thức cho các khóa học. LMS dùng để theo dõi tiến độ, đánh giá năng lực cuối kỳ và ghi nhận hoàn thành khóa Tái ký.</p>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card-5d retail-theme">
+                    <div style="font-size: 2.5rem; color: var(--kv-blue-border); font-weight: 800; margin-bottom: 5px; line-height: 1;">1</div>
+                    <h3 style="margin-bottom: 10px; color: var(--text-dark);">Ghi danh LMS</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-gray); margin-bottom: 20px; flex-grow:1;">
+                        Đăng nhập tài khoản cá nhân được cấp và tiến hành ghi danh vào khóa học chính thức.
+                    </p>
+                    <a href="https://daotao.kiotviet.vn/khoa-hoc-bat-buoc/" target="_blank" class="btn-link" style="background: transparent; color: var(--kv-primary); border: 1px solid var(--kv-primary); box-shadow: none;">Kích hoạt ngay</a>
+                </div>
+
+                <div class="card-5d retail-theme">
+                    <div style="font-size: 2.5rem; color: var(--kv-blue-border); font-weight: 800; margin-bottom: 5px; line-height: 1;">2</div>
+                    <h3 style="margin-bottom: 10px; color: var(--text-dark);">Tự học E-Learning</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-gray); margin-bottom: 20px; flex-grow:1;">
+                        Học lý thuyết, nghiên cứu Infographics, làm quiz game và Bài tập thực hành tương ứng.
+                    </p>
+                    <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/" target="_blank" class="btn-link" style="background: transparent; color: var(--kv-primary); border: 1px solid var(--kv-primary); box-shadow: none;">Vào E-Learning</a>
+                </div>
+
+                <div class="card-5d retail-theme">
+                    <div style="font-size: 2.5rem; color: var(--kv-blue-border); font-weight: 800; margin-bottom: 5px; line-height: 1;">3</div>
+                    <h3 style="margin-bottom: 10px; color: var(--text-dark);">Ôn tập Tình huống</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-gray); margin-bottom: 20px; flex-grow:1;">
+                        Tham khảo Danh sách tình huống tư vấn để luyện vận dụng, review cuối ngày học.
+                    </p>
+                    <a href="https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/tinh-huong-on-tap-retail" target="_blank" class="btn-link" style="background: transparent; color: var(--kv-primary); border: 1px solid var(--kv-primary); box-shadow: none;">Xem Tình huống</a>
+                </div>
+
+                <div class="card-5d retail-theme" style="border-color: var(--kv-blue-border); background: var(--kv-blue-soft);">
+                    <div style="font-size: 2.5rem; color: var(--kv-primary); font-weight: 800; margin-bottom: 5px; line-height: 1;">4</div>
+                    <h3 style="margin-bottom: 10px; color: var(--kv-primary);">Thi sát hạch</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 20px; flex-grow:1;">
+                        Hoàn thành bài kiểm tra đánh giá kiến thức cuối kỳ trên hệ thống LMS để chốt kết quả.
+                    </p>
+                    <a href="https://daotao.kiotviet.vn/khoa-hoc-bat-buoc/" target="_blank" class="btn-link">Làm bài kiểm tra</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Chuyển Tab Chính
+        function openMainTab(evt, tabId) {
+            var contents = document.getElementsByClassName("main-tab-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            var btns = document.getElementsByClassName("main-tab-btn");
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+            }
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Chuyển Tab Phụ trong Mục 2
+        function openSubTab(evt, subTabId) {
+            var contents = document.getElementsByClassName("sub-tab-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].style.display = "none";
+            }
+            var btns = document.getElementsByClassName("sub-tab-btn");
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+            }
+            document.getElementById(subTabId).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
