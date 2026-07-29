@@ -1,1 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Đào tạo Tái ký - KiotViet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { blue: '#0052CC', orange: '#FF6600' }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'float': '0 10px 30px -5px rgba(0, 0, 0, 0.08)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F8FAFC; color: #0F172A; }
+        
+        /* Trục thời gian (Timeline) căn giữa hoàn hảo tâm của Icon 40px */
+        .timeline-line {
+            position: absolute;
+            top: 2rem;
+            bottom: -1.5rem;
+            left: calc(1.25rem - 1px); /* 1.25rem là nửa của w-10 (2.5rem). Trừ 1px nửa độ dày của đường line */
+            width: 2px;
+            background: #E2E8F0;
+            z-index: 0;
+        }
+        
+        /* Ẩn đường thẳng ở bước cuối cùng */
+        .timeline-item:last-child .timeline-line { display: none; }
 
+        /* Hiệu ứng viền màu Accent cho thẻ */
+        .card-accent-all { border-left: 4px solid #6366F1; }
+        .card-accent-admin { border-left: 4px solid #E11D48; }
+        .card-accent-learner { border-left: 4px solid #0284C7; }
+        .card-accent-trainer { border-left: 4px solid #10B981; }
+        .card-accent-sm { border-left: 4px solid #D97706; }
+
+        /* Animation khi lọc */
+        .timeline-item {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet" class="h-6">
+                <div class="w-px h-5 bg-slate-200"></div>
+                <span class="font-bold text-slate-700 text-sm tracking-tight uppercase">Project Đào Tạo Tái Ký</span>
+            </div>
+            
+            <div class="flex bg-slate-100 p-1 rounded-lg border border-slate-200/50 shadow-inner">
+                <button onclick="setBranch('all')" id="b-all" class="px-3 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-800 transition-colors">Tất cả</button>
+                <button onclick="setBranch('retail')" id="b-retail" class="px-3 py-1 text-xs font-semibold rounded text-slate-500 hover:text-slate-700 transition-colors">Retail</button>
+                <button onclick="setBranch('fnb')" id="b-fnb" class="px-3 py-1 text-xs font-semibold rounded text-slate-500 hover:text-slate-700 transition-colors">FNB</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 md:px-8 py-8 w-full flex-1">
+        
+        <!-- BẢNG ĐIỀU KHIỂN -->
+        <div class="mb-10 bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="px-4 py-2 w-full sm:w-auto">
+                <h2 class="text-sm font-bold text-slate-800">Bộ Lọc Lộ Trình</h2>
+            </div>
+
+            <!-- Tab Control Filters -->
+            <div class="flex w-full sm:w-auto bg-slate-50 p-1 rounded-lg border border-slate-200/60">
+                <button onclick="setFocus('all')" id="f-all" class="flex-1 sm:flex-none px-4 py-1.5 text-xs font-bold rounded-md bg-slate-800 text-white shadow-sm transition-all">Toàn bộ (11)</button>
+                <button onclick="setFocus('trainer')" id="f-trainer" class="flex-1 sm:flex-none px-4 py-1.5 text-xs font-bold rounded-md text-emerald-600 hover:bg-emerald-50 transition-all"><i class="fa-solid fa-chalkboard-user mr-1"></i>Trainer</button>
+                <button onclick="setFocus('learner')" id="f-learner" class="flex-1 sm:flex-none px-4 py-1.5 text-xs font-bold rounded-md text-sky-600 hover:bg-sky-50 transition-all"><i class="fa-solid fa-user-graduate mr-1"></i>Học viên</button>
+            </div>
+        </div>
+
+        <!-- TIMELINE CONTAINER -->
+        <div class="relative pb-10" id="timeline-root">
+            <!-- Dữ liệu được render tại đây bằng Javascript -->
+        </div>
+
+    </main>
+
+    <script>
+        const timelineData = [
+            {
+                id: 1, role: "All", code: "all",
+                icon: "fa-solid fa-map", title: "Khởi động: Cập nhật Thời Khóa Biểu",
+                desc: "Nắm bắt thông tin All-in-one, danh sách lớp học và lịch trình trong tuần.",
+                retail: [{ name: "Xem TKB Retail", url: "https://kiotvietlnd.github.io/training/tkb-tai-ky-tuan-1" }],
+                fnb: [{ name: "Xem TKB FNB", url: "https://kiotvietlnd.github.io/training/tkb-tai-ky-tuan-1" }]
+            },
+            {
+                id: 2, role: "Admin", code: "admin",
+                icon: "fa-solid fa-gears", title: "Hệ thống phân công Reviewer",
+                desc: "Điền danh sách ứng viên & giảng viên. Dùng công cụ tự động đổ lịch vào sheet Review Calendar.",
+                retail: [], fnb: []
+            },
+            {
+                id: 3, role: "Trainer", code: "trainer",
+                icon: "fa-regular fa-calendar-check", title: "Tạo & gửi Lịch Google Meet",
+                desc: "Lấy email Học viên để Add lịch Calendar & Cập nhật Sheet Review. Giữ nguyên 1 link Google Meet duy nhất.",
+                retail: [], fnb: []
+            },
+            {
+                id: 4, role: "Học viên", code: "learner",
+                icon: "fa-solid fa-book-open", title: "Nghiên cứu Lý thuyết",
+                desc: "Học viên tự xem Infographic, lý thuyết sản phẩm và trả lời câu hỏi phụ trên Github.",
+                retail: [{ name: "Học liệu Retail", url: "https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/dao-tao-san-pham-retail" }],
+                fnb: [{ name: "Học liệu FNB", url: "https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/dao-tao-san-pham-fnb" }]
+            },
+            {
+                id: 5, role: "Học viên", code: "learner",
+                icon: "fa-solid fa-pen-nib", title: "Làm Test Trắc nghiệm",
+                desc: "Làm bài trắc nghiệm nhanh để củng cố kiến thức từng phần.",
+                retail: [
+                    { name: "TK1A", url: "https://kiotvietlnd.github.io/quiz/khoa-hoc/retail-tk1a" }, 
+                    { name: "TK1B", url: "https://kiotvietlnd.github.io/quiz/khoa-hoc/retail-tk1b" }, 
+                    { name: "TK2A", url: "https://kiotvietlnd.github.io/quiz/khoa-hoc/retail-tk2a" }, 
+                    { name: "TK2B", url: "https://kiotvietlnd.github.io/quiz/khoa-hoc/retail-tk2b" }
+                ],
+                fnb: [
+                    { name: "TK1A", url: "https://kiotvietlnd.github.io/quiz/khoa-hoc/fnb-tk1a" }, 
+                    { name: "TK1B", url: "https://kiotvietlnd.github.io/quiz/khoa-hoc/fnb-tk1b" }, 
+                    { name: "TK2A", url: "https://kiotvietlnd.github.io/quiz/khoa-hoc/fnb-tk2a" }, 
+                    { name: "TK2B", url: "https://kiotvietlnd.github.io/quiz/khoa-hoc/fnb-tk2b" }
+                ]
+            },
+            {
+                id: 6, role: "Học viên", code: "learner",
+                icon: "fa-solid fa-camera", title: "Thực hành & Chụp ảnh",
+                desc: "Thao tác trực tiếp trên phần mềm KiotViet, chụp ảnh màn hình và nộp minh chứng.",
+                retail: [{ name: "Nộp bài Retail", url: "https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/" }],
+                fnb: [{ name: "Nộp bài FNB", url: "https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/" }]
+            },
+            {
+                id: 7, role: "Trainer", code: "trainer",
+                icon: "fa-solid fa-clipboard-check", title: "Kiểm tra trạng thái bài nộp",
+                desc: "Trước khi vào Meet, Trainer check xem học viên đã nộp đủ ảnh thực hành chưa.",
+                retail: [{ name: "View Dashboard", url: "https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/view-giang-vien.html" }],
+                fnb: [{ name: "View Dashboard", url: "https://kiotvietlnd.github.io/quiz/thuc-hanh/tai-ky/view-giang-vien.html" }]
+            },
+            {
+                id: 8, role: "Học viên", code: "learner",
+                icon: "fa-regular fa-lightbulb", title: "Chuẩn bị Tình huống",
+                desc: "Đọc trước các ca tình huống khó (không có đáp án) để phản xạ khi bị Reviewer hỏi.",
+                retail: [{ name: "Tình huống Retail", url: "https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/tinh-huong-on-tap-retail" }],
+                fnb: [{ name: "Tình huống FNB", url: "https://kiotvietlnd.github.io/elearning/khoa-hoc-tai-ky/tinh-huong-on-tap-fnb" }]
+            },
+            {
+                id: 9, role: "Trainer", code: "trainer",
+                icon: "fa-solid fa-video", title: "Tiến hành Review Live",
+                desc: "Dùng tool Review để: Nhập tên HV > Xem bài > Bốc đề ngẫu nhiên > Ghi nhận kết quả.",
+                retail: [{ name: "Tool Review", url: "https://kiotvietlnd.github.io/quiz/review-tai-ky/trainer" }],
+                fnb: [{ name: "Tool Review", url: "https://kiotvietlnd.github.io/quiz/review-tai-ky/trainer" }]
+            },
+            {
+                id: 10, role: "SM", code: "sm",
+                icon: "fa-solid fa-chart-line", title: "Đồng bộ Báo cáo",
+                desc: "SM Tái ký & team LND theo dõi bảng điểm tổng kết để ra quyết định.",
+                retail: [{ name: "Xem Báo cáo", url: "https://sites.google.com/kiotviet.com/review-sp-tai-ky/home" }],
+                fnb: [{ name: "Xem Báo cáo", url: "https://sites.google.com/kiotviet.com/review-sp-tai-ky/home" }]
+            },
+            {
+                id: 11, role: "Học viên", code: "learner",
+                icon: "fa-solid fa-trophy", title: "Thi tốt nghiệp LMS",
+                desc: "Hoàn thành Test cuối khóa trên LMS (40 câu, Đạt ≥80%, tối đa 2 lần).",
+                retail: [{ name: "Thi LMS Retail", url: "https://daotao.kiotviet.vn/khoa-hoc/tai-ky-dao-tao-san-pham-kiotviet-retail/" }],
+                fnb: [{ name: "Thi LMS FNB", url: "https://daotao.kiotviet.vn/khoa-hoc/tai-ky-dao-tao-san-pham-kiotviet-fnb/" }]
+            }
+        ];
+
+        const colors = {
+            'all': { bg: 'bg-indigo-100', text: 'text-indigo-700', icon: 'bg-indigo-600' },
+            'admin': { bg: 'bg-rose-100', text: 'text-rose-700', icon: 'bg-rose-600' },
+            'learner': { bg: 'bg-sky-100', text: 'text-sky-700', icon: 'bg-sky-600' },
+            'trainer': { bg: 'bg-emerald-100', text: 'text-emerald-700', icon: 'bg-emerald-600' },
+            'sm': { bg: 'bg-amber-100', text: 'text-amber-700', icon: 'bg-amber-600' }
+        };
+
+        let currentBranch = 'all';
+        let currentFocus = 'all';
+
+        function render() {
+            const root = document.getElementById('timeline-root');
+            let html = '';
+            
+            // Biến đếm số thứ tự thay đổi linh hoạt khi áp dụng bộ lọc
+            let displayIndex = 1;
+
+            timelineData.forEach((item) => {
+                // LOGIC LỌC (Ẩn hoàn toàn thẻ không nằm trong Focus Mode)
+                const isVisible = (currentFocus === 'all' || item.code === currentFocus || item.code === 'all');
+                if (!isVisible) return; // Nếu không đạt điều kiện => Bỏ qua không render
+
+                const theme = colors[item.code];
+                
+                // Logic lọc nhánh Retail/FNB
+                const showRetail = (currentBranch === 'all' || currentBranch === 'retail') && item.retail.length > 0;
+                const showFnb = (currentBranch === 'all' || currentBranch === 'fnb') && item.fnb.length > 0;
+
+                // Buttons HTML
+                let btns = '';
+                if (showRetail) {
+                    btns += item.retail.map(r => `<a href="${r.url}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-700 text-xs font-semibold rounded-lg border border-blue-200 hover:border-blue-600 transition-all shadow-sm"><i class="fa-solid fa-store"></i> ${r.name}</a>`).join('');
+                }
+                if (showFnb) {
+                    btns += item.fnb.map(r => `<a href="${r.url}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 hover:bg-orange-500 hover:text-white text-orange-700 text-xs font-semibold rounded-lg border border-orange-200 hover:border-orange-500 transition-all shadow-sm"><i class="fa-solid fa-utensils"></i> ${r.name}</a>`).join('');
+                }
+                
+                const linkArea = btns ? `<div class="mt-4 flex flex-wrap gap-2 pt-3 border-t border-slate-100">${btns}</div>` : '';
+
+                html += `
+                <div class="relative flex items-start gap-6 timeline-item mb-6">
+                    <div class="timeline-line"></div>
+                    
+                    <!-- Icon Node có kèm huy hiệu Đánh số thứ tự (Badge) -->
+                    <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border-[3px] border-[#F8FAFC] shadow-sm ${theme.icon} text-white mt-1">
+                        <i class="${item.icon} text-sm"></i>
+                        
+                        <!-- Số thứ tự -->
+                        <span class="absolute -top-2 -left-2 w-5 h-5 flex items-center justify-center rounded-full bg-slate-800 text-white text-[10px] font-bold border-2 border-[#F8FAFC] shadow-sm">
+                            ${displayIndex}
+                        </span>
+                    </div>
+
+                    <!-- Card Nội dung -->
+                    <div class="flex-1 bg-white rounded-xl shadow-soft border border-slate-200 card-accent-${item.code} p-5 hover:shadow-float transition-shadow">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${theme.bg} ${theme.text}">${item.role}</span>
+                            ${item.code === 'trainer' ? `<span class="text-[10px] font-bold text-emerald-500 flex items-center gap-1"><i class="fa-solid fa-check-double"></i> Việc của bạn</span>` : ''}
+                        </div>
+                        <h3 class="text-base font-bold text-slate-800 mb-1.5">${item.title}</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">${item.desc}</p>
+                        ${linkArea}
+                    </div>
+                </div>
+                `;
+                
+                displayIndex++; // Tăng số đếm sau mỗi lần render thành công
+            });
+            
+            root.innerHTML = html;
+        }
+
+        // Đổi Tab Nhành SP
+        function setBranch(val) {
+            currentBranch = val;
+            ['all', 'retail', 'fnb'].forEach(b => {
+                const el = document.getElementById(`b-${b}`);
+                if (b === val) el.className = "px-3 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-800 transition-colors";
+                else el.className = "px-3 py-1 text-xs font-semibold rounded text-slate-500 hover:text-slate-700 transition-colors";
+            });
+            render();
+        }
+
+        // Đổi Focus Mode (Trainer / Học Viên / Tất Cả)
+        function setFocus(val) {
+            currentFocus = val;
+            ['all', 'trainer', 'learner'].forEach(f => {
+                const el = document.getElementById(`f-${f}`);
+                if (f === val) {
+                    if(f==='all') el.className = "flex-1 sm:flex-none px-4 py-1.5 text-xs font-bold rounded-md bg-slate-800 text-white shadow-sm transition-all";
+                    if(f==='trainer') el.className = "flex-1 sm:flex-none px-4 py-1.5 text-xs font-bold rounded-md bg-emerald-600 text-white shadow-sm transition-all";
+                    if(f==='learner') el.className = "flex-1 sm:flex-none px-4 py-1.5 text-xs font-bold rounded-md bg-sky-600 text-white shadow-sm transition-all";
+                } else {
+                    if(f==='all') el.className = "flex-1 sm:flex-none px-4 py-1.5 text-xs font-bold rounded-md text-slate-600 hover:bg-slate-100 transition-all";
+                    if(f==='trainer') el.className = "flex-1 sm:flex-none px-4 py-1.5 text-xs font-bold rounded-md text-emerald-600 hover:bg-emerald-50 transition-all";
+                    if(f==='learner') el.className = "flex-1 sm:flex-none px-4 py-1.5 text-xs font-bold rounded-md text-sky-600 hover:bg-sky-50 transition-all";
+                }
+            });
+            render();
+        }
+
+        document.addEventListener('DOMContentLoaded', render);
+    </script>
+</body>
+</html>
