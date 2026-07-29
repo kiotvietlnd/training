@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Đào tạo Tái ký - KiotViet</title>
+    <title>Tài liệu dự án -  ĐÀO TẠO TÁI KÝ - KiotViet</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -53,25 +53,17 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
         }
 
-        /* --- TIMELINE CHUẨN (CĂN CHỈNH CHO ICON GẤP ĐÔI) --- */
-        /* Trên Mobile (Icon size: w-20 = 5rem -> tâm là 2.5rem) */
+        /* --- TIMELINE CHUẨN ĐÃ CĂN CHỈNH CHO ICON LỚN HƠN 1.5 LẦN --- */
         .timeline-line {
             position: absolute;
-            top: 4rem;
+            top: 4rem; /* Kéo xuống một chút để phù hợp icon to */
             bottom: -1rem;
-            left: calc(2.5rem - 1px); 
+            /* Chiều rộng Icon = 72px -> Tâm là 36px. Độ dày viền line = 2px -> Trừ đi 1px = 35px */
+            left: 35px;
             width: 2px;
             background: linear-gradient(to bottom, #cbd5e1, #e2e8f0);
             z-index: 0;
         }
-        
-        /* Trên Desktop (Icon size: w-24 = 6rem -> tâm là 3rem) */
-        @media (min-width: 640px) {
-            .timeline-line {
-                left: calc(3rem - 1px);
-            }
-        }
-        
         .timeline-item:last-child .timeline-line { display: none; }
 
         .timeline-item { animation: fadeInUp 0.5s cubic-bezier(0.23, 1, 0.32, 1) both; }
@@ -110,25 +102,26 @@
 
     <!-- HEADER NAVBAR -->
     <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/50 h-16 lg:h-20 flex items-center shadow-sm sticky top-0 z-50 transition-all">
-        <div class="max-w-[1300px] mx-auto px-5 lg:px-8 w-full flex items-center gap-3 lg:gap-4">
+        <div class="max-w-[1300px] mx-auto px-4 lg:px-6 w-full flex items-center gap-3 lg:gap-4">
             <img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo" class="h-6 lg:h-8">
             <span class="text-slate-300 font-light text-xl lg:text-2xl">|</span>
             <span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-800 tracking-tight text-sm lg:text-lg uppercase">
-                Project Đào tạo Tái ký
+                Tài liệu dự án -  ĐÀO TẠO TÁI KÝ
             </span>
         </div>
     </header>
 
-    <main class="flex-grow max-w-[1300px] w-full mx-auto px-5 lg:px-8 py-10 lg:py-16">
+    <!-- Đã thu hẹp lề trái phải (px-3 lg:px-4) mở rộng không gian -->
+    <main class="flex-grow max-w-[1300px] w-full mx-auto px-3 lg:px-4 py-8 lg:py-12">
         
-        <!-- HEADER BLOCK TƯƠNG TỰ TEMPLATE -->
-        <section class="mb-12">
+        <!-- HEADER BLOCK -->
+        <section class="mb-10">
             <div class="flex flex-col items-center text-center gap-3">
                 <div class="w-16 h-16 bg-gradient-to-br from-sky-500 to-blue-700 rounded-[20px] flex items-center justify-center text-3xl text-white shadow-lg shadow-sky-200 shrink-0 mb-2">
-                    <i class="fa-solid fa-layer-group"></i>
+                    <i class="fa-solid fa-server"></i>
                 </div>
-                <h1 class="text-[2rem] lg:text-[3rem] font-black text-slate-800 leading-tight tracking-tight">
-                    Project Đào tạo <span class="cyber-text-gradient drop-shadow-sm">Tái Ký</span>
+                <h1 class="text-[2rem] lg:text-[2.75rem] font-black text-slate-800 leading-tight tracking-tight">
+                    TỔNG HỢP TÀI LIỆU<BR> <span class="cyber-text-gradient drop-shadow-sm">ĐÀO TẠO SẢN PHẨM CƠ BẢN - TEAM TÁI KÝ</span>
                 </h1>
                 <p class="text-slate-500 font-medium max-w-xl text-[15px]">
                     Theo dõi trực quan toàn bộ tiến trình công việc, tài liệu và hệ thống quản lý học viên theo thời gian thực.
@@ -136,14 +129,14 @@
             </div>
         </section>
 
-        <!-- BỘ LỌC -->
+        <!-- BỘ LỌC (Mở rộng layout sang 1200px) -->
         <section class="mb-12 relative z-20">
-            <div class="bg-white/80 glass-panel-ultra border border-slate-200 rounded-[28px] p-6 lg:p-8 shadow-sm max-w-[1000px] mx-auto flex flex-col md:flex-row gap-8 items-center justify-between">
+            <div class="bg-white/80 glass-panel-ultra border border-slate-200 rounded-[24px] p-5 lg:p-6 shadow-sm max-w-[1200px] mx-auto flex flex-col md:flex-row gap-6 items-center justify-between">
                 
                 <!-- Lọc Ngành -->
                 <div class="w-full md:w-auto">
-                    <span class="text-xs font-black text-slate-400 uppercase tracking-widest block mb-3">Chọn ngành phụ trách:</span>
-                    <div class="flex gap-2.5">
+                    <span class="text-[11px] font-black text-slate-400 uppercase tracking-widest block mb-3">Chọn ngành phụ trách:</span>
+                    <div class="flex flex-wrap gap-2.5">
                         <button id="b-all" onclick="setBranch('all')" class="px-5 py-2.5 rounded-xl font-bold border-2 text-xs transition-all border-sky-500 bg-sky-500 text-white shadow-md">
                             Tất cả
                         </button>
@@ -158,7 +151,7 @@
 
                 <!-- Lọc Đối tượng -->
                 <div class="w-full md:w-auto">
-                    <span class="text-xs font-black text-slate-400 uppercase tracking-widest block mb-3 text-left md:text-right">Tập trung tác vụ:</span>
+                    <span class="text-[11px] font-black text-slate-400 uppercase tracking-widest block mb-3 text-left md:text-right">Tập trung tác vụ:</span>
                     <div class="flex flex-wrap gap-2.5 justify-start md:justify-end">
                         <button id="f-all" onclick="setFocus('all')" class="px-5 py-2.5 rounded-xl font-bold border-2 text-xs transition-all border-slate-800 bg-slate-800 text-white shadow-md">
                             Hiển thị (11)
@@ -176,7 +169,8 @@
         </section>
 
         <!-- TIMELINE CONTAINER -->
-        <section class="max-w-[1000px] mx-auto relative px-4 md:px-10 py-10 mb-20 bg-white/40 backdrop-blur-md border border-slate-200/80 rounded-[32px] shadow-sm overflow-visible">
+        <!-- Đã giảm padding hai bên (px-3 md:px-6) để tối đa hoá chiều rộng thẻ -->
+        <section class="max-w-[1200px] mx-auto relative px-3 md:px-6 py-10 mb-20 bg-white/40 backdrop-blur-md border border-slate-200/80 rounded-[32px] shadow-sm overflow-visible">
             <div id="timeline-root" class="relative">
                 <!-- Data Rendered Here -->
             </div>
@@ -185,6 +179,7 @@
     </main>
 
     <script>
+        // Dữ liệu đã được cập nhật nút Test Trắc nghiệm (tên ngắn 1A, 1B, 2A, 2B, 3)
         const timelineData = [
             {
                 id: 1, role: "All", code: "all",
@@ -293,17 +288,17 @@
             let displayIndex = 1;
 
             timelineData.forEach((item) => {
-                // Logic Filter
+                // Logic Filter Focus
                 const isVisible = (currentFocus === 'all' || item.code === currentFocus || item.code === 'all');
                 if (!isVisible) return; 
 
                 const theme = colors[item.code];
                 
-                // Logic Ngành
+                // Logic Filter Ngành
                 const showRetail = (currentBranch === 'all' || currentBranch === 'retail') && item.retail.length > 0;
                 const showFnb = (currentBranch === 'all' || currentBranch === 'fnb') && item.fnb.length > 0;
 
-                // Buttons (sử dụng style scifi-btn từ template)
+                // Render Buttons
                 let btns = '';
                 if (showRetail) {
                     btns += item.retail.map(r => `
@@ -322,24 +317,23 @@
                     `).join('');
                 }
                 
-                const linkArea = btns ? `<div class="mt-5 flex flex-wrap gap-3">${btns}</div>` : '';
+                const linkArea = btns ? `<div class="mt-5 flex flex-wrap gap-2.5">${btns}</div>` : '';
 
                 html += `
-                <div class="relative flex items-start gap-5 sm:gap-8 timeline-item mb-8">
+                <div class="relative flex items-start gap-4 md:gap-6 timeline-item mb-8">
                     <!-- Trục dọc -->
                     <div class="timeline-line"></div>
                     
-                    <!-- Icon khổng lồ + Số thứ tự -->
-                    <div class="relative z-10 flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-2xl sm:rounded-[24px] flex items-center justify-center border-[4px] sm:border-[6px] border-[#f8fafc] shadow-md ${theme.icon} text-white mt-1">
-                        <i class="${item.icon} text-3xl sm:text-4xl drop-shadow-sm"></i>
+                    <!-- Icon TO GẤP 1.5 LẦN (72px) + Số thứ tự -->
+                    <div class="relative z-10 flex-shrink-0 w-[72px] h-[72px] rounded-2xl flex items-center justify-center border-[5px] border-[#f8fafc] shadow-md ${theme.icon} text-white mt-1">
+                        <i class="${item.icon} text-[28px] drop-shadow-sm"></i>
                         
-                        <!-- Huy hiệu đánh số -->
-                        <span class="absolute -top-3 -right-3 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-slate-800 text-white text-[12px] sm:text-[14px] font-bold border-[2px] sm:border-[3px] border-[#f8fafc] shadow-sm">
+                        <span class="absolute -top-2.5 -right-2.5 w-7 h-7 flex items-center justify-center rounded-full bg-slate-800 text-white text-[12px] font-bold border-[3px] border-[#f8fafc] shadow-sm">
                             ${displayIndex}
                         </span>
                     </div>
 
-                    <!-- Nội dung Thẻ (Glassmorphism & Bo góc) -->
+                    <!-- Nội dung Thẻ -->
                     <div class="flex-1 bg-white/90 backdrop-blur-md rounded-[24px] shadow-sm border border-slate-200/80 card-accent-${item.code} p-6 transition-all hover:-translate-y-1 hover:shadow-lg hover:border-slate-300 group">
                         
                         <!-- Header thẻ -->
@@ -350,7 +344,7 @@
                             ${item.code === 'trainer' ? `<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md flex items-center gap-1 border border-emerald-100"><i class="fa-solid fa-check-double"></i> Việc của bạn</span>` : ''}
                         </div>
                         
-                        <h3 class="text-lg sm:text-xl font-black text-slate-800 mb-2 group-hover:text-blue-700 transition-colors">${item.title}</h3>
+                        <h3 class="text-[1.15rem] font-black text-slate-800 mb-2 group-hover:text-blue-700 transition-colors">${item.title}</h3>
                         <p class="text-[14px] text-slate-500 font-medium leading-relaxed max-w-2xl">${item.desc}</p>
                         
                         <!-- Links -->
@@ -365,7 +359,7 @@
             root.innerHTML = html;
         }
 
-        // Action Style cho Filter Buttons
+        // Base styling for active/inactive buttons
         const baseBtnStyle = "px-5 py-2.5 rounded-xl font-bold border-2 text-xs transition-all";
 
         function setBranch(val) {
@@ -374,7 +368,7 @@
             const bRet = document.getElementById('b-retail');
             const bFnb = document.getElementById('b-fnb');
 
-            [bAll, bRet, bFnb].forEach(b => b.className = `${baseBtnStyle} border-slate-200 text-slate-600 bg-white`);
+            [bAll, bRet, bFnb].forEach(b => b.className = `${baseBtnStyle} border-slate-200 text-slate-600 bg-white hover:border-slate-300`);
             
             if(val === 'all') bAll.className = `${baseBtnStyle} border-sky-500 bg-sky-500 text-white shadow-md`;
             if(val === 'retail') bRet.className = `${baseBtnStyle} border-sky-500 bg-sky-500 text-white shadow-md`;
@@ -389,7 +383,7 @@
             const fTrn = document.getElementById('f-trainer');
             const fLrn = document.getElementById('f-learner');
 
-            [fAll, fTrn, fLrn].forEach(f => f.className = `${baseBtnStyle} border-slate-200 text-slate-600 bg-white`);
+            [fAll, fTrn, fLrn].forEach(f => f.className = `${baseBtnStyle} border-slate-200 text-slate-600 bg-white hover:border-slate-300`);
             
             if(val === 'all') fAll.className = `${baseBtnStyle} border-slate-800 bg-slate-800 text-white shadow-md`;
             if(val === 'trainer') fTrn.className = `${baseBtnStyle} border-emerald-600 bg-emerald-600 text-white shadow-md`;
