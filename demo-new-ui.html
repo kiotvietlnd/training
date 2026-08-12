@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KiotViet E-Learning - Tra cứu sản phẩm</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,7 +15,8 @@
                         kvBlueHover: '#1259c7',
                         themePurple: '#9333ea',
                         themeGray: '#475569',
-                        themeGreen: '#16a34a'
+                        kvGreen: '#16a34a',
+                        kvGreenHover: '#15803d'
                     }
                 } 
             }
@@ -38,7 +38,7 @@
         .nav-tab-btn.active-guide { border-bottom-color: #c084fc; color: #ffffff; font-weight: 800; background-color: rgba(255,255,255,0.15); }
         .nav-tab-btn.active-glossary { border-bottom-color: #cbd5e1; color: #ffffff; font-weight: 800; background-color: rgba(255,255,255,0.15); }
         .nav-tab-btn.active-basic { border-bottom-color: #60a5fa; color: #ffffff; font-weight: 800; background-color: rgba(255,255,255,0.15); }
-        .nav-tab-btn.active-advanced { border-bottom-color: #4ade80; color: #ffffff; font-weight: 800; background-color: rgba(255,255,255,0.15); }
+        .nav-tab-btn.active-advanced { border-bottom-color: #4ade80; color: #ffffff; font-weight: 800; background-color: rgba(22,163,74,0.3); }
         .nav-tab-btn:hover { background-color: rgba(255,255,255,0.1); }
         
         .btn-interact { transition: transform 0.15s ease, box-shadow 0.15s ease; }
@@ -48,7 +48,7 @@
 </head>
 <body class="text-slate-800 antialiased flex flex-col h-screen w-screen bg-[#f8fafc] overflow-hidden select-none">
 
-    <!-- 1. HEADER MAIN (KIOTVIET BLUE - BADGE NGÀNH NỀN TRẮNG CHỮ XANH) -->
+    <!-- HEADER MAIN -->
     <header class="h-[60px] sm:h-[64px] shrink-0 text-white shadow-sm z-30 flex items-center justify-between px-4 sm:px-6 bg-gradient-to-r from-[#166def] via-[#166def] to-[#1d4ed8]">
         <div class="flex items-center gap-3 truncate">
             <div class="shrink-0 bg-white p-1 rounded-md flex items-center shadow-xs">
@@ -56,111 +56,107 @@
             </div>
             <span class="text-white/40 text-lg font-light">|</span>
             <div class="truncate">
-                <h1 class="text-xs sm:text-sm font-black tracking-tight text-white uppercase truncate">TRA CỨU SẢN PHẨM</h1>
-                <p class="text-[10px] text-blue-100 font-bold uppercase truncate">Chuyên Trang Đào Tạo Chuyên Viên</p>
+                <h1 class="text-xs sm:text-sm font-black tracking-tight text-white uppercase truncate" id="main-feature-title">Tra cứu sản phẩm</h1>
+                <p class="text-[10px] text-blue-100 font-bold uppercase truncate">Chuyên trang Học liệu Đào tạo sản phẩm KiotViet</p>
             </div>
         </div>
 
-        <!-- THẺ NGÀNH: NỀN TRẮNG - CHỮ XANH DƯƠNG -->
+        <!-- THẺ NGÀNH: NỀN TRẮNG CHỮ XANH -->
         <div class="shrink-0 flex items-center gap-1.5 bg-white text-[#166def] font-bold px-3.5 py-1.5 rounded-full shadow-xs text-xs sm:text-sm border border-blue-100">
             <i class="fa-solid fa-store text-[#166def]"></i>
-            <span class="hidden sm:inline">Ngành Bán Buôn, Bán Lẻ</span>
-            <span class="sm:hidden">Bán Buôn, Bán Lẻ</span>
+            <span class="hidden sm:inline">Bán buôn, Bán lẻ</span>
+            <span class="sm:hidden">Bán buôn, Bán lẻ</span>
         </div>
     </header>
 
-    <!-- 2. SUB-NAVBAR 4 TABS -->
-    <nav class="bg-[#1e3a8a] text-white shrink-0 px-4 sm:px-6 flex gap-1 sm:gap-2 overflow-x-auto custom-scrollbar shadow-xs z-20">
-        <button onclick="switchTab('guide')" id="tab-btn-guide" class="nav-tab-btn active-guide px-4 py-2.5 sm:py-3 flex items-center gap-2 font-bold text-xs sm:text-sm shrink-0">
-            <i class="fa-solid fa-compass text-purple-300"></i> Hướng dẫn học
-        </button>
-        <button onclick="switchTab('glossary')" id="tab-btn-glossary" class="nav-tab-btn px-4 py-2.5 sm:py-3 flex items-center gap-2 font-bold text-xs sm:text-sm shrink-0">
-            <i class="fa-solid fa-book-bookmark text-slate-300"></i> Thuật ngữ nền tảng
-        </button>
-        <button onclick="switchTab('basic')" id="tab-btn-basic" class="nav-tab-btn px-4 py-2.5 sm:py-3 flex items-center gap-2 font-bold text-xs sm:text-sm shrink-0">
-            <i class="fa-solid fa-circle-play text-blue-300"></i> Kiến thức cơ bản
-        </button>
-        <button onclick="switchTab('advanced')" id="tab-btn-advanced" class="nav-tab-btn px-4 py-2.5 sm:py-3 flex items-center gap-2 font-bold text-xs sm:text-sm shrink-0">
-            <i class="fa-solid fa-sliders text-green-300"></i> Kiến thức nâng cao
-        </button>
+    <!-- SUB-NAVBAR TÁCH RIÊNG NÂNG CAO SANG PHẢI (MÀU XANH LÁ) -->
+    <nav class="bg-[#1e3a8a] text-white shrink-0 px-4 sm:px-6 flex justify-between items-center overflow-x-auto custom-scrollbar shadow-xs z-20">
+        <div class="flex gap-1 sm:gap-2 shrink-0">
+            <button onclick="switchTab('guide')" id="tab-btn-guide" class="nav-tab-btn active-guide px-4 py-2.5 sm:py-3 flex items-center gap-2 font-bold text-xs sm:text-sm shrink-0">
+                <i class="fa-solid fa-compass text-purple-300"></i> Hướng dẫn học
+            </button>
+            <button onclick="switchTab('glossary')" id="tab-btn-glossary" class="nav-tab-btn px-4 py-2.5 sm:py-3 flex items-center gap-2 font-bold text-xs sm:text-sm shrink-0">
+                <i class="fa-solid fa-book-bookmark text-slate-300"></i> Thuật ngữ nền tảng
+            </button>
+            <button onclick="switchTab('basic')" id="tab-btn-basic" class="nav-tab-btn px-4 py-2.5 sm:py-3 flex items-center gap-2 font-bold text-xs sm:text-sm shrink-0">
+                <i class="fa-solid fa-circle-play text-blue-300"></i> Kiến thức cơ bản
+            </button>
+        </div>
+        
+        <!-- MỤC NÂNG CAO TÁCH SANG PHẢI - MÀU XANH LÁ -->
+        <div class="shrink-0 ml-auto">
+            <button onclick="switchTab('advanced')" id="tab-btn-advanced" class="nav-tab-btn px-4 py-2.5 sm:py-3 flex items-center gap-2 font-bold text-xs sm:text-sm shrink-0 text-emerald-300 hover:text-white">
+                <i class="fa-solid fa-sliders text-emerald-400"></i> Kiến thức nâng cao
+            </button>
+        </div>
     </nav>
 
-    <!-- 3. MAIN CONTAINER -->
+    <!-- MAIN CONTAINER -->
     <main class="flex-1 min-h-0 relative p-3 sm:p-5 flex flex-col items-center justify-center overflow-hidden">
 
-        <!-- ================= SECTION 1: HƯỚNG DẪN HỌC ================= -->
+        <!-- SECTION 1: HƯỚNG DẪN HỌC -->
         <div id="view-guide" class="w-full h-full overflow-y-auto custom-scrollbar">
             <div class="max-w-5xl mx-auto space-y-5 pb-4">
-                
-                <!-- 1. Giới thiệu chung -->
                 <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xs border border-purple-200 space-y-5">
                     <div class="border-b border-slate-100 pb-3">
                         <span class="bg-purple-100 text-purple-800 border border-purple-200 font-extrabold text-[11px] uppercase px-3 py-1 rounded-full tracking-wider inline-block">
                             <i class="fa-solid fa-circle-info mr-1 text-purple-600"></i> Giới thiệu chung
                         </span>
-                        <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-2">Tính Năng: Tra Cứu Sản Phẩm KiotViet</h2>
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mt-1">Tính năng tra cứu sản phẩm được tích hợp ngay trên màn hình bán hàng của KiotViet, giúp bạn và nhân viên có thể tra cứu, lựa chọn hàng hóa để thêm vào đơn một cách nhanh chóng và chính xác trên mọi nền tảng.</p>
+                        <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-2">Tính Năng: <span class="text-[#166def]" id="guide-feature-name">Tra cứu sản phẩm</span></h2>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mt-1" id="intro-description-text">
+                            Tính năng tra cứu sản phẩm được tích hợp ngay trên màn hình bán hàng của KiotViet, giúp bạn và nhân viên có thể tra cứu, lựa chọn hàng hóa để thêm vào đơn một cách nhanh chóng và chính xác trên mọi nền tảng.
+                        </p>
                     </div>
 
-                    <!-- Video & Infographic -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex flex-col justify-between">
-                            <h4 class="text-xs font-black text-slate-700 uppercase mb-2"><i class="fa-solid fa-circle-play text-[#166def] mr-1.5"></i> Video Hướng Dẫn Trực Quan:</h4>
-                            <div class="w-full aspect-video rounded-xl overflow-hidden shadow-xs border border-slate-200">
-                                <iframe class="w-full h-full" src="https://www.youtube.com/embed/wKZ5Eq6X5Gg" frameborder="0" allowfullscreen></iframe>
-                            </div>
+                    <!-- MEDIA KHÓA CHUẨN TỶ LỆ 16:9 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="intro-media-grid">
+                        <div class="w-full aspect-video bg-slate-900 rounded-2xl overflow-hidden shadow-xs border border-slate-200">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/wKZ5Eq6X5Gg?si=j7WF1WBSplfPIfEK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
-
-                        <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex flex-col justify-between text-center">
-                            <h4 class="text-xs font-black text-slate-700 uppercase mb-2 text-left"><i class="fa-solid fa-image text-[#166def] mr-1.5"></i> Sơ Đồ Infographic:</h4>
-                            <div class="flex-1 flex items-center justify-center py-2">
-                                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/12/07103353/TRA-CUU-SAN-PHAM.jpg" onclick="openLightbox('https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/12/07103353/TRA-CUU-SAN-PHAM.jpg')" class="max-h-[160px] object-contain rounded-lg border border-slate-200 cursor-pointer hover:opacity-95 transition-all shadow-xs">
+                        <div class="w-full aspect-video bg-slate-100 rounded-2xl overflow-hidden shadow-xs border border-slate-200 relative cursor-pointer" onclick="openLightbox('https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/12/07103353/TRA-CUU-SAN-PHAM.jpg')">
+                            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/12/07103353/TRA-CUU-SAN-PHAM.jpg" class="w-full h-full object-cover">
+                            <div class="absolute bottom-2 right-2 bg-slate-900/80 text-white text-[10px] px-2.5 py-1 rounded-full backdrop-blur-md font-bold">
+                                <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Phóng to Ảnh
                             </div>
-                            <p class="text-[11px] text-slate-400 font-bold text-center"><i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Nhấp vào ảnh để phóng to sơ đồ</p>
                         </div>
                     </div>
 
                     <div class="bg-purple-50/60 p-4 rounded-2xl border border-purple-100 space-y-2">
                         <h4 class="text-xs font-black text-purple-900 uppercase"><i class="fa-solid fa-star text-purple-600 mr-1.5"></i> Lợi Ích Nổi Bật Dành Cho Cửa Hàng:</h4>
-                        <ul class="space-y-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                            <li>• <strong>Tạo hóa đơn nhanh chóng và chính xác:</strong> Tìm kiếm bằng quét mã vạch, nhập tên hoặc mã hàng giúp giảm thời gian chờ của khách hàng.</li>
-                            <li>• <strong>Lọc đa tiêu chí đa dạng, linh hoạt:</strong> Lọc theo thuộc tính (màu sắc, kích cỡ) hoặc nhóm hàng đáp ứng nhu cầu đặc thù từng ngành.</li>
-                            <li>• <strong>Thao tác linh hoạt đa nền tảng:</strong> Sử dụng mượt mà trên Máy tính/Web, App Mobile và Máy POS Android.</li>
+                        <ul class="space-y-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed" id="intro-benefits-list">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-600 mt-1"></i> <span><strong>Tạo hóa đơn nhanh chóng và chính xác</strong>: Dễ dàng tìm kiếm sản phẩm bằng nhiều cách như quét mã vạch, nhập tên hoặc mã hàng, giúp giảm thời gian chờ đợi của khách hàng và hạn chế sai sót khi lên đơn.</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-600 mt-1"></i> <span><strong>Hỗ trợ tiêu chí tìm kiếm đa dạng, linh hoạt</strong>: Tìm kiếm sản phẩm theo thuộc tính (màu sắc, kích cỡ), hoặc nhóm hàng để đáp ứng nhu cầu đặc thù của từng ngành kinh doanh.</span></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- 2. Lộ trình tối ưu -->
+                <!-- LỘ TRÌNH HỌC -->
                 <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-xs border border-slate-200 space-y-4">
                     <h3 class="font-black text-sm sm:text-base text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
                         <i class="fa-solid fa-route text-purple-600"></i> Lộ Trình Học Tối Ưu Cho Chuyên Viên Tư Vấn
                     </h3>
-
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
                         <div onclick="switchTab('glossary')" class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 hover:border-slate-400 transition-all cursor-pointer space-y-2 btn-interact">
                             <span class="text-[10px] font-black text-slate-700 bg-slate-200 px-2.5 py-1 rounded-full inline-block uppercase">BƯỚC 1: ĐỌC TRƯỚC</span>
                             <h4 class="font-black text-slate-900 text-sm sm:text-base">Thuật ngữ nền tảng</h4>
-                            <p class="text-slate-600 text-xs leading-relaxed">Đọc hiểu chuẩn từ vựng KiotViet (FEFO, Serial/IMEI, Chế độ F6...) trước khi học.</p>
+                            <p class="text-slate-600 text-xs leading-relaxed">Đọc hiểu chuẩn từ vựng KiotViet trước khi học.</p>
                         </div>
-
                         <div onclick="switchTab('basic')" class="bg-blue-50/70 p-4 sm:p-5 rounded-2xl border-2 border-[#166def] hover:shadow-xs transition-all cursor-pointer space-y-2 btn-interact">
                             <span class="text-[10px] font-black text-white bg-[#166def] px-2.5 py-1 rounded-full inline-block uppercase">🌟 BẮT BUỘC ƯU TIÊN HỌC TRƯỚC</span>
                             <h4 class="font-black text-blue-950 text-sm sm:text-base">Kiến thức cơ bản</h4>
-                            <p class="text-slate-600 text-xs leading-relaxed">Nắm trọn 80% thao tác cốt lõi chỉ trong 5-10 phút. Bắt buộc phải học trước khi tư vấn demo.</p>
+                            <p class="text-slate-600 text-xs leading-relaxed">Nắm trọn 80% thao tác cốt lõi chỉ trong 5-10 phút.</p>
                         </div>
-
-                        <div onclick="switchTab('advanced')" class="bg-green-50/60 p-4 sm:p-5 rounded-2xl border border-green-200 hover:border-green-500 transition-all cursor-pointer space-y-2 btn-interact">
-                            <span class="text-[10px] font-black text-green-800 bg-green-100 px-2.5 py-1 rounded-full inline-block uppercase">TRA CỨU / KHI CÓ NHIỀU THỜI GIAN</span>
-                            <h4 class="font-black text-slate-900 text-sm sm:text-base">Kiến thức nâng cao</h4>
-                            <p class="text-slate-600 text-xs leading-relaxed">Tìm hiểu sâu khi khách hàng có case đặc thù hoặc tra cứu lại khi làm bài tập đào tạo.</p>
+                        <div onclick="switchTab('advanced')" class="bg-emerald-50/70 p-4 sm:p-5 rounded-2xl border-2 border-emerald-600 hover:shadow-xs transition-all cursor-pointer space-y-2 btn-interact">
+                            <span class="text-[10px] font-black text-white bg-emerald-600 px-2.5 py-1 rounded-full inline-block uppercase">TRA CỨU / KHI CÓ NHIỀU THỜI GIAN</span>
+                            <h4 class="font-black text-emerald-950 text-sm sm:text-base">Kiến thức nâng cao</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">Tìm hiểu sâu khi có case đặc thù hoặc tra cứu lại khi làm bài tập.</p>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- ================= SECTION 2: THUẬT NGỮ NỀN TẢNG ================= -->
+        <!-- SECTION 2: THUẬT NGỮ NỀN TẢNG -->
         <div id="view-glossary" class="hidden w-full h-full overflow-y-auto custom-scrollbar">
             <div class="max-w-4xl mx-auto space-y-3.5 pb-4">
                 <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-5">
@@ -171,17 +167,14 @@
                             </h2>
                             <p class="text-slate-500 text-xs mt-1">Chuẩn hóa danh mục từ vựng chuyên môn trước khi đi vào thao tác chi tiết</p>
                         </div>
-                        <span class="bg-slate-100 text-slate-700 font-bold text-xs px-3 py-1 rounded-full border border-slate-200">6 Thuật ngữ</span>
                     </div>
-
                     <ul class="space-y-4 text-slate-600 text-xs sm:text-sm leading-relaxed" id="glossary-bullets-container"></ul>
                 </div>
             </div>
         </div>
 
-        <!-- ================= SECTION 3: KIẾN THỨC CƠ BẢN ================= -->
+        <!-- SECTION 3: KIẾN THỨC CƠ BẢN -->
         <div id="view-basic" class="hidden w-full h-full flex flex-col overflow-hidden">
-            <!-- Cover Page Section C -->
             <div id="overview-basic" class="w-full h-full overflow-y-auto custom-scrollbar p-2 flex items-center justify-center">
                 <div class="max-w-2xl w-full bg-white p-6 sm:p-8 rounded-3xl border-2 border-[#166def] shadow-xs space-y-5 text-center my-auto">
                     <div class="space-y-2 border-b border-slate-100 pb-4">
@@ -190,23 +183,17 @@
                         <p class="text-slate-500 text-xs sm:text-sm">Khám phá nhanh 80% tính năng cốt lõi chỉ trong 5 - 10 phút</p>
                     </div>
 
-                    <!-- Ý NGHĨA & MỤC ĐÍCH TÁCH THÀNH 2 KHỐI RIÊNG -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-left">
                         <div class="bg-blue-50/70 p-4 rounded-2xl border border-blue-100 space-y-1">
                             <h3 class="font-black text-[#166def] text-xs sm:text-sm flex items-center gap-1.5"><i class="fa-solid fa-star"></i> Ý Nghĩa:</h3>
-                            <p class="text-slate-700 leading-relaxed text-xs">
-                                Đây là phần **quan trọng nhất** giúp học viên nắm trọn 80% thao tác cốt lõi trong thời gian ngắn nhất.
-                            </p>
+                            <p class="text-slate-700 leading-relaxed text-xs">Đây là phần <strong>quan trọng nhất</strong> giúp nắm trọn 80% thao tác cốt lõi trong thời gian ngắn nhất.</p>
                         </div>
                         <div class="bg-blue-50/70 p-4 rounded-2xl border border-blue-100 space-y-1">
                             <h3 class="font-black text-[#166def] text-xs sm:text-sm flex items-center gap-1.5"><i class="fa-solid fa-bullseye"></i> Mục Đích:</h3>
-                            <p class="text-slate-700 leading-relaxed text-xs">
-                                Khi gặp khách hàng cần Demo gấp, bạn chỉ cần nắm vững nội dung phần này là đủ tự tin làm chủ màn hình bán hàng KiotViet.
-                            </p>
+                            <p class="text-slate-700 leading-relaxed text-xs">Khi gặp khách hàng cần Demo gấp, bạn chỉ cần nắm vững nội dung phần này là đủ tự tin làm chủ màn hình.</p>
                         </div>
                     </div>
 
-                    <!-- Khuyên dùng tách paragraph riêng -->
                     <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-left text-xs text-slate-600 leading-relaxed">
                         💡 <strong>Khuyên dùng:</strong> Học viên nên ưu tiên hoàn thành ngay phần Kiến thức cơ bản này trước khi chuyển sang các nội dung khác.
                     </div>
@@ -220,40 +207,33 @@
             <div id="viewer-basic" class="hidden w-full h-full flex flex-col overflow-hidden bg-white rounded-3xl border border-slate-200 shadow-xs"></div>
         </div>
 
-        <!-- ================= SECTION 4: KIẾN THỨC NÂNG CAO ================= -->
+        <!-- SECTION 4: KIẾN THỨC NÂNG CAO (THEME XANH LÁ - GREEN) -->
         <div id="view-advanced" class="hidden w-full h-full flex flex-col overflow-hidden">
-            <!-- Cover Page Section D -->
             <div id="overview-advanced" class="w-full h-full overflow-y-auto custom-scrollbar p-2 flex items-center justify-center">
-                <div class="max-w-2xl w-full bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-5 text-center my-auto">
+                <div class="max-w-2xl w-full bg-white p-6 sm:p-8 rounded-3xl border-2 border-emerald-600 shadow-xs space-y-5 text-center my-auto">
                     <div class="space-y-2 border-b border-slate-100 pb-4">
-                        <span class="bg-slate-700 text-white font-extrabold text-[11px] uppercase px-3.5 py-1 rounded-full tracking-wider">📘 DÀNH CHO CẦN TRA CỨU / KHI CÓ NHIỀU THỜI GIAN</span>
+                        <span class="bg-emerald-600 text-white font-extrabold text-[11px] uppercase px-3.5 py-1 rounded-full tracking-wider">📘 DÀNH CHO CẦN TRA CỨU / KHI CÓ NHIỀU THỜI GIAN</span>
                         <h2 class="text-xl sm:text-2xl font-black text-slate-900">Kiến Thức Nâng Cao & Tra Cứu</h2>
                         <p class="text-slate-500 text-xs sm:text-sm">Giải quyết các case tư vấn đặc thù và hỗ trợ làm bài tập đào tạo</p>
                     </div>
 
-                    <!-- Ý NGHĨA & MỤC ĐÍCH TÁCH THÀNH 2 KHỐI RIÊNG -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-left">
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
-                            <h3 class="font-black text-slate-900 text-xs sm:text-sm flex items-center gap-1.5"><i class="fa-solid fa-layer-group text-[#166def]"></i> Ý Nghĩa:</h3>
-                            <p class="text-slate-700 leading-relaxed text-xs">
-                                Tổng hợp các tính năng nâng cao cho các ngành hàng đặc thù (Lô - HSD ngành Dược, Serial/IMEI Điện máy, Gộp biến thể Thời trang, Bán hàng trên App/POS).
-                            </p>
+                        <div class="bg-emerald-50/70 p-4 rounded-2xl border border-emerald-100 space-y-1">
+                            <h3 class="font-black text-emerald-800 text-xs sm:text-sm flex items-center gap-1.5"><i class="fa-solid fa-layer-group text-emerald-600"></i> Ý Nghĩa:</h3>
+                            <p class="text-slate-700 leading-relaxed text-xs">Tổng hợp các tính năng tra cứu chuyên sâu (Phím F6, Gộp/Tách hàng, Lô-HSD, Mobile App, Máy POS...).</p>
                         </div>
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
-                            <h3 class="font-black text-slate-900 text-xs sm:text-sm flex items-center gap-1.5"><i class="fa-solid fa-bullseye text-[#166def]"></i> Mục Đích:</h3>
-                            <p class="text-slate-700 leading-relaxed text-xs">
-                                Cung cấp kho tri thức tra cứu chuyên sâu giúp xử lý các câu hỏi phức tạp từ khách hàng và hỗ trợ làm bài tập trong các khóa đào tạo.
-                            </p>
+                        <div class="bg-emerald-50/70 p-4 rounded-2xl border border-emerald-100 space-y-1">
+                            <h3 class="font-black text-emerald-800 text-xs sm:text-sm flex items-center gap-1.5"><i class="fa-solid fa-bullseye text-emerald-600"></i> Mục Đích:</h3>
+                            <p class="text-slate-700 leading-relaxed text-xs">Cung cấp kho tri thức tra cứu chuyên sâu giúp xử lý câu hỏi phức tạp và hỗ trợ làm bài tập đào tạo.</p>
                         </div>
                     </div>
 
-                    <!-- Khuyên dùng tách paragraph riêng -->
-                    <div class="p-3.5 rounded-2xl bg-blue-50/70 border border-blue-200 text-left text-xs text-slate-700 leading-relaxed space-y-1">
-                        <strong class="text-[#166def] font-extrabold block"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> Khuyên dùng:</strong>
+                    <div class="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-200 text-left text-xs text-slate-700 leading-relaxed space-y-1">
+                        <strong class="text-emerald-800 font-extrabold block"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> Khuyên dùng:</strong>
                         <p>Hãy tìm hiểu phần này khi có nhiều thời gian, khi gặp câu hỏi phức tạp từ khách hàng hoặc khi cần tra cứu lại thông tin để làm bài tập trong khóa đào tạo.</p>
                     </div>
 
-                    <button onclick="startSectionContent('advanced')" class="bg-[#166def] hover:bg-[#1259c7] text-white font-black px-7 py-3 rounded-2xl shadow-xs text-xs sm:text-sm uppercase tracking-wider btn-interact inline-flex items-center gap-2">
+                    <button onclick="startSectionContent('advanced')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-7 py-3 rounded-2xl shadow-xs text-xs sm:text-sm uppercase tracking-wider btn-interact inline-flex items-center gap-2">
                         <i class="fa-solid fa-sliders"></i> Khám phá bài học Kiến thức nâng cao
                     </button>
                 </div>
@@ -264,16 +244,30 @@
 
     </main>
 
-    <!-- POPUP CHÚC MỪNG 🎉 -->
-    <div id="congratulations-modal" class="fixed inset-0 bg-slate-900/80 z-[9999] hidden flex-col items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl border border-blue-100 space-y-4">
+    <!-- POPUP CHÚC MỪNG HOÀN THÀNH MỤC CƠ BẢN -->
+    <div id="basic-completion-modal" class="fixed inset-0 bg-slate-900/80 z-[9999] hidden flex-col items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-8 max-w-lg w-full text-center shadow-2xl border border-blue-100 space-y-4">
             <div class="w-16 h-16 bg-blue-100 text-[#166def] rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">
                 🎉
             </div>
             <h3 class="text-2xl font-black text-slate-900">Chúc Mừng Bạn!</h3>
-            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                Bạn đã xuất sắc hoàn thành toàn bộ bài học thuộc tính năng <strong class="text-[#166def]">Tra Cứu Sản Phẩm</strong>!
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed" id="basic-completion-text">
+                Chúc mừng bạn! Bạn đã hoàn thành tìm hiểu các nội dung đào tạo cơ bản thuộc tính năng <strong class="text-[#166def]" id="completion-feature-name">Tra cứu sản phẩm</strong>
             </p>
+            <div class="pt-2 flex flex-col sm:flex-row gap-2.5 justify-center">
+                <button onclick="closeBasicCompletionModal()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs sm:text-sm">Đóng</button>
+                <button onclick="goToAdvancedSection()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-xl text-xs sm:text-sm shadow-md"><i class="fa-solid fa-sliders mr-1"></i> Học tiếp nâng cao</button>
+                <button onclick="restartCourse()" class="px-4 py-2.5 bg-[#166def] hover:bg-[#1259c7] text-white font-bold rounded-xl text-xs sm:text-sm"><i class="fa-solid fa-rotate-right mr-1"></i> Học lại từ đầu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP CHÚC MỪNG TOÀN BỘ KHÓA HỌC -->
+    <div id="congratulations-modal" class="fixed inset-0 bg-slate-900/80 z-[9999] hidden flex-col items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl border border-blue-100 space-y-4">
+            <div class="w-16 h-16 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">🏆</div>
+            <h3 class="text-2xl font-black text-slate-900">Hoàn Thành Xuất Sắc!</h3>
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">Bạn đã hoàn thành toàn bộ nội dung đào tạo thuộc tính năng <strong class="text-[#166def]" id="course-feature-name">Tra cứu sản phẩm</strong>!</p>
             <div class="pt-2 flex gap-3 justify-center">
                 <button onclick="closeCongratulationModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs sm:text-sm">Đóng</button>
                 <button onclick="restartCourse()" class="px-5 py-2.5 bg-[#166def] hover:bg-[#1259c7] text-white font-black rounded-xl text-xs sm:text-sm shadow-md"><i class="fa-solid fa-rotate-right mr-1"></i> Học lại từ đầu</button>
@@ -287,66 +281,66 @@
         <img id="lightbox-img" src="" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl bg-white">
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         function formatText(text) {
             if (!text) return '';
-            return text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-800">$1</strong>');
+            return text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900">$1</strong>');
         }
 
+        const rawFeatureTitle = "Tra cứu sản phẩm";
+
         const glossaryList = [
-            { term: "FEFO (First Expired, First Out)", desc: "Nguyên tắc xuất bán lô hàng có hạn sử dụng gần nhất trước. KiotViet tự động gợi ý lô tuân thủ FEFO khi tạo hóa đơn." },
-            { term: "Serial / IMEI", desc: "Mã định danh duy nhất cho từng máy. Gõ hoặc quét mã Serial/IMEI giúp định danh chính xác mặt hàng đưa vào đơn." },
-            { term: "Gộp hàng hóa liên quan", desc: "Tính năng gom toàn bộ các biến thể (size, màu sắc) của cùng mẫu thành 1 ô đại diện duy nhất giúp màn hình bán hàng không bị trôi." },
-            { term: "Chế độ Nhập nhanh (Phím F6)", desc: "Mỗi lần máy đọc mã vạch, số lượng tự động cộng thêm 1 mà không nhảy con trỏ chuột. Tối ưu cho siêu thị, tạp hóa." },
-            { term: "Chế độ Nhập thường (Phím F6)", desc: "Sau khi chọn hoặc quét sản phẩm, con trỏ tự động nhảy sang ô Số lượng để thu ngân gõ tay số lượng mua lớn." },
-            { term: "Hàng hóa Yêu thích (Đánh dấu Sao)", desc: "Các mặt hàng bán chạy đánh dấu sao trong Danh mục sẽ hiển thị ở vị trí ưu tiên nổi bật để nhấp chọn tức thì." }
+            { term: 'Mã vạch / SKU', desc: 'Mã định danh sản phẩm giúp máy quét ghi nhận thông tin và thêm ngay vào đơn bán hàng một cách tự động.' },
+            { term: 'Hàng hóa yêu thích', desc: 'Các mặt hàng bán chạy được đánh dấu sao trong Danh sách hàng hóa để hiển thị nổi bật trên màn hình bán hàng giúp chọn nhanh.' },
+            { term: 'Bộ lọc Thuộc tính / Nhóm hàng', desc: 'Công cụ lọc giúp thu hẹp danh sách sản phẩm theo các tiêu chí như Màu sắc, Size hoặc Nhóm ngành sản phẩm.' },
+            { term: 'Chế độ Nhập nhanh / Nhập thường (F6)', desc: 'Phím F6 cho phép chuyển đổi giữa Nhập nhanh (tự động cộng dồn số lượng khi quét mã) và Nhập thường (nhập số lượng thủ công).' },
+            { term: 'Gộp hàng hóa liên quan', desc: 'Chế độ hiển thị gom nhóm các biến thể sản phẩm (size, màu) giúp giao diện màn hình bán hàng gọn gàng hơn.' },
+            { term: 'Nguyên tắc FEFO', desc: 'First Expired, First Out - Nguyên tắc hệ thống tự động gợi ý xuất bán lô hàng có hạn sử dụng gần nhất trước.' },
+            { term: 'Serial / IMEI', desc: 'Mã định danh cá thể duy nhất dành cho từng thiết bị điện tử, điện thoại di động giúp tra cứu bán hàng và bảo hành.' }
         ];
 
         const lessonsC = [
             {
-                id: "C1",
-                title: "Bài 1: Tìm kiếm theo Tên, Mã hàng hoặc Mã vạch",
-                goal: "Tìm nhanh sản phẩm khi khách đọc tên, đọc mã hoặc đưa mã vạch sản phẩm.",
+                title: "Thao tác 1: Tìm kiếm theo Tên, Mã hàng hoặc Mã vạch",
+                goal: "Nhanh chóng tìm kiếm và thêm sản phẩm vào đơn hàng bằng gõ phím hoặc sử dụng máy quét mã vạch.",
                 steps: [
-                    "Tại màn hình Bán hàng, nhập trực tiếp Tên hàng hoặc Mã hàng vào ô tìm kiếm.",
-                    "Nếu dùng máy quét, chỉ cần quét Mã vạch sản phẩm, hệ thống tự động thêm ngay vào đơn hàng."
+                    "Tại màn hình **Bán hàng**, bạn gõ trực tiếp **Tên hàng** hoặc **Mã hàng** vào ô tìm kiếm.",
+                    "Nếu dùng máy quét mã vạch, bạn đưa đầu quét vào mã vạch trên sản phẩm, hệ thống sẽ tự động thêm hàng hóa vào đơn hàng."
                 ],
                 images: [
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032131/TSPR_011025-1.png",
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032135/TSPR_011025-2.png"
                 ],
                 quiz: {
-                    q: "Khi sử dụng máy quét mã vạch ở màn hình Bán hàng, sản phẩm sẽ tự động được thêm vào đơn mà không cần nhấn phím Enter?",
+                    q: "Khi dùng máy quét mã vạch trên màn hình Bán hàng, hệ thống sẽ tự động thêm sản phẩm vào đơn hàng mà không cần gõ phím?",
                     isTrue: true,
-                    explain: "Đúng! Hệ thống KiotViet tự động nhận diện tín hiệu máy quét và thêm ngay sản phẩm vào hóa đơn."
+                    explain: "Chính xác! Đầu quét mã vạch giúp tự động nhận diện mã và thêm ngay mặt hàng vào đơn."
                 }
             },
             {
-                id: "C2",
-                title: "Bài 2: Chọn hàng hóa trực quan (Hình ảnh, Yêu thích)",
-                goal: "Chọn sản phẩm trực tiếp từ danh sách có hình ảnh hoặc danh sách mặt hàng bán chạy đã đánh dấu sao.",
+                title: "Thao tác 2: Chọn hàng hóa trực quan (theo Hình ảnh, Yêu thích)",
+                goal: "Thêm sản phẩm trực quan dựa trên danh sách hình ảnh bên góc phải hoặc bảng hàng hóa yêu thích.",
                 steps: [
-                    "Ở chế độ Bán thường, nhấp chuột trực tiếp vào ô Hình ảnh sản phẩm bên phải màn hình.",
-                    "Các sản phẩm được đánh dấu Ngôi sao (Yêu thích) sẽ hiển thị nổi bật để chọn nhanh không cần tìm kiếm."
+                    "**Chọn theo hình ảnh**: Ở chế độ **Bán thường**, danh sách sản phẩm kèm hình ảnh hiển thị bên phải màn hình. Nhấp chuột vào hình ảnh để thêm vào hóa đơn.",
+                    "**Chọn hàng hóa yêu thích**: Các sản phẩm được đánh dấu sao (yêu thích) hiển thị nổi bật trên màn hình để bạn bấm chọn nhanh không cần gõ tìm kiếm."
                 ],
                 images: [
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032145/TSPR_011025-3.png",
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032153/TSPR_011025-4.png"
                 ],
                 quiz: {
-                    q: "Sản phẩm được đánh dấu sao (yêu thích) trong Danh mục sẽ hiển thị nổi bật trên màn hình bán hàng để chọn nhanh?",
+                    q: "Chỉ những hàng hóa được đánh dấu sao (yêu thích) trong Danh sách hàng hóa mới hiển thị trên bảng chọn nhanh yêu thích?",
                     isTrue: true,
-                    explain: "Chính xác! Đánh dấu sao giúp đưa mặt hàng bán chạy lên vị trí ưu tiên."
+                    explain: "Đúng! Biểu tượng ngôi sao (yêu thích) giúp đưa các sản phẩm bán chạy ra bảng chọn nhanh trên màn hình Bán hàng."
                 }
             },
             {
-                id: "C3",
-                title: "Bài 3: Lọc hàng hóa theo Nhóm hoặc Thuộc tính",
-                goal: "Lọc chính xác mặt hàng khi khách hỏi mua theo yêu cầu cụ thể (Ví dụ: Áo thun màu đỏ size S).",
+                title: "Thao tác 3: Lọc hàng hóa theo nhóm hoặc thuộc tính",
+                goal: "Lọc chính xác danh sách sản phẩm theo màu sắc, kích cỡ hoặc nhóm ngành dựa trên yêu cầu cụ thể của khách.",
                 steps: [
-                    "Trên danh sách hàng hóa, nhấn vào biểu tượng Lọc theo nhóm hàng hoặc Lọc theo thuộc tính.",
-                    "Tích chọn thuộc tính cần tìm (MÀU SẮC: Đỏ, SIZE: S) và nhấn Xong để hiển thị sản phẩm phù hợp."
+                    "Trên danh sách hàng hóa góc phải, nhấn biểu tượng **Lọc theo nhóm hàng** hoặc **Lọc hàng hóa theo thuộc tính**.",
+                    "Tích chọn nhóm hàng hoặc chọn các thuộc tính tương ứng (ví dụ: MÀU SẮC: Đỏ, SIZE: S).",
+                    "Nhấn **Xong** để hệ thống hiển thị danh sách các sản phẩm phù hợp."
                 ],
                 images: [
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032158/TSPR_011025-5.png",
@@ -355,40 +349,38 @@
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032218/TSPR_011025-8.png"
                 ],
                 quiz: {
-                    q: "Bộ lọc trên màn hình bán hàng cho phép kết hợp lọc đồng thời cả Nhóm hàng và Thuộc tính chi tiết (Màu sắc, Size)?",
+                    q: "Người dùng có thể kết hợp vừa lọc theo Nhóm hàng vừa lọc theo Thuộc tính (màu sắc, size) cùng lúc?",
                     isTrue: true,
-                    explain: "Đúng! Bạn có thể kết hợp lọc đa tiêu chí linh hoạt cùng lúc."
+                    explain: "Chính xác! Việc kết hợp bộ lọc giúp tìm kiếm chính xác mặt hàng đáp ứng nhu cầu cụ thể của khách."
                 }
             }
         ];
 
         const lessonsD = [
             {
-                id: "D4",
-                title: "Bài 4: Chế độ nhập liệu (Nhập nhanh/Nhập thường - F6)",
-                goal: "Chuyển đổi linh hoạt giữa quét mã vạch cộng dồn tự động và nhập số lượng thủ công.",
+                title: "Thao tác 1: Sử dụng các chế độ nhập (Nhập nhanh/Nhập thường)",
+                goal: "Chuyển đổi linh hoạt giữa chế độ quét mã vạch liên tục (Nhập nhanh) và nhập số lượng thủ công (Nhập thường) qua phím F6.",
                 steps: [
-                    "Bấm phím F6 trên bàn phím để chuyển đổi nhanh 2 chế độ.",
-                    "Nhập nhanh: Tối ưu cho máy quét, mỗi lần quét tự động cộng dồn số lượng (+1).",
-                    "Nhập thường: Quét/chọn xong con trỏ tự động nhảy sang ô số lượng để gõ tay."
+                    "Nhấn phím **F6** trên bàn phím để chuyển đổi nhanh giữa hai chế độ nhập liệu.",
+                    "**Chế độ Nhập nhanh**: Tối ưu cho máy quét mã vạch. Mỗi lần quét, số lượng sản phẩm tự động tăng thêm 1.",
+                    "**Chế độ Nhập thường**: Sau khi chọn sản phẩm, con trỏ chuột tự động chuyển sang ô số lượng để bạn gõ số lượng thủ công."
                 ],
                 images: [
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032223/TSPR_011025-9.png",
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032227/TSPR_011025-10.png"
                 ],
                 quiz: {
-                    q: "Ở Chế độ Nhập nhanh (F6), mỗi lần quét mã vạch sản phẩm sẽ tự động cộng dồn số lượng (+1) vào đơn hàng?",
+                    q: "Ở chế độ Nhập nhanh, mỗi lần quét mã vạch thành công thì số lượng sản phẩm trong đơn sẽ tự động tăng thêm 1?",
                     isTrue: true,
-                    explain: "Chính xác! Chế độ Nhập nhanh giúp quét mã liên tục rất nhanh."
+                    explain: "Chính xác! Chế độ Nhập nhanh giúp quét mã liên tục mà không cần can thiệp nhập số lượng từng lần."
                 }
             },
             {
-                id: "D5",
-                title: "Bài 5: Gộp/Tách hàng hóa liên quan (Biến thể)",
-                goal: "Gom gọn các mẫu sản phẩm nhiều biến thể (size, màu) thành 1 dòng đại diện để màn hình gọn gàng.",
+                title: "Thao tác 2: Gộp/Tách hàng hóa liên quan",
+                goal: "Gom nhóm các biến thể sản phẩm (size, màu) giúp danh sách hiển thị trên màn hình bán hàng gọn gàng hơn.",
                 steps: [
-                    "Vào góc phải màn hình Bán hàng -> Tùy chọn hiển thị -> Khác -> Bật xanh 'Gộp hàng hóa liên quan'.",
-                    "Khi nhấp chọn sản phẩm gộp, hệ thống mở cửa sổ popup chọn chi tiết Size, Màu sắc."
+                    "Tại màn hình **Bán hàng**, nhấn biểu tượng tùy chọn góc phải ➔ chọn **Tùy chọn hiển thị** ➔ **Khác** ➔ bật xanh **Gộp hàng hóa liên quan**.",
+                    "Khi ở chế độ 'Gộp', các biến thể cùng loại sẽ nhóm lại. Khi chọn sản phẩm gộp, pop-up hiển thị cho bạn chọn chi tiết size, màu sắc trước khi thêm vào đơn."
                 ],
                 images: [
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032248/TSPR_011025-12.png",
@@ -396,119 +388,110 @@
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032257/TSPR_011025-14.png"
                 ],
                 quiz: {
-                    q: "Bật tính năng 'Gộp hàng hóa liên quan' giúp gom các biến thể size/màu lại thành 1 ô đại diện để tránh trôi màn hình?",
+                    q: "Khi bật chế độ 'Gộp hàng hóa liên quan', chọn sản phẩm gộp sẽ mở pop-up để chọn thuộc tính chi tiết?",
                     isTrue: true,
-                    explain: "Đúng! Bấm chọn sản phẩm gộp sẽ mở popup chọn chi tiết biến thể."
+                    explain: "Đúng! Cửa sổ chọn thuộc tính xuất hiện giúp người bán chọn đúng màu sắc, kích cỡ cụ thể của sản phẩm gộp."
                 }
             },
             {
-                id: "D6",
-                title: "Bài 6: Thêm mới hàng hóa ngay khi tìm kiếm",
-                goal: "Tạo nhanh mặt hàng mới chưa có trong hệ thống ngay tại màn hình bán hàng.",
+                title: "Thao tác 3: Thêm mới hàng hóa ngay khi tìm kiếm",
+                goal: "Khai báo nhanh mặt hàng mới chưa có trong hệ thống ngay tại màn hình bán hàng mà không cần thoát ra.",
                 steps: [
-                    "Gõ tên sản phẩm mới vào ô Tìm hàng hóa.",
-                    "Hệ thống hiển thị gợi ý '+ Thêm mới hàng hóa' ngay bên dưới.",
-                    "Nhấp vào gợi ý, điền nhanh thông tin và nhấn Lưu để đưa sản phẩm vào đơn bán luôn."
+                    "Gõ tên một sản phẩm chưa có trong danh mục tại ô tìm kiếm.",
+                    "Hệ thống sẽ hiển thị dòng gợi ý **+ Thêm mới hàng hóa**.",
+                    "Nhấp chọn, điền nhanh thông tin sản phẩm mới và nhấn **Lưu**. Sản phẩm được thêm thẳng vào hóa đơn và lưu vào danh mục của cửa hàng."
                 ],
                 images: [
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032300/TSPR_011025-15.png",
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032304/TSPR_011025-16.png"
                 ],
                 quiz: {
-                    q: "Thu ngân có thể bấm nút '+ Thêm mới hàng hóa' ngay tại ô tìm kiếm khi gặp sản phẩm chưa có trong danh mục?",
-                    isTrue: true,
-                    explain: "Chính xác! Giúp thêm mới nhanh mà không làm gián đoạn việc tính tiền."
+                    q: "Người bán bắt buộc phải quay lại màn hình Quản lý Danh mục hàng hóa mới có thể tạo mới sản phẩm?",
+                    isTrue: false,
+                    explain: "KiotViet cho phép bấm '+ Thêm mới hàng hóa' ngay trên màn hình Bán hàng vô cùng tiện lợi."
                 }
             },
             {
-                id: "D7",
-                title: "Bài 7: Tìm hàng theo Lô - Hạn sử dụng (FEFO)",
-                goal: "Quản lý và xuất bán chính xác mặt hàng có Lô - HSD (Dược phẩm, Thực phẩm).",
+                title: "Thao tác 4: Tìm hàng theo Lô - Hạn sử dụng hoặc Serial/IMEI",
+                goal: "Tìm kiếm và chọn xuất bán chính xác Lô - Hạn sử dụng hoặc mã Serial/IMEI cho sản phẩm đặc thù.",
                 steps: [
-                    "Hệ thống tự động gợi ý Lô có hạn sử dụng gần nhất để xuất bán trước theo nguyên tắc FEFO.",
-                    "Thu ngân cũng có thể gõ trực tiếp tên Lô cụ thể vào ô tìm kiếm để chọn."
+                    "**Theo Lô - HSD**: Khi chọn sản phẩm có Lô, hệ thống tự động gợi ý lô cận hạn nhất theo nguyên tắc FEFO. Bạn cũng có thể gõ chính xác Tên Lô vào ô tìm kiếm.",
+                    "**Theo Serial/IMEI**: Nhập trực tiếp số Serial/IMEI chính xác của sản phẩm vào ô tìm kiếm trên màn hình Bán hàng để thêm vào đơn."
                 ],
                 images: [
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032308/TSPR_011025-17.png",
-                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032312/TSPR_011025-18.png"
-                ],
-                quiz: {
-                    q: "Đối với mặt hàng có Lô - HSD, KiotViet tự động gợi ý Lô gần hết hạn nhất xuất bán trước theo nguyên tắc FEFO?",
-                    isTrue: true,
-                    explain: "Chính xác! Ưu tiên lô gần hết hạn xuất trước giúp giảm thiểu rủi ro hết hạn."
-                }
-            },
-            {
-                id: "D8",
-                title: "Bài 8: Tìm hàng theo Serial/IMEI",
-                goal: "Định danh và chọn chính xác thiết bị điện tử, điện thoại theo số IMEI duy nhất.",
-                steps: [
-                    "Gõ hoặc quét trực tiếp số Serial/IMEI vào ô tìm kiếm trên màn hình Bán hàng.",
-                    "Hệ thống tự nhận diện và thêm chính xác mặt hàng đó vào hóa đơn."
-                ],
-                images: [
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032312/TSPR_011025-18.png",
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032317/TSPR_011025-19.png"
                 ],
                 quiz: {
-                    q: "Khi bán mặt hàng Serial/IMEI, thu ngân bắt buộc phải tìm chọn tên sản phẩm trước rồi mới được điền số IMEI?",
-                    isTrue: false,
-                    explain: "Sai! Chỉ cần gõ hoặc quét trực tiếp số IMEI vào ô tìm kiếm, KiotViet sẽ tự định danh chính xác sản phẩm."
+                    q: "Đối với hàng hóa quản lý Lô - HSD, hệ thống KiotViet mặc định tự động gợi ý Lô theo nguyên tắc FEFO (Hạn dùng gần nhất xuất trước)?",
+                    isTrue: true,
+                    explain: "Chính xác! Hệ thống ưu tiên xuất bán lô có hạn sử dụng ngắn nhất trước để tránh hết hạn tồn kho."
                 }
             },
             {
-                id: "D9",
-                title: "Bài 9: Xem chi tiết tồn kho chi nhánh & vị trí quầy kệ",
-                goal: "Tra cứu vị trí trưng bày quầy kệ và số lượng tồn kho thực tế ở các chi nhánh khác.",
+                title: "Thao tác 5: Xem chi tiết thông tin hàng hóa (Vị trí, Thương hiệu, Tồn kho chi nhánh)",
+                goal: "Tra cứu nhanh vị trí quầy kệ, hình ảnh nét, mô tả và tồn kho các chi nhánh để tư vấn cho khách.",
                 steps: [
-                    "Bấm biểu tượng '...' trên dòng sản phẩm -> chọn 'Xem chi tiết'.",
-                    "Hoặc di chuột vào dòng sản phẩm -> bấm biểu tượng chữ 'i' để xem nhanh tồn kho chi nhánh."
+                    "**Cách 1 (Tra cứu nhanh)**: Tại ô tìm kiếm, gõ tên sản phẩm rồi nhấp vào **hình ảnh** sản phẩm trong danh sách kết quả.",
+                    "**Cách 2 (Khi tạo đơn)**: Nhấn biểu tượng 3 chấm trên dòng hàng hóa đã chọn ➔ chọn **Xem chi tiết**.",
+                    "**Xem tồn kho chi nhánh**: Đưa trỏ chuột vào dòng hàng hóa ➔ nhấn biểu tượng chữ **i** để xem tồn kho toàn chi nhánh."
                 ],
                 images: [
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/04/16080321/TCSPR_160426-1.png",
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/04/16080254/TCSPR_160426-2.png",
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/04/16080242/TCSPR_160426-3.png",
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/04/16080229/TCSPR_160426-4.png",
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/04/16080219/TCSPR_160426-5.png",
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/04/16080208/TCSPR_160426-6.png",
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/04/16080151/TCSPR_160426-7.png"
                 ],
                 quiz: {
-                    q: "Thu ngân có thể kiểm tra vị trí quầy kệ và tồn kho thực tế ở các chi nhánh khác ngay tại màn hình Bán hàng?",
+                    q: "Biểu tượng chữ 'i' khi di chuột vào dòng hàng hóa cho phép người bán xem nhanh lượng tồn kho của hàng hóa ở các chi nhánh khác?",
                     isTrue: true,
-                    explain: "Đúng! Di chuột bấm icon 'i' hoặc 'Xem chi tiết' để xem tồn kho chi nhánh."
+                    explain: "Chính xác! Nhấn chữ 'i' giúp kiểm tra tồn kho liên chi nhánh được phân quyền vô cùng tiện lợi."
                 }
             },
             {
-                id: "D10",
-                title: "Bài 10: Thao tác trên Điện thoại (App Mobile)",
-                goal: "Tạo đơn bán hàng nhanh chóng ngay trên ứng dụng di động KiotViet.",
+                title: "Thao tác 6: Thao tác tìm sản phẩm trên Điện thoại",
+                goal: "Sử dụng ứng dụng KiotViet trên di động để chọn sản phẩm, quét mã vạch camera, lọc và chọn nhiều hàng hóa.",
                 steps: [
-                    "Vào menu Bán hàng -> chọn Bán hàng trên App Mobile.",
-                    "Gõ tên/mã hoặc bấm biểu tượng mã vạch để quét bằng camera điện thoại.",
-                    "Bật 'Chế độ chọn nhiều' hoặc bấm nút '+' để thêm mới hàng hóa nhanh."
+                    "Mở app KiotViet ➔ Bán hàng ➔ Bán hàng.",
+                    "Tìm tên/mã/lô/IMEI hoặc chạm biểu tượng **mã vạch** để dùng camera quét.",
+                    "Chạm bộ lọc theo Nhóm/Thuộc tính, bật **Chế độ chọn nhiều** để thêm nhiều mặt hàng cùng lúc, hoặc bấm dấu **+** để thêm mới hàng hóa."
                 ],
                 images: [
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032328/TSPR_011025-20.png",
-                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032332/TSPR_011025-21.png"
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032332/TSPR_011025-21.png",
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032337/TSPR_011025-22.png",
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032343/TSPR_011025-23.png",
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032356/TSPR_011025-24.png",
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032401/TSPR_011025-25.png"
                 ],
                 quiz: {
-                    q: "Ứng dụng KiotViet trên điện thoại hỗ trợ quét mã vạch bằng Camera và bật 'Chế độ chọn nhiều' để tạo đơn nhanh?",
+                    q: "Ứng dụng KiotViet trên điện thoại hỗ trợ tính năng 'Chế độ chọn nhiều' giúp thêm hàng loạt sản phẩm vào đơn cùng lúc?",
                     isTrue: true,
-                    explain: "Chính xác! App Mobile có đầy đủ công cụ quét camera barcode và chọn nhiều hàng."
+                    explain: "Đúng! Chế độ chọn nhiều giúp nhân viên chọn liên tiếp nhiều mặt hàng trước khi quay lại màn hình tạo đơn."
                 }
             },
             {
-                id: "D11",
-                title: "Bài 11: Thao tác trên Máy POS Android",
-                goal: "Thêm sản phẩm và tính tiền trực tiếp trên máy POS tại quầy thu ngân.",
+                title: "Thao tác 7: Thao tác tìm sản phẩm trên Máy POS",
+                goal: "Thao tác tra cứu sản phẩm và điều chỉnh số lượng linh hoạt trên Máy POS Android tại quầy thanh toán.",
                 steps: [
-                    "Gõ ô Tìm hàng hóa hoặc dùng máy quét mã vạch.",
-                    "Chọn nhanh sản phẩm theo các ô Nhóm hàng hóa phân loại trực quan.",
-                    "Chạm vào nút biểu tượng + / - để tăng giảm số lượng bán."
+                    "Gõ tên/mã vào ô **Tìm hàng hóa** hoặc dùng máy quét mã vạch (mỗi lần quét/chọn số lượng tự tăng +1).",
+                    "Hoặc bấm chọn nhanh sản phẩm trực tiếp từ danh mục các **Nhóm hàng** phân loại sẵn.",
+                    "Tăng/giảm số lượng bằng nút **+ / -** trên dòng sản phẩm hoặc chạm trực tiếp vào số lượng để gõ số mới."
                 ],
                 images: [
                     "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032409/TSPR_011025-26.png",
-                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032414/TSPR_011025-27.png"
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032414/TSPR_011025-27.png",
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032417/TSPR_011025-28.png",
+                    "https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/01032421/TSPR_011025-29.png"
                 ],
                 quiz: {
-                    q: "Giao diện Máy POS Android cho phép điều chỉnh nhanh số lượng sản phẩm bằng nút bấm + / - trực quan?",
+                    q: "Trên Máy POS Android, người bán có thể chạm trực tiếp vào ô số lượng của sản phẩm trong đơn để gõ nhập số lượng thủ công?",
                     isTrue: true,
-                    explain: "Đúng! Máy POS thiết kế nút + / - toàn diện giúp điều chỉnh nhanh chóng."
+                    explain: "Chính xác! Ngoài bấm nút +/-, chạm trực tiếp ô số lượng giúp nhập số lượng lớn cực kỳ nhanh chóng."
                 }
             }
         ];
@@ -524,10 +507,7 @@
 
         function switchTab(tabId) {
             activeTab = tabId;
-
-            document.querySelectorAll('.nav-tab-btn').forEach(btn => {
-                btn.className = 'nav-tab-btn px-3 sm:px-4 py-2.5 sm:py-3 flex items-center gap-1.5 font-bold text-xs sm:text-sm shrink-0';
-            });
+            document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.className = 'nav-tab-btn px-4 py-2.5 sm:py-3 flex items-center gap-2 font-bold text-xs sm:text-sm shrink-0');
             const activeBtn = document.getElementById(`tab-btn-${tabId}`);
             if (activeBtn) activeBtn.classList.add(`active-${tabId}`);
 
@@ -536,9 +516,8 @@
                 if (el) el.classList.add('hidden');
             });
 
-            if (tabId === 'guide') {
-                document.getElementById('view-guide').classList.remove('hidden');
-            } else if (tabId === 'glossary') {
+            if (tabId === 'guide') document.getElementById('view-guide').classList.remove('hidden');
+            else if (tabId === 'glossary') {
                 document.getElementById('view-glossary').classList.remove('hidden');
                 renderGlossaryBullets();
             } else if (tabId === 'basic' || tabId === 'advanced') {
@@ -564,47 +543,41 @@
         function startSectionContent(scope) {
             currentLessonScope = scope;
             document.getElementById(`overview-${scope}`).classList.add('hidden');
-            
             const viewer = document.getElementById(`viewer-${scope}`);
             viewer.classList.remove('hidden');
-
             currentLessonList = (scope === 'basic') ? lessonsC : lessonsD;
             currentLessonIndex = 0;
-
             renderViewerSkeleton(viewer, scope);
             loadCurrentLesson();
         }
 
         function renderViewerSkeleton(container, scope) {
+            const isAdvanced = scope === 'advanced';
+            const themeColorText = isAdvanced ? 'text-emerald-700' : 'text-[#166def]';
+            const themeBgBadge = isAdvanced ? 'bg-emerald-100 text-emerald-800 border-emerald-200' : 'bg-[#166def]/10 text-[#166def] border-[#166def]/20';
+            const themeBtnNext = isAdvanced ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-[#166def] hover:bg-[#1259c7]';
+            const borderFocus = isAdvanced ? 'focus:border-emerald-600' : 'focus:border-[#166def]';
+
             container.innerHTML = `
                 <div class="bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex justify-between items-center shrink-0 gap-3 shadow-xs">
                     <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-                        <span class="text-xs font-black uppercase text-slate-400 shrink-0 hidden sm:inline"><i class="fa-solid fa-list-ul mr-1 text-[#166def]"></i> Bài học hiện tại:</span>
+                        <span class="text-xs font-black uppercase text-slate-400 shrink-0 hidden sm:inline"><i class="fa-solid fa-list-ul mr-1 ${themeColorText}"></i> Thao tác đang tìm hiểu:</span>
                         <div class="relative flex-1 max-w-lg min-w-[200px]">
-                            <select id="lesson-select-${scope}" onchange="onLessonSelectChange(this.value)" class="w-full bg-slate-100 hover:bg-slate-200/80 text-slate-900 font-extrabold text-xs sm:text-sm md:text-base px-3.5 py-2 rounded-xl border-2 border-slate-300 focus:border-[#166def] focus:outline-none appearance-none cursor-pointer pr-9 truncate">
+                            <select id="lesson-select-${scope}" onchange="onLessonSelectChange(this.value)" class="w-full bg-slate-100 hover:bg-slate-200/80 text-slate-900 font-extrabold text-xs sm:text-sm md:text-base px-3.5 py-2 rounded-xl border-2 border-slate-300 ${borderFocus} focus:outline-none appearance-none cursor-pointer pr-9 truncate">
                                 ${currentLessonList.map((l, i) => `<option value="${i}" class="text-slate-900 font-bold">${l.title}</option>`).join('')}
                             </select>
                             <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-xs"></i>
                         </div>
                     </div>
-                    
-                    <span id="slide-step-indicator-${scope}" class="bg-[#166def]/10 text-[#166def] font-black text-xs px-3.5 py-1.5 rounded-full shrink-0 border border-[#166def]/20">
-                        Trang 1 / 4
-                    </span>
+                    <span id="slide-step-indicator-${scope}" class="${themeBgBadge} font-black text-xs px-3.5 py-1.5 rounded-full shrink-0 border">Trang 1 / 4</span>
                 </div>
-
                 <div class="flex-1 min-h-0 overflow-y-auto p-3 sm:p-5 custom-scrollbar flex items-center justify-center bg-slate-50">
-                    <div class="w-full max-w-4xl mx-auto h-full flex flex-col justify-center" id="slide-content-viewport-${scope}"></div>
+                    <div class="w-full max-w-5xl mx-auto h-full flex flex-col justify-center" id="slide-content-viewport-${scope}"></div>
                 </div>
-
                 <div class="bg-white border-t border-slate-200 px-4 sm:px-6 py-2.5 sm:py-3 flex justify-between items-center shrink-0">
-                    <button onclick="prevSlide()" id="btn-prev-slide" class="px-4 sm:px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all flex items-center gap-1.5 text-xs sm:text-sm btn-interact">
-                        <i class="fa-solid fa-arrow-left"></i> Trang trước
-                    </button>
+                    <button onclick="prevSlide()" id="btn-prev-slide" class="px-4 sm:px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all flex items-center gap-1.5 text-xs sm:text-sm btn-interact"><i class="fa-solid fa-arrow-left"></i> Trang trước</button>
                     <div id="slide-dots-bar-${scope}" class="flex gap-1.5"></div>
-                    <button onclick="nextSlide()" id="btn-next-slide" class="px-4 sm:px-5 py-2 bg-[#166def] hover:bg-[#1259c7] text-white font-black rounded-xl transition-all shadow-xs flex items-center gap-1.5 text-xs sm:text-sm btn-interact">
-                        Trang tiếp <i class="fa-solid fa-arrow-right"></i>
-                    </button>
+                    <button onclick="nextSlide()" id="btn-next-slide" class="px-4 sm:px-5 py-2 ${themeBtnNext} text-white font-black rounded-xl transition-all shadow-xs flex items-center gap-1.5 text-xs sm:text-sm btn-interact">Trang tiếp <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             `;
         }
@@ -619,7 +592,6 @@
             const select = document.getElementById(`lesson-select-${currentLessonScope}`);
             if (select) select.value = currentLessonIndex;
 
-            // PHÂN TÁCH SLIDE THÀNH CÁC TRANG PHÂN BIỆT RÕ RÀNG
             lessonSlides = [
                 { type: 'TITLE', title: lesson.title, goal: lesson.goal },
                 { type: 'STEPS', title: lesson.title, goal: lesson.goal, steps: lesson.steps }
@@ -628,7 +600,6 @@
             if (lesson.images && lesson.images.length > 0) {
                 lessonSlides.push({ type: 'IMAGES', title: lesson.title, images: lesson.images });
             }
-
             if (lesson.quiz) {
                 lessonSlides.push({ type: 'QUIZ', title: lesson.title, quiz: lesson.quiz });
             }
@@ -643,65 +614,76 @@
             const viewport = document.getElementById(`slide-content-viewport-${currentLessonScope}`);
             const indicator = document.getElementById(`slide-step-indicator-${currentLessonScope}`);
             const dotsBar = document.getElementById(`slide-dots-bar-${currentLessonScope}`);
+            const isAdvanced = currentLessonScope === 'advanced';
 
             if (!viewport) return;
-
             indicator.innerText = `Trang ${currentSlideStep + 1} / ${lessonSlides.length}`;
 
             let html = '';
 
-            // 1. TRANG BÌA TÊN BÀI (NỀN TRẮNG - VIỀN ĐẬM XANH - CHỮ XANH)
             if (slide.type === 'TITLE') {
+                const borderClass = isAdvanced ? 'border-2 border-emerald-500' : 'border-2 border-[#166def]';
+                const badgeClass = isAdvanced ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-blue-50 text-[#166def] border-blue-200';
+                const textTitleColor = isAdvanced ? 'text-emerald-700' : 'text-[#166def]';
+                const iconColor = isAdvanced ? 'text-emerald-600' : 'text-[#166def]';
+
                 html = `
-                    <div class="bg-white text-[#166def] p-8 sm:p-10 rounded-3xl shadow-sm border-2 border-[#166def] text-center space-y-4 max-w-2xl mx-auto w-full">
-                        <span class="bg-blue-50 text-[#166def] border border-blue-200 font-extrabold text-xs uppercase px-3.5 py-1 rounded-full tracking-wider inline-block">BẮT ĐẦU BÀI HỌC</span>
-                        <h2 class="text-xl sm:text-2xl md:text-3xl font-black text-[#166def] leading-snug">${slide.title}</h2>
-                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
-                            <p class="text-slate-700 text-xs sm:text-sm leading-relaxed font-semibold">${formatText(slide.goal)}</p>
+                    <div class="bg-white p-8 sm:p-12 rounded-3xl shadow-sm ${borderClass} text-center space-y-5 max-w-4xl mx-auto w-full transition-all">
+                        <span class="${badgeClass} border font-extrabold text-xs uppercase px-4 py-1.5 rounded-full tracking-wider inline-block shadow-2xs">
+                            BẮT ĐẦU THAO TÁC
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black ${textTitleColor} leading-snug tracking-tight max-w-3xl mx-auto [text-wrap:balance]">
+                            ${slide.title}
+                        </h2>
+                        <div class="p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-200 max-w-2xl mx-auto">
+                            <p class="text-slate-700 text-xs sm:text-sm md:text-base leading-relaxed font-semibold">${formatText(slide.goal)}</p>
                         </div>
-                        <p class="text-xs text-slate-400 pt-1 font-semibold"><i class="fa-solid fa-arrow-right text-[#166def] mr-1"></i> Bấm "Trang tiếp" bên dưới để xem Mục tiêu & Quy trình</p>
+                        <p class="text-xs text-slate-400 pt-1 font-semibold flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-arrow-right ${iconColor}"></i> Bấm "Trang tiếp" bên dưới để xem Quy trình chi tiết
+                        </p>
                     </div>
                 `;
-            }
-            // 2. TRANG MỤC TIÊU & QUY TRÌNH
-            else if (slide.type === 'STEPS') {
+            } else if (slide.type === 'STEPS') {
+                const badgeColor = isAdvanced ? 'text-emerald-700' : 'text-[#166def]';
+                const numBg = isAdvanced ? 'bg-emerald-600' : 'bg-[#166def]';
+
                 html = `
-                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-5 max-w-3xl mx-auto w-full">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-5 max-w-4xl mx-auto w-full">
                         <div class="border-b border-slate-100 pb-3">
-                            <span class="text-xs font-black text-[#166def] uppercase tracking-wider block mb-1">Mục tiêu bài học</span>
+                            <span class="text-xs font-black ${badgeColor} uppercase tracking-wider block mb-1">Mục tiêu thao tác</span>
                             <h3 class="text-xs sm:text-sm font-bold text-slate-900 leading-relaxed">${formatText(slide.goal)}</h3>
                         </div>
                         <div class="space-y-2.5">
                             <span class="text-xs font-black text-slate-400 uppercase tracking-wider block">Quy trình thực hiện chuẩn:</span>
                             ${slide.steps.map((st, i) => `
-                                <div class="flex gap-3 items-start bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                                    <span class="w-6 h-6 rounded-full bg-[#166def] text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">${i+1}</span>
+                                <div class="flex gap-3 items-start bg-slate-50 p-3.5 sm:p-4 rounded-2xl border border-slate-100">
+                                    <span class="w-6 h-6 rounded-full ${numBg} text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">${i+1}</span>
                                     <p class="text-slate-800 font-bold text-xs sm:text-sm leading-relaxed">${formatText(st)}</p>
                                 </div>
                             `).join('')}
                         </div>
                     </div>
                 `;
-            }
-            // 3. TRANG HÌNH ẢNH MÀN HÌNH ĐỘC LẬP (GIẢM SIZE KÍCH THƯỚC ĐỂ HIỂN THỊ ĐỦ)
-            else if (slide.type === 'IMAGES') {
+            } else if (slide.type === 'IMAGES') {
                 const totalImgs = slide.images.length;
                 const currentImg = slide.images[carouselImgIndex] || slide.images[0];
+                const iconColor = isAdvanced ? 'text-emerald-600' : 'text-[#166def]';
+                const btnBg = isAdvanced ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-[#166def] hover:bg-[#1259c7]';
+                const badgeBg = isAdvanced ? 'bg-emerald-50 text-emerald-700' : 'bg-blue-50 text-[#166def]';
 
                 html = `
                     <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-xs space-y-3.5 max-w-4xl mx-auto w-full">
                         <div class="flex justify-between items-center border-b border-slate-100 pb-2.5">
-                            <h3 class="text-xs sm:text-sm font-bold text-slate-900"><i class="fa-solid fa-desktop text-[#166def] mr-1.5"></i> Màn Hình Thao Tác (Ảnh ${carouselImgIndex + 1}/${totalImgs})</h3>
-                            <button onclick="openLightbox('${currentImg}')" class="text-xs text-[#166def] font-bold bg-blue-50 px-3 py-1 rounded-full hover:bg-blue-100 transition-all">Phóng to ảnh <i class="fa-solid fa-magnifying-glass-plus ml-1"></i></button>
+                            <h3 class="text-xs sm:text-sm font-bold text-slate-900"><i class="fa-solid fa-desktop ${iconColor} mr-1.5"></i> Màn Hình Thao Tác (Ảnh ${carouselImgIndex + 1}/${totalImgs})</h3>
+                            <button onclick="openLightbox('${currentImg}')" class="text-xs font-bold ${badgeBg} px-3 py-1 rounded-full transition-all">Phóng to ảnh <i class="fa-solid fa-magnifying-glass-plus ml-1"></i></button>
                         </div>
 
-                        <!-- KÍCH THƯỚC ẢNH ĐÃ ĐƯỢC GIẢM 10% (MAX-H 38VH) GIÚP KHÔNG BỊ TRÀN VÙNG HỌC -->
                         <div class="relative flex items-center justify-center bg-slate-50 p-2 rounded-2xl border border-slate-200 min-h-[35vh]">
                             ${totalImgs > 1 ? `
-                                <button onclick="prevCarouselImg(${totalImgs})" class="absolute left-3 top-1/2 -translate-y-1/2 bg-[#166def] hover:bg-[#1259c7] text-white w-9 h-9 rounded-full flex items-center justify-center text-sm shadow-md z-10 btn-interact">
+                                <button onclick="prevCarouselImg(${totalImgs})" class="absolute left-3 top-1/2 -translate-y-1/2 ${btnBg} text-white w-9 h-9 rounded-full flex items-center justify-center text-sm shadow-md z-10 btn-interact">
                                     <i class="fa-solid fa-chevron-left"></i>
                                 </button>
-                                <button onclick="nextCarouselImg(${totalImgs})" class="absolute right-3 top-1/2 -translate-y-1/2 bg-[#166def] hover:bg-[#1259c7] text-white w-9 h-9 rounded-full flex items-center justify-center text-sm shadow-md z-10 btn-interact">
+                                <button onclick="nextCarouselImg(${totalImgs})" class="absolute right-3 top-1/2 -translate-y-1/2 ${btnBg} text-white w-9 h-9 rounded-full flex items-center justify-center text-sm shadow-md z-10 btn-interact">
                                     <i class="fa-solid fa-chevron-right"></i>
                                 </button>
                             ` : ''}
@@ -710,11 +692,10 @@
                         </div>
                     </div>
                 `;
-            }
-            // 4. TRANG QUIZ CỦNG CỐ ĐỘC LẬP
-            else if (slide.type === 'QUIZ') {
+            } else if (slide.type === 'QUIZ') {
                 const q = slide.quiz;
                 const state = quizAnsweredState[slide.title];
+                const badgeBg = isAdvanced ? 'bg-emerald-600' : 'bg-[#166def]';
 
                 let remarkHtml = '';
                 if (state) {
@@ -738,7 +719,7 @@
                 html = `
                     <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-5 max-w-2xl mx-auto w-full">
                         <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
-                            <span class="bg-[#166def] text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">CỦNG CỐ BÀI HỌC</span>
+                            <span class="${badgeBg} text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">CỦNG CỐ THAO TÁC</span>
                             <span class="text-xs font-bold text-slate-400">1 Câu hỏi nhận định</span>
                         </div>
 
@@ -760,8 +741,9 @@
 
             viewport.innerHTML = html;
 
+            const dotActiveColor = isAdvanced ? 'bg-emerald-600' : 'bg-[#166def]';
             dotsBar.innerHTML = lessonSlides.map((_, i) => `
-                <div onclick="jumpToSlideStep(${i})" class="w-2.5 h-2.5 rounded-full cursor-pointer transition-all ${i === currentSlideStep ? 'bg-[#166def] w-5' : 'bg-slate-300'}"></div>
+                <div onclick="jumpToSlideStep(${i})" class="w-2.5 h-2.5 rounded-full cursor-pointer transition-all ${i === currentSlideStep ? `${dotActiveColor} w-5` : 'bg-slate-300'}"></div>
             `).join('');
 
             document.getElementById('btn-prev-slide').disabled = currentSlideStep === 0;
@@ -796,9 +778,8 @@
                     currentLessonIndex++;
                     loadCurrentLesson();
                 } else if (currentLessonScope === 'basic') {
-                    switchTab('advanced');
+                    showBasicCompletionModal();
                 } else if (currentLessonScope === 'advanced') {
-                    // HOÀN THÀNH BÀI CUỐI -> MỞ POPUP CHÚC MỪNG 🎉
                     showCongratulationModal();
                 }
             }
@@ -820,7 +801,26 @@
             renderCurrentSlide();
         }
 
+        function showBasicCompletionModal() {
+            document.getElementById('completion-feature-name').innerText = rawFeatureTitle;
+            const modal = document.getElementById('basic-completion-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeBasicCompletionModal() {
+            const modal = document.getElementById('basic-completion-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function goToAdvancedSection() {
+            closeBasicCompletionModal();
+            switchTab('advanced');
+        }
+
         function showCongratulationModal() {
+            document.getElementById('course-feature-name').innerText = rawFeatureTitle;
             const modal = document.getElementById('congratulations-modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
@@ -833,6 +833,7 @@
         }
 
         function restartCourse() {
+            closeBasicCompletionModal();
             closeCongratulationModal();
             quizAnsweredState = {};
             switchTab('guide');
