@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" class="h-full w-full overflow-hidden" style="font-size: 13px;">
+<html lang="vi" class="h-full w-full overflow-hidden" style="font-size: 15px;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -38,7 +38,7 @@
             -webkit-overflow-scrolling: touch;
         }
         
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
@@ -91,7 +91,7 @@
                 <i id="sidebar-toggle-icon" class="fa-solid fa-bars-staggered text-xs"></i>
             </button>
             
-            <button onclick="openSettingsModal()" class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-all cursor-pointer shrink-0" title="Thu phóng giao diện">
+            <button onclick="openSettingsModal()" class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-all cursor-pointer shrink-0" title="Cài đặt thu phóng">
                 <i class="fa-solid fa-gear text-xs"></i>
             </button>
 
@@ -122,8 +122,7 @@
             </div>
 
             <div class="p-2 space-y-1.5 overflow-y-auto flex-1 custom-scrollbar">
-                
-                <!-- QUY ĐỊNH HỌC TẬP (MỤC CỐ ĐỊNH DUY NHẤT Ở TRÊN) -->
+                <!-- QUY ĐỊNH HỌC TẬP -->
                 <button onclick="navGoToPage('intro-overview')" id="btn-intro-overview" class="sidebar-item-btn active-lesson w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-slate-700 hover:bg-slate-100 text-xs font-semibold cursor-pointer">
                     <i class="fa-solid fa-clipboard-check text-xs shrink-0 text-[#166def] lesson-icon"></i>
                     <span class="truncate flex-1 text-left font-bold">Quy định học tập</span>
@@ -133,9 +132,8 @@
                     <div class="h-px bg-slate-200 w-full"></div>
                 </div>
 
-                <!-- 5 CỤM ACCORDION GẬP MỞ TỰ ĐỘNG -->
+                <!-- 5 CỤM ACCORDION GẬP MỞ -->
                 <div id="sidebar-accordion-container" class="space-y-1.5"></div>
-
             </div>
         </aside>
 
@@ -153,14 +151,14 @@
             </button>
 
             <!-- VÙNG HIỂN THỊ NỘI DUNG THAO TÁC -->
-            <div id="dynamic-content-view" class="w-full h-full overflow-y-auto px-6 sm:px-14 pt-3 safe-bottom-padding custom-scrollbar flex flex-col">
+            <div id="dynamic-content-view" class="w-full h-full overflow-y-auto px-5 sm:px-12 md:px-16 pt-3 safe-bottom-padding custom-scrollbar flex flex-col">
                 <!-- Nội dung hiển thị động -->
             </div>
         </main>
 
     </div>
 
-    <!-- MODAL THU PHÓNG ZOOM -->
+    <!-- MODAL THU PHÓNG ZOOM: MẶC ĐỊNH 100%, THÊM 110, 120, 130 -->
     <div id="modal-settings" class="fixed inset-0 bg-black/70 z-[100] hidden flex items-center justify-center p-3 backdrop-blur-xs">
         <div class="bg-white rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl border border-slate-200">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -176,15 +174,15 @@
             <div class="space-y-2">
                 <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
                     <span>Tỷ lệ thu phóng (Zoom):</span>
-                    <span id="zoom-label" class="text-[#166def] font-black">80%</span>
+                    <span id="zoom-label" class="text-[#166def] font-black">100%</span>
                 </label>
                 <div class="grid grid-cols-4 gap-1.5">
-                    <button onclick="setAppZoom(70)" class="zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="70">70%</button>
-                    <button onclick="setAppZoom(80)" class="zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border-2 border-[#166def] bg-blue-50 text-[#166def] cursor-pointer" data-zoom="80">80%</button>
-                    <button onclick="setAppZoom(90)" class="zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="90">90%</button>
-                    <button onclick="setAppZoom(100)" class="zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="100">100%</button>
+                    <button onclick="setAppZoom(100)" class="zoom-btn py-2 px-2 rounded-xl text-xs font-bold border-2 border-[#166def] bg-blue-50 text-[#166def] cursor-pointer" data-zoom="100">100%</button>
+                    <button onclick="setAppZoom(110)" class="zoom-btn py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="110">110%</button>
+                    <button onclick="setAppZoom(120)" class="zoom-btn py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="120">120%</button>
+                    <button onclick="setAppZoom(130)" class="zoom-btn py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="130">130%</button>
                 </div>
-                <p class="text-[10px] text-slate-500 italic">Mặc định 80% tối ưu cỡ chữ vừa khít mọi kích cỡ màn hình.</p>
+                <p class="text-[10px] text-slate-500 italic">Mặc định 100% giúp hình ảnh và chữ hiển thị to rõ, sắc nét.</p>
             </div>
 
             <div class="pt-2">
@@ -192,6 +190,17 @@
                     Xác nhận &amp; Đóng
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL LIGHTBOX XEM ẢNH PHÓNG TO TOÀN MÀN HÌNH -->
+    <div id="modal-image-lightbox" onclick="closeImageLightbox()" class="fixed inset-0 bg-black/85 z-[150] hidden flex flex-col items-center justify-center p-2 sm:p-4 backdrop-blur-sm cursor-zoom-out select-none">
+        <button onclick="closeImageLightbox()" class="absolute top-3 right-3 sm:top-5 sm:right-5 w-10 h-10 rounded-full bg-white/20 hover:bg-white/35 text-white flex items-center justify-center text-lg z-10 transition-all cursor-pointer" title="Đóng (Esc)">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="relative max-w-[95vw] max-h-[92vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Ảnh phóng to" class="w-auto h-auto max-w-full max-h-[88vh] rounded-xl shadow-2xl object-contain border border-white/20">
+            <p id="lightbox-caption" class="text-white/90 text-xs sm:text-sm font-medium mt-2 px-4 py-1 rounded-full bg-black/50 text-center max-w-2xl truncate"></p>
         </div>
     </div>
 
@@ -215,7 +224,6 @@
 
     <!-- JAVASCRIPT LOGIC ENGINE -->
     <script>
-        // DỮ LIỆU ĐƯỢC CHIA LÀM 5 DANH MỤC - TÊN RÚT GỌN TỐI ĐA ĐỂ SIDEBAR THOÁNG ĐẸP
         const CATEGORIES_DATA = [
             {
                 id: "cat_login",
@@ -475,16 +483,15 @@
         ];
 
         let currentPage = 'intro-overview';
-        let currentZoom = 80;
+        let currentZoom = 100; // Mặc định 100%
         let isSidebarCollapsed = false;
         let viewedPages = new Set(['intro-overview']);
-        let openCategories = new Set(['cat_login']); // Lưu danh mục đang mở
+        let openCategories = new Set(['cat_login']);
 
         function isMobile() {
             return window.innerWidth < 768;
         }
 
-        // TẠO DANH SÁCH TUẦN TỰ CHO 2 NÚT TIẾP / LÙI
         function getLinearNavigationList() {
             let list = [
                 { id: 'intro-overview', title: 'Quy định học tập' }
@@ -500,24 +507,55 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            setAppZoom(80);
+            setAppZoom(100);
             renderSidebar();
             navGoToPage('intro-overview');
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeImageLightbox();
+                    closeSettingsModal();
+                    closeModal('modal-completed');
+                }
+            });
         });
 
+        // HÀM ĐIỀU CHỈNH ZOOM: 100%, 110%, 120%, 130%
         function setAppZoom(val) {
             currentZoom = val;
-            const fontMap = { 70: '11.5px', 80: '13px', 90: '14.5px', 100: '16px' };
-            document.documentElement.style.fontSize = fontMap[val] || '13px';
+            const fontMap = { 
+                100: '15px', 
+                110: '16.5px', 
+                120: '18px', 
+                130: '19.5px' 
+            };
+            document.documentElement.style.fontSize = fontMap[val] || '15px';
             document.getElementById('zoom-label').innerText = val + '%';
             
             document.querySelectorAll('.zoom-btn').forEach(b => {
                 if (parseInt(b.getAttribute('data-zoom')) === val) {
-                    b.className = 'zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border-2 border-[#166def] bg-blue-50 text-[#166def] cursor-pointer';
+                    b.className = 'zoom-btn py-2 px-2 rounded-xl text-xs font-bold border-2 border-[#166def] bg-blue-50 text-[#166def] cursor-pointer';
                 } else {
-                    b.className = 'zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700';
+                    b.className = 'zoom-btn py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700';
                 }
             });
+        }
+
+        // HÀM PHÓNG TO ẢNH LIGHTBOX
+        function openImageLightbox(src, caption) {
+            const modal = document.getElementById('modal-image-lightbox');
+            const imgEl = document.getElementById('lightbox-img');
+            const capEl = document.getElementById('lightbox-caption');
+            if (modal && imgEl) {
+                imgEl.src = src;
+                capEl.innerText = caption ? caption.replace(/<[^>]*>?/gm, '') : '';
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeImageLightbox() {
+            const modal = document.getElementById('modal-image-lightbox');
+            if (modal) modal.classList.add('hidden');
         }
 
         function openSettingsModal() { document.getElementById('modal-settings').classList.remove('hidden'); }
@@ -555,7 +593,6 @@
             }
         }
 
-        // ĐÓNG / MỞ TỪNG NHÓM ACCORDION
         function toggleCategoryAccordion(catId) {
             if (openCategories.has(catId)) {
                 openCategories.delete(catId);
@@ -565,7 +602,6 @@
             renderSidebar();
         }
 
-        // VẼ THANH SIDEBAR TINH GỌN
         function renderSidebar() {
             const container = document.getElementById('sidebar-accordion-container');
             if (!container) return;
@@ -576,7 +612,6 @@
 
                 return `
                     <div class="rounded-xl border ${hasActiveChild ? 'border-blue-200 bg-blue-50/30' : 'border-slate-200/80 bg-white'} overflow-hidden transition-all">
-                        <!-- HEADER CỤM ACCORDION -->
                         <button onclick="toggleCategoryAccordion('${cat.id}')" class="w-full flex items-center justify-between px-2.5 py-2 text-slate-800 hover:bg-slate-50 text-xs font-bold cursor-pointer select-none">
                             <div class="flex items-center gap-2 truncate">
                                 <i class="fa-solid ${cat.icon} text-xs text-[#166def] shrink-0"></i>
@@ -585,7 +620,6 @@
                             <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#166def]' : ''}"></i>
                         </button>
 
-                        <!-- DANH SÁCH BÀI HỌC (CHỈ HIỆN KHI MỞ) -->
                         <div class="${isOpen ? 'block' : 'hidden'} px-1.5 pb-1.5 pt-0.5 space-y-1 bg-white/60 border-t border-slate-100">
                             ${cat.lessons.map(lesson => {
                                 const isViewed = viewedPages.has(lesson.id);
@@ -602,7 +636,6 @@
                 `;
             }).join('');
 
-            // Highlight mục Quy định
             const introBtn = document.getElementById('btn-intro-overview');
             if (introBtn) {
                 if (currentPage === 'intro-overview') {
@@ -633,7 +666,6 @@
             currentPage = pageId;
             viewedPages.add(pageId);
 
-            // Tự động mở nhóm danh mục tương ứng
             CATEGORIES_DATA.forEach(cat => {
                 if (cat.lessons.some(l => l.id === pageId)) {
                     openCategories.add(cat.id);
@@ -688,10 +720,10 @@
             const container = document.getElementById('dynamic-content-view');
             if (!container) return;
 
-            // TRANG QUY ĐỊNH HỌC TẬP (ĐÃ LOẠI BỎ KHỐI 5 NHÓM THAO TÁC RƯỜM RÀ)
+            // TRANG QUY ĐỊNH HỌC TẬP
             if (currentPage === 'intro-overview') {
                 container.innerHTML = `
-                    <div class="w-full max-w-4xl mx-auto space-y-4 pb-6">
+                    <div class="w-full max-w-5xl mx-auto space-y-4 pb-6">
                         <div class="bg-white rounded-2xl p-4 sm:p-5 border border-blue-200 shadow-xs space-y-2">
                             <div class="flex items-center gap-2">
                                 <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider text-white bg-[#166def]">Học trực tuyến</span>
@@ -706,7 +738,7 @@
                             <h3 class="text-xs sm:text-sm font-black uppercase tracking-wider text-amber-950 flex items-center gap-2">
                                 <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Quy định học tập & Thi kiểm tra bắt buộc:
                             </h3>
-                            <ul class="text-xs text-amber-950 space-y-2 list-disc pl-5 font-medium leading-relaxed">
+                            <ul class="text-xs sm:text-sm text-amber-950 space-y-2 list-disc pl-5 font-medium leading-relaxed">
                                 <li><strong>Học đầy đủ nội dung:</strong> Học viên cần hoàn thành 100% thời lượng bài giảng, không tua nhanh hoặc bỏ qua các slide nghiệp vụ.</li>
                                 <li><strong>Làm bài kiểm tra đúng hạn:</strong> Các bài test học phần sáng và bài kiểm tra cuối khóa có giới hạn thời gian mở và nộp bài. Hệ thống sẽ tự động đóng khi hết giờ.</li>
                                 <li><strong>Nộp file bài tập thực hành:</strong> Đối với bài tập buổi chiều và bài tập kỹ năng, học viên phải tải đúng mẫu file quy định, làm bài và đính kèm tệp lên hệ thống trước thời hạn kết thúc.</li>
@@ -715,7 +747,7 @@
                         </div>
 
                         <div class="pt-2 text-center">
-                            <button onclick="navStepLinear('next')" class="px-6 py-2.5 bg-[#166def] hover:bg-[#1259c7] text-white font-bold rounded-xl text-xs shadow-md transition-all cursor-pointer">
+                            <button onclick="navStepLinear('next')" class="px-6 py-2.5 bg-[#166def] hover:bg-[#1259c7] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
                                 Bắt đầu xem hướng dẫn thao tác <i class="fa-solid fa-arrow-right ml-1.5"></i>
                             </button>
                         </div>
@@ -724,7 +756,7 @@
                 return;
             }
 
-            // TRANG CHI TIẾT CÁC BÀI THAO TÁC
+            // TRANG CHI TIẾT CÁC BÀI THAO TÁC - MỞ RỘNG VÙNG ẢNH VÀ CLICK ĐỂ ZOOM
             let currentLesson = null;
             let currentCategory = null;
 
@@ -742,7 +774,7 @@
                 const isLast = (list[list.length - 1].id === currentLesson.id);
 
                 container.innerHTML = `
-                    <div class="w-full max-w-4xl mx-auto space-y-3.5 pb-16 md:pb-6">
+                    <div class="w-full max-w-5xl mx-auto space-y-4 pb-16 md:pb-6">
                         <!-- HEADER BÀI HỌC -->
                         <div class="space-y-1 border-b border-slate-200 pb-2.5">
                             <div class="flex items-center gap-2">
@@ -767,7 +799,7 @@
                             <p class="text-xs sm:text-sm text-amber-950 leading-relaxed font-medium pl-7">${currentLesson.situation}</p>
                         </div>
 
-                        <!-- CÁC BƯỚC THAO TÁC + HÌNH ẢNH TO RÕ NÉT -->
+                        <!-- CÁC BƯỚC THAO TÁC + HÌNH ẢNH TO VÀ CLICK ĐỂ PHÓNG TO -->
                         <div class="space-y-3 pt-1">
                             <h3 class="text-xs font-black uppercase tracking-wider text-slate-500">Quy trình thực hiện:</h3>
                             <div class="space-y-4">
@@ -778,8 +810,14 @@
                                             <div class="text-xs sm:text-sm text-slate-700 leading-relaxed font-bold">${step.text}</div>
                                         </div>
                                         ${step.img ? `
-                                            <div class="rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-slate-100 flex items-center justify-center p-1 sm:p-2">
-                                                <img src="${step.img}" alt="Hình ảnh bước ${sIdx + 1}" class="w-full h-auto object-contain select-none max-h-[550px] mx-auto rounded-lg">
+                                            <div onclick="openImageLightbox('${step.img}', '${step.text.replace(/'/g, "\\'")}')" 
+                                                 class="relative group rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-slate-100 flex items-center justify-center p-1.5 sm:p-3 cursor-zoom-in transition-all hover:border-[#166def]/60 hover:shadow-md">
+                                                <img src="${step.img}" alt="Hình ảnh bước ${sIdx + 1}" class="w-full h-auto object-contain select-none max-h-[680px] mx-auto rounded-lg transition-transform group-hover:scale-[1.008]">
+                                                
+                                                <!-- BADGE HƯỚNG DẪN CLICK PHÓNG TO -->
+                                                <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/60 hover:bg-black/80 text-white text-[11px] font-semibold flex items-center gap-1.5 backdrop-blur-xs transition-opacity shadow-md pointer-events-none opacity-85 group-hover:opacity-100">
+                                                    <i class="fa-solid fa-expand text-[10px]"></i> Bấm để phóng to
+                                                </div>
                                             </div>
                                         ` : ''}
                                     </div>
