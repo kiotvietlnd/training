@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full w-full overflow-hidden" style="font-size: 13px;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>KiotViet E-Learning - Hướng Dẫn Thao Tác LMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { 
+                extend: {
+                    colors: {
+                        kvPrimary: '#166def',
+                        kvBlue: '#166def',
+                        kvNavy: '#1e3a8a',
+                        kvGreen: '#16a34a'
+                    }
+                } 
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html, body { 
+            height: 100%; 
+            height: 100dvh;
+            min-height: -webkit-fill-available;
+            width: 100%; 
+            margin: 0; 
+            padding: 0; 
+            overflow: hidden; 
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        button, button:focus, button:focus-visible, button:active,
+        a, a:focus, a:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        .sidebar-item-btn { transition: all 0.15s ease; outline: none !important; }
+        .sidebar-item-btn.active-lesson { background-color: #166def !important; color: #ffffff !important; font-weight: 700; }
+        .sidebar-item-btn.active-lesson i.lesson-icon { color: #ffffff !important; }
+        .sidebar-item-btn.active-lesson i.check-icon { color: #86efac !important; }
+
+        #app-sidebar {
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+        }
+
+        .side-nav-btn {
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .side-nav-btn:hover:not(:disabled) {
+            transform: translateY(-50%) scale(1.08);
+        }
+        .side-nav-btn:active:not(:disabled) {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        @media (max-width: 767px) {
+            .safe-bottom-padding {
+                padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 5.5rem) !important;
+            }
+        }
+        @media (min-width: 768px) {
+            .safe-bottom-padding {
+                padding-bottom: 2rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased flex flex-col h-[100dvh] w-screen bg-[#f1f5f9] overflow-hidden select-none">
+
+    <!-- NAVBAR NHẸ GỌN (42px) -->
+    <header class="h-[42px] shrink-0 text-white shadow-xs z-30 flex items-center justify-between px-2.5 sm:px-4 bg-gradient-to-r from-[#166def] via-[#166def] to-[#1d4ed8]">
+        <div class="flex items-center gap-1.5 sm:gap-2 truncate">
+            <button onclick="toggleSidebarCollapse()" class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-all cursor-pointer shrink-0" title="Danh mục">
+                <i id="sidebar-toggle-icon" class="fa-solid fa-bars-staggered text-xs"></i>
+            </button>
+            
+            <button onclick="openSettingsModal()" class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-all cursor-pointer shrink-0" title="Thu phóng giao diện">
+                <i class="fa-solid fa-gear text-xs"></i>
+            </button>
+
+            <span class="text-white/40 text-xs sm:text-sm font-light">|</span>
+            <div class="truncate">
+                <h1 class="text-xs sm:text-sm font-black tracking-tight text-white uppercase truncate">Hướng Dẫn Học LMS</h1>
+            </div>
+        </div>
+
+        <div class="shrink-0 font-bold px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-[11px] text-white shadow-xs bg-cyan-400 border border-cyan-400/40 uppercase tracking-wider">
+            LMS Guide
+        </div>
+    </header>
+
+    <!-- KHUNG BODY CHÍNH -->
+    <div class="flex-1 flex flex-row min-h-0 w-full overflow-hidden relative">
+
+        <!-- LỚP BACKDROP MỜ TRÊN MOBILE -->
+        <div id="sidebar-backdrop" onclick="toggleSidebarCollapse()" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden backdrop-blur-2xs transition-opacity"></div>
+
+        <!-- SIDEBAR GỌN GÀNG, KHÔNG RƯỜM RÀ -->
+        <aside id="app-sidebar" class="fixed md:static inset-y-0 left-0 z-50 md:z-20 w-64 sm:w-60 lg:w-64 bg-white border-r border-slate-200 shrink-0 h-full flex flex-col shadow-xl md:shadow-xs overflow-hidden -translate-x-full md:translate-x-0">
+            <div class="md:hidden h-10 px-3 border-b border-slate-100 flex items-center justify-between bg-slate-50 shrink-0">
+                <span class="text-xs font-black text-slate-700 uppercase tracking-wider">Nội dung hướng dẫn</span>
+                <button onclick="toggleSidebarCollapse()" class="w-6 h-6 rounded-md text-slate-400 hover:text-slate-700 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+
+            <div class="p-2 space-y-1.5 overflow-y-auto flex-1 custom-scrollbar">
+                
+                <!-- QUY ĐỊNH HỌC TẬP (MỤC CỐ ĐỊNH DUY NHẤT Ở TRÊN) -->
+                <button onclick="navGoToPage('intro-overview')" id="btn-intro-overview" class="sidebar-item-btn active-lesson w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-slate-700 hover:bg-slate-100 text-xs font-semibold cursor-pointer">
+                    <i class="fa-solid fa-clipboard-check text-xs shrink-0 text-[#166def] lesson-icon"></i>
+                    <span class="truncate flex-1 text-left font-bold">Quy định học tập</span>
+                </button>
+
+                <div class="pt-1 pb-0.5 px-2">
+                    <div class="h-px bg-slate-200 w-full"></div>
+                </div>
+
+                <!-- 5 CỤM ACCORDION GẬP MỞ TỰ ĐỘNG -->
+                <div id="sidebar-accordion-container" class="space-y-1.5"></div>
+
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT CHÍNH -->
+        <main class="flex-1 min-w-0 h-full relative overflow-hidden flex flex-col bg-[#f8fafc]">
+            
+            <!-- NÚT MŨI TÊN TRÁI -->
+            <button id="nav-btn-prev" onclick="navStepLinear('prev')" class="side-nav-btn absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-white text-slate-700 hover:text-[#166def] border border-slate-200 flex items-center justify-center cursor-pointer disabled:opacity-0 disabled:pointer-events-none" title="Trang trước">
+                <i class="fa-solid fa-arrow-left text-[11px] sm:text-sm font-black"></i>
+            </button>
+
+            <!-- NÚT MŨI TÊN PHẢI -->
+            <button id="nav-btn-next" onclick="navStepLinear('next')" class="side-nav-btn absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#166def] hover:bg-[#1259c7] text-white flex items-center justify-center cursor-pointer" title="Trang tiếp">
+                <i class="fa-solid fa-arrow-right text-[11px] sm:text-sm font-black"></i>
+            </button>
+
+            <!-- VÙNG HIỂN THỊ NỘI DUNG THAO TÁC -->
+            <div id="dynamic-content-view" class="w-full h-full overflow-y-auto px-6 sm:px-14 pt-3 safe-bottom-padding custom-scrollbar flex flex-col">
+                <!-- Nội dung hiển thị động -->
+            </div>
+        </main>
+
+    </div>
+
+    <!-- MODAL THU PHÓNG ZOOM -->
+    <div id="modal-settings" class="fixed inset-0 bg-black/70 z-[100] hidden flex items-center justify-center p-3 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl border border-slate-200">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2 text-slate-800">
+                    <i class="fa-solid fa-gear text-[#166def]"></i>
+                    <h3 class="text-sm font-black uppercase">Cài đặt hiển thị</h3>
+                </div>
+                <button onclick="closeSettingsModal()" class="text-slate-400 hover:text-slate-600 text-sm cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
+                    <span>Tỷ lệ thu phóng (Zoom):</span>
+                    <span id="zoom-label" class="text-[#166def] font-black">80%</span>
+                </label>
+                <div class="grid grid-cols-4 gap-1.5">
+                    <button onclick="setAppZoom(70)" class="zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="70">70%</button>
+                    <button onclick="setAppZoom(80)" class="zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border-2 border-[#166def] bg-blue-50 text-[#166def] cursor-pointer" data-zoom="80">80%</button>
+                    <button onclick="setAppZoom(90)" class="zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="90">90%</button>
+                    <button onclick="setAppZoom(100)" class="zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="100">100%</button>
+                </div>
+                <p class="text-[10px] text-slate-500 italic">Mặc định 80% tối ưu cỡ chữ vừa khít mọi kích cỡ màn hình.</p>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="closeSettingsModal()" class="w-full py-2 bg-[#166def] hover:bg-[#1259c7] text-white font-bold rounded-xl text-xs cursor-pointer shadow-xs">
+                    Xác nhận &amp; Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP HOÀN THÀNH TẤT CẢ HƯỚNG DẪN -->
+    <div id="modal-completed" class="fixed inset-0 bg-black/75 z-[100] hidden flex items-center justify-center p-3 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-md w-full p-5 text-center space-y-3.5 shadow-2xl border-2 border-emerald-600">
+            <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-base font-black text-slate-900">Chúc mừng bạn đã xem hết hướng dẫn!</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">Bạn đã nắm vững toàn bộ thao tác học tập, thi kiểm tra và nộp bài trên hệ thống LMS.</p>
+            </div>
+            <div class="pt-2">
+                <button onclick="restartFromBeginning()" class="w-full py-2.5 px-3 bg-[#166def] hover:bg-[#1259c7] text-white font-bold rounded-xl text-xs cursor-pointer transition-all shadow-xs">
+                    Xem lại từ đầu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+        // DỮ LIỆU ĐƯỢC CHIA LÀM 5 DANH MỤC - TÊN RÚT GỌN TỐI ĐA ĐỂ SIDEBAR THOÁNG ĐẸP
+        const CATEGORIES_DATA = [
+            {
+                id: "cat_login",
+                name: "1. Đăng nhập",
+                icon: "fa-right-to-bracket",
+                lessons: [
+                    {
+                        id: "login-1",
+                        sidebarTitle: "1. Cấp tài khoản & Mật khẩu",
+                        title: "Nhận tài khoản và Đổi mật khẩu lần đầu",
+                        situation: "Học viên mới tham gia cần <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">kiểm tra hòm thư Email</b> để lấy thông tin tài khoản được cấp và thực hiện đổi mật khẩu trong lần đầu đăng nhập.",
+                        steps: [
+                            {
+                                text: "Mở Email cá nhân/công việc đã đăng ký, tìm thư cấp tài khoản gửi từ hệ thống đào tạo LMS để lấy tên đăng nhập và đường dẫn.",
+                                img: "https://i.postimg.cc/gjS7qcQL/Mail-tai-khoan.png"
+                            },
+                            {
+                                text: "Truy cập đường link trong mail hoặc vào hệ thống để tiến hành đổi mật khẩu mới trong lần đầu đăng nhập nhằm kích hoạt tài khoản.",
+                                img: "https://i.postimg.cc/XNQt0xqy/Doi-mat-khau-lan-dau.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "login-2",
+                        sidebarTitle: "2. Đăng nhập LMS",
+                        title: "Đăng nhập vào hệ thống LMS",
+                        situation: "Học viên <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">đăng nhập vào cổng LMS</b> bằng thông tin tài khoản và mật khẩu vừa thiết lập để bắt đầu lộ trình đào tạo.",
+                        steps: [
+                            {
+                                text: "Điền tên đăng nhập (email/mã nhân viên) và mật khẩu, sau đó bấm nút <b>Đăng nhập</b> để vào giao diện chính.",
+                                img: "https://i.postimg.cc/nznSyQtD/Dang-nhap.png"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "cat_onboarding",
+                name: "2. Khóa hội nhập",
+                icon: "fa-handshake",
+                lessons: [
+                    {
+                        id: "onboard-1",
+                        sidebarTitle: "1. Vào chương trình tuần 1",
+                        title: "Xem khóa học Tuần 1 & Vào chương trình",
+                        situation: "Học viên xem <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">Lộ trình khóa học Tuần 1</b> và truy cập đúng chương trình Hội nhập để chuẩn bị học tập.",
+                        steps: [
+                            {
+                                text: "Nhấp chọn vào mục <b>Chương trình</b> đào tạo trên thanh menu hệ thống.",
+                                img: "https://i.postimg.cc/3J3xy1QR/Chuong-trinh.png"
+                            },
+                            {
+                                text: "Xem danh sách các khóa học được phân bổ trong Tuần 1 tại màn hình chính của học viên.",
+                                img: "https://i.postimg.cc/Jz60Ckgt/Khoa-hoc-tuan-1.png"
+                            },
+                            {
+                                text: "Bấm chọn <b>Vào chương trình</b> để mở danh mục các học phần của khóa Hội nhập.",
+                                img: "https://i.postimg.cc/Wp8hwCnx/Vao-chuong-trinh.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "onboard-2",
+                        sidebarTitle: "2. Học & Test Hội nhập",
+                        title: "Bắt đầu học & Hoàn thành bài test Hội nhập",
+                        situation: "Học viên <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">tham gia học nội dung hội nhập</b> và hoàn thành bài kiểm tra để kết thúc học phần.",
+                        steps: [
+                            {
+                                text: "Bấm vào nút <b>Bắt đầu học</b> để truy cập và xem chi tiết bài giảng khóa Hội nhập.",
+                                img: "https://i.postimg.cc/sxsshjqQ/Bat-dau-hoc-khoa-Hoi-nhap.png"
+                            },
+                            {
+                                text: "Thực hiện trả lời các câu hỏi và hoàn thành bài test kiểm tra kiến thức khóa Hội nhập để ghi nhận kết quả.",
+                                img: "https://i.postimg.cc/XNRDx1Yn/Hoan-thanh-bai-test-hoi-nhap.png"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "cat_product",
+                name: "3. Khóa sản phẩm",
+                icon: "fa-box-open",
+                lessons: [
+                    {
+                        id: "prod-1",
+                        sidebarTitle: "1. Khóa SPCB 1",
+                        title: "Bắt đầu học khóa Sản phẩm cơ bản (SPCB 1)",
+                        situation: "Học viên bắt đầu <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">khóa học nghiệp vụ Sản phẩm cơ bản</b> trên hệ thống.",
+                        steps: [
+                            {
+                                text: "Truy cập chương trình đào tạo sản phẩm và chọn khóa <b>Sản phẩm cơ bản 1 (SPCB 1)</b>.",
+                                img: "https://i.postimg.cc/fL652kDW/Bat-dau-hoc-khoa-SPCB-1.png"
+                            },
+                            {
+                                text: "Nhấn <b>Bắt đầu học</b> để mở giao diện bài giảng tương tác.",
+                                img: "https://i.postimg.cc/Hs1BbJ6P/Bat-dau-hoc.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "prod-2",
+                        sidebarTitle: "2. Thao tác bài giảng",
+                        title: "Thao tác trên giao diện bài giảng tương tác",
+                        situation: "Các thao tác quan trọng khi học: <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">phóng to toàn màn hình</b> và <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">sử dụng phím mũi tên</b> để chuyển tiếp nội dung.",
+                        steps: [
+                            {
+                                text: "Sử dụng tính năng phóng to toàn màn hình bài giảng để giao diện hiển thị rõ ràng, thuận tiện theo dõi thao tác mẫu.",
+                                img: "https://i.postimg.cc/y8YhT0cN/Phong-to-giao-dien.png"
+                            },
+                            {
+                                text: "Thao tác bấm biểu tượng mũi tên điều hướng để chuyển qua các slide và học phần tiếp theo sau khi hoàn thành từng phần.",
+                                img: "https://i.postimg.cc/RC7c5gTh/Thao-tac-su-dung-mui-ten-de-qua-hoc-phan.png"
+                            },
+                            {
+                                text: "Bấm mũi tên xác nhận để chuyển sang học phần kế tiếp trong danh sách bài học.",
+                                img: "https://i.postimg.cc/rpjvP1Yg/Thao-tac-mui-ten-sang-hoc-phan-tiep-theo.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "prod-3",
+                        sidebarTitle: "3. Bài test sáng",
+                        title: "Làm bài kiểm tra tổng hợp & Hoàn tất học phần sáng",
+                        situation: "Sau khi học lý thuyết buổi sáng, học viên cần <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">làm bài kiểm tra tổng hợp</b> và nộp bài để hoàn tất học phần sáng.",
+                        steps: [
+                            {
+                                text: "Nhấp chọn và <b>Bắt đầu làm bài kiểm tra tổng hợp bài 1</b> buổi sáng.",
+                                img: "https://i.postimg.cc/NMSYd8Kv/Bat-dau-lam-bai-kiem-tra-tong-hop-b1.png"
+                            },
+                            {
+                                text: "Hoàn thiện các câu hỏi trắc nghiệm kiến thức và bấm <b>Nộp bài kiểm tra</b>.",
+                                img: "https://i.postimg.cc/rmLNx3J6/Nop-bai-kiem-tra-b1.png"
+                            },
+                            {
+                                text: "Xem lại kết quả bài làm, điểm số và nhấn xác nhận để <b>Hoàn tất học phần sáng</b>.",
+                                img: "https://i.postimg.cc/vmwVN96L/Xem-lai-bai-lam-va-hoan-tat-hoc-phan-sang.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "prod-4",
+                        sidebarTitle: "4. Bài tập thực hành chiều",
+                        title: "Tải đề và Nộp bài tập thực hành (Học phần chiều)",
+                        situation: "Vào buổi chiều, học viên <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">xem hướng dẫn, tải file đề bài về máy</b>, thực hành và đính kèm file nộp bài tập.",
+                        steps: [
+                            {
+                                text: "Bấm vào mục học phần chiều và chọn <b>Bắt đầu làm bài tập chiều bài 1</b>.",
+                                img: "https://i.postimg.cc/kMYtdLbJ/Bat-dau-lam-bai-tap-chieu-b1.png"
+                            },
+                            {
+                                text: "Chọn mục <b>Hướng dẫn</b> để xem chi tiết yêu cầu đề bài và tiêu chí chấm điểm.",
+                                img: "https://i.postimg.cc/TwYhzc27/Chon-huong-dan-de-xem-bai-lam.png"
+                            },
+                            {
+                                text: "Đọc kỹ hướng dẫn và bảng tiêu chí làm bài tập thực hành được cung cấp.",
+                                img: "https://i.postimg.cc/fyVyLT9t/Chon-huong-dan-xem-bai-lam.png"
+                            },
+                            {
+                                text: "Nhấp vào liên kết đề bài để <b>Mở link bài tập và tải file mẫu về máy tính</b>.",
+                                img: "https://i.postimg.cc/N0Q0XxHP/Mo-link-bai-tap-va-tai-file-ve-may.png"
+                            },
+                            {
+                                text: "Sau khi hoàn thành bài làm trên máy, chọn <b>Thêm file bài tập đã làm</b> để đính kèm tệp và nhấn nộp bài.",
+                                img: "https://i.postimg.cc/pLHj0zj6/Them-file-bai-tap-da-lam.png"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "cat_final_test",
+                name: "4. Kiểm tra cuối khóa",
+                icon: "fa-file-signature",
+                lessons: [
+                    {
+                        id: "final-1",
+                        sidebarTitle: "1. Lịch thi & Bắt đầu thi",
+                        title: "Xem lịch thi & Bắt đầu làm bài kiểm tra cuối khóa",
+                        situation: "Học viên <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">tra cứu thời gian thi</b> trong mục lịch cá nhân và truy cập bài kiểm tra tổng kết khóa sản phẩm.",
+                        steps: [
+                            {
+                                text: "Vào mục <b>Lịch của tôi</b> trên hệ thống LMS để xem lịch mở ca thi và thời hạn làm bài kiểm tra cuối khóa.",
+                                img: "https://i.postimg.cc/br0ydDwB/Lich-cua-toi.png"
+                            },
+                            {
+                                text: "Chọn bài thi đánh giá năng lực cuối khóa Sản phẩm từ danh sách bài tập/kỳ thi được giao.",
+                                img: "https://i.postimg.cc/D0hFVvPQ/Bat-dau-lam-bai-kiem-tra-cuoi-khoa.png"
+                            },
+                            {
+                                text: "Bấm nút <b>Bắt đầu làm bài</b> để vào giao diện làm bài kiểm tra tính giờ.",
+                                img: "https://i.postimg.cc/mkgX1KLs/Bat-dau-lam-bai.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "final-2",
+                        sidebarTitle: "2. Nộp bài & Khảo sát",
+                        title: "Nộp bài, Xem lại kết quả & Hoàn thành khảo sát",
+                        situation: "Sau khi nộp bài thi cuối khóa, học viên <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">xem lại kết quả điểm</b> và thực hiện <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">phiếu khảo sát ý kiến</b> để kết thúc toàn bộ khóa học.",
+                        steps: [
+                            {
+                                text: "Kiểm tra kỹ các câu trả lời trước khi hết giờ và bấm <b>Nộp bài</b>.",
+                                img: "https://i.postimg.cc/Hknm1Pbn/Nop-bai.png"
+                            },
+                            {
+                                text: "Xem lại điểm số, số câu đúng và trạng thái Đạt/Chưa đạt của bài kiểm tra cuối khóa.",
+                                img: "https://i.postimg.cc/YqqKQyn1/Xem-lai-bai-kiem-tra-cuoi-khoa.png"
+                            },
+                            {
+                                text: "Mở biểu mẫu khảo sát chất lượng khóa học và hoàn thành các câu hỏi phản hồi ý kiến.",
+                                img: "https://i.postimg.cc/T20B2Jdn/Hoan-thanh-khao-sat.png"
+                            },
+                            {
+                                text: "Bấm nộp khảo sát và kiểm tra thông báo xác nhận <b>Đã nộp khảo sát thành công</b>.",
+                                img: "https://i.postimg.cc/6pn0qBrb/Da-nop-khao-sat.png"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "cat_skills",
+                name: "5. Khóa kỹ năng",
+                icon: "fa-user-graduate",
+                lessons: [
+                    {
+                        id: "skill-1",
+                        sidebarTitle: "1. Khóa COC/CRM & Quiz",
+                        title: "Khóa học COC, CRM & Nộp bài Quiz kỹ năng",
+                        situation: "Học viên tham gia <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">các khóa đào tạo kỹ năng bắt buộc</b> (Quy tắc ứng xử COC, Quy trình CRM...) và nộp bài Quiz kiểm tra.",
+                        steps: [
+                            {
+                                text: "Truy cập danh sách các khóa học kỹ năng như Bộ quy tắc ứng xử (COC), Hệ thống quản trị khách hàng (CRM)...",
+                                img: "https://i.postimg.cc/FR9GwwLt/Khoa-hoc-COC-CRM.png"
+                            },
+                            {
+                                text: "Xem hết nội dung bài giảng video/e-learning và thực hiện bấm <b>Nộp bài Quiz</b> kiểm tra hiểu biết.",
+                                img: "https://i.postimg.cc/c4KTqR6b/Nop-bai-quiz.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "skill-2",
+                        sidebarTitle: "2. Bài tập thực hành",
+                        title: "Bài tập thực hành kỹ năng",
+                        situation: "Học viên <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">thực hiện bài tập tình huống thực tế</b> và tải file nộp bài lên hệ thống.",
+                        steps: [
+                            {
+                                text: "Mở học phần bài tập kỹ năng, đọc đề bài tình huống, làm bài và tải tệp bài làm lên hệ thống để giảng viên chấm điểm.",
+                                img: "https://i.postimg.cc/fW1qRq49/Bai-tap-thuc-hanh-ky-nang.png"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        let currentPage = 'intro-overview';
+        let currentZoom = 80;
+        let isSidebarCollapsed = false;
+        let viewedPages = new Set(['intro-overview']);
+        let openCategories = new Set(['cat_login']); // Lưu danh mục đang mở
+
+        function isMobile() {
+            return window.innerWidth < 768;
+        }
+
+        // TẠO DANH SÁCH TUẦN TỰ CHO 2 NÚT TIẾP / LÙI
+        function getLinearNavigationList() {
+            let list = [
+                { id: 'intro-overview', title: 'Quy định học tập' }
+            ];
+
+            CATEGORIES_DATA.forEach(cat => {
+                cat.lessons.forEach(lesson => {
+                    list.push({ id: lesson.id, title: lesson.title, catId: cat.id, catName: cat.name });
+                });
+            });
+
+            return list;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            setAppZoom(80);
+            renderSidebar();
+            navGoToPage('intro-overview');
+        });
+
+        function setAppZoom(val) {
+            currentZoom = val;
+            const fontMap = { 70: '11.5px', 80: '13px', 90: '14.5px', 100: '16px' };
+            document.documentElement.style.fontSize = fontMap[val] || '13px';
+            document.getElementById('zoom-label').innerText = val + '%';
+            
+            document.querySelectorAll('.zoom-btn').forEach(b => {
+                if (parseInt(b.getAttribute('data-zoom')) === val) {
+                    b.className = 'zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border-2 border-[#166def] bg-blue-50 text-[#166def] cursor-pointer';
+                } else {
+                    b.className = 'zoom-btn py-1.5 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700';
+                }
+            });
+        }
+
+        function openSettingsModal() { document.getElementById('modal-settings').classList.remove('hidden'); }
+        function closeSettingsModal() { document.getElementById('modal-settings').classList.add('hidden'); }
+
+        function toggleSidebarCollapse() {
+            const sidebar = document.getElementById('app-sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            const icon = document.getElementById('sidebar-toggle-icon');
+
+            if (isMobile()) {
+                const isOpen = !sidebar.classList.contains('-translate-x-full');
+                if (isOpen) {
+                    sidebar.classList.add('-translate-x-full');
+                    backdrop.classList.add('hidden');
+                    icon.className = 'fa-solid fa-bars-staggered text-xs';
+                } else {
+                    sidebar.classList.remove('-translate-x-full');
+                    backdrop.classList.remove('hidden');
+                    icon.className = 'fa-solid fa-xmark text-xs';
+                }
+            } else {
+                isSidebarCollapsed = !isSidebarCollapsed;
+                if (isSidebarCollapsed) {
+                    sidebar.style.width = '0px';
+                    sidebar.style.transform = 'translateX(-100%)';
+                    sidebar.style.opacity = '0';
+                    icon.className = 'fa-solid fa-arrow-right-to-bracket text-xs';
+                } else {
+                    sidebar.style.width = '';
+                    sidebar.style.transform = 'translateX(0)';
+                    sidebar.style.opacity = '1';
+                    icon.className = 'fa-solid fa-bars-staggered text-xs';
+                }
+            }
+        }
+
+        // ĐÓNG / MỞ TỪNG NHÓM ACCORDION
+        function toggleCategoryAccordion(catId) {
+            if (openCategories.has(catId)) {
+                openCategories.delete(catId);
+            } else {
+                openCategories.add(catId);
+            }
+            renderSidebar();
+        }
+
+        // VẼ THANH SIDEBAR TINH GỌN
+        function renderSidebar() {
+            const container = document.getElementById('sidebar-accordion-container');
+            if (!container) return;
+
+            container.innerHTML = CATEGORIES_DATA.map((cat) => {
+                const isOpen = openCategories.has(cat.id);
+                const hasActiveChild = cat.lessons.some(l => l.id === currentPage);
+
+                return `
+                    <div class="rounded-xl border ${hasActiveChild ? 'border-blue-200 bg-blue-50/30' : 'border-slate-200/80 bg-white'} overflow-hidden transition-all">
+                        <!-- HEADER CỤM ACCORDION -->
+                        <button onclick="toggleCategoryAccordion('${cat.id}')" class="w-full flex items-center justify-between px-2.5 py-2 text-slate-800 hover:bg-slate-50 text-xs font-bold cursor-pointer select-none">
+                            <div class="flex items-center gap-2 truncate">
+                                <i class="fa-solid ${cat.icon} text-xs text-[#166def] shrink-0"></i>
+                                <span class="truncate text-[11.5px] uppercase tracking-wide font-black ${hasActiveChild ? 'text-[#166def]' : 'text-slate-700'}">${cat.name}</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#166def]' : ''}"></i>
+                        </button>
+
+                        <!-- DANH SÁCH BÀI HỌC (CHỈ HIỆN KHI MỞ) -->
+                        <div class="${isOpen ? 'block' : 'hidden'} px-1.5 pb-1.5 pt-0.5 space-y-1 bg-white/60 border-t border-slate-100">
+                            ${cat.lessons.map(lesson => {
+                                const isViewed = viewedPages.has(lesson.id);
+                                const isActive = (currentPage === lesson.id);
+                                return `
+                                    <button onclick="navGoToPage('${lesson.id}')" class="sidebar-item-btn w-full text-left px-2 py-1.5 rounded-lg text-xs flex items-center justify-between gap-1.5 cursor-pointer leading-tight ${isActive ? 'active-lesson text-white' : 'text-slate-600 hover:bg-slate-100 font-medium'}">
+                                        <span class="truncate flex-1 text-[11px]">${lesson.sidebarTitle}</span>
+                                        ${isViewed ? `<i class="fa-solid fa-circle-check check-icon text-emerald-500 text-[11px] shrink-0" title="Đã xem"></i>` : ''}
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Highlight mục Quy định
+            const introBtn = document.getElementById('btn-intro-overview');
+            if (introBtn) {
+                if (currentPage === 'intro-overview') {
+                    introBtn.className = 'sidebar-item-btn active-lesson w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-white font-bold cursor-pointer';
+                } else {
+                    introBtn.className = 'sidebar-item-btn w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-slate-700 hover:bg-slate-100 text-xs font-semibold cursor-pointer';
+                }
+            }
+        }
+
+        function updateSideNavButtons() {
+            const list = getLinearNavigationList();
+            const curIdx = list.findIndex(item => item.id === currentPage);
+            const prevBtn = document.getElementById('nav-btn-prev');
+            const nextBtn = document.getElementById('nav-btn-next');
+            if (!prevBtn || !nextBtn) return;
+
+            if (curIdx <= 0) {
+                prevBtn.disabled = true;
+                prevBtn.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                prevBtn.disabled = false;
+                prevBtn.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function navGoToPage(pageId) {
+            currentPage = pageId;
+            viewedPages.add(pageId);
+
+            // Tự động mở nhóm danh mục tương ứng
+            CATEGORIES_DATA.forEach(cat => {
+                if (cat.lessons.some(l => l.id === pageId)) {
+                    openCategories.add(cat.id);
+                }
+            });
+
+            renderSidebar();
+            renderCurrentPageView();
+            updateSideNavButtons();
+            
+            if (isMobile()) {
+                const sidebar = document.getElementById('app-sidebar');
+                const backdrop = document.getElementById('sidebar-backdrop');
+                const icon = document.getElementById('sidebar-toggle-icon');
+                if (sidebar && backdrop && !sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.add('-translate-x-full');
+                    backdrop.classList.add('hidden');
+                    if (icon) icon.className = 'fa-solid fa-bars-staggered text-xs';
+                }
+            }
+
+            const container = document.getElementById('dynamic-content-view');
+            if (container) container.scrollTop = 0;
+        }
+
+        function navStepLinear(direction) {
+            const list = getLinearNavigationList();
+            const curIdx = list.findIndex(item => item.id === currentPage);
+            if (curIdx === -1) return;
+
+            if (direction === 'next') {
+                if (curIdx === list.length - 1) {
+                    document.getElementById('modal-completed').classList.remove('hidden');
+                    return;
+                }
+                const nextItem = list[curIdx + 1];
+                navGoToPage(nextItem.id);
+            } else if (direction === 'prev') {
+                if (curIdx > 0) {
+                    const prevItem = list[curIdx - 1];
+                    navGoToPage(prevItem.id);
+                }
+            }
+        }
+
+        function restartFromBeginning() {
+            closeModal('modal-completed');
+            navGoToPage('intro-overview');
+        }
+
+        function renderCurrentPageView() {
+            const container = document.getElementById('dynamic-content-view');
+            if (!container) return;
+
+            // TRANG QUY ĐỊNH HỌC TẬP (ĐÃ LOẠI BỎ KHỐI 5 NHÓM THAO TÁC RƯỜM RÀ)
+            if (currentPage === 'intro-overview') {
+                container.innerHTML = `
+                    <div class="w-full max-w-4xl mx-auto space-y-4 pb-6">
+                        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-blue-200 shadow-xs space-y-2">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider text-white bg-[#166def]">Học trực tuyến</span>
+                            </div>
+                            <h2 class="text-base sm:text-lg font-black text-slate-900">Hướng Dẫn Thao Tác Hệ Thống LMS KiotViet</h2>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Hướng dẫn chi tiết từng bước giúp học viên hoàn thành các học phần, bài kiểm tra và bài tập thực hành theo đúng quy trình đào tạo.
+                            </p>
+                        </div>
+
+                        <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/90 border-2 border-amber-300 shadow-2xs space-y-2.5">
+                            <h3 class="text-xs sm:text-sm font-black uppercase tracking-wider text-amber-950 flex items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Quy định học tập & Thi kiểm tra bắt buộc:
+                            </h3>
+                            <ul class="text-xs text-amber-950 space-y-2 list-disc pl-5 font-medium leading-relaxed">
+                                <li><strong>Học đầy đủ nội dung:</strong> Học viên cần hoàn thành 100% thời lượng bài giảng, không tua nhanh hoặc bỏ qua các slide nghiệp vụ.</li>
+                                <li><strong>Làm bài kiểm tra đúng hạn:</strong> Các bài test học phần sáng và bài kiểm tra cuối khóa có giới hạn thời gian mở và nộp bài. Hệ thống sẽ tự động đóng khi hết giờ.</li>
+                                <li><strong>Nộp file bài tập thực hành:</strong> Đối với bài tập buổi chiều và bài tập kỹ năng, học viên phải tải đúng mẫu file quy định, làm bài và đính kèm tệp lên hệ thống trước thời hạn kết thúc.</li>
+                                <li><strong>Tính trung thực:</strong> Nghiêm cấm chia sẻ tài khoản hoặc làm bài thi hộ. Mọi kết quả ghi nhận trên hệ thống đều là căn cứ đánh giá quá trình thử việc và xếp loại đào tạo.</li>
+                            </ul>
+                        </div>
+
+                        <div class="pt-2 text-center">
+                            <button onclick="navStepLinear('next')" class="px-6 py-2.5 bg-[#166def] hover:bg-[#1259c7] text-white font-bold rounded-xl text-xs shadow-md transition-all cursor-pointer">
+                                Bắt đầu xem hướng dẫn thao tác <i class="fa-solid fa-arrow-right ml-1.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // TRANG CHI TIẾT CÁC BÀI THAO TÁC
+            let currentLesson = null;
+            let currentCategory = null;
+
+            for (const cat of CATEGORIES_DATA) {
+                const found = cat.lessons.find(l => l.id === currentPage);
+                if (found) {
+                    currentLesson = found;
+                    currentCategory = cat;
+                    break;
+                }
+            }
+
+            if (currentLesson) {
+                const list = getLinearNavigationList();
+                const isLast = (list[list.length - 1].id === currentLesson.id);
+
+                container.innerHTML = `
+                    <div class="w-full max-w-4xl mx-auto space-y-3.5 pb-16 md:pb-6">
+                        <!-- HEADER BÀI HỌC -->
+                        <div class="space-y-1 border-b border-slate-200 pb-2.5">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 text-[10px] font-black text-white rounded-full uppercase tracking-wider bg-[#166def]">
+                                    ${currentCategory.name}
+                                </span>
+                                <i class="fa-solid fa-circle-check text-emerald-500 text-sm" title="Đang học"></i>
+                            </div>
+                            <h2 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+                                <span>${currentLesson.title}</span>
+                            </h2>
+                        </div>
+
+                        <!-- BỐI CẢNH / MỤC TIÊU -->
+                        <div class="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-amber-50 via-orange-50/80 to-amber-50/50 border-2 border-amber-300 shadow-2xs space-y-1.5">
+                            <div class="flex items-center gap-2 text-amber-900">
+                                <div class="w-5 h-5 rounded-md bg-amber-500 text-white flex items-center justify-center text-[11px] shadow-xs shrink-0">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <h3 class="text-xs font-black uppercase tracking-wider text-amber-900">Mục tiêu thao tác:</h3>
+                            </div>
+                            <p class="text-xs sm:text-sm text-amber-950 leading-relaxed font-medium pl-7">${currentLesson.situation}</p>
+                        </div>
+
+                        <!-- CÁC BƯỚC THAO TÁC + HÌNH ẢNH TO RÕ NÉT -->
+                        <div class="space-y-3 pt-1">
+                            <h3 class="text-xs font-black uppercase tracking-wider text-slate-500">Quy trình thực hiện:</h3>
+                            <div class="space-y-4">
+                                ${currentLesson.steps.map((step, sIdx) => `
+                                    <div class="space-y-2.5 bg-white p-3 sm:p-4 rounded-2xl border border-slate-200 shadow-2xs">
+                                        <div class="flex items-start gap-2.5">
+                                            <span class="w-5 h-5 rounded-full text-white text-[11px] font-black flex items-center justify-center shrink-0 mt-0.5 shadow-2xs bg-[#166def]">${sIdx + 1}</span>
+                                            <div class="text-xs sm:text-sm text-slate-700 leading-relaxed font-bold">${step.text}</div>
+                                        </div>
+                                        ${step.img ? `
+                                            <div class="rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-slate-100 flex items-center justify-center p-1 sm:p-2">
+                                                <img src="${step.img}" alt="Hình ảnh bước ${sIdx + 1}" class="w-full h-auto object-contain select-none max-h-[550px] mx-auto rounded-lg">
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <!-- NÚT HOÀN THÀNH Ở CUỐI TRANG CUỐI -->
+                        ${isLast ? `
+                            <div class="pt-4">
+                                <div onclick="document.getElementById('modal-completed').classList.remove('hidden')" 
+                                     class="w-full p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#166def] via-teal-600 to-[#16a34a] text-white cursor-pointer shadow-md transition-all hover:scale-[1.005] active:scale-[0.99] flex items-center justify-between gap-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-xl shrink-0 shadow-xs">
+                                            <i class="fa-solid fa-trophy text-amber-300"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-xs sm:text-base font-black uppercase tracking-tight text-white">Bạn đã xem hết nội dung hướng dẫn!</h4>
+                                            <p class="text-[11px] sm:text-xs text-white/90 font-medium mt-0.5">Bấm vào đây để hoàn tất.</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                    </div>
+                `;
+            }
+        }
+
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    </script>
+</body>
+</html>
