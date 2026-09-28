@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full w-full overflow-hidden" style="font-size: 15px;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>KiotViet E-Learning - Hướng Dẫn Thao Tác LMS (DVKH)</title>
+    
+    <link rel="icon" type="image/png" href="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2023/10/31095822/64x64.png" sizes="64x64">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y7FEF8SQJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y7FEF8SQJW');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { 
+                extend: {
+                    colors: {
+                        kvPrimary: '#166def',
+                        kvBlue: '#166def',
+                        kvNavy: '#1e3a8a',
+                        kvGreen: '#16a34a'
+                    }
+                } 
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html, body { 
+            height: 100%; 
+            height: 100dvh;
+            min-height: -webkit-fill-available;
+            width: 100%; 
+            margin: 0; 
+            padding: 0; 
+            overflow: hidden; 
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        button, button:focus, button:focus-visible, button:active,
+        a, a:focus, a:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        .sidebar-item-btn { transition: all 0.15s ease; outline: none !important; }
+        .sidebar-item-btn.active-lesson { background-color: #166def !important; color: #ffffff !important; font-weight: 700; }
+        .sidebar-item-btn.active-lesson i.lesson-icon { color: #ffffff !important; }
+        .sidebar-item-btn.active-lesson i.check-icon { color: #86efac !important; }
+
+        #app-sidebar {
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+        }
+
+        .side-nav-btn {
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .side-nav-btn:hover:not(:disabled) {
+            transform: translateY(-50%) scale(1.08);
+        }
+        .side-nav-btn:active:not(:disabled) {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        @media (max-width: 767px) {
+            .safe-bottom-padding {
+                padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 5.5rem) !important;
+            }
+        }
+        @media (min-width: 768px) {
+            .safe-bottom-padding {
+                padding-bottom: 2rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased flex flex-col h-[100dvh] w-screen bg-[#f1f5f9] overflow-hidden select-none">
+
+    <!-- NAVBAR NHẸ GỌN (42px) -->
+    <header class="h-[42px] shrink-0 text-white shadow-xs z-30 flex items-center justify-between px-2.5 sm:px-4 bg-gradient-to-r from-[#166def] via-[#166def] to-[#1d4ed8]">
+        <div class="flex items-center gap-1.5 sm:gap-2 truncate">
+            <button onclick="toggleSidebarCollapse()" class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-all cursor-pointer shrink-0" title="Danh mục">
+                <i id="sidebar-toggle-icon" class="fa-solid fa-bars-staggered text-xs"></i>
+            </button>
+            
+            <button onclick="openSettingsModal()" class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-all cursor-pointer shrink-0" title="Cài đặt thu phóng">
+                <i class="fa-solid fa-gear text-xs"></i>
+            </button>
+
+            <span class="text-white/40 text-xs sm:text-sm font-light">|</span>
+            <div class="truncate">
+                <h1 class="text-xs sm:text-sm font-black tracking-tight text-white uppercase truncate">HDSD Học LMS - DVKH</h1>
+            </div>
+        </div>
+
+        <div class="shrink-0 font-bold px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-[11px] text-white shadow-xs bg-emerald-500 border border-emerald-400/40 uppercase tracking-wider">
+            DVKH
+        </div>
+    </header>
+
+    <!-- KHUNG BODY CHÍNH -->
+    <div class="flex-1 flex flex-row min-h-0 w-full overflow-hidden relative">
+
+        <!-- LỚP BACKDROP MỜ TRÊN MOBILE -->
+        <div id="sidebar-backdrop" onclick="toggleSidebarCollapse()" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden backdrop-blur-2xs transition-opacity"></div>
+
+        <!-- SIDEBAR GỌN GÀNG -->
+        <aside id="app-sidebar" class="fixed md:static inset-y-0 left-0 z-50 md:z-20 w-64 sm:w-60 lg:w-64 bg-white border-r border-slate-200 shrink-0 h-full flex flex-col shadow-xl md:shadow-xs overflow-hidden -translate-x-full md:translate-x-0">
+            <div class="md:hidden h-10 px-3 border-b border-slate-100 flex items-center justify-between bg-slate-50 shrink-0">
+                <span class="text-xs font-black text-slate-700 uppercase tracking-wider">Nội dung đào tạo DVKH</span>
+                <button onclick="toggleSidebarCollapse()" class="w-6 h-6 rounded-md text-slate-400 hover:text-slate-700 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+
+            <div class="p-2 space-y-1.5 overflow-y-auto flex-1 custom-scrollbar">
+                <!-- QUY ĐỊNH HỌC TẬP -->
+                <button onclick="navGoToPage('intro-overview')" id="btn-intro-overview" class="sidebar-item-btn active-lesson w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-slate-700 hover:bg-slate-100 text-xs font-semibold cursor-pointer">
+                    <i class="fa-solid fa-clipboard-check text-xs shrink-0 text-[#166def] lesson-icon"></i>
+                    <span class="truncate flex-1 text-left font-bold">Quy định học tập DVKH</span>
+                </button>
+
+                <div class="pt-1 pb-0.5 px-2">
+                    <div class="h-px bg-slate-200 w-full"></div>
+                </div>
+
+                <!-- CÁC CỤM ACCORDION ĐƯỢC CHIA LÀM 2 LỘ TRÌNH -->
+                <div id="sidebar-accordion-container" class="space-y-1.5"></div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT CHÍNH -->
+        <main class="flex-1 min-w-0 h-full relative overflow-hidden flex flex-col bg-[#f8fafc]">
+            
+            <!-- NÚT MŨI TÊN TRÁI -->
+            <button id="nav-btn-prev" onclick="navStepLinear('prev')" class="side-nav-btn absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-white text-slate-700 hover:text-[#166def] border border-slate-200 flex items-center justify-center cursor-pointer disabled:opacity-0 disabled:pointer-events-none" title="Trang trước">
+                <i class="fa-solid fa-arrow-left text-[11px] sm:text-sm font-black"></i>
+            </button>
+
+            <!-- NÚT MŨI TÊN PHẢI -->
+            <button id="nav-btn-next" onclick="navStepLinear('next')" class="side-nav-btn absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#166def] hover:bg-[#1259c7] text-white flex items-center justify-center cursor-pointer" title="Trang tiếp">
+                <i class="fa-solid fa-arrow-right text-[11px] sm:text-sm font-black"></i>
+            </button>
+
+            <!-- VÙNG HIỂN THỊ NỘI DUNG THAO TÁC -->
+            <div id="dynamic-content-view" class="w-full h-full overflow-y-auto px-5 sm:px-12 md:px-16 pt-3 safe-bottom-padding custom-scrollbar flex flex-col">
+                <!-- Nội dung hiển thị động -->
+            </div>
+        </main>
+
+    </div>
+
+    <!-- MODAL THU PHÓNG ZOOM: MẶC ĐỊNH 100%, 110%, 120%, 130% -->
+    <div id="modal-settings" class="fixed inset-0 bg-black/70 z-[100] hidden flex items-center justify-center p-3 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl border border-slate-200">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2 text-slate-800">
+                    <i class="fa-solid fa-gear text-[#166def]"></i>
+                    <h3 class="text-sm font-black uppercase">Cài đặt hiển thị</h3>
+                </div>
+                <button onclick="closeSettingsModal()" class="text-slate-400 hover:text-slate-600 text-sm cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
+                    <span>Tỷ lệ thu phóng (Zoom):</span>
+                    <span id="zoom-label" class="text-[#166def] font-black">100%</span>
+                </label>
+                <div class="grid grid-cols-4 gap-1.5">
+                    <button onclick="setAppZoom(100)" class="zoom-btn py-2 px-2 rounded-xl text-xs font-bold border-2 border-[#166def] bg-blue-50 text-[#166def] cursor-pointer" data-zoom="100">100%</button>
+                    <button onclick="setAppZoom(110)" class="zoom-btn py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="110">110%</button>
+                    <button onclick="setAppZoom(120)" class="zoom-btn py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="120">120%</button>
+                    <button onclick="setAppZoom(130)" class="zoom-btn py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700" data-zoom="130">130%</button>
+                </div>
+                <p class="text-[10px] text-slate-500 italic">Mặc định 100% giúp hình ảnh và chữ hiển thị to rõ, sắc nét.</p>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="closeSettingsModal()" class="w-full py-2 bg-[#166def] hover:bg-[#1259c7] text-white font-bold rounded-xl text-xs cursor-pointer shadow-xs">
+                    Xác nhận &amp; Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL LIGHTBOX XEM ẢNH PHÓNG TO TOÀN MÀN HÌNH -->
+    <div id="modal-image-lightbox" onclick="closeImageLightbox()" class="fixed inset-0 bg-black/85 z-[150] hidden flex flex-col items-center justify-center p-2 sm:p-4 backdrop-blur-sm cursor-zoom-out select-none">
+        <button onclick="closeImageLightbox()" class="absolute top-3 right-3 sm:top-5 sm:right-5 w-10 h-10 rounded-full bg-white/20 hover:bg-white/35 text-white flex items-center justify-center text-lg z-10 transition-all cursor-pointer" title="Đóng (Esc)">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="relative max-w-[95vw] max-h-[92vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Ảnh phóng to" class="w-auto h-auto max-w-full max-h-[88vh] rounded-xl shadow-2xl object-contain border border-white/20">
+            <p id="lightbox-caption" class="text-white/90 text-xs sm:text-sm font-medium mt-2 px-4 py-1 rounded-full bg-black/50 text-center max-w-2xl truncate"></p>
+        </div>
+    </div>
+
+    <!-- POPUP HOÀN THÀNH TẤT CẢ HƯỚNG DẪN -->
+    <div id="modal-completed" class="fixed inset-0 bg-black/75 z-[100] hidden flex items-center justify-center p-3 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-md w-full p-5 text-center space-y-3.5 shadow-2xl border-2 border-emerald-600">
+            <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-base font-black text-slate-900">Chúc mừng bạn đã xem hết hướng dẫn!</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">Bạn đã nắm vững toàn bộ thao tác học tập theo cả 2 lộ trình Onboarding DVKH trên hệ thống LMS.</p>
+            </div>
+            <div class="pt-2">
+                <button onclick="restartFromBeginning()" class="w-full py-2.5 px-3 bg-[#166def] hover:bg-[#1259c7] text-white font-bold rounded-xl text-xs cursor-pointer transition-all shadow-xs">
+                    Xem lại từ đầu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+        // CẤU TRÚC 3 PHẦN: ĐĂNG NHẬP + LỘ TRÌNH TUẦN 1 + LỘ TRÌNH TUẦN 2-3-4
+        const CATEGORIES_DATA = [
+            {
+                id: "cat_login",
+                name: "1. Đăng nhập",
+                icon: "fa-right-to-bracket",
+                lessons: [
+                    {
+                        id: "login-1",
+                        sidebarTitle: "1. Cấp tài khoản & Mật khẩu",
+                        title: "Nhận tài khoản và Đổi mật khẩu lần đầu",
+                        situation: "Học viên mới tham gia cần <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">kiểm tra hòm thư Email</b> để lấy thông tin tài khoản được cấp và thực hiện đổi mật khẩu trong lần đầu đăng nhập.",
+                        steps: [
+                            {
+                                text: "Mở Email cá nhân/công việc đã đăng ký, tìm thư cấp tài khoản gửi từ hệ thống đào tạo LMS để lấy tên đăng nhập và đường dẫn.",
+                                img: "https://i.postimg.cc/gjS7qcQL/Mail-tai-khoan.png"
+                            },
+                            {
+                                text: "Truy cập đường link trong mail hoặc vào hệ thống để tiến hành đổi mật khẩu mới trong lần đầu đăng nhập nhằm kích hoạt tài khoản.",
+                                img: "https://i.postimg.cc/XNQt0xqy/Doi-mat-khau-lan-dau.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "login-2",
+                        sidebarTitle: "2. Đăng nhập LMS",
+                        title: "Đăng nhập vào hệ thống LMS",
+                        situation: "Học viên <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">đăng nhập vào cổng LMS (https://daotao.kiotviet.com/)</b> bằng thông tin tài khoản và mật khẩu vừa thiết lập để bắt đầu lộ trình đào tạo.",
+                        steps: [
+                            {
+                                text: "Điền tên đăng nhập (email) và mật khẩu tự tạo, sau đó bấm nút <b>Đăng nhập</b> để vào giao diện chính (tích chọn Ghi nhớ đăng nhập để tiện sử dụng lần sau).",
+                                img: "https://i.postimg.cc/nznSyQtD/Dang-nhap.png"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "cat_dvkh_w1",
+                name: "2. Onboard Tuần 1 (DVKH)",
+                icon: "fa-calendar-week",
+                lessons: [
+                    {
+                        id: "dvkh-w1-1",
+                        sidebarTitle: "1. Vào chương trình tuần 1",
+                        title: "Chương trình đào tạo DVKH Tuần 1 & Bắt đầu vào học",
+                        situation: "Học viên xem <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">Lộ trình đào tạo DVKH Tuần 1</b> và bấm truy cập vào chương trình học.",
+                        steps: [
+                            {
+                                text: "Xem danh sách và lộ trình các khóa học được phân bổ trong chương trình DVKH Tuần 1.",
+                                img: "https://i.postimg.cc/Kc3s8J5b/Chuong-trinh-DVKH-tuan-1.jpg"
+                            },
+                            {
+                                text: "Bấm chọn nút <b>Vào chương trình</b> để mở danh mục các khóa học trong Tuần 1.",
+                                img: "https://i.postimg.cc/gJCshbKz/Vao-chuong-trinh-tuan-1.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "dvkh-w1-2",
+                        sidebarTitle: "2. Khóa Đào tạo Hội nhập",
+                        title: "Học slide và hoàn thành bài test Khóa Hội nhập",
+                        situation: "Học viên tham gia <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">học nội dung slide hội nhập</b> và làm bài kiểm tra để hoàn tất khóa học.",
+                        steps: [
+                            {
+                                text: "Xem và học lần lượt từng slide trong bài giảng tương tác của khóa đào tạo hội nhập.",
+                                img: "https://i.postimg.cc/X70x73Jh/Hoc-slide-khoa-dao-tao-hoi-nhap.png"
+                            },
+                            {
+                                text: "Thực hiện trả lời các câu hỏi và hoàn thành bài test kiểm tra kiến thức khóa Hội nhập để ghi nhận kết quả.",
+                                img: "https://i.postimg.cc/pLWZzZKj/Hoan-thien-bai-test-dao-tao-hoi-nhap.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "dvkh-w1-3",
+                        sidebarTitle: "3. Khóa KiotViet Retail 01",
+                        title: "Học bài và nộp bài khóa KiotViet Retail 01",
+                        situation: "Học viên học nghiệp vụ phần mềm qua khóa <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">KiotViet Retail 01</b>, học bài giảng và nộp bài kiểm tra.",
+                        steps: [
+                            {
+                                text: "Trong danh sách chương trình tuần 1, chọn khóa <b>KiotViet Retail 01</b> và nhấn <b>Bắt đầu học</b>.",
+                                img: "https://i.postimg.cc/W3vtq9J9/Bat-dau-hoc-khoa-Kiot-Viet-Retail-01.png"
+                            },
+                            {
+                                text: "Thực hiện các thao tác học phần tương tác, trả lời câu hỏi và bấm <b>Nộp bài</b> kiểm tra Retail.",
+                                img: "https://i.postimg.cc/pXq8btnX/Lam-bai-va-nop-bai-retail.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "dvkh-w1-4",
+                        sidebarTitle: "4. Khóa Kế toán 01",
+                        title: "Bắt đầu học và hoàn thiện bài test Khóa Kế toán 01",
+                        situation: "Học viên tiếp tục học nghiệp vụ tài chính qua khóa <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">Kế toán 01</b> và làm bài test đánh giá cuối khóa.",
+                        steps: [
+                            {
+                                text: "Chọn khóa <b>Kế toán 01</b> từ danh mục các khóa đào tạo của tuần 1.",
+                                img: "https://i.postimg.cc/yxfN5spL/Bat-dau-hoc-khoa-ke-toan-01.png"
+                            },
+                            {
+                                text: "Nhấn nút <b>Bắt đầu học</b> để truy cập vào nội dung bài giảng Kế toán 01.",
+                                img: "https://i.postimg.cc/9FM09wrj/Bat-dau-hoc-bai-ke-toan-01.png"
+                            },
+                            {
+                                text: "Thực hiện trả lời các câu hỏi trắc nghiệm và bấm nộp bài để <b>Hoàn thiện bài test Kế toán 01 cuối khóa</b>.",
+                                img: "https://i.postimg.cc/mkrL7KZC/Hoan-thien-bai-test-ke-toan-01-cuoi-khoa.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "dvkh-w1-5",
+                        sidebarTitle: "5. Chứng chỉ hoàn thành",
+                        title: "Kiểm tra và nhận chứng chỉ sau khi hoàn tất khóa học",
+                        situation: "Sau khi hoàn thành bài học và đạt điểm bài test, học viên <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">truy cập mục Chứng chỉ</b> để kiểm tra chứng chỉ đào tạo đã được cấp.",
+                        steps: [
+                            {
+                                text: "Vào mục thông tin cá nhân và chọn mục <b>Chứng chỉ</b> để xem và tải về các chứng chỉ đã hoàn thành trong chương trình.",
+                                img: "https://i.postimg.cc/Yq57SvFQ/Nhan-duoc-chung-chi-sau-khi-hoan-thien-khoa-hoc-trong-muc-Chung-chi.png"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "cat_dvkh_w234",
+                name: "3. Onboard Tuần 2, 3, 4 (DVKH)",
+                icon: "fa-graduation-cap",
+                lessons: [
+                    {
+                        id: "dvkh-w234-1",
+                        sidebarTitle: "1. Vào chương trình tuần 2, 3, 4",
+                        title: "Lộ trình đào tạo DVKH Tuần 2, 3, 4 & Bắt đầu vào học",
+                        situation: "Học viên DVKH bước vào lộ trình chuyên sâu <b class=\"font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded\">Onboarding Tuần 2, 3, 4</b> trên hệ thống.",
+                        steps: [
+                            {
+                                text: "Theo dõi toàn bộ lộ trình đào tạo chuyên sâu dành cho nhân viên DVKH trong các tuần 2, 3 và 4.",
+                                img: "https://i.postimg.cc/bJVcfr8g/Lo-trinh-dvkh-tuan-2-3-4.jpg"
+                            },
+                            {
+                                text: "Bấm chọn nút <b>Vào chương trình</b> tại khóa đào tạo DVKH Tuần 2, 3, 4.",
+                                img: "https://i.postimg.cc/SRHBjPnW/Chon-nut-vao-chuong-trinh-tuan-2-3-4.png"
+                            },
+                            {
+                                text: "Nhấn <b>Bắt đầu học</b> để truy cập vào các học phần được giao trong chương trình.",
+                                img: "https://i.postimg.cc/CKds6xPx/Bat-dau-vao-chuong-trinh-hoc.png"
+                            }
+                        ]
+                    },
+                    {
+                        id: "dvkh-w234-2",
+                        sidebarTitle: "2. Học bài & Thi cuối khóa",
+                        title: "Thao tác học từng học phần và Hoàn thành bài kiểm tra cuối khóa",
+                        situation: "Thao tác học từng học phần, bấm nút chuyển tiếp (Next bài) và hoàn thành bài kiểm tra cuối khóa (tương tự như khóa Retail 02 và các khóa chuyên môn khác).",
+                        steps: [
+                            {
+                                text: "Bắt đầu học từng học phần theo đúng thứ tự, thao tác bấm nút chuyển tiếp (Next / Bài tiếp) để qua các bài học tiếp theo.",
+                                img: "https://i.postimg.cc/qgfFpCFg/Bat-dau-hoc-tung-hoc-phan-va-next-de-qua-bai.png"
+                            },
+                            {
+                                text: "Sau khi xem xong bài giảng, tiến hành làm và <b>Hoàn thành bài kiểm tra cuối khóa</b> để nộp bài và nhận điểm số đánh giá.",
+                                img: "https://i.postimg.cc/BvY44MB6/Hoan-thanh-bai-kiem-tra-cuoi-khoa.png"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        let currentPage = 'intro-overview';
+        let currentZoom = 100;
+        let isSidebarCollapsed = false;
+        let viewedPages = new Set(['intro-overview']);
+        let openCategories = new Set(['cat_dvkh_w1']);
+
+        function isMobile() {
+            return window.innerWidth < 768;
+        }
+
+        function getLinearNavigationList() {
+            let list = [
+                { id: 'intro-overview', title: 'Quy định học tập DVKH' }
+            ];
+
+            CATEGORIES_DATA.forEach(cat => {
+                cat.lessons.forEach(lesson => {
+                    list.push({ id: lesson.id, title: lesson.title, catId: cat.id, catName: cat.name });
+                });
+            });
+
+            return list;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            setAppZoom(100);
+            renderSidebar();
+            navGoToPage('intro-overview');
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeImageLightbox();
+                    closeSettingsModal();
+                    closeModal('modal-completed');
+                }
+            });
+        });
+
+        function setAppZoom(val) {
+            currentZoom = val;
+            const fontMap = { 
+                100: '15px', 
+                110: '16.5px', 
+                120: '18px', 
+                130: '19.5px' 
+            };
+            document.documentElement.style.fontSize = fontMap[val] || '15px';
+            document.getElementById('zoom-label').innerText = val + '%';
+            
+            document.querySelectorAll('.zoom-btn').forEach(b => {
+                if (parseInt(b.getAttribute('data-zoom')) === val) {
+                    b.className = 'zoom-btn py-2 px-2 rounded-xl text-xs font-bold border-2 border-[#166def] bg-blue-50 text-[#166def] cursor-pointer';
+                } else {
+                    b.className = 'zoom-btn py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 hover:bg-slate-50 cursor-pointer text-slate-700';
+                }
+            });
+        }
+
+        // HÀM MỞ LIGHTBOX QUA CHỈ MỤC TRÁNH LỖI XUNG ĐỘT QUOTES
+        function openLightboxByIndex(lessonId, stepIdx) {
+            let targetLesson = null;
+            for (const cat of CATEGORIES_DATA) {
+                const found = cat.lessons.find(l => l.id === lessonId);
+                if (found) {
+                    targetLesson = found;
+                    break;
+                }
+            }
+            if (targetLesson && targetLesson.steps[stepIdx]) {
+                const step = targetLesson.steps[stepIdx];
+                openImageLightbox(step.img, step.text);
+            }
+        }
+
+        function openImageLightbox(src, caption) {
+            const modal = document.getElementById('modal-image-lightbox');
+            const imgEl = document.getElementById('lightbox-img');
+            const capEl = document.getElementById('lightbox-caption');
+            if (modal && imgEl) {
+                imgEl.src = src;
+                capEl.innerText = caption ? caption.replace(/<[^>]*>?/gm, '') : '';
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeImageLightbox() {
+            const modal = document.getElementById('modal-image-lightbox');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function openSettingsModal() { document.getElementById('modal-settings').classList.remove('hidden'); }
+        function closeSettingsModal() { document.getElementById('modal-settings').classList.add('hidden'); }
+
+        function toggleSidebarCollapse() {
+            const sidebar = document.getElementById('app-sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            const icon = document.getElementById('sidebar-toggle-icon');
+
+            if (isMobile()) {
+                const isOpen = !sidebar.classList.contains('-translate-x-full');
+                if (isOpen) {
+                    sidebar.classList.add('-translate-x-full');
+                    backdrop.classList.add('hidden');
+                    icon.className = 'fa-solid fa-bars-staggered text-xs';
+                } else {
+                    sidebar.classList.remove('-translate-x-full');
+                    backdrop.classList.remove('hidden');
+                    icon.className = 'fa-solid fa-xmark text-xs';
+                }
+            } else {
+                isSidebarCollapsed = !isSidebarCollapsed;
+                if (isSidebarCollapsed) {
+                    sidebar.style.width = '0px';
+                    sidebar.style.transform = 'translateX(-100%)';
+                    sidebar.style.opacity = '0';
+                    icon.className = 'fa-solid fa-arrow-right-to-bracket text-xs';
+                } else {
+                    sidebar.style.width = '';
+                    sidebar.style.transform = 'translateX(0)';
+                    sidebar.style.opacity = '1';
+                    icon.className = 'fa-solid fa-bars-staggered text-xs';
+                }
+            }
+        }
+
+        function toggleCategoryAccordion(catId) {
+            if (openCategories.has(catId)) {
+                openCategories.delete(catId);
+            } else {
+                openCategories.add(catId);
+            }
+            renderSidebar();
+        }
+
+        function renderSidebar() {
+            const container = document.getElementById('sidebar-accordion-container');
+            if (!container) return;
+
+            container.innerHTML = CATEGORIES_DATA.map((cat) => {
+                const isOpen = openCategories.has(cat.id);
+                const hasActiveChild = cat.lessons.some(l => l.id === currentPage);
+
+                return `
+                    <div class="rounded-xl border ${hasActiveChild ? 'border-blue-200 bg-blue-50/30' : 'border-slate-200/80 bg-white'} overflow-hidden transition-all">
+                        <button onclick="toggleCategoryAccordion('${cat.id}')" class="w-full flex items-center justify-between px-2.5 py-2 text-slate-800 hover:bg-slate-50 text-xs font-bold cursor-pointer select-none">
+                            <div class="flex items-center gap-2 truncate">
+                                <i class="fa-solid ${cat.icon} text-xs text-[#166def] shrink-0"></i>
+                                <span class="truncate text-[11.5px] uppercase tracking-wide font-black ${hasActiveChild ? 'text-[#166def]' : 'text-slate-700'}">${cat.name}</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#166def]' : ''}"></i>
+                        </button>
+
+                        <div class="${isOpen ? 'block' : 'hidden'} px-1.5 pb-1.5 pt-0.5 space-y-1 bg-white/60 border-t border-slate-100">
+                            ${cat.lessons.map(lesson => {
+                                const isViewed = viewedPages.has(lesson.id);
+                                const isActive = (currentPage === lesson.id);
+                                return `
+                                    <button onclick="navGoToPage('${lesson.id}')" class="sidebar-item-btn w-full text-left px-2 py-1.5 rounded-lg text-xs flex items-center justify-between gap-1.5 cursor-pointer leading-tight ${isActive ? 'active-lesson text-white' : 'text-slate-600 hover:bg-slate-100 font-medium'}">
+                                        <span class="truncate flex-1 text-[11px]">${lesson.sidebarTitle}</span>
+                                        ${isViewed ? `<i class="fa-solid fa-circle-check check-icon text-emerald-500 text-[11px] shrink-0" title="Đã xem"></i>` : ''}
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const introBtn = document.getElementById('btn-intro-overview');
+            if (introBtn) {
+                if (currentPage === 'intro-overview') {
+                    introBtn.className = 'sidebar-item-btn active-lesson w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-white font-bold cursor-pointer';
+                } else {
+                    introBtn.className = 'sidebar-item-btn w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-slate-700 hover:bg-slate-100 text-xs font-semibold cursor-pointer';
+                }
+            }
+        }
+
+        function updateSideNavButtons() {
+            const list = getLinearNavigationList();
+            const curIdx = list.findIndex(item => item.id === currentPage);
+            const prevBtn = document.getElementById('nav-btn-prev');
+            const nextBtn = document.getElementById('nav-btn-next');
+            if (!prevBtn || !nextBtn) return;
+
+            if (curIdx <= 0) {
+                prevBtn.disabled = true;
+                prevBtn.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                prevBtn.disabled = false;
+                prevBtn.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function navGoToPage(pageId) {
+            currentPage = pageId;
+            viewedPages.add(pageId);
+
+            CATEGORIES_DATA.forEach(cat => {
+                if (cat.lessons.some(l => l.id === pageId)) {
+                    openCategories.add(cat.id);
+                }
+            });
+
+            renderSidebar();
+            renderCurrentPageView();
+            updateSideNavButtons();
+            
+            if (isMobile()) {
+                const sidebar = document.getElementById('app-sidebar');
+                const backdrop = document.getElementById('sidebar-backdrop');
+                const icon = document.getElementById('sidebar-toggle-icon');
+                if (sidebar && backdrop && !sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.add('-translate-x-full');
+                    backdrop.classList.add('hidden');
+                    if (icon) icon.className = 'fa-solid fa-bars-staggered text-xs';
+                }
+            }
+
+            const container = document.getElementById('dynamic-content-view');
+            if (container) container.scrollTop = 0;
+        }
+
+        function navStepLinear(direction) {
+            const list = getLinearNavigationList();
+            const curIdx = list.findIndex(item => item.id === currentPage);
+            if (curIdx === -1) return;
+
+            if (direction === 'next') {
+                if (curIdx === list.length - 1) {
+                    document.getElementById('modal-completed').classList.remove('hidden');
+                    return;
+                }
+                const nextItem = list[curIdx + 1];
+                navGoToPage(nextItem.id);
+            } else if (direction === 'prev') {
+                if (curIdx > 0) {
+                    const prevItem = list[curIdx - 1];
+                    navGoToPage(prevItem.id);
+                }
+            }
+        }
+
+        function restartFromBeginning() {
+            closeModal('modal-completed');
+            navGoToPage('intro-overview');
+        }
+
+        function renderCurrentPageView() {
+            const container = document.getElementById('dynamic-content-view');
+            if (!container) return;
+
+            // TRANG QUY ĐỊNH HỌC TẬP DVKH
+            if (currentPage === 'intro-overview') {
+                container.innerHTML = `
+                    <div class="w-full max-w-5xl mx-auto space-y-4 pb-6">
+                        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-blue-200 shadow-xs space-y-2">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider text-white bg-[#166def]">Đào tạo DVKH</span>
+                            </div>
+                            <h2 class="text-base sm:text-lg font-black text-slate-900">Hướng Dẫn Thao Tác Học LMS - Khối Dịch Vụ Khách Hàng</h2>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Tài liệu hướng dẫn chi tiết quy trình học tập, thao tác bài giảng tương tác và làm bài kiểm tra cho 2 giai đoạn: <strong>Onboarding Tuần 1</strong> và <strong>Onboarding Tuần 2, 3, 4</strong>.
+                            </p>
+                        </div>
+
+                        <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/90 border-2 border-amber-300 shadow-2xs space-y-2.5">
+                            <h3 class="text-xs sm:text-sm font-black uppercase tracking-wider text-amber-950 flex items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Quy định đào tạo DVKH bắt buộc:
+                            </h3>
+                            <ul class="text-xs sm:text-sm text-amber-950 space-y-2 list-disc pl-5 font-medium leading-relaxed">
+                                <li><strong>Tuân thủ đúng lộ trình:</strong> Hoàn thành tuần tự các khóa học trong Tuần 1 (Hội nhập, KiotViet Retail 01, Kế toán 01) trước khi bước sang lộ trình chuyên sâu Tuần 2, 3, 4.</li>
+                                <li><strong>Học đầy đủ nội dung:</strong> Hoàn thành 100% thời lượng bài giảng, thực hành bấm nút Next chuyển tiếp qua từng slide để ghi nhận tiến độ.</li>
+                                <li><strong>Hoàn thành bài kiểm tra cuối khóa:</strong> Làm và nộp bài test đánh giá năng lực của từng khóa học đúng thời hạn quy định.</li>
+                                <li><strong>Nhận chứng chỉ đào tạo:</strong> Sau khi hoàn thành và đạt điểm yêu cầu, truy cập mục Chứng chỉ để kiểm tra chứng chỉ hoàn thành khóa học.</li>
+                            </ul>
+                        </div>
+
+                        <div class="pt-2 text-center">
+                            <button onclick="navStepLinear('next')" class="px-6 py-2.5 bg-[#166def] hover:bg-[#1259c7] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
+                                Bắt đầu xem hướng dẫn lộ trình <i class="fa-solid fa-arrow-right ml-1.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // TRANG CHI TIẾT CÁC BÀI THAO TÁC
+            let currentLesson = null;
+            let currentCategory = null;
+
+            for (const cat of CATEGORIES_DATA) {
+                const found = cat.lessons.find(l => l.id === currentPage);
+                if (found) {
+                    currentLesson = found;
+                    currentCategory = cat;
+                    break;
+                }
+            }
+
+            if (currentLesson) {
+                const list = getLinearNavigationList();
+                const isLast = (list[list.length - 1].id === currentLesson.id);
+
+                container.innerHTML = `
+                    <div class="w-full max-w-5xl mx-auto space-y-4 pb-16 md:pb-6">
+                        <!-- HEADER BÀI HỌC -->
+                        <div class="space-y-1 border-b border-slate-200 pb-2.5">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 text-[10px] font-black text-white rounded-full uppercase tracking-wider bg-[#166def]">
+                                    ${currentCategory.name}
+                                </span>
+                                <i class="fa-solid fa-circle-check text-emerald-500 text-sm" title="Đang học"></i>
+                            </div>
+                            <h2 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+                                <span>${currentLesson.title}</span>
+                            </h2>
+                        </div>
+
+                        <!-- BỐI CẢNH / MỤC TIÊU -->
+                        <div class="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-amber-50 via-orange-50/80 to-amber-50/50 border-2 border-amber-300 shadow-2xs space-y-1.5">
+                            <div class="flex items-center gap-2 text-amber-900">
+                                <div class="w-5 h-5 rounded-md bg-amber-500 text-white flex items-center justify-center text-[11px] shadow-xs shrink-0">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <h3 class="text-xs font-black uppercase tracking-wider text-amber-900">Mục tiêu thao tác:</h3>
+                            </div>
+                            <p class="text-xs sm:text-sm text-amber-950 leading-relaxed font-medium pl-7">${currentLesson.situation}</p>
+                        </div>
+
+                        <!-- CÁC BƯỚC THAO TÁC + HÌNH ẢNH TO VÀ CLICK ĐỂ PHÓNG TO -->
+                        <div class="space-y-3 pt-1">
+                            <h3 class="text-xs font-black uppercase tracking-wider text-slate-500">Quy trình thực hiện:</h3>
+                            <div class="space-y-4">
+                                ${currentLesson.steps.map((step, sIdx) => `
+                                    <div class="space-y-2.5 bg-white p-3 sm:p-4 rounded-2xl border border-slate-200 shadow-2xs">
+                                        <div class="flex items-start gap-2.5">
+                                            <span class="w-5 h-5 rounded-full text-white text-[11px] font-black flex items-center justify-center shrink-0 mt-0.5 shadow-2xs bg-[#166def]">${sIdx + 1}</span>
+                                            <div class="text-xs sm:text-sm text-slate-700 leading-relaxed font-bold">${step.text}</div>
+                                        </div>
+                                        ${step.img ? `
+                                            <div onclick="openLightboxByIndex('${currentLesson.id}', ${sIdx})" 
+                                                 class="relative group rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-slate-100 flex items-center justify-center p-1.5 sm:p-3 cursor-zoom-in transition-all hover:border-[#166def]/60 hover:shadow-md">
+                                                <img src="${step.img}" alt="Hình ảnh bước ${sIdx + 1}" class="w-full h-auto object-contain select-none max-h-[680px] mx-auto rounded-lg transition-transform group-hover:scale-[1.008]">
+                                                
+                                                <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/60 hover:bg-black/80 text-white text-[11px] font-semibold flex items-center gap-1.5 backdrop-blur-xs transition-opacity shadow-md pointer-events-none opacity-85 group-hover:opacity-100">
+                                                    <i class="fa-solid fa-expand text-[10px]"></i> Bấm để phóng to
+                                                </div>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <!-- NÚT HOÀN THÀNH Ở CUỐI TRANG CUỐI -->
+                        ${isLast ? `
+                            <div class="pt-4">
+                                <div onclick="document.getElementById('modal-completed').classList.remove('hidden')" 
+                                     class="w-full p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#166def] via-teal-600 to-[#16a34a] text-white cursor-pointer shadow-md transition-all hover:scale-[1.005] active:scale-[0.99] flex items-center justify-between gap-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-xl shrink-0 shadow-xs">
+                                            <i class="fa-solid fa-trophy text-amber-300"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-xs sm:text-base font-black uppercase tracking-tight text-white">Bạn đã xem hết nội dung hướng dẫn DVKH!</h4>
+                                            <p class="text-[11px] sm:text-xs text-white/90 font-medium mt-0.5">Bấm vào đây để hoàn tất.</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                    </div>
+                `;
+            }
+        }
+
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    </script>
+</body>
+</html>
