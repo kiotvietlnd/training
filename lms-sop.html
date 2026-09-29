@@ -36,7 +36,7 @@
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
       --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.04);
       --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.04);
-      --sidebar-width: 310px;
+      --sidebar-width: 320px;
     }
 
     * {
@@ -299,7 +299,7 @@
       color: var(--slate-700);
     }
 
-    /* RACI Matrix & Cards */
+    /* RACI Matrix */
     .sop-raci-box {
       background: var(--slate-50);
       border: 1px solid var(--slate-200);
@@ -410,31 +410,6 @@
       font-weight: 600;
       font-family: 'JetBrains Mono', monospace;
       color: var(--slate-900);
-    }
-
-    /* Modules List */
-    .module-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
-      margin: 16px 0;
-    }
-
-    .module-card {
-      border: 1px solid var(--slate-200);
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-      background: white;
-    }
-    .module-card strong {
-      display: block;
-      color: var(--slate-900);
-      font-size: 13.5px;
-      margin-bottom: 2px;
-    }
-    .module-card span {
-      font-size: 12.5px;
-      color: var(--slate-600);
     }
 
     /* Callout & Alerts */
@@ -551,7 +526,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.92);
       backdrop-filter: blur(5px);
       z-index: 1000;
       justify-content: center;
@@ -629,18 +604,6 @@
       background: var(--primary);
       transform: translateY(-2px);
     }
-
-    @media print {
-      header.top-nav, aside.sidebar, .btn-top { display: none !important; }
-      .layout-container { margin-top: 0; }
-      main.content { margin-left: 0; max-width: 100%; border: none; padding: 10px; }
-      .img-figure { break-inside: avoid; border: 1px solid #ccc; box-shadow: none; }
-    }
-
-    @media (max-width: 992px) {
-      aside.sidebar { display: none; }
-      main.content { margin-left: 0; padding: 20px; }
-    }
   </style>
 </head>
 <body>
@@ -659,10 +622,10 @@
   </header>
 
   <div class="layout-container">
-    <!-- Left Sticky Sidebar Navigation -->
+    <!-- Left Navigation Sidebar -->
     <aside class="sidebar">
       <div class="search-box">
-        <input type="text" id="sidebarSearch" class="search-input" placeholder="Tìm kiếm nhanh SOP...">
+        <input type="text" id="sidebarSearch" class="search-input" placeholder="Tìm kiếm nhanh quy trình SOP...">
       </div>
 
       <nav>
@@ -671,52 +634,51 @@
           <li class="nav-item"><a href="#section-overview">SOP-00: Quản Lý Truy Cập & Phân Hệ</a></li>
         </ul>
 
-        <div class="sidebar-section-title">Phân hệ Nhân sự & License</div>
+        <div class="sidebar-section-title">Nhân sự & License</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="#section-hr-import">SOP-01.1: Import Nhân Sự Hàng Loạt</a></li>
           <li class="nav-item"><a href="#section-hr-manual">SOP-01.2: Thêm Nhân Sự Đơn Lẻ</a></li>
           <li class="nav-item"><a href="#section-hr-delete">SOP-01.3: Thu Hồi License & Xóa User</a></li>
         </ul>
 
-        <div class="sidebar-section-title">Phân hệ Ngân hàng Câu hỏi</div>
+        <div class="sidebar-section-title">Ngân hàng đề & Nhãn</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="#section-tag-create">SOP-02.1: Tạo & Import Nhãn Đề</a></li>
-          <li class="nav-item"><a href="#section-tag-delete">SOP-02.2: Xóa & Tối Ưu Nhãn</a></li>
-          <li class="nav-item"><a href="#section-question-bank">SOP-02.3: Ngân Hàng Câu Hỏi Trắc Nghiệm</a></li>
-          <li class="nav-item"><a href="#section-regrade">SOP-02.4: Chấm Lại Bài Khi Sửa Key</a></li>
+          <li class="nav-item"><a href="#section-tags">SOP-02.1: Quản Trị & Tối Ưu Nhãn (Tags)</a></li>
+          <li class="nav-item"><a href="#section-question-bank">SOP-02.2: Ngân Hàng Câu Hỏi & 6 Định Dạng</a></li>
+          <li class="nav-item"><a href="#section-regrade">SOP-02.3: Chấm Lại Bài Khi Sửa Key Đáp Án</a></li>
         </ul>
 
-        <div class="sidebar-section-title">Phân hệ Khóa học & Lộ trình</div>
+        <div class="sidebar-section-title">Khóa học & Lộ trình</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="#section-course-flow">SOP-03.1: Chu Trình 7 Bước Tạo Khóa Học</a></li>
+          <li class="nav-item"><a href="#section-course-flow">SOP-03.1: Chu Trình 7 Bước Quản Trị Khóa Học</a></li>
           <li class="nav-item"><a href="#section-program">SOP-03.2: Thiết Lập Chương Trình Đào Tạo</a></li>
           <li class="nav-item"><a href="#section-survey-cert">SOP-03.3: Khảo Sát & Cấp Chứng Chỉ Tự Động</a></li>
         </ul>
 
-        <div class="sidebar-section-title">Phân hệ Bài Kiểm Tra & Đề Thi</div>
+        <div class="sidebar-section-title">Bài kiểm tra & Đề thi</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="#section-quiz-course">SOP-04.1: Tạo Quiz Tích Hợp Khóa Học</a></li>
           <li class="nav-item"><a href="#section-quiz-standalone">SOP-04.2: Tạo Bài Kiểm Tra Độc Lập</a></li>
         </ul>
 
-        <div class="sidebar-section-title">Phân hệ Ca thi & Giám sát</div>
+        <div class="sidebar-section-title">Ca thi & Giám sát</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="#section-exam-session">SOP-05.1: Thiết Lập Ca Thi Đa Phiên</a></li>
-          <li class="nav-item"><a href="#section-exam-retake">SOP-05.2: Điều Chuyển Thí Sinh Thi Lại</a></li>
-          <li class="nav-item"><a href="#section-proctoring">SOP-05.3: Giám Sát Kỳ Thi Trực Tuyến</a></li>
+          <li class="nav-item"><a href="#section-exam-retake">SOP-05.2: Điều Chuyển Thí Sinh Thi Lại Lần 2</a></li>
+          <li class="nav-item"><a href="#section-proctoring">SOP-05.3: Giám Sát Trực Tuyến & Nộp Bài</a></li>
         </ul>
 
-        <div class="sidebar-section-title">Phân hệ Báo cáo & Đánh giá</div>
+        <div class="sidebar-section-title">Báo cáo & Đánh giá</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="#section-reports">SOP-06.1: Trích Xuất & Phân Tích Dữ Liệu</a></li>
         </ul>
       </nav>
     </aside>
 
-    <!-- Main Content Area -->
+    <!-- Main SOP Body -->
     <main class="content">
       
-      <!-- DOCUMENT CONTROL HEADER -->
+      <!-- DOCUMENT CONTROL HEADER (ISO STANDARD) -->
       <div class="doc-control-box">
         <div class="doc-control-header">
           <div class="doc-control-title">
@@ -730,7 +692,7 @@
             <td class="label">Mã tài liệu:</td>
             <td class="val">SOP-L&amp;D-LMS-01</td>
             <td class="label">Phiên bản:</td>
-            <td class="val">v2.0 (SOP Standard)</td>
+            <td class="val">v2.1 (Cập nhật Bộ ảnh chuẩn mới)</td>
           </tr>
           <tr>
             <td class="label">Bộ phận ban hành:</td>
@@ -750,7 +712,7 @@
       <!-- SOP SECTION 0 -->
       <section id="section-overview">
         <h2 class="section-heading">
-          <span>0. QUY ĐỊNH TRUY CẬP &amp; MA TRẬN PHÂN HỆ QUẢN TRỊ</span>
+          <span>0. QUY ĐỊNH TRUY CẬP &amp; PHÂN QUYỀN HỆ THỐNG</span>
           <span class="sop-badge">SOP-00</span>
         </h2>
         
@@ -780,7 +742,7 @@
             </div>
             <div class="kv-item"><span class="kv-key">URL truy cập:</span><span class="kv-val"><a href="https://daotao.kiotviet.com/" target="_blank">daotao.kiotviet.com</a></span></div>
             <div class="kv-item"><span class="kv-key">Mục đích vận hành:</span><span class="kv-val">Học tập, thi trắc nghiệm, nộp khảo sát</span></div>
-            <div class="kv-item"><span class="kv-key">Phương thức đăng nhập:</span><span class="kv-val">Tài khoản công ty / Google SSO</span></div>
+            <div class="kv-item"><span class="kv-key">Phương thức đăng nhập:</span><span class="kv-val">Tài khoản doanh nghiệp / Google SSO</span></div>
           </div>
         </div>
 
@@ -789,27 +751,9 @@
             <img src="https://docs.google.com/docs-images-rt/ALKuztb-JVTiXtzY1ivQKJ2vzV7dbGzZeC3nJQMoO8zcf2xsXxYFMHwsDB6G9jGZX0zA6Vcvl_Y1S7ETFNlG0g_0fADRcGVfoASVf5j7DHfl21yxt_U_pKx9I55hm-5Zls30X_Ov7wUfRIFnw87Bd4BZLcO8TmRhs3OH6aaVh-A=s2048" alt="Giao diện cổng học viên và quản lý">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 1:</strong> Giao diện tổng quan cổng học tập phía Người dùng / Giảng viên.</span>
-            <span class="hint">Nhấp ảnh để xem chi tiết</span>
+            <span><strong>Hình 1:</strong> Giao diện tổng quan trang dành cho Học viên / Giảng viên / Quản lý.</span>
+            <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
-        </div>
-
-        <h3 class="sub-heading">Ma Trận 6 Phân Hệ Quản Trị Hệ Thống</h3>
-        <div class="module-list">
-          <div class="module-card"><strong>1. Tổ chức</strong><span>Quản lý sơ đồ cơ cấu, chi nhánh, phòng ban và chức danh nhân sự.</span></div>
-          <div class="module-card"><strong>2. Nhân sự</strong><span>Quản lý danh sách, hồ sơ, phân quyền tài khoản của cán bộ nhân viên.</span></div>
-          <div class="module-card"><strong>3. Nội dung</strong><span>Kho học liệu: Bài giảng, khóa học, khảo sát và ngân hàng câu hỏi trắc nghiệm.</span></div>
-          <div class="module-card"><strong>4. Đào tạo</strong><span>Tổ chức phân bổ, thiết lập chương trình lộ trình, ghi danh và giám sát tiến độ.</span></div>
-          <div class="module-card"><strong>5. Báo cáo</strong><span>Bảng thống kê tỷ lệ hoàn thành, điểm kiểm tra và trích xuất dữ liệu chi tiết.</span></div>
-          <div class="module-card"><strong>6. Website</strong><span>Tùy chỉnh giao diện portal, banner đào tạo và thông số hiển thị.</span></div>
-        </div>
-
-        <div class="callout warning">
-          <div class="callout-title">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-            Phạm vi can thiệp &amp; Thẩm quyền phê duyệt
-          </div>
-          <p>Tài liệu SOP này quy định chuẩn hóa 4 nghiệp vụ trọng yếu: <strong>Nhân sự, Nội dung, Đào tạo và Báo cáo</strong>. Mọi thay đổi thuộc phân hệ Website và Cơ cấu Tổ chức bắt buộc phải có văn bản phê duyệt từ <strong>L&amp;D Manager</strong> trước khi thực thi.</p>
         </div>
       </section>
 
@@ -820,7 +764,7 @@
           <span class="sop-badge">SOP-01</span>
         </h2>
 
-        <h3 class="sub-heading">SOP-01.1: Nhập Dữ Liệu Nhân Sự Hàng Loạt Qua File Excel</h3>
+        <h3 class="sub-heading">SOP-01.1: Nhập Dữ Liệu Nhân Sự Hàng Loạt Bằng Excel</h3>
         
         <div class="sop-table-wrap">
           <table class="sop-table">
@@ -838,19 +782,18 @@
                 <td><span class="step-num">1</span></td>
                 <td>L&amp;D Admin</td>
                 <td>
-                  Tải biểu mẫu chuẩn: <a href="https://docs.google.com/spreadsheets/d/1Ank2ctsFVZLP_Wk9u-MSe820JHhiiggj/edit?usp=sharing" target="_blank" style="color: var(--primary); font-weight: 600;">mau-import-nhan-su.xlsx</a>.<br>
-                  Nhập/dán dữ liệu nhân viên bằng phím tắt <code>Ctrl + Shift + V</code>. Kiểm tra các trường: <em>Mã NV, Họ tên, Email, Ngày sinh, Ngày vào làm (DD/MM/YYYY)</em>.
+                  Mở và chuẩn bị file mẫu Excel nhập liệu nhân sự. Sử dụng phím tắt <code>Ctrl + Shift + V</code> khi dán dữ liệu. Kiểm tra định dạng ngày sinh, ngày vào làm (DD/MM/YYYY).
                 </td>
-                <td>File Excel không lỗi định dạng, đúng cấu trúc cột quy định.</td>
+                <td>File Excel chuẩn cấu trúc cột hệ thống, không lỗi định dạng text.</td>
                 <td>15 phút</td>
               </tr>
               <tr>
                 <td><span class="step-num">2</span></td>
                 <td>L&amp;D Admin</td>
                 <td>
-                  Vào <strong>Nhân sự</strong> trên thanh điều hướng &rarr; Chọn chức năng <strong>Nhập dữ liệu</strong> &rarr; Đính kèm file <code>.xlsx</code> vừa chuẩn bị &rarr; Bấm xác nhận nạp dữ liệu.
+                  Vào <strong>Nhân sự</strong> trên thanh menu &rarr; Chọn chức năng <strong>Nhập dữ liệu</strong> &rarr; Tải file <code>.xlsx</code> lên hệ thống &rarr; Xác nhận Import.
                 </td>
-                <td>100% hồ sơ trong danh sách được khởi tạo, hệ thống báo Import thành công.</td>
+                <td>100% hồ sơ hiển thị thành công trong danh sách nhân sự.</td>
                 <td>10 phút</td>
               </tr>
             </tbody>
@@ -859,20 +802,20 @@
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYExP2oeh1VOto9PttaWSumKGipCBjVLsNZ417hwOJcRdqQfgSCOVOQ2kMxkWZpAYEH75dDA0hXaiRAIJ_8qn9ufD_jp2986mq7voqX1a6IVmgH6WqJ6ZwrJqUvOEjvj7HDDn-hnOx9GWk9dolZgd51OF_IOo94ssm-wIqZnQ=s2048" alt="Biên soạn file Excel import nhân sự">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztae8SJH1dLL8IaRkZr4Ao267UCbERw0kyh4jWWY4XsX82syAtyPDqFTG6hvz6vnyZVbwqzygAHR2y2lHIxGlnoSBCk0D-pc_UF0dEMrVNXkfJyB03-ZzBo0GSlWqHTnGp_46XyH7YiT1rn-mVI7PwdtllE4NQDlxRMRiB8TxA=s2048" alt="File mẫu Excel nhập liệu nhân sự">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 2:</strong> Mẫu chuẩn bị file dữ liệu Excel danh sách nhân sự cần import.</span>
+            <span><strong>Hình 2:</strong> Cấu trúc file mẫu Excel chuẩn bị dữ liệu nhân sự để import.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuzta9TNG-XsQGDAp20nlfSo4pvxMUTVRxKuz8h-WiTeU8FcRGgwVWyAZOTfUoAbyMPQZDwYAFmgvnKJX2uUbFu7FcrW_5hgi56ujWUrc5xkr1CYu_N6pgYq18mEgIQJcYJrupuwQcMAwa7GryiYwPohSkjse6FkAoQXc74tU=s2048" alt="Thao tác import file nhân sự tại menu Nhân sự">
+            <img src="https://docs.google.com/docs-images-rt/ALKuzta9TNG-XsQGDAp20nlfSo4pvxMUTVRxKuz8h-WiTeU8FcRGgwVWyAZOTfUoAbyMPQZDwYAFmgvnKJX2uUbFu7FcrW_5hgi56ujWUrc5xkr1CYu_N6pgYq18mEgIQJcYJrupuwQcMAwa7GryiYwPohSkjse6FkAoQXc74tU=s2048" alt="Vị trí nút nhập dữ liệu tại tab Nhân sự">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 3:</strong> Giao diện thực hiện nhập dữ liệu nhân sự hàng loạt trên hệ thống.</span>
+            <span><strong>Hình 3:</strong> Vị trí nút Nhập dữ liệu tại phân hệ Nhân sự trên thanh điều hướng.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
@@ -880,455 +823,254 @@
 
       <section id="section-hr-manual">
         <h3 class="sub-heading">SOP-01.2: Thêm Hồ Sơ Nhân Sự Thủ Công (Đơn Lẻ)</h3>
-        <p><strong>Mục đích áp dụng:</strong> Bổ sung tài khoản cho giảng viên nội bộ, khách mời thỉnh giảng hoặc các nhân sự mới tiếp nhận bổ sung ngoài đợt import định kỳ.</p>
-        
-        <div class="sop-table-wrap">
-          <table class="sop-table">
-            <thead>
-              <tr>
-                <th style="width: 70px;">Bước</th>
-                <th style="width: 130px;">Người thực hiện</th>
-                <th>Thao tác chi tiết trên LMS</th>
-                <th style="width: 200px;">Tiêu chuẩn đầu ra</th>
-                <th style="width: 90px;">SLA</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="step-num">1</span></td>
-                <td>L&amp;D Admin</td>
-                <td>Vào menu <strong>Nhân sự</strong> &rarr; Nhấp chọn nút <strong>Tạo Nhân sự</strong> ở góc trên bên phải màn hình.</td>
-                <td>Mở form khởi tạo hồ sơ nhân sự mới.</td>
-                <td>2 phút</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">2</span></td>
-                <td>L&amp;D Admin</td>
-                <td>
-                  Điền các trường dữ liệu bắt buộc: <em>Mã nhân viên, Họ và tên, Email doanh nghiệp, Phòng ban trực thuộc, Chức danh công việc</em> &rarr; Thiết lập mật khẩu mặc định &rarr; Nhấn <strong>Lưu</strong>.
-                </td>
-                <td>Tài khoản nhân sự được cấp và gửi thông tin xác nhận qua email.</td>
-                <td>5 phút</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <p><strong>Mục đích:</strong> Áp dụng cấp tài khoản gấp cho chuyên gia thỉnh giảng, giảng viên nội bộ hoặc học viên phát sinh đột xuất.</p>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztY0bqcImvGh5sXi8blZ6qLwOnqIqIPcqQZ3eG_z0hOFpd_SYs91WwRLw4M75Td7WL7iIFzGyVrhv3U7hekSkfvTky8I63HYPMPxHS2q42YPQ8gZ84j1EzJmf5NAQCiP8D3kZbWJ74zcNFujo0qDAZosYFTBfEd8k0g6YXk4cQ=s2048" alt="Nút Tạo nhân sự">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbZqPoHZDKSg-Y5o7rJQuuhKHvFBIFhjdtnaL_SdZlBryDEBqrhne-i9ixDNy8o1br1qvprHcZqRPKWlK0M0uegx2EZC5hnGVpzsjtqKW0LAyz_An9O2Yv8SQBwZ90T-X4iXMBQ9FEidf_WF3a60GLR-Wovg3Z7BZGN0HRxsw=s2048" alt="Nút Tạo Nhân sự">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 4:</strong> Vị trí nút Tạo Nhân sự trong phân hệ quản lý nhân viên.</span>
+            <span><strong>Hình 4:</strong> Vị trí nút Tạo Nhân sự ở góc phải phân hệ quản lý nhân viên.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztbBvQC6ntl_BGvsRx7oRQlqZ5OkknMWhq2lo7WpH2bD7R3IG5tH2aCeJjX5m18E-Mossr_ovNQIA8flm2OME6FFR21DAGagVsWpuMcDG9j2m5HNQ_D-P1TvaSslEC1mBBoIP_rkcRyPXByewexDZcPRyq8kdUDKBuxxQYKG9g=s2048" alt="Form thông tin nhân sự mới">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbBvQC6ntl_BGvsRx7oRQlqZ5OkknMWhq2lo7WpH2bD7R3IG5tH2aCeJjX5m18E-Mossr_ovNQIA8flm2OME6FFR21DAGagVsWpuMcDG9j2m5HNQ_D-P1TvaSslEC1mBBoIP_rkcRyPXByewexDZcPRyq8kdUDKBuxxQYKG9g=s2048" alt="Form điền thông tin cơ bản cho nhân sự mới">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 5:</strong> Mẫu thông tin chi tiết cần thiết lập cho một tài khoản nhân sự mới.</span>
+            <span><strong>Hình 5:</strong> Form thiết lập các trường thông tin cơ bản cho tài khoản nhân sự mới.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
       </section>
 
       <section id="section-hr-delete">
-        <h3 class="sub-heading">SOP-01.3: Quy Trình Khóa &amp; Xóa Hồ Sơ Nhân Sự (Thu Hồi License Active)</h3>
+        <h3 class="sub-heading">SOP-01.3: Khóa &amp; Xóa Hồ Sơ Để Thu Hồi License Active Hàng Tháng</h3>
         
         <div class="callout danger">
           <div class="callout-title">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-            QUY ĐỊNH BẮT BUỘC: QUẢN LÝ LICENSE ACTIVE HÀNG THÁNG
+            QUY ĐỊNH BẮT BUỘC: QUẢN LÝ DUNG LƯỢNG LICENSE ACTIVE
           </div>
-          <p>Hệ thống giới hạn dung lượng User Active hàng tháng theo hợp đồng License. <strong>100% nhân sự nghỉ việc (OFF) hoặc ngưng tham gia lộ trình đào tạo phải được XÓA / KHÓA TÀI KHOẢN trong vòng 24h kể từ khi nhận quyết định thôi việc</strong> để bảo toàn license cho nhân sự mới.</p>
-        </div>
-
-        <div class="sop-table-wrap">
-          <table class="sop-table">
-            <thead>
-              <tr>
-                <th style="width: 70px;">Bước</th>
-                <th style="width: 130px;">Người thực hiện</th>
-                <th>Thao tác chi tiết trên LMS</th>
-                <th style="width: 200px;">Tiêu chuẩn đầu ra</th>
-                <th style="width: 90px;">SLA</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="step-num">1</span></td>
-                <td>L&amp;D Admin</td>
-                <td>Vào <strong>Nhân sự</strong> &rarr; Tab <strong>Danh sách</strong>.</td>
-                <td>Hiển thị toàn bộ dữ liệu nhân sự công ty.</td>
-                <td>1 phút</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">2</span></td>
-                <td>L&amp;D Admin</td>
-                <td>Sử dụng thanh tìm kiếm để lọc nhân sự theo: <em>Mã nhân viên / Họ tên / Email</em>.</td>
-                <td>Xác định chính xác tài khoản cần xử lý (tránh xóa nhầm người trùng tên).</td>
-                <td>2 phút</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">3</span></td>
-                <td>L&amp;D Admin</td>
-                <td>Nhấp vào tên nhân sự để truy cập vào trang chi tiết hồ sơ cá nhân.</td>
-                <td>Mở giao diện hồ sơ chi tiết.</td>
-                <td>1 phút</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">4</span></td>
-                <td>L&amp;D Admin</td>
-                <td>Cuộn xuống cuối trang hồ sơ, tìm khu vực chức năng đặc biệt và nhấp nút <strong>XÓA</strong>.</td>
-                <td>Hiển thị hộp thoại cảnh báo bảo mật xác nhận xóa.</td>
-                <td>1 phút</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">5</span></td>
-                <td>L&amp;D Admin</td>
-                <td>Nhập chính xác <strong>Tên nhân sự</strong> vào ô xác thực &rarr; Bấm <strong>Xóa vĩnh viễn Account</strong>.</td>
-                <td>Tài khoản bị hủy, license người dùng được giải phóng ngay lập tức.</td>
-                <td>1 phút</td>
-              </tr>
-            </tbody>
-          </table>
+          <p>Hệ thống LMS áp dụng hạn mức tài khoản hoạt động theo tháng. <strong>Tất cả nhân sự thôi việc (OFF) hoặc tạm ngưng lộ trình học tập bắt buộc phải được KHÓA / XÓA TÀI KHOẢN trong vòng 24 giờ</strong> để bảo toàn dung lượng license cho nhân viên mới.</p>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYe5HiyJd3ptlqrLzrQRz92gRuPXeAOaNHYxYmbUKESZKHlqSiXDdaKb75_bUP8SNRKEHS2juNtaCDUrE0w9Hde3rFy4utvZVFZ1qpEyGj3GfCL8F3MOKTFnYVBNnXiHmc24ntRxIdm-zwp2PNjEXGCRDJYcxhfRML7FhaH2A=s2048" alt="Danh sách nhân sự">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztboEU1OFJEgoDVjI9hjbnsjqffc3AkHJ49RfNQ8jhS406e-khxBQx2Y78xiwLObQofTWLhRBsMDaFuNwAlbSIBaPRZ1szfyNRl11ZniMOg3-XEnXD0egxAIa3c-nR7jL1HhPXWnNwpnTExQuH-8xP_rp0SoPAARRgOugbEtPw=s2048" alt="Danh sách nhân sự cần thao tác">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 6:</strong> Danh sách toàn bộ cán bộ nhân viên trong hệ thống.</span>
+            <span><strong>Hình 6:</strong> Danh sách toàn bộ nhân sự công ty trong phân hệ Nhân sự.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZL3kUI3_ptfJVhbCLGsjLtKeX9nAC2NFNGskXvf4JrVMud1PnOa3UMVdtbHFFUduGiCZDzXPY5pab0-CoelbcvE3RVoZ1cuC91Jwbxoy_B3DzLYe7daDruWDU7Bwu7owjKZlgIC5qZPmFeF0Vmn7ykEeeIsjexQEE1jPsMqA=s2048" alt="Tìm kiếm nhân sự">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztb3w0fE2Bah4IZjsIRAYY3YDDe6YiHYWmTlxi7MMcus0TViC7SysrluWQRnzxx-2fRl-2lUAGPWDn95rXocx4b_45GpXvwvIFsNYJ-zFCznLprH39IzZIMwvGjusnqpdeharoUp_AMxp25L2cgYQO0GX9IFbWOIitWtjcK6oQ=s2048" alt="Tìm kiếm nhân sự theo bộ lọc">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 7:</strong> Tìm kiếm tài khoản cần xử lý theo tên hoặc mã nhân viên.</span>
+            <span><strong>Hình 7:</strong> Tìm kiếm tài khoản cần xử lý theo tên hoặc mã nhân viên qua bộ lọc.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYypPD6G37uW0pnk6aNAvzclkm34x16-L3nOW3XfAqJlPLdkhq-FOlQI4d_kNmnDZc5aJq7cyhkjTlntFwq6DgrPUTDNxHvkS-MctMDAqNntmG_r9ETEpucuyHP8dsUXye-KdCvuc3rHKlrcJhZNpshIK7OUF2gYIEawFxYdQ=s2048" alt="Kết quả tìm kiếm">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYJ6RRlSuuGxB6egpUO3POTPLq0krzEcVH0SGMzAWJSohpoE04ezptwpL_OS-bUZnMxrGE-UMGm4PmF6YPpg7Mv07Kb--XONIVMNLl2ZG7Z2d8MERNmZNbuA0Jj5YJu0jL4qVQQqeorohqKmeXBkm7QkOei2bjyA4jzC-L1cw=s2048" alt="Kết quả tìm kiếm nhân sự">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 8:</strong> Kết quả hiển thị nhân sự cần điều chỉnh.</span>
+            <span><strong>Hình 8:</strong> Kết quả hiển thị nhân sự cần điều chỉnh trạng thái tài khoản.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYTofyJtXyRcABZ0TMZjxhiztoySoW5eKIPNOkbg2gHBrCTRjcl_dB2K6lq_Lu7CcTE9xmf5lbpGhoOSfe7TqXMWX3mTw5z4fxVrmXZ_JoG3uohD4-PTGBKQMXZjq9qccKs7s8XphOeLkXn2rdJ2KZyLoWyv5TCbIge_hZq4w=s2048" alt="Xem hồ sơ nhân sự">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYTofyJtXyRcABZ0TMZjxhiztoySoW5eKIPNOkbg2gHBrCTRjcl_dB2K6lq_Lu7CcTE9xmf5lbpGhoOSfe7TqXMWX3mTw5z4fxVrmXZ_JoG3uohD4-PTGBKQMXZjq9qccKs7s8XphOeLkXn2rdJ2KZyLoWyv5TCbIge_hZq4w=s2048" alt="Vào trang Hồ sơ nhân sự">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 9:</strong> Màn hình chi tiết thông tin hồ sơ của nhân sự.</span>
+            <span><strong>Hình 9:</strong> Giao diện chi tiết thông tin hồ sơ của nhân sự đã chọn.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztbYlCULOoJjwowxWOFZPVYDgm_JlBbk_3S013DQ8W4A8-Gwob6lZ_1sk23KfuiixFQd63k4lzsc50VkSbFPSnwZZtA2045rqB93qYcNx4VQMOQIqv7OqlzIJ2VxCSqAfC4nsklR0HX9vgEvAuPxXDSYSpwAe-G0bolGTczQJQ=s2048" alt="Nút xóa nhân sự cuối trang">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbYlCULOoJjwowxWOFZPVYDgm_JlBbk_3S013DQ8W4A8-Gwob6lZ_1sk23KfuiixFQd63k4lzsc50VkSbFPSnwZZtA2045rqB93qYcNx4VQMOQIqv7OqlzIJ2VxCSqAfC4nsklR0HX9vgEvAuPxXDSYSpwAe-G0bolGTczQJQ=s2048" alt="Nút XÓA ở cuối trang hồ sơ">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 10:</strong> Nút Xóa nằm ở chân trang quản lý tài khoản.</span>
+            <span><strong>Hình 10:</strong> Vị trí nút XÓA nằm ở chân trang quản lý tài khoản nhân viên.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZa34vcyY-nphqLew1Ibenv9Kt8blCfXJKPPoYkIcABG8IjCYFz_nipy5PA4SNCtWiC-zb71LeHIuokOc4WuwRkZZFF-kkcmISNnd369DXxlU5RQjapn5sfvkJQvi7xKERdMy6fC-emygQYlY_vw-f-ZBmyjIm1uXEsbsv7Ew=s2048" alt="Xác nhận xóa tài khoản">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZa34vcyY-nphqLew1Ibenv9Kt8blCfXJKPPoYkIcABG8IjCYFz_nipy5PA4SNCtWiC-zb71LeHIuokOc4WuwRkZZFF-kkcmISNnd369DXxlU5RQjapn5sfvkJQvi7xKERdMy6fC-emygQYlY_vw-f-ZBmyjIm1uXEsbsv7Ew=s2048" alt="Popup nhập tên để xác nhận xóa vĩnh viễn">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 11:</strong> Nhập xác thực tên nhân sự để hủy vĩnh viễn tài khoản.</span>
+            <span><strong>Hình 11:</strong> Hộp thoại xác thực bảo mật: Nhập chính xác tên nhân sự để hủy vĩnh viễn account.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
       </section>
 
       <!-- SOP SECTION 2 -->
-      <section id="section-tag-create">
+      <section id="section-tags">
         <h2 class="section-heading">
-          <span>2. QUY TRÌNH QUẢN LÝ NGÂN HÀNG CÂU HỎI &amp; NHÃN CHUYÊN ĐỀ</span>
+          <span>2. QUY TRÌNH QUẢN TRỊ NHÃN &amp; NGÂN HÀNG CÂU HỎI TRẮC NGHIỆM</span>
           <span class="sop-badge">SOP-02</span>
         </h2>
-        
-        <p><strong>Định nghĩa vận hành:</strong> Nhãn (Tags) đóng vai trò là <em>Chủ đề kiến thức hoặc Chuyên đề đánh giá</em>. Việc chuẩn hóa nhãn giúp hệ thống tự động bốc câu hỏi ngẫu nhiên khi xây dựng các ma trận đề thi.</p>
 
-        <h3 class="sub-heading">SOP-02.1: Khởi Tạo Nhãn Chủ Đề (Thủ Công &amp; Import Hàng Loạt)</h3>
-        
-        <div class="sop-table-wrap">
-          <table class="sop-table">
-            <thead>
-              <tr>
-                <th style="width: 120px;">Phương thức</th>
-                <th>Quy trình các bước thực thi</th>
-                <th style="width: 220px;">Tiêu chuẩn kiểm soát</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Cách 1: Thủ công</strong></td>
-                <td>
-                  1. Vào <strong>Nội dung</strong> &rarr; <strong>Câu hỏi</strong> &rarr; Tab <strong>Nhãn</strong>.<br>
-                  2. Nhập tên nhãn vào thanh tìm kiếm. Nếu hệ thống thông báo <em>"Không tìm thấy nhãn"</em> &rarr; Nhấn <strong>Tạo nhãn</strong>.
-                </td>
-                <td>Tránh tạo trùng lặp tên nhãn đã có trong thư viện.</td>
-              </tr>
-              <tr>
-                <td><strong>Cách 2: Import Excel</strong></td>
-                <td>
-                  1. Tại tab <strong>Nhãn</strong> &rarr; Bấm nút <strong>Nhập nhãn</strong>.<br>
-                  2. Tải <strong>Mẫu Excel (.xlsx)</strong> &rarr; Điền danh mục nhãn bắt đầu từ ô <code>A2</code>.<br>
-                  3. Lưu file và tải ngược lại lên LMS.
-                </td>
-                <td>Mỗi nhãn đại diện cho 1 năng lực/chuyên đề đào tạo rõ ràng.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h3 class="sub-heading">SOP-02.1: Quản Trị &amp; Khởi Tạo Nhãn Chủ Đề (Tags)</h3>
+        <p><strong>Khái niệm SOP:</strong> Nhãn (Tags) đại diện cho <em>Chủ đề hoặc Năng lực kiến thức</em>. Nhãn được dùng làm điều kiện tiên quyết để hệ thống bốc câu hỏi ngẫu nhiên khi trộn đề thi trắc nghiệm.</p>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztb54rOUw7fwjG1YKJaMCwt7ZUnMh09tGoIDB3RO5eZLmYl7SUrV9WAdiQUxG3ELckI12NfL2wVGOesNQnro2ittO-nf1AbjAXKpjyDZyCth-9GV0_0tjaTuNEvNZ-LlAW4Sfr9bnRyZ1Erg2ITrUSm3b55f-WNZso5GhDUD2g=s2048" alt="Kiểm tra nhãn trong thanh tìm kiếm">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZU6yPcs56I4oOHLTC9AyS4xAN7xYsibe-UigimSn4WlNr2jo3HDDjABfPTkLVz0c7KJf9btqWlVcozTwzzfZOjp4SEplY8Q1bM-o-r2bMHuUmnskfVg-n74RrE8I5GOn5pfN2YBveOsUefCcO662YcAQ=s2048" alt="Danh sách các nhãn/chủ đề câu hỏi">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 12:</strong> Kiểm tra trạng thái tồn tại của nhãn trước khi bấm tạo.</span>
+            <span><strong>Hình 12:</strong> Danh sách tổng hợp các nhãn chuyên đề câu hỏi trên hệ thống.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuzta8-8S0aFmXEd2mnrvBL6jaDLlwkmN4Eo4Qe2m9S8_9lbNFvlLfi2_tmVfxJvII3XGRS84WefBM17W4-cQNSpGHLih_RncLCAorYJppktgQ_Vpi5nTDrFcxMfn84DJsJaM1tLhnj20N8T4TdV1lIUQximpm3w1HjtdBJjs5aQ=s2048" alt="Tạo nhãn thủ công thành công">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztb54rOUw7fwjG1YKJaMCwt7ZUnMh09tGoIDB3RO5eZLmYl7SUrV9WAdiQUxG3ELckI12NfL2wVGOesNQnro2ittO-nf1AbjAXKpjyDZyCth-9GV0_0tjaTuNEvNZ-LlAW4Sfr9bnRyZ1Erg2ITrUSm3b55f-WNZso5GhDUD2g=s2048" alt="Tìm kiếm nhãn - Trường hợp chưa có nhãn">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 13:</strong> Nhãn mới được khởi tạo thành công trên hệ thống.</span>
+            <span><strong>Hình 13:</strong> Thao tác tìm kiếm nhãn: Hệ thống thông báo chưa tồn tại &rarr; Cho phép tạo mới.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYpjiun282cHJHEPAqWFMKeI7tdnut1SDmNQ5F-9qJJMdn6lHkdecU-TM2oaSzKb_5Ul6O718sVmUxRWYyWpk0FY97kPxIs4rUWcSfcCtWndPSwmcTLPk1b2Wm7vd6d-qT02ujPUgLDXrazX_LMiPqVu_ZeVNAPIUsG2TegHg=s2048" alt="Tải file mẫu Excel nhập nhãn">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbDk0c78WU0JjeNbDa8ahtaVpss3k30dO7tvpasd6ekXcLJjfP-XVbGeUHBNtNwNLfgdo_6aFwZQSzToJJlD6iN7fOYHKSnL8TOa6rtFUgOuDpYjkq8_dgpiwRYEkq9FrJhZSfa_7t-btWrv9uXBnsT4Xq6yGgUtU1sTWgr9w=s2048" alt="Tìm kiếm nhãn - Trường hợp đã tồn tại">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 14:</strong> Giao diện tải template Excel import nhãn câu hỏi.</span>
+            <span><strong>Hình 14:</strong> Thao tác tìm kiếm nhãn: Nhãn đã có sẵn trong cơ sở dữ liệu (Tránh tạo trùng lặp).</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYv9LBoHzBIWCCHD1-pZ-SX8LY2irxvjfoJ64VUPQTymNE84pwcFx7_Xj7EmuluXmPuJN_lBWie87gqt5osC9FaclXQh8A-OouzWUejqRVaWD4B-g9HmyJkQkX1tT-gtZSTvnVlEYfa6aTP-pBOhjrUHOOEojkXUz_xiBA=s2048" alt="Điền tên nhãn vào file Excel">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZpjFCGmiwdZF8TU_OlMAov25AHZkujkUOwAqSLOZdIJqHEBTaj1HRY5ItQycGaB015hkmRfRhA-8S7eVpzakiIHL6HaI1Xbr5P4XjVwRgAGbiOleR3PAVpFjW7A_oRBhLQzxGyCBVCndXepRwtK0jKWb_OAaVllakPzkcTFA=s2048" alt="Tải mẫu Excel nhập nhãn">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 15:</strong> Nhập dữ liệu danh mục nhãn vào file bảng tính.</span>
+            <span><strong>Hình 15:</strong> Tải biểu mẫu bảng tính Excel để thực hiện nạp nhãn câu hỏi hàng loạt.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztaBYhv9oon2G4IEwyrUTsEbGlXGX-1swwynhrSSbLJzkdzgsGQi29O_vW2ZmNIUVWj3jF0rGwd_JNeUjjCPW9VST_oeMJ-XVVoamsm2dq_zWEHzrBKzKrQLBhBaOXU2wTdJUgThOlvJKlDBpnwDvL_yrIv10lMkWEgaxsxqiw=s2048" alt="Chọn file và tải lên">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYv9LBoHzBIWCCHD1-pZ-SX8LY2irxvjfoJ64VUPQTymNE84pwcFx7_Xj7EmuluXmPuJN_lBWie87gqt5osC9FaclXQh8A-OouzWUejqRVaWD4B-g9HmyJkQkX1tT-gtZSTvnVlEYfa6aTP-pBOhjrUHOOEojkXUz_xiBA=s2048" alt="Điền thông tin vào file Excel mẫu">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 16:</strong> Tải file Excel nhãn lên LMS để hoàn tất nạp dữ liệu.</span>
-            <span class="hint">Nhấp ảnh để phóng to</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="section-tag-delete">
-        <h3 class="sub-heading">SOP-02.2: Rà Soát &amp; Xóa Nhãn Không Còn Sử Dụng</h3>
-        <p><strong>Nguyên tắc:</strong> Định kỳ cuối mỗi quý, L&amp;D Admin thực hiện tinh gọn các nhãn thử nghiệm hoặc không gắn với câu hỏi nào để tránh rác dữ liệu.</p>
-        
-        <p><strong>Xóa đơn lẻ 1 nhãn:</strong> Tìm nhãn &rarr; Nhấp <strong>biểu tượng 3 chấm</strong> &rarr; Chọn <strong>Xóa</strong>.</p>
-        <div class="img-figure">
-          <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYp5dh5OOO3R7KYZqSk54oaIXIic-2hR2f8n7VLAxefwr-PfpAn5irLkK7Z17Tz6U142L-IB90YcUD-usjKGhgfcBbvCulyd0fvPs2mPf8r4guF5sytmFzsz9jgfVyCGE8KS2yzB52oHp0sktFPn3rsfmNeEtnIvnHnmt79QQ=s2048" alt="Xóa 1 nhãn">
-          </div>
-          <div class="img-caption">
-            <span><strong>Hình 17:</strong> Thao tác xóa nhanh một nhãn qua menu chức năng phụ.</span>
+            <span><strong>Hình 16:</strong> Biên soạn danh mục các tên nhãn vào cột tương ứng trong file mẫu.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
-        <p><strong>Xóa hàng loạt nhiều nhãn:</strong> Tích chọn các nhãn cần xóa &rarr; Bấm <strong>Thao tác</strong> &rarr; Chọn <strong>Xóa nhãn đã chọn</strong>.</p>
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztbDXjFVinUMOMLSpjZQX85yRiIUKeooEqzt5B0jeC0Oj746ekCG5u9VA4eDxacAp25WvJpmV5dgE5pI3XKNrdords_mCxx9bk5Vv9rL0D3GQudb7ZAHDhUfF1yFAdXL0aAgZj32dL4qgTwf4OKczvo1L1Tf_3hGCxM1X-H1hA=s2048" alt="Xóa hàng loạt nhãn">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztaBYhv9oon2G4IEwyrUTsEbGlXGX-1swwynhrSSbLJzkdzgsGQi29O_vW2ZmNIUVWj3jF0rGwd_JNeUjjCPW9VST_oeMJ-XVVoamsm2dq_zWEHzrBKzKrQLBhBaOXU2wTdJUgThOlvJKlDBpnwDvL_yrIv10lMkWEgaxsxqiw=s2048" alt="Thao tác Import file nhãn lên LMS">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 18:</strong> Xóa đồng loạt nhiều nhãn bằng tính năng bulk action.</span>
+            <span><strong>Hình 17:</strong> Tải file nhãn đã chuẩn bị lên hệ thống để hoàn tất cập nhật.</span>
+            <span class="hint">Nhấp ảnh để phóng to</span>
+          </div>
+        </div>
+
+        <div class="img-figure">
+          <div class="img-container">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztba_ZGlsUQF2rR6VAZFGnxEi_r1lbh9jva4gXQ6luLGzIeusxpwMF_MTj08brLGqNVSLle6coKFapBrWRBFEM9b-F-Fjro4E81gbx7QH3_Revc2ngF8h30yEmNtoLKfYHyOS664CgQo6MJ6VcDDzU-7cbSfzBPh8Inp3-OYJg=s2048" alt="Thao tác xóa 1 nhãn đơn lẻ">
+          </div>
+          <div class="img-caption">
+            <span><strong>Hình 18:</strong> Thao tác xóa một nhãn đơn lẻ không còn sử dụng thông qua menu phụ.</span>
+            <span class="hint">Nhấp ảnh để phóng to</span>
+          </div>
+        </div>
+
+        <div class="img-figure">
+          <div class="img-container">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbDXjFVinUMOMLSpjZQX85yRiIUKeooEqzt5B0jeC0Oj746ekCG5u9VA4eDxacAp25WvJpmV5dgE5pI3XKNrdords_mCxx9bk5Vv9rL0D3GQudb7ZAHDhUfF1yFAdXL0aAgZj32dL4qgTwf4OKczvo1L1Tf_3hGCxM1X-H1hA=s2048" alt="Thao tác chọn và xóa hàng loạt nhãn">
+          </div>
+          <div class="img-caption">
+            <span><strong>Hình 19:</strong> Tích chọn nhiều nhãn rác để thực hiện xóa hàng loạt (Bulk Action).</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
       </section>
 
       <section id="section-question-bank">
-        <h3 class="sub-heading">SOP-02.3: Quản Trị Ngân Hàng Câu Hỏi &amp; 6 Định Dạng Trắc Nghiệm</h3>
-        <p>Ngân hàng câu hỏi là tài nguyên số dùng chung. Giảng viên và Admin có thể tái sử dụng linh hoạt trong các bài học, kỳ thi sát hạch nâng bậc hoặc đánh giá định kỳ.</p>
+        <h3 class="sub-heading">SOP-02.2: Ngân Hàng Câu Hỏi &amp; 6 Định Dạng Trắc Nghiệm Chuẩn</h3>
+        <p>Kho học liệu câu hỏi tập trung cho toàn công ty, phục vụ trộn đề bài học, đề thi cuối khóa và kỳ sát hạch định kỳ.</p>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztb9wj_USwkHlH-_P-q6qIHDcqIlqddZ_tx1arNZBw_lgwtsXlmsPTgmmtLJCYzTSNyiW_sUUb4ecWIjlk7ZaXBm-PYi8OIb73wQGnzClR3g0-VMTWbZoTOuJs8wlD6vLaSbF8E4pSgYRhZ4aql3bcmecNEIuKnFTrQ3LnQoCA=s2048" alt="Giao diện ngân hàng câu hỏi">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztb9wj_USwkHlH-_P-q6qIHDcqIlqddZ_tx1arNZBw_lgwtsXlmsPTgmmtLJCYzTSNyiW_sUUb4ecWIjlk7ZaXBm-PYi8OIb73wQGnzClR3g0-VMTWbZoTOuJs8wlD6vLaSbF8E4pSgYRhZ4aql3bcmecNEIuKnFTrQ3LnQoCA=s2048" alt="Giao diện danh sách câu hỏi trắc nghiệm">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 19:</strong> Giao diện danh sách câu hỏi trung tâm với bộ lọc phân loại đa tầng.</span>
+            <span><strong>Hình 20:</strong> Giao diện ngân hàng câu hỏi trắc nghiệm trung tâm của hệ thống.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZ9a0Fp_SinODXj7QJZQPvSY7rEOzwggTPipmv4tSCF7qRVB9BTN20cxp1NSqdk2OwhQYnIx1g2i45zhvPEURUJiq9Ddgz8ivS0jw9K7p-Df4zHb3ENNDWyNIc0cNffLv7ZRQgHF_yh8jytwZC_6SS2cMehm9IJygY1o_cH4w=s2048" alt="Xem câu hỏi theo nhãn">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZ9a0Fp_SinODXj7QJZQPvSY7rEOzwggTPipmv4tSCF7qRVB9BTN20cxp1NSqdk2OwhQYnIx1g2i45zhvPEURUJiq9Ddgz8ivS0jw9K7p-Df4zHb3ENNDWyNIc0cNffLv7ZRQgHF_yh8jytwZC_6SS2cMehm9IJygY1o_cH4w=s2048" alt="Danh sách câu trắc nghiệm theo nhãn">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 20:</strong> Lọc danh sách câu hỏi trắc nghiệm theo từng nhãn chủ đề. <em>(Lưu ý: Hệ thống chưa hỗ trợ chức năng Xuất file câu hỏi)</em>.</span>
+            <span><strong>Hình 21:</strong> Lọc và xem danh sách các câu hỏi thuộc về một nhãn chủ đề nhất định.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYm2unAd73mJVUKPYzyeIs6lYEJzzYlpUUtNXroR0LkVo8Mr3SgOlOUXzvWupbWunRs_5W-5bsXJKRzFqX5KSLAIrSEs7ZVZaRz2aorD7E1HwUdNpxiYLCvNZXMrp4HXRA7ttry2dKgYOBYEAUpt0glfvhLmeIeb1D7H-c=s2048" alt="Chọn loại câu hỏi">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZKWpXsmZE-pcaqFemkAgbZ49ozV1g_9yuH0d158ywWkTx4GMqCxstKy2xf4jSrL2LvhsuUWEZ_qiklkewFwvgCfxoNPktOXD1tYSTYDpSjPaqUuvjNLD3aFAKwkGrYd6SitGOrb8_ax3pCbb6IqNXpswEVidV-k2Cjbnw=s2048" alt="Hộp thoại lựa chọn loại câu hỏi">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 21:</strong> Lựa chọn 1 trong 6 định dạng câu hỏi hỗ trợ.</span>
+            <span><strong>Hình 22:</strong> Hộp thoại lựa chọn 1 trong 6 định dạng câu hỏi trắc nghiệm được hỗ trợ.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
-        <h4 style="font-size: 14px; font-weight: 700; margin: 12px 0 6px;">Bảng Phân Loại 6 Dạng Trắc Nghiệm Chuẩn:</h4>
-        <div class="sop-table-wrap">
-          <table class="sop-table">
-            <thead>
-              <tr>
-                <th style="width: 140px;">Mã loại (Type)</th>
-                <th style="width: 160px;">Tên định dạng</th>
-                <th>Mô tả nghiệp vụ &amp; Phạm vi ứng dụng</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="tag-badge">SINGLE</span></td>
-                <td>Một đáp án đúng</td>
-                <td>Thí sinh chọn duy nhất 1 phương án đúng nhất trong các lựa chọn.</td>
-              </tr>
-              <tr>
-                <td><span class="tag-badge">MULTI</span></td>
-                <td>Nhiều đáp án đúng</td>
-                <td>Thí sinh chọn nhiều phương án đúng cùng lúc (chấm điểm theo tổ hợp).</td>
-              </tr>
-              <tr>
-                <td><span class="tag-badge">TRUE-FALSE</span></td>
-                <td>Đúng / Sai</td>
-                <td>Dạng nhị phân, kiểm tra nhanh kiến thức cốt lõi/chính sách.</td>
-              </tr>
-              <tr>
-                <td><span class="tag-badge">CHOICE-SCORED</span></td>
-                <td>Tính điểm theo đáp án</td>
-                <td>Mỗi phương án gán trọng số điểm khác nhau (đánh giá năng lực/hành vi).</td>
-              </tr>
-              <tr>
-                <td><span class="tag-badge">DISC</span></td>
-                <td>Trắc nghiệm DISC</td>
-                <td>Đánh giá phong cách hành vi &amp; tâm lý nhân sự theo mô hình DISC.</td>
-              </tr>
-              <tr>
-                <td><span class="tag-badge">FIB</span></td>
-                <td>Điền từ vào chỗ trống</td>
-                <td>Thí sinh nhập chính xác từ/cụm từ (hỗ trợ phân biệt hoa/thường).</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="callout warning">
-          <div class="callout-title">Ghi chú kỹ thuật (Roadmap KiotViet LMS)</div>
-          <p>Các định dạng: <em>MATCHING (Ghép nối), NUMERIC (Đáp án số), SEQUENCE (Sắp xếp thứ tự), DRAG-WORD (Kéo từ vào ô trống), DRAG-DROP (Kéo thả)</em> đã có sẵn trong cấu trúc dữ liệu backend nhưng đang tạm ẩn và sẽ được kích hoạt khi giao diện mới hoàn thiện.</p>
-        </div>
-
-        <p><strong>Tiêu chuẩn biên soạn câu hỏi:</strong> Nội dung phải rõ nghĩa; đính kèm hình ảnh/âm thanh/video nếu câu hỏi có tình huống; gán độ khó từ 1 (Dễ) đến 5 (Rất khó); bắt buộc gắn nhãn chủ đề và viết lời giải thích chi tiết cho đáp án đúng.</p>
-
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztbSZnQZSZU83-uSIyOCaHzgNxJULbnuI7xdRs6PAJtwTTUzUBI4koEw1aX_d9dBlUrkbDZm3bPMHAF2V1AFODQIEJh1vdbsMnTTKa-rallOxwWYC8SaIfc1B2lRoKaQjN2FGj3LKZ1qnb4f9LzvwXZWBWie_HpUdaC75LRK1g=s2048" alt="Form tạo câu hỏi chi tiết">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztY3mpoy2p3zmpHdZy9giNLZOxxJvTCTpbFShRWdP1t0GlutuZ7ZBAKcYmP65ehzBuwmgfZpClqiQRDJVW4a__HCeDwzAJCVmuNBXcDJidlbTsXB7MQm5_d2Mp42HsMtOA8i0N2uqw55Htm2eJc3e_KHQQN631447nBiIHUPfg=s2048" alt="Form biên soạn câu hỏi chi tiết">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 22:</strong> Giao diện thiết lập chi tiết câu hỏi, đáp án đúng và trọng số điểm.</span>
+            <span><strong>Hình 23:</strong> Màn hình biên soạn nội dung câu hỏi, gán đáp án đúng, nhãn và độ khó.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
       </section>
 
       <section id="section-regrade">
-        <h3 class="sub-heading">SOP-02.4: Quy Trình Chấm Lại Bài Thi Sau Khi Điều Chỉnh Key Đáp Án</h3>
+        <h3 class="sub-heading">SOP-02.3: Quy Trình Chấm Lại Bài Sau Khi Sửa Key Đáp Án</h3>
         
         <div class="callout danger">
           <div class="callout-title">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-            QUY ĐỊNH BẢO VẸ DỮ LIỆU ĐIỂM THI
+            QUY ĐỊNH BẢO VỆ TÍNH TOÀN VẸN CỦA ĐIỂM THI
           </div>
-          <p>Khi một câu hỏi có sai sót về đáp án và <strong>đã có thí sinh hoàn thành bài nộp</strong>, việc lưu lại key mới trên ngân hàng câu hỏi <strong>KHÔNG</strong> tự động cập nhật điểm. Quản trị viên bắt buộc phải thực thi lệnh <strong>Chấm lại bài đã nộp</strong> để hệ thống tính lại điểm và đồng bộ vào phân hệ Báo cáo.</p>
-        </div>
-
-        <div class="sop-table-wrap">
-          <table class="sop-table">
-            <thead>
-              <tr>
-                <th style="width: 70px;">Bước</th>
-                <th style="width: 130px;">Người thực hiện</th>
-                <th>Thao tác chi tiết trên LMS</th>
-                <th style="width: 200px;">Tiêu chuẩn đầu ra</th>
-                <th style="width: 90px;">SLA</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="step-num">1</span></td>
-                <td>Giảng viên / Admin</td>
-                <td>Vào Ngân hàng câu hỏi &rarr; Tìm câu hỏi bị lỗi &rarr; Chọn đáp án đúng chuẩn xác &rarr; Bấm <strong>Lưu</strong>.</td>
-                <td>Dữ liệu câu hỏi được cập nhật key mới.</td>
-                <td>3 phút</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">2</span></td>
-                <td>Giảng viên / Admin</td>
-                <td>Nhấp vào <strong>biểu tượng 3 chấm</strong> tại dòng câu hỏi đó &rarr; Chọn <strong>Chấm lại bài đã nộp</strong>.</td>
-                <td>Hệ thống thống kê danh sách các bài thi liên quan.</td>
-                <td>2 phút</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">3</span></td>
-                <td>Giảng viên / Admin</td>
-                <td>Rà soát bảng so sánh điểm thay đổi dự kiến &rarr; Bấm nút xác nhận <strong>CHẤM LẠI</strong>.</td>
-                <td>Toàn bộ bài thi đã nộp được tính lại điểm chuẩn xác 100%.</td>
-                <td>2 phút</td>
-              </tr>
-            </tbody>
-          </table>
+          <p>Khi đề thi có lỗi sai đáp án và <strong>đã có học viên nộp bài</strong>, việc lưu lại đáp án mới sẽ <strong>KHÔNG</strong> tự động thay đổi điểm học viên. Quản trị viên bắt buộc phải kích hoạt lệnh <strong>Chấm lại bài đã nộp</strong> để hệ thống tính lại điểm và đồng bộ vào phân hệ Báo cáo.</p>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYz_XuCQdNKHVpnHUmWtiv-0zqdMTVsQUeCUQxnddYEvbow-WQFL1KVuhh3rYnA4yBQlhBSF9sm5vL_XnOcMwN8eZCn2SLHW5vQJPm28eP23lO4IOa7k2gtTHYTjdLj1EmBmQU1BqSNbcub3_HJIy00pHEJvdisZ8BL8QHBgw=s2048" alt="Chấm lại bài đã nộp">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbONVZln-QXa2K5T_u_fCCzNP7NqMiMnFIKqYXE2ogfdow4FHPzZj1WGIUdJANIlVBDwSJf3A4wseANNw4bb5Goad9al-QcL8Lv3xYOud82SM9jbHnaeBv4dhbQZon8LhnUu0mW5LRqrxoJON1p1ymKovbGEbPzoSblfmS2_Q=s2048" alt="Chỉnh sửa đáp án và Chấm lại bài đã nộp">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 23:</strong> Tính năng Chấm lại bài thi đã nộp để đồng bộ lại kết quả sau khi sửa đáp án.</span>
+            <span><strong>Hình 24:</strong> Thao tác sửa đáp án và kích hoạt tính năng "Chấm lại bài đã nộp".</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
@@ -1343,257 +1085,192 @@
 
         <h3 class="sub-heading">SOP-03.1: Chu Trình Vận Hành Khóa Học Tiêu Chuẩn (7 Bước)</h3>
         
-        <div class="sop-table-wrap">
-          <table class="sop-table">
-            <thead>
-              <tr>
-                <th style="width: 70px;">Giai đoạn</th>
-                <th style="width: 110px;">Chủ trì</th>
-                <th>Nội dung thực thi chuẩn</th>
-                <th style="width: 180px;">Tiêu chuẩn nghiệm thu</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Bước 1: Khởi tạo</strong></td>
-                <td>L&amp;D Admin</td>
-                <td>
-                  Vào <strong>Nội dung &rarr; Khóa học</strong> (<code>/manage/content/courses</code>) &rarr; Tab <strong>Danh sách</strong> &rarr; Bấm <strong>Khóa học mới</strong>.<br>
-                  <em style="color: var(--danger);">Quy tắc URL Slug: Chỉ chấp nhận chữ thường không dấu và dấu gạch nối (-). Tránh các ký tự đặc biệt như gạch dài, dấu hai chấm.</em>
-                </td>
-                <td>Khóa học được tạo ở trạng thái <code>Bản nháp (Draft)</code>.</td>
-              </tr>
-              <tr>
-                <td><strong>Bước 2: Cấu trúc</strong></td>
-                <td>L&amp;D Specialist</td>
-                <td>
-                  Mở <strong>Trình soạn khóa học</strong> &rarr; Bắt buộc bấm <strong>+ Thêm chương</strong> trước.<br>
-                  Trong mỗi chương, nhấn <strong>Thêm bài giảng</strong>: Chọn định dạng học liệu phù hợp (<em>Video, Slide, SCORM, PDF, Văn bản, Phòng live hoặc Quiz</em>).
-                </td>
-                <td>100% học liệu hiển thị chuẩn, không lỗi tải file SCORM/Video.</td>
-              </tr>
-              <tr>
-                <td><strong>Bước 3: Xuất bản</strong></td>
-                <td>L&amp;D Admin</td>
-                <td>Chuyển sang tab <strong>Xuất bản</strong> &rarr; Đổi trạng thái sang <strong>Hoạt động</strong> &rarr; Cấu hình điều kiện tiên quyết và quyền truy cập.</td>
-                <td>Khóa học sẵn sàng ghi danh học viên.</td>
-              </tr>
-              <tr>
-                <td><strong>Bước 4: Ghi danh</strong></td>
-                <td>L&amp;D Admin</td>
-                <td>Tại tab <strong>Ghi danh</strong> &rarr; Chọn <strong>Thêm ghi danh</strong> theo Cá nhân, Phòng ban hoặc Chức danh &rarr; Thiết lập <strong>Hạn hoàn thành (Deadline)</strong>.</td>
-                <td>Học viên nhận được email thông báo có khóa học mới.</td>
-              </tr>
-              <tr>
-                <td><strong>Bước 5: Tiếp nhận</strong></td>
-                <td>Học viên</td>
-                <td>Đăng nhập portal &rarr; Vào <strong>Học tập &rarr; Khóa học</strong> &rarr; Kiểm tra mục <em>"Khóa học của tôi"</em> &rarr; Bấm <strong>Bắt đầu học</strong>.</td>
-                <td>Học viên thấy đúng lộ trình được phân bổ.</td>
-              </tr>
-              <tr>
-                <td><strong>Bước 6: Trải nghiệm</strong></td>
-                <td>Học viên</td>
-                <td>Học trong không gian Classroom: Xem mục lục bài giảng bên phải, xem nội dung bài học ở giữa, dùng nút điều hướng và ghi chú cá nhân.</td>
-                <td>Hệ thống ghi nhận thời gian học thực tế.</td>
-              </tr>
-              <tr>
-                <td><strong>Bước 7: Giám sát</strong></td>
-                <td>L&amp;D Admin</td>
-                <td>Vào <strong>Báo cáo &rarr; Khóa học</strong> để đo lường tiến độ hoàn thành, thời gian học và trích xuất dữ liệu nghiệm thu.</td>
-                <td>Xuất báo cáo định kỳ nộp Ban Giám Đốc.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYsLJ212UxS2iEtbJ8Y_rlVAhpb4aYC1C3zFWOVBTJLY8ZTbqsbxCnMeFnUfh-Tt8ozq5OgVFQ1PpCoZAXw-T2leL5KfosOtdueuclyaM8yUdjCCHLtgTn1p3H5wLZ3xgAB_WtCSU8v50CkV_wj9-yXOzl7MqcfDDouqB4=s2048" alt="Form tạo khóa học mới">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbE4jJTvqK5N_VaBJszsafxEoSn_T5MqDwdmvzh1TGV-SdQE6j0quELaUtb10wqft8drpXjcE8Z8rwBE2LOndhBSgVcMdFruoB3YL0tQ0ndy2msQ-2C3qo3CvKtYYd_h8YVZ6mYPVw3Ru7olSRkVIKyInV6PgE0cIlOfuvWJg=s2048" alt="Danh sách & Nút tạo khóa học mới">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 24:</strong> Form khởi tạo khóa học và thiết lập slug URL thân thiện.</span>
+            <span><strong>Hình 25:</strong> Danh sách khóa học và nút "Khóa học mới" tại menu Quản trị Nội dung.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZwAjyUVSgGnQdXqQtIVpsMMy49BIM6VMWfwo9ZjFeEg9T99JEuje12M-_dAwhPxsuQ0eGnltOKKbnjKi3OwfI9sn8ERC5kds9lMM0kcaGjHC9RfnwM1lxOsQIAoxv8VDxJEojLt_0iGtR_ifp9mNIjvVAQFwyLMCmnBOQ=s2048" alt="Trình soạn khóa học tổng thể">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztY2vKXiKn-7vRmaWXgMI3GT2a9uwkgW6F94KFgvkPhIs3q0UXf1VWNdtCcBCKIe-y7yehlKPJHteY9KBYskr_1xgJX2Pbhr4jCwUoQdEs8inqL8bG6zGesTyn4LsW7q5jmZBKhKQSvgk6beepnoUmws8zwvcmAPy4AoTiY=s2048" alt="Form tạo khóa học mới">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 25:</strong> Giao diện tổng thể trình biên tập cấu trúc khóa học.</span>
+            <span><strong>Hình 26:</strong> [Bước 1] Form khởi tạo thông tin cơ bản và slug URL thân thiện cho khóa học mới.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztancj1oreqCX_PnBmgDc2X_vBTrV8razQmfN0WGMQgrx1Gphkem3PVcOFzWEVAtvU7S2FJ7uFGZYJuVnxLhhNQg-GbQfFUWqTH-zioWkCkwpDX5mk7Gru2xBoTrX-avzH6TcBw3msKsXUzqmceCETEEiKr-VO-weJwnITU=s2048" alt="Lựa chọn định dạng bài giảng">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZwAjyUVSgGnQdXqQtIVpsMMy49BIM6VMWfwo9ZjFeEg9T99JEuje12M-_dAwhPxsuQ0eGnltOKKbnjKi3OwfI9sn8ERC5kds9lMM0kcaGjHC9RfnwM1lxOsQIAoxv8VDxJEojLt_0iGtR_ifp9mNIjvVAQFwyLMCmnBOQ=s2048" alt="Trình soạn khóa học - Cây chương bài giảng">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 26:</strong> Menu lựa chọn các định dạng học liệu (Video, SCORM, PDF, Slide, Quiz...).</span>
+            <span><strong>Hình 27:</strong> [Bước 2] Trình biên tập khóa học theo cấu trúc cây thư mục Chương &amp; Bài giảng.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztbE4jJTvqK5N_VaBJszsafxEoSn_T5MqDwdmvzh1TGV-SdQE6j0quELaUtb10wqft8drpXjcE8Z8rwBE2LOndhBSgVcMdFruoB3YL0tQ0ndy2msQ-2C3qo3CvKtYYd_h8YVZ6mYPVw3Ru7olSRkVIKyInV6PgE0cIlOfuvWJg=s2048" alt="Menu Nội dung - Khóa học mới">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztasipgZiqoig5JtbLL87ATjX53V4LW_gc2FpQdSdsA5LbYX8GjUSXPbG5o-HiYy8tLWYuyDqvErVKwjVvGaBgytn-qbrDpWKABp_09QN8Tj30ItyyecX89bBbDH9PEsShcfA2wqkCzWg2Kqz5hWD7gmyGOs0zz_d361QgI=s2048" alt="Tab Chương & Thêm loại bài giảng">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 27:</strong> Thao tác truy cập từ menu Danh sách khóa học.</span>
+            <span><strong>Hình 28:</strong> [Bước 2] Thao tác tạo Chương trước khi cấu hình các định dạng học liệu bên trong.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztblteYBE2kUJH7CLEkLxMUvztmkWKUoSVuC-8TdqzGhmmg10lPTTc9Bbci17CNJDj8XdcnKWLW7exlYK4PNIzKFMyNt4SMeixy7M1lgjczig7tcPUjvYMHvaIcCPsfYWYjAfLKPKdks74-TElLSGoU-llxwQMavfnEW73M=s2048" alt="Bắt buộc thêm Chương">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbZ4jSwUDwBgUbrqYklq7WNXenk8MKIoHBg_L8cdMj9skOLWBz7YWkYVJXgUv9yaJqsI4RCZlEIvhJmPxfQud5iRyrfd_rA8Xy20yMzVfBnRy6r0qS4MPAhVcAwxuX8wLU-OOieRPRFDqhiyqMMmnYAVICX_7CUb8iY8GQ=s2048" alt="Thêm chương và bài giảng đa phương tiện">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 28:</strong> Quy tắc cấu trúc: Luôn cần khởi tạo Chương trước khi thêm Bài giảng.</span>
+            <span><strong>Hình 29:</strong> [Bước 2] Lựa chọn loại học liệu đa phương tiện (Video, Slide, SCORM, PDF, Live Room...).</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZKZmd6F-Rmnqg-UB7ZKRugwd9aisyws2S5scUAn9K170Jmy5_EHDivMUQsCkKU0QaT6wq17Nk9lXeKE1an7ZfNSaotCCL9oyukoBZnwuGY3O5J7h_oKWYjBN30BKLhdkmczoVyHFo0-vGawqBYQI8aP32twhay1OqjG60=s2048" alt="Tab Xuất bản">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZKZmd6F-Rmnqg-UB7ZKRugwd9aisyws2S5scUAn9K170Jmy5_EHDivMUQsCkKU0QaT6wq17Nk9lXeKE1an7ZfNSaotCCL9oyukoBZnwuGY3O5J7h_oKWYjBN30BKLhdkmczoVyHFo0-vGawqBYQI8aP32twhay1OqjG60=s2048" alt="Tab Xuất bản khóa học">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 29:</strong> Thiết lập xuất bản khóa học và điều kiện cấp quyền truy cập.</span>
+            <span><strong>Hình 30:</strong> [Bước 3] Tab Xuất bản: Chuyển khóa học sang trạng thái Hoạt động và cấu hình điều kiện học.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztY5ibndh6KddUXRz2tz9PVKybmUtYr_6lleocJfg9Kw87hnyL_mDUowXTpQ-gXLDlN_QBJI_KW0tuGlo_-IRPxGJm7uoczupz0ABdtxE2pGHkEBZ--SpuVpBgyNvcnSvswz_lvru528WAAWwhKJazY4QSaVSviKlKT2DYnTlw=s2048" alt="Tab Ghi danh">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztY5ibndh6KddUXRz2tz9PVKybmUtYr_6lleocJfg9Kw87hnyL_mDUowXTpQ-gXLDlN_QBJI_KW0tuGlo_-IRPxGJm7uoczupz0ABdtxE2pGHkEBZ--SpuVpBgyNvcnSvswz_lvru528WAAWwhKJazY4QSaVSviKlKT2DYnTlw=s2048" alt="Tab Ghi danh học viên & phân quyền">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 30:</strong> Bảng theo dõi danh sách ghi danh, tiến độ, điểm số và hạn chót hoàn thành.</span>
+            <span><strong>Hình 31:</strong> [Bước 4] Tab Ghi danh: Phân quyền khóa học theo cá nhân/phòng ban và đặt hạn nộp bài.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYLhgRi8pv0znasREU_N6SR4cKVph1rWHVmqi4DtZzdIA5p2Ti_PYPK7zO9yWI_ZXNV4UA2oiuRVLhoLboJ_f1YazF3MHEWdo5XW_-5cM4z-4b2bYW3beJ6_1W7AgraLLWDub1a1z7kjNFEmX5gAC7Mal3p8Alzauvetx3iUA=s2048" alt="Giao diện Khóa học của tôi phía học viên">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYOBlgQxyL2eWF1gJw4FNwrclQr2Larl7n5mFT4UDm0qcMRad9hIL5aLOtopVvw3-Vfw66iiEjUO476eB_XW2E47gcRdF6Vh6Ts6kiKvqAMX7hkN1qgXHchCBckIuhrmBPrkKTiLVFrPccYrD14DLOabfx8hgkq25DHuMnYFg=s2048" alt="Giao diện học viên - Khóa học của tôi">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 31:</strong> Dashboard "Khóa học của tôi" phía giao diện học viên.</span>
+            <span><strong>Hình 32:</strong> [Bước 5] Giao diện phía học viên: Danh sách các khóa học được chỉ định học tập.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztajk9nC8mC7hhRBF0io-eNUeQ8TdPnHIM1w6R4hG2Tmrsz6msvxfl1qQZub0nhAeYD4bl0kC81h3tzlFesSpEtefcJzfF6AjCslnF04NSk4ZDO0UPf5-mH0UGtT86P11O4NDRKWgllY9_eeLfoZHhSgaFkK98UJuCEZYOAP7g=s2048" alt="Chi tiết khóa học phía học viên">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztajk9nC8mC7hhRBF0io-eNUeQ8TdPnHIM1w6R4hG2Tmrsz6msvxfl1qQZub0nhAeYD4bl0kC81h3tzlFesSpEtefcJzfF6AjCslnF04NSk4ZDO0UPf5-mH0UGtT86P11O4NDRKWgllY9_eeLfoZHhSgaFkK98UJuCEZYOAP7g=s2048" alt="Giao diện học viên - Trang chi tiết khóa học">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 32:</strong> Trang thông tin chi tiết và nút "Bắt đầu học" phía học viên.</span>
+            <span><strong>Hình 33:</strong> [Bước 5] Trang thông tin chi tiết khóa học và nút "Bắt đầu học" của học viên.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYgihzdwppdF9ZZtK8jp-Rps2wpAI1m7EDpte9bfu0_v3P6Hb34MzZbB9hKBhaRAb6PoTqIJQEyN9qzA-rxj5UKY-ZAZg-j-NUt3NB3Uic1ua3DvE2wadN30xjb0rnHi9Q8blwti_w1gVa6lW2L7mvrJtTNaiVDDAvkb0EwLA=s2048" alt="Giao diện học tập Classroom">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYb_K-bd6s6D3qWk3nQmpkVzTPVoUUiQkGALEXknj40Ivgeic8hGlkDVUfSaYGYDzOxMvhDshpKr8OvsyP_yE0VhpY-nM3B9J_mbCap9P2Yq9lZKnUGL5ztrsrNKfJ5wfWo81ocjSWNoOKaJVNuIRi7JIo--btL020BgBWCvw=s2048" alt="Giao diện học tập tại Lớp học Classroom">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 33:</strong> Trải nghiệm học tập trong không gian Classroom tiêu chuẩn.</span>
+            <span><strong>Hình 34:</strong> [Bước 6] Giao diện học tập không gian Classroom: Bài giảng, mục lục bên phải và thanh điều hướng.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZheouioZJuYwvP-cjS5-uavVUnML-EJyNLR153YD5PhxkJOvbmuXUQBVUPfxuk2leYkyqQPK5D-zLHzEuQC65wLOKGOfMJNf5gK7MUAtXihHorEwwNtgQ9D_N3bhBBmLGAXuihHh6OZqFaTHkM5hQCE2EadwtAd1MgH7E=s2048" alt="Báo cáo tiến độ học tập">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZCkECJD5J8p8PR_GY2i6NkYw0HgPwiuGDQGlzN1SYd-IeOvJqyf1Vh0P8oTGJpRkhSC2HA-opCuN5IKCp3ApWKQfdL7LKkbDs7jppMsZu32u7QeH_PXQRVTGP9rJlNKCO-zzKKj3cDZ8ZEwmIVxGkKZVdUNy45mwTlXdI=s2048" alt="Báo cáo kết quả học tập & Đào tạo">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 34:</strong> Báo cáo học tập và tỷ lệ hoàn thành khóa học theo thời gian thực.</span>
+            <span><strong>Hình 35:</strong> [Bước 7] Báo cáo tiến độ và kết quả học tập của khóa học theo thời gian thực.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
       </section>
 
       <section id="section-program">
-        <h3 class="sub-heading">SOP-03.2: Thiết Lập Chương Trình Đào Tạo (Learning Path)</h3>
-        <p><strong>Khái niệm SOP:</strong> Chương trình (Program) là chuỗi liên hoàn kết hợp nhiều Khóa học và Bài kiểm tra nối tiếp nhau theo thứ tự bắt buộc. Học viên phải hoàn thành chặng trước mới được mở khóa chặng tiếp theo.</p>
-        
+        <h3 class="sub-heading">SOP-03.2: Thiết Lập Chương Trình Đào Tạo Lộ Trình (Learning Path)</h3>
+        <p>Gom nhóm nhiều khóa học và bài kiểm tra nối tiếp nhau theo lộ trình bắt buộc cho nhân sự mới hoặc nhân viên nâng ngạch.</p>
+
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztaxooB_4YrS_X4isafNqv6lZMjYQTNChKAnL8STRYB0nB5krSg7jNW2vwMN5CaZiGk0asng9t4DLDYg3gcxzrYuaUkT4B0VkgLplL0n1r4pqwnJ2J3cZhA8n7CctndjVN-4Up3vSftVH5a1OZTXaApaFZ6r8R5iKmB0C1vfjw=s2048" alt="Giao diện cấu hình chương trình đào tạo">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztaxooB_4YrS_X4isafNqv6lZMjYQTNChKAnL8STRYB0nB5krSg7jNW2vwMN5CaZiGk0asng9t4DLDYg3gcxzrYuaUkT4B0VkgLplL0n1r4pqwnJ2J3cZhA8n7CctndjVN-4Up3vSftVH5a1OZTXaApaFZ6r8R5iKmB0C1vfjw=s2048" alt="Lộ trình hoạt động trong Chương trình">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 35:</strong> Thiết lập lộ trình đào tạo gồm nhiều khóa học và mốc đánh giá liên hoàn.</span>
+            <span><strong>Hình 36:</strong> Cấu hình chuỗi hoạt động liên hoàn (Khóa học + Đề thi) trong một Chương trình đào tạo.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
       </section>
 
       <section id="section-survey-cert">
-        <h3 class="sub-heading">SOP-03.3: Khảo Sát Đào Tạo &amp; Cấp Chứng Chỉ Điện Tử Tự Động</h3>
-        <p><strong>Khảo sát (Survey):</strong> Thiết lập để thu thập phản hồi của học viên về chất lượng giảng viên, nội dung và nền tảng sau khi khóa học kết thúc.</p>
-        
+        <h3 class="sub-heading">SOP-03.3: Khảo Sát Đào Tạo &amp; Cấp Chứng Chỉ Tự Động</h3>
+        <p>Thu thập ý kiến đánh giá học viên và tự động xuất chứng chỉ điện tử KiotViet sau khi đạt yêu cầu.</p>
+
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztaUJFB6LiiYp6-E-xPF588DuGhA2HVWF8CKaAaMdTiVm_LFbITf6Sq0L9oe3PthEVNAvHjBE2FN8SULIoOUWyTuJ1OhImKTV6q7AwRjMlGBHJls3yCLJA7pOTzMQGkIUWW5lNErF9iOWo4HhgfBgFOL_3NXUgzgB6KsLApOtA=s2048" alt="Tạo khảo sát bước 1">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztY2E-_IsECM6BpYR3Zive5muT9TaU4UWCbflcHxvIwl5fXouYsbbUrEogm4BYElFyJccbE7neHFaM8mLyZ_GneC8kbL6YCxZqSW5FFnDqOs2j94mkCXVkPhujP8aANjyFcCi_5SnMd5eFUe-FTE7VqJWIZBkw93FA8Qt_vJ4Q=s2048" alt="Thiết lập khảo sát">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 36:</strong> Khởi tạo biểu mẫu khảo sát ý kiến học viên.</span>
+            <span><strong>Hình 37:</strong> Màn hình khởi tạo thông số và tiêu đề cho biểu mẫu khảo sát đào tạo.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztaogFBR5r8r0ByQc1LYuNs9mlSi6C-CBMMaXBzwRme26ygCFCwlFrB3t-SjrE_2PqLHwsd5ONk1pldkUpQS6Au3Z_ZKNml9ciUMB1SuLLbCvqba1aBTt3QQAVo6I_HpszArarXKgm7XYkRaS_4KkHVyfwQwPUZn1advO6D8RQ=s2048" alt="Cấu hình câu hỏi khảo sát">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztaogFBR5r8r0ByQc1LYuNs9mlSi6C-CBMMaXBzwRme26ygCFCwlFrB3t-SjrE_2PqLHwsd5ONk1pldkUpQS6Au3Z_ZKNml9ciUMB1SuLLbCvqba1aBTt3QQAVo6I_HpszArarXKgm7XYkRaS_4KkHVyfwQwPUZn1advO6D8RQ=s2048" alt="Soạn nội dung câu hỏi khảo sát">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 37:</strong> Thiết lập câu hỏi đánh giá chất lượng giảng dạy.</span>
-            <span class="hint">Nhấp ảnh để phóng to</span>
-          </div>
-        </div>
-
-        <p><strong>Cấp Chứng chỉ điện tử:</strong> Tải phôi thiết kế KiotViet lên hệ thống &rarr; Định vị tọa độ các biến số động: <code>{{student_name}}</code>, <code>{{course_title}}</code>, <code>{{completion_date}}</code>, <code>{{cert_code}}</code> &rarr; Gắn điều kiện: Học viên chỉ nhận chứng chỉ khi đạt điểm tối thiểu ở bài test cuối khóa.</p>
-
-        <div class="img-figure">
-          <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYnwjTCMky-5Jka6n7M2JNnO8fjwskrF2fRvFq7apCXyq_WT0MFb2eSkTMcto0-gbx1pYQZ1dAJjH8Dqd2o3FF5nN8daxieZjt68XFnvErV04uZ76eh3neKoZVSAFIDxDd9OYV-mQKbfR-RHPl36DLMyUwkdbuEEv3rhFw=s2048" alt="Danh mục chứng chỉ">
-          </div>
-          <div class="img-caption">
-            <span><strong>Hình 38:</strong> Danh mục các mẫu chứng chỉ đào tạo đã thiết lập.</span>
+            <span><strong>Hình 38:</strong> Soạn thảo nội dung câu hỏi đo lường chất lượng giảng viên và chương trình.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYXro6KbYTsdxhLAdVafJNuNysIoyosOghRcsKbWEufupf5iWXsRoOTgLqSqPl0EYLgdN8q2zp9bXhyAACT_sOLiA3Wwwxwaw7h52GyG6geDvEg9VpFf1lVHYtt6ildn03Bqn79ZpnaJhQA0USHTUg1sbQLP8KcSHN2gGtCRg=s2048" alt="Giao diện thiết kế phôi chứng chỉ">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYnwjTCMky-5Jka6n7M2JNnO8fjwskrF2fRvFq7apCXyq_WT0MFb2eSkTMcto0-gbx1pYQZ1dAJjH8Dqd2o3FF5nN8daxieZjt68XFnvErV04uZ76eh3neKoZVSAFIDxDd9OYV-mQKbfR-RHPl36DLMyUwkdbuEEv3rhFw=s2048" alt="Quản lý mẫu chứng chỉ">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 39:</strong> Định dạng trường thông tin động trên phôi chứng chỉ.</span>
+            <span><strong>Hình 39:</strong> Danh mục các mẫu chứng chỉ đào tạo đã thiết lập sẵn trong hệ thống.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztbogC7_ia_DwDKJBOR3hP9D7bED65cq9S_vEoRACKYAGftNVR9f1dOnnfyaYXNXjYqIS2q8iXofMhQcfRIB9ITFL3paeyWb6zYIcjRUXNR-IIcZaOjyuZTHp3pqKiH4_-1wZp4qyGqi0mXRzW9jZym4hpOLMsNJE3laeuPG_g=s2048" alt="Cấu hình thông tin in chứng chỉ">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYXro6KbYTsdxhLAdVafJNuNysIoyosOghRcsKbWEufupf5iWXsRoOTgLqSqPl0EYLgdN8q2zp9bXhyAACT_sOLiA3Wwwxwaw7h52GyG6geDvEg9VpFf1lVHYtt6ildn03Bqn79ZpnaJhQA0USHTUg1sbQLP8KcSHN2gGtCRg=s2048" alt="Cài đặt thông số chứng chỉ">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 40:</strong> Cấu hình thông số tọa độ hiển thị tên học viên và chữ ký.</span>
+            <span><strong>Hình 40:</strong> Cấu hình kích thước và các thông số hiển thị của chứng chỉ điện tử.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztaGx6trxTjNiwWocs4u-vgiUlsGY_3LCdKwDNPFTy90dJlUZWw6cqSAYyZ6nsfRkUMujy2bGmwMRWCqQVWFA4CVNGb3pSCkfv2nXBl0umBSIGyaEk6ph91p7c7fuGUc-4qeEebcaZ0VV85JFlQwtmcz5rJ2pojvmPO5Nuc=s2048" alt="Gắn chứng chỉ vào khóa học">
+            <img src="https://docs.google.com/docs-images-rt/ALKuzta2gcxQdSlNPJGIZX0mWvBC89--x3msTMOvs_MmroQ70sCuz_kC-kgPT71UMJ5M8rOPI6OMQEv9MWsAqitKDUCrtKIe7aaTVEFxoCv7egqndO8kZHKz0rWm8mctkHtd2QFrojHBAzU6zU1pZK827g3eWlIiWz88FfJqly8AQw=s2048" alt="Trình thiết kế phôi chứng chỉ">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 41:</strong> Thiết lập điều kiện tự động xuất chứng chỉ sau khi đạt bài thi cuối khóa.</span>
+            <span><strong>Hình 41:</strong> Trình thiết kế tọa độ động cho biến Tên nhân sự, Ngày cấp và Chữ ký trên phôi.</span>
+            <span class="hint">Nhấp ảnh để phóng to</span>
+          </div>
+        </div>
+
+        <div class="img-figure">
+          <div class="img-container">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztaGx6trxTjNiwWocs4u-vgiUlsGY_3LCdKwDNPFTy90dJlUZWw6cqSAYyZ6nsfRkUMujy2bGmwMRWCqQVWFA4CVNGb3pSCkfv2nXBl0umBSIGyaEk6ph91p7c7fuGUc-4qeEebcaZ0VV85JFlQwtmcz5rJ2pojvmPO5Nuc=s2048" alt="Điều kiện kích hoạt và cấp chứng chỉ">
+          </div>
+          <div class="img-caption">
+            <span><strong>Hình 42:</strong> Thiết lập quy tắc tự động cấp chứng nhận sau khi hoàn thành 100% khóa học.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
@@ -1606,156 +1283,109 @@
           <span class="sop-badge">SOP-04</span>
         </h2>
 
-        <h3 class="sub-heading">SOP-04.1: Thiết Lập Quiz Tích Hợp Trực Tiếp Trong Khóa Học</h3>
+        <h3 class="sub-heading">SOP-04.1: Bài Kiểm Tra (Quiz) Tích Hợp Trực Tiếp Trong Khóa Học</h3>
         
-        <div class="sop-table-wrap">
-          <table class="sop-table">
-            <thead>
-              <tr>
-                <th style="width: 70px;">Bước</th>
-                <th>Thao tác cấu hình tiêu chuẩn trên LMS</th>
-                <th style="width: 260px;">Quy chuẩn kiểm soát chất lượng (QC)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="step-num">1</span></td>
-                <td>Trong khóa học &rarr; Tab <strong>Bài giảng</strong> &rarr; Nhấn <strong>+ Thêm bài giảng</strong> &rarr; Chọn định dạng <strong>Quiz</strong>.</td>
-                <td>Hệ thống mở khung thiết lập đề thi con trong khóa.</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">2</span></td>
-                <td>
-                  Thiết lập các thông số vận hành:
-                  <ul style="margin-left: 18px; margin-top: 4px;">
-                    <li><strong>Đảo vị trí câu hỏi:</strong> <em>BẬT</em> (Chống gian lận).</li>
-                    <li><strong>Cho phép làm lại bài:</strong> <em>BẬT</em> nếu ôn tập; <em>TẮT</em> nếu thi tính điểm Pass/Fail.</li>
-                    <li><strong>Yêu cầu % đúng để hoàn thành:</strong> Đặt tối thiểu <code>80%</code>.</li>
-                    <li><strong>Xem đáp án giải thích:</strong> Cân nhắc chỉ bật sau khi hết thời hạn làm bài.</li>
-                  </ul>
-                </td>
-                <td>Đảm bảo tính khách quan và tính điểm tự động chuẩn xác.</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">3</span></td>
-                <td>
-                  Chọn phương thức tạo đề:
-                  <ul style="margin-left: 18px; margin-top: 4px;">
-                    <li><em>Danh sách câu hỏi:</em> Chọn thủ công từng câu cụ thể.</li>
-                    <li><em>Tự động tạo câu hỏi:</em> Bốc ngẫu nhiên theo số lượng và <strong>Nhãn chủ đề</strong> đã cấu hình sẵn.</li>
-                  </ul>
-                </td>
-                <td>Số lượng câu hỏi trong các nhãn phải lớn hơn số câu cần bốc để đảm bảo tính ngẫu nhiên.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztaue663WzH49zZn4cr9ncGzfLuHhb5V-9wwaVwSrh9FR4poAK2Ix_QDSm8FE5k9Yb9-cBvjiecOi-J7NhzxZUX-K_Y4uYaA_EeqzPLfy9h4psnLsX0-1aDoqsfGbrRRKSV6EvEjt9T-QB-jIApPZ24THkLikXoPfuEI2j5mDg=s2048" alt="Chọn loại bài giảng Quiz">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbhFw5oTznkubHq4x-YQIYAuRw12Cb7rdm9MIL5Ap6LRmBtcOBgsK-Nzp4f1JR42sQHT7yW62SVTmikn8B6_E5Th5SVo1F6Z__34BpRtSu9GLx3nQYvSL5BGcKB532gAl_gYteucifdbHLlA7PeUoWUVDbA2gWW2igXe_In2A=s2048" alt="Thêm bài giảng loại Quiz">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 42:</strong> Lựa chọn loại học liệu Quiz kiểm tra tích hợp trong khóa học.</span>
+            <span><strong>Hình 43:</strong> Thao tác chọn loại bài giảng Quiz bên trong cấu trúc chương của khóa học.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYMzgwxroftURLGtisWgYYz-wpZlplTVyfHAlMpKPDKrkuYc_T_rqDX7JM9mTVZqyFH3urPj8RpMm90inLLRL-VadK6wQOvHnwn8U2phmA0qVY_PS3sGoEGHS1O1QTl0UZNpYueDXMluS75efpNXMBPC3yoqkL26ifmkLRQqQ=s2048" alt="Cài đặt thông số Quiz">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYMzgwxroftURLGtisWgYYz-wpZlplTVyfHAlMpKPDKrkuYc_T_rqDX7JM9mTVZqyFH3urPj8RpMm90inLLRL-VadK6wQOvHnwn8U2phmA0qVY_PS3sGoEGHS1O1QTl0UZNpYueDXMluS75efpNXMBPC3yoqkL26ifmkLRQqQ=s2048" alt="Cài đặt thông số đề kiểm tra (Hình 1)">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 43:</strong> Cấu hình thời gian làm bài, điểm hoàn thành và lượt làm lại.</span>
+            <span><strong>Hình 44:</strong> Thiết lập thời gian làm bài, quyền xem kết quả và số lượt làm bài.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztb0K5xeyyD9hl8mVNjL2tIlkUwOTZ4m5-l5MjBc7LI9ruNhyuaHbftVNTza7MRWNTbdu0tZpFb0q90PKvVCUQucnIsjn0B9Py3_iM1-91y5jNDU4KC9DDeAF51LUrpI3jVTL7Tz2R4tmHAgwsaZvOlMx_JLl31JNx2aGzrpnA=s2048" alt="Cấu hình hiển thị đáp án và kết quả">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYQj0o5dOMQFP2Dg5FU-6i5-ZQ3iXd5AxberX81VotjyvE3jCHW_ulnEkUjHXWmJm7Iekp0o6WE9Au1BLKSXXk1-X_dOpo9jRWwPHQCBTiaGeA8rnSydWiwWaIw6xyWN6IUxRiSfAJSqYUtfK7XgZp311s0yzuDEdI0jG2dwg=s2048" alt="Cài đặt tiêu chuẩn hoàn thành & tổng điểm (Hình 2)">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 44:</strong> Thiết lập quyền xem kết quả và đáp án giải thích sau khi nộp bài.</span>
+            <span><strong>Hình 45:</strong> Thiết lập tổng điểm, số câu hỏi và % tối thiểu để Pass bài kiểm tra.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYLCSmaIyG6aTZiTyqR9624uS7aE5GO7VDWazdDXxUhWCjsLSmTufAtVSM462IyvLhWTDMfZJnWxtLXYDWq6ofbhy3rWaAs0GTTQoNus56FQaJ1Lex85PCQttSdCwLI_4_vGxlzVZp0bNGVY8Xe0kmJ1naVc2vnST9Y2IZAHQ=s2048" alt="Điều kiện bốc câu hỏi tự động">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYUZy6tlyiF_rv7G_lsJU-Tnh_snXVyclHXYUu19FT5FXqFcOIeyqDBV8vEj5eSOUjsyYooG4Q8w6aErcQK8VUq5uLT3TVe48sQS79YMi3tmwQrNq1NO4VmCZ1MFtHuM4PBAqrpEDY6_mgCEob5_loJi85jxDyNOlVtjDQQpw=s2048" alt="Điều kiện lấy câu hỏi tự động từ thư viện">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 45:</strong> Thiết lập ma trận bốc câu hỏi tự động theo từng nhãn chủ đề.</span>
+            <span><strong>Hình 46:</strong> Cấu hình ma trận bốc câu hỏi ngẫu nhiên tự động dựa theo các Nhãn chủ đề.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
       </section>
 
       <section id="section-quiz-standalone">
-        <h3 class="sub-heading">SOP-04.2: Khởi Tạo Bài Kiểm Tra Độc Lập Trong Module Nội Dung</h3>
-        <p><strong>Mục đích:</strong> Phục vụ các kỳ thi sát hạch diện rộng, kỳ thi chuyển giai đoạn thử việc hoặc thi xét tăng bậc không phụ thuộc vào tiến độ của 1 khóa học riêng lẻ.</p>
+        <h3 class="sub-heading">SOP-04.2: Thiết Lập Bài Kiểm Tra Độc Lập Trong Module Nội Dung</h3>
+        <p>Phục vụ các đợt thi sát hạch nâng bậc hoặc đánh giá định kỳ độc lập không gắn trong khóa học đơn lẻ.</p>
 
-        <p><strong>Quy trình thực hiện:</strong></p>
-        <p><strong>Bước 1:</strong> Vào <strong>Nội dung &rarr; Kiểm tra</strong> &rarr; Tab <strong>Tất cả</strong> &rarr; Nhấp chọn <strong>+ Bài kiểm tra mới</strong>.</p>
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZynUU8C7y0V-U0FQW9tSADJbiE3HP3hmCiPTuFAqxDLpxIV7DpsD3yl5OqZ-vEqN_yMHyWD_SkrNTQ9HJIU5U0S1O36MGO8JtoeHS4IMnwM7Vi3bOderz0oahKeAdCjMR454eu71s-n1o6TFmZJDY1G4PFNlFC075Qj0g=s2048" alt="Thêm bài kiểm tra mới">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZynUU8C7y0V-U0FQW9tSADJbiE3HP3hmCiPTuFAqxDLpxIV7DpsD3yl5OqZ-vEqN_yMHyWD_SkrNTQ9HJIU5U0S1O36MGO8JtoeHS4IMnwM7Vi3bOderz0oahKeAdCjMR454eu71s-n1o6TFmZJDY1G4PFNlFC075Qj0g=s2048" alt="Nút tạo bài kiểm tra độc lập mới">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 46:</strong> Vị trí nút khởi tạo bài kiểm tra độc lập trong module Kiểm tra.</span>
-            <span class="hint">Nhấp ảnh để phóng to</span>
-          </div>
-        </div>
-
-        <p><strong>Bước 2:</strong> Chọn Loại bài kiểm tra là <strong>Đào tạo</strong> &rarr; Khai báo Tên bài kiểm tra &rarr; Nhấn <strong>Tạo bài kiểm tra mới</strong>.</p>
-        <div class="img-figure">
-          <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYIbQzUcMhUGBuEfSX_NoPaZ5mBoB8vJDyKxBTPWEXRlGlceA8MHPDBqMjHfAdTLWrHQokC5S5VkSMnnq5N2PNvzO4FnsgsgqGB7UilxgNOwYbp0UAN1QEbntf4b_CklNucWdG2wjMVGY_JHHIfWVcHdfXJl6T4q7XDzQsoDA=s2048" alt="Đặt tên bài kiểm tra mới">
-          </div>
-          <div class="img-caption">
-            <span><strong>Hình 47:</strong> Khai báo loại bài kiểm tra Đào tạo và tên tiêu đề bài thi.</span>
-            <span class="hint">Nhấp ảnh để phóng to</span>
-          </div>
-        </div>
-
-        <p><strong>Bước 3 &amp; 4:</strong> Cấu hình cài đặt thời lượng làm bài, gắn mẫu chứng chỉ và nạp bộ đề từ ma trận ngân hàng câu hỏi.</p>
-        <div class="img-figure">
-          <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYbAiV-FyY47pyDKv5Qaax0rrY3mtkG9NVAYPhk7HNscs-6fpaXffu54ln4A3jAVdKTO9qKVJQLHODszMnAzYyfA94E5oifx1_I1MnSMWkIJgvnfBf-bqtC8RpnT-pyuJX5hONXt-gxCgBeinKYs9_DH0_6f1l6N5D3hlFfsg=s2048" alt="Cài đặt cơ bản bài kiểm tra">
-          </div>
-          <div class="img-caption">
-            <span><strong>Hình 48:</strong> Màn hình hoàn thiện các thông số vận hành bài kiểm tra độc lập.</span>
+            <span><strong>Hình 47:</strong> Vị trí nút "+ Bài kiểm tra mới" tại menu Nội dung &rarr; Kiểm tra.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztY_ubbLf5qkQh-z0xLkO2Zb-1sA7z0a0LzivWcyiy9y2jqN7OH7J0E94N54jDPIOoKwBxyj8kZXfqUXiaNYruay_YrCF_c45CBaziYoECzl5VI2SCugZJ0mot_hMi6VLu9zqjaC9ZRZFw-SNjrDfioRBA2CzOSpf8wDWY8bDw=s2048" alt="Tạo đề kiểm tra - Giao diện chi tiết">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZtJ8tAzA4emipfjSpYpx0wikgmh4QBjBCgl0F3nZ5-cQeUWgNSQBMSrEBxUePSTRCcbHfTxHKeP5siRfbHD6u5sOPZK_mymr_hxo4dPf4aMaCHnPE1VquauOSiyOFNi_Mi2JOkuDMcvSBCItigj8BX4kE8jfrp4EqtoUCneQ=s2048" alt="Chọn loại Đào tạo và đặt tên bài kiểm tra">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 49:</strong> Giao diện cấu hình bài kiểm tra và thời hạn nộp bài.</span>
+            <span><strong>Hình 48:</strong> Chọn phân loại "Đào tạo" và khai báo tên bài kiểm tra sát hạch.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztaoKw3u8WIp26UnPG_2sD8W6ssASpBl6xzI1FN43qCEYv5ppZK2uGX31BsFfdXJslo5yIUZ4P5KaaSKWdYZmb4__uS73IDv4sbiuFAQVPd5EH_Cu_B7UByuMnPiUMYDuMV4WHDAfDepCwIpJHu_-84LlVb126f9T7A9X1VtjA=s2048" alt="Thiết lập đề kiểm tra">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbBjP_bHVgmvFqFTzX8rGAmW7Dko9XbzfmEZinlgbuUqI9a_K8Wgy7cm8oxHPfDlI2MK1Ie_3wV45SnV4bDkVEcqwXktGaJmXtjhNvEyeSHt23wCgdZXlDn0VqRjtobgHNy5Fhrj1HGFwU_FObDj1dc8im18_M26w-JMmfygw=s2048" alt="Cài đặt nâng cao bài kiểm tra độc lập">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 50:</strong> Thiết lập nguồn câu hỏi và số lượng câu trong đề thi.</span>
+            <span><strong>Hình 49:</strong> Màn hình hoàn thiện các thông số vận hành nâng cao của bài kiểm tra độc lập.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYulSY9PihTx43zSlAI3kxDQJkYM2t85LuYp1RuxfqnpU4BIhWBUCBs57Yz8mOwcxWRLbcXh6l_ztJ8E6olIGhXWWqPZHO1lREyaxHmAP6oP3d0TUlTgga2JYyjatRObY6qJcr4CVGIL3JbfH5zNNx6bGdl_3DAS71VVNStiQ=s2048" alt="Điều kiện lấy câu hỏi tự động - Hàng loạt nhãn">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztb8K2F16sSZ2brcla9HiIkfuFgkEIbeK7N2hGSlcRNQcs1cz3e3hQ2_3cwfhGnZteZy1ld0Ct6fvg-x4z6Hh6W-8tlLLNg-IlGzpSLs_gmraOwEUaTDTzQLXVWAReeAhdrPZA0pApsjhrQfme_Dv9R-0n1XUqIX0cBtSgY_uQ=s2048" alt="Màn hình cấu hình đề - Phần 1">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 51:</strong> Điều kiện lấy câu hỏi tự động: Có thể thêm hàng loạt nhãn để trộn đề.</span>
+            <span><strong>Hình 50:</strong> Cấu hình đề kiểm tra (Phần 1): Đặt thời hạn nộp bài và tiêu chuẩn xét duyệt.</span>
+            <span class="hint">Nhấp ảnh để phóng to</span>
+          </div>
+        </div>
+
+        <div class="img-figure">
+          <div class="img-container">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztaoKw3u8WIp26UnPG_2sD8W6ssASpBl6xzI1FN43qCEYv5ppZK2uGX31BsFfdXJslo5yIUZ4P5KaaSKWdYZmb4__uS73IDv4sbiuFAQVPd5EH_Cu_B7UByuMnPiUMYDuMV4WHDAfDepCwIpJHu_-84LlVb126f9T7A9X1VtjA=s2048" alt="Màn hình cấu hình đề - Phần 2">
+          </div>
+          <div class="img-caption">
+            <span><strong>Hình 51:</strong> Cấu hình đề kiểm tra (Phần 2): Khai báo số lượng câu hỏi và tổng điểm bài thi.</span>
+            <span class="hint">Nhấp ảnh để phóng to</span>
+          </div>
+        </div>
+
+        <div class="img-figure">
+          <div class="img-container">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYulSY9PihTx43zSlAI3kxDQJkYM2t85LuYp1RuxfqnpU4BIhWBUCBs57Yz8mOwcxWRLbcXh6l_ztJ8E6olIGhXWWqPZHO1lREyaxHmAP6oP3d0TUlTgga2JYyjatRObY6qJcr4CVGIL3JbfH5zNNx6bGdl_3DAS71VVNStiQ=s2048" alt="Điều kiện chọn câu hỏi tự động theo nhãn">
+          </div>
+          <div class="img-caption">
+            <span><strong>Hình 52:</strong> Điều kiện lấy câu hỏi tự động: Có thể chọn nhiều nhãn đồng thời để tạo đề thi chéo.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
@@ -1768,210 +1398,150 @@
           <span class="sop-badge">SOP-05</span>
         </h2>
 
-        <h3 class="sub-heading">SOP-05.1: Thiết Lập Kỳ Thi Nhiều Ca (Multi-Sessions)</h3>
-        <p><strong>Tình huống nghiệp vụ:</strong> Tổ chức các kỳ thi tập trung quy mô lớn (ví dụ: Thi chứng chỉ cuối khóa Sales gồm <em>Ca 1: Thi đợt đầu</em> và <em>Ca 2: Thi lại cho các bạn trượt Ca 1</em>).</p>
-
-        <div class="sop-table-wrap">
-          <table class="sop-table">
-            <thead>
-              <tr>
-                <th style="width: 70px;">Bước</th>
-                <th>Thao tác cấu hình ca thi chuẩn trên LMS</th>
-                <th style="width: 250px;">Lưu ý kỹ thuật đặc biệt</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="step-num">1</span></td>
-                <td>Vào <strong>Nội dung &rarr; Kiểm tra</strong> &rarr; Bấm <strong>Sửa</strong> tại bài kiểm tra tương ứng.</td>
-                <td>Mở giao diện tinh chỉnh cấu hình đề.</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">2</span></td>
-                <td>Vào tab <strong>Lịch kiểm tra</strong> &rarr; Gạt bật xanh công tắc <strong>Sử dụng nhiều ca kiểm</strong>.</td>
-                <td>Bật thêm <em>"Thời gian linh hoạt"</em> nếu muốn đồng hồ đếm ngược tính riêng từ lúc thí sinh bấm "Vào thi".</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">3</span></td>
-                <td>
-                  Thiết lập số lần làm bài tối đa:
-                  <ul style="margin-left: 18px; margin-top: 4px;">
-                    <li>Đặt <code>1</code>: Cho đợt thi lần đầu.</li>
-                    <li>Nâng lên <code>2</code>: Khi tổ chức cho thí sinh trượt thi lại lần 2 (Hết đợt phải chỉnh lại 1).</li>
-                  </ul>
-                </td>
-                <td>Tránh thí sinh tự ý làm lại bài khi chưa có lệnh mở đợt thi lại.</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">4</span></td>
-                <td>Nhấn <strong>+ Thêm ca kiểm tra</strong>: Khai báo Tên ca, Khung giờ bắt đầu - kết thúc, Sức chứa tối đa.</td>
-                <td><strong>Tuyệt đối không để khung giờ giữa các ca kiểm bị trùng lặp nhau.</strong></td>
-              </tr>
-              <tr>
-                <td><span class="step-num">5</span></td>
-                <td>Nhấn biểu tượng <strong>Cài đặt</strong> tại ca kiểm &rarr; Bấm <strong>Thêm học viên</strong> &rarr; Tích chọn thí sinh &rarr; Lưu lại.</td>
-                <td>Thí sinh chỉ nhìn thấy ca thi mà mình được phân bổ.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+        <h3 class="sub-heading">SOP-05.1: Cấu Hình Ca Kiểm Tra Đa Phiên (Multi-Sessions)</h3>
+        
         <div class="img-figure">
           <div class="img-container">
             <img src="https://docs.google.com/docs-images-rt/ALKuztbL8Md02X7EueR-Us2Bl4ILPN47lGyYrHctgo5IJ41htRtPEMirDpEbqm5N0rYB1QQIo6yrGEBV2WTRLhMQmsP2GEiQiEpfn1LILOXsoJftmYOQPEKBU-Lqp93QB7ya8SDhlHatZHPL1K0p3z7QmdhvivvCBAra_02lSK0=s2048" alt="Sửa bài kiểm tra">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 52:</strong> Nhấn chọn Sửa bài kiểm tra để thiết lập lịch thi ca.</span>
+            <span><strong>Hình 53:</strong> Chọn chức năng Sửa bài kiểm tra để thiết lập phân bổ ca thi.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYZxiXnf-hykE3elsILxZtur7Ck5XcGFDmv-KMGxAlBK4K8zP00xTZOXK_W-Htxd2XBATvKBD8kFnSdRAeI686-TKyvkti5HkOzIj4kYKjuMQmxDpbMLYkXYc8NrAgaUiVj0pM6qLCChng978UIbczIIwNTz3a1VLIwBZerAw=s2048" alt="Thiết lập số lần làm bài = 1">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYJyIrJZhzr6vUr7cckbRFyiMY9QGjO4eiWPlr4gTJ2ohDBy8gsjHzzFkASWwFLgdK1Q0k5JXxiMzg1UQq-1KkIOecqiRbpOc2d93LemD7RwI7kjaPdVOB4IhWyoqIgDu4nfkD9R525AAi1bfN19ooVQjtIRFD68v0HjdDk1A=s2048" alt="Bật Sử dụng nhiều ca kiểm & Thời gian linh hoạt">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 53:</strong> Thiết lập số lần làm bài tối đa mặc định là 1.</span>
+            <span><strong>Hình 54:</strong> Bật chế độ "Sử dụng nhiều ca kiểm" và tùy chọn "Thời gian linh hoạt cho mỗi học viên".</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztY8XqwsZTunCRGeXs2B1MWLzj0eOQcyCsJ93TxT1veOZ5nZmaY7xtbl2xDxb-EqnEM1h58taDRqsBFwHn_OyQVlvzjY6paEkLZ5Y32COltIdOjxxopBFaoHcMuYtymlqxeoSx1Ys1t6ng7ABZOLav3f71KqWswyIxCih4JFnQ=s2048" alt="Thiết lập số lần làm bài = 2">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztY8XqwsZTunCRGeXs2B1MWLzj0eOQcyCsJ93TxT1veOZ5nZmaY7xtbl2xDxb-EqnEM1h58taDRqsBFwHn_OyQVlvzjY6paEkLZ5Y32COltIdOjxxopBFaoHcMuYtymlqxeoSx1Ys1t6ng7ABZOLav3f71KqWswyIxCih4JFnQ=s2048" alt="Cài đặt số lần làm bài tối đa">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 54:</strong> Chuyển số lần làm bài lên 2 khi tổ chức đợt thi lại cho học viên Fail.</span>
+            <span><strong>Hình 55:</strong> Thiết lập số lần làm bài (1 lần cho đợt đầu, chuyển lên 2 lần khi mở thi lại).</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZd0mR5tANFVyZv78L_cxE1XD-aIVCW3pTjSe7T4e-ATmbsU4349v1jnE0A8BTpIZLPMD6M4K7PuwlcnPzoIcQq9weeouu0GY9azcSXMlHBrfBYhQsjo3s0unjUFAcPPQFStzIThm6rnU8WzPSLHfyDYYb9BEEmCGfieoQ=s2048" alt="Danh sách ca kiểm tra">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZd0mR5tANFVyZv78L_cxE1XD-aIVCW3pTjSe7T4e-ATmbsU4349v1jnE0A8BTpIZLPMD6M4K7PuwlcnPzoIcQq9weeouu0GY9azcSXMlHBrfBYhQsjo3s0unjUFAcPPQFStzIThm6rnU8WzPSLHfyDYYb9BEEmCGfieoQ=s2048" alt="Quản lý ca kiểm tra: Nút Thêm ca kiểm tra">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 55:</strong> Khu vực quản lý các ca thi trong tab Lịch kiểm tra.</span>
+            <span><strong>Hình 56:</strong> Khu vực danh sách ca kiểm tra và nút "+ Thêm ca kiểm tra".</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztbH_IJxSsewkhmwEAFxll2TnFmI_pF7wajZOP3wohY0PVaUOZYElPAJWAwdxxEJgNPweZHhFwgvSeJzFuMrjr_mxpAPUhjIqvwk6yL93zwkKrb44ZM2xzUCA94m8bOLXbn8TLKZ2ql-TAe7p9XZVRRG9DoFBegARyaEfsR-Kg=s2048" alt="Form thêm ca kiểm tra">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYdf6XpZIOCw8DiWPf2lNid8UrLBJiBq5bRTLEJRZOxFpwXm4BrLubdFYNpEbskkQ3rSIJTs2GPypDjL6eZvRxiSb7meBTyou4BmMkCBvHkyaC-qtmwVn5omah_im7mgE87pW5E2LaqfdxTWZx2l6p7vZWZumJYAQFThOVC_Q=s2048" alt="Form tạo thông tin ca kiểm tra">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 56:</strong> Khai báo thông số thời gian bắt đầu, kết thúc và sức chứa tối đa của ca thi.</span>
+            <span><strong>Hình 57:</strong> Khai báo thông tin ca kiểm tra: Tên ca, Thời gian bắt đầu - kết thúc và sức chứa tối đa.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYK7qt27NaXK3vy8U7OEcrtRb5g2GNepe7lLJq6t7XMGKFmDjKvmxIL8GLrDq32vIkyH2bco1BnYnp0PSjXAX8wCfaQfKur8-2_yTIiioItFvs6A1q56IkxJt6YiEbWjT5I5xZHkhemVzJkQw6DPuI8n0oxkAQh39tFUYzWqw=s2048" alt="Cài đặt ca kiểm">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYMAfRVU9iSl-TCCNtmcvUAdgiUJ-F0ow-E8EB2cQevvQmVcSJJcKtvXrMRDKENeo5gopAs5na3OUrFmgRtENG8fH45eLq1BpvIv8cXASI8rC3KzMPrShN6bN9YUxIHPmh3SVl4BZOxB3pRwmnMqHvwXQFx1_SfISAT9nQjlg=s2048" alt="Danh sách các ca thi và nút Cài đặt">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 57:</strong> Chọn cài đặt tại ca thi để quản lý danh sách thí sinh.</span>
+            <span><strong>Hình 58:</strong> Danh sách các ca thi đã tạo và nút "Cài đặt" để thêm danh sách học viên.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztb0ik3MqygAmJUl99waAYfV_arD4x6zMAztCs0wOmth2ZQp5Plc3gyDg-JPkCVmFIbVQ8d6M6ZH-32eRMCwY2SL0CaTZlrGvlrQyc0YwrRHC2dQxfjaHtCJdEVtL6pUWFqdqzK3BIk0eKXPfGWV7c6O4U0zJflbSuh-QMw=s2048" alt="Danh sách thí sinh trong ca">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztb0ik3MqygAmJUl99waAYfV_arD4x6zMAztCs0wOmth2ZQp5Plc3gyDg-JPkCVmFIbVQ8d6M6ZH-32eRMCwY2SL0CaTZlrGvlrQyc0YwrRHC2dQxfjaHtCJdEVtL6pUWFqdqzK3BIk0eKXPfGWV7c6O4U0zJflbSuh-QMw=s2048" alt="Màn hình chỉnh sửa ca kiểm & Thêm học viên">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 58:</strong> Màn hình quản lý danh sách học viên trực thuộc ca kiểm tra.</span>
+            <span><strong>Hình 59:</strong> Giao diện quản lý thí sinh của ca thi và nút "Thêm học viên".</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZOA_H-JGL776hrmRvSV_YdwIIo4o0TuB6WE5_s8RYc09YQeOfVr9nV8t4gqq8vNXWVhPqQoFPMVJhsS3nO_05lY3AVvoVYAdyTnbll39ixdAD7hsITakyyf829jfOjxizD6FVfmUIKb_2fk7uboayXRpq15ZvKQdZEy4fKBQ=s2048" alt="Thêm học viên vào ca kiểm tra">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZOA_H-JGL776hrmRvSV_YdwIIo4o0TuB6WE5_s8RYc09YQeOfVr9nV8t4gqq8vNXWVhPqQoFPMVJhsS3nO_05lY3AVvoVYAdyTnbll39ixdAD7hsITakyyf829jfOjxizD6FVfmUIKb_2fk7uboayXRpq15ZvKQdZEy4fKBQ=s2048" alt="Tìm kiếm & Chọn thí sinh đưa vào ca thi">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 59:</strong> Tìm kiếm và tích chọn thêm học viên vào ca thi.</span>
+            <span><strong>Hình 60:</strong> Tìm kiếm và tích chọn thí sinh được phép vào phòng thi của ca này.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
       </section>
 
       <section id="section-exam-retake">
-        <h3 class="sub-heading">SOP-05.2: Vận Hành Điều Chuyển Thí Sinh Thi Lại (Ca 1 &rarr; Ca 2)</h3>
+        <h3 class="sub-heading">SOP-05.2: Quy Trình Điều Chuyển Thí Sinh Thi Lại Lần 2 (Ca 1 &rarr; Ca 2)</h3>
         
-        <p>Khi có thí sinh không vượt qua điểm sàn ở lần thi đầu (<span style="color: var(--danger); font-weight: 700;">Fail Ca 1</span>), cán bộ phụ trách kỳ thi thực hiện điều chuyển thí sinh sang Ca 2 theo 1 trong 2 phương án chuẩn:</p>
+        <p>Khi có thí sinh không đạt điểm chuẩn ở lần thi thứ nhất (<span style="color: var(--danger); font-weight: 700;">Fail Ca 1</span>), người phụ trách thực hiện điều chuyển thí sinh sang Ca 2:</p>
 
-        <p><strong>Phương án 1 (Khuyên dùng - Nhanh gọn):</strong><br>
-        Nhấp trực tiếp vào biểu tượng chuyển ca <img src="https://docs.google.com/docs-images-rt/ALKuztZot3FQZYxVBhX68XcIePSoxah9qo660DUqBH4FbEhpHb1t3zQl1Bd3JxAnnRsWKdxlrP13yuIFBveJaAceZ-_L_TTwY0RNLdv7c4rqvh2Iu7HTisE049nU5FqhWg9bOd1Muw6Yik9WEl915AvLTx9sMH4I9m2AdEKID-VoGw=s2048" alt="Icon chuyển ca" class="inline-icon"> tại dòng của thí sinh đó để chuyển trực tiếp sang Ca kiểm 2.</p>
+        <p><strong>Cách 1 (Nhanh nhất):</strong> Nhấp trực tiếp vào biểu tượng nút chuyển ca <img src="https://docs.google.com/docs-images-rt/ALKuztZot3FQZYxVBhX68XcIePSoxah9qo660DUqBH4FbEhpHb1t3zQl1Bd3JxAnnRsWKdxlrP13yuIFBveJaAceZ-_L_TTwY0RNLdv7c4rqvh2Iu7HTisE049nU5FqhWg9bOd1Muw6Yik9WEl915AvLTx9sMH4I9m2AdEKID-VoGw=s2048" alt="Icon chuyển ca thi" class="inline-icon"> tại dòng của thí sinh đó.</p>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZoXxEvkH3Q3rkd7IjEAtEQAoqqtPUa1VZPMJ4KAOv-i9a6gF8_97XCtJtossZOOtKVwMCVj0zJUfctkAu6GDsci3dZCIu3rHo2EcfxsXWBbSNqfQA6BjmPB0LoyROmJvD0vIQwJQDL49jiE_R_WrsIZ_DgIuZzc886lPE=s2048" alt="Chuyển học viên Fail từ Ca 1 sang Ca 2">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztagnfugMzu1TxbNMCxmbRCj2u17kBGUtUNpn-nisuS5nKArwkfJa7N1q8ngr7rNZsHCpHhSAWP_kOJtvLWM5UgsBvt4VYFuvFHfecNNOJ2V1PgcjJzeGQPBEUSo_5f7EfnBee7v-1lWfM3W7hJJug_CfCeNHZJtPeTww8c=s2048" alt="Hộp thoại chuyển học viên sang ca thi khác">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 60:</strong> Thao tác chuyển ca thi trực tiếp cho học viên thi lại.</span>
+            <span><strong>Hình 61:</strong> Hộp thoại chọn ca thi chuyển tiếp: Chọn Ca 2 và xác nhận điều chuyển học viên.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
-        <p><strong>Phương án 2 (Thủ công):</strong><br>
-        Bấm vào biểu tượng Thùng rác để <strong>Gỡ</strong> thí sinh khỏi danh sách Ca 1 &rarr; Mở danh sách thí sinh Ca 2 và tìm tên học viên đó để thêm vào.</p>
-
-        <div class="callout warning">
-          <div class="callout-title">Quy tắc chống xung đột dữ liệu học viên</div>
-          <p>Hệ thống không cho phép 1 học viên tồn tại song song ở nhiều ca thi trong cùng 1 bài kiểm tra. Nếu bạn chưa gỡ hoặc chưa điều chuyển khỏi Ca 1, tên học viên đó sẽ <strong>không bao giờ xuất hiện</strong> trong thanh tìm kiếm của Ca 2.</p>
-        </div>
+        <p><strong>Cách 2 (Gỡ thủ công):</strong> Nhấn nút thùng rác để gỡ học viên khỏi Ca 1, sau đó mở Ca 2 và bấm thêm học viên.</p>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZpHyQ3tzDnvFFrPIl-T-NkeRkrc9_b_GU2JFlnD-1-7RvvRPudGcUkbAr9TNuq4tIiF12a1a8OB5o73yhCiez5iLteNoBYbLoazusBKSoJjHyINOnsjrRr4QU-M47sFxgBsHVO6JpbNSqQgHT6NiA0pyIXyTGRT4DyCsCAJw=s2048" alt="Gỡ học viên bằng biểu tượng thùng rác">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbUNn5HjVRnqCTz-tx2OSAmCJlgAaHfX8xXeqBxKM1HZP30ft1lagN1wsJNKvQD1TewidMwv5x6wM7Or1qBT9f7wTT6Yrb7WAC19SMqxopUDyp8Wv4HFR7EESAPSVwC02zIT_-8ezuB7Y8Sow6WJVmQ-6h3TGhyhdPkxMZa_A=s2048" alt="Nút biểu tượng Thùng rác để gỡ thí sinh khỏi ca">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 61:</strong> Thao tác gỡ học viên khỏi ca kiểm tra trước khi ghi danh vào ca mới.</span>
+            <span><strong>Hình 62:</strong> Thao tác gỡ thí sinh khỏi ca thi hiện tại bằng biểu tượng Thùng rác.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
       </section>
 
       <section id="section-proctoring">
-        <h3 class="sub-heading">SOP-05.3: Giám Sát Kỳ Thi Trực Tuyến Thời Gian Thực (Online Proctoring)</h3>
+        <h3 class="sub-heading">SOP-05.3: Giám Sát Trực Tuyến (Online Proctoring) &amp; Quá Trình Nộp Bài</h3>
         
-        <p><strong>Mục đích:</strong> Đảm bảo tính minh bạch, hỗ trợ thí sinh bị ngắt kết nối mạng và phát hiện các hành vi bất thường trong quá trình làm bài trực tuyến.</p>
-        
-        <p><strong>Thao tác truy cập:</strong> Vào bài kiểm tra &rarr; Tab <strong>Lịch sử</strong> &rarr; Nhấn nút <strong>Vào phòng giám sát</strong> tại ca thi đang diễn ra.</p>
+        <p>Giám sát thời gian thực để hỗ trợ kỹ thuật kịp thời và phát hiện gian lận trong giờ thi:</p>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztYys5HDDa2AWrJ5pcE8FQnO84kafmqNwBxVm7XRviazxlSTDQ0PmnGEAnd6GF3RheMoEFavVkUsWHdXbFYh4tFsPxlPw3VvV_5DOoCBwkieNUnIwIkEYM4XGHqBvnYcAVOyGwUcM4GVC4udToytSSK18-6P4KOqESgM-uxjUQ=s2048" alt="Nút Vào phòng giám sát">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztYys5HDDa2AWrJ5pcE8FQnO84kafmqNwBxVm7XRviazxlSTDQ0PmnGEAnd6GF3RheMoEFavVkUsWHdXbFYh4tFsPxlPw3VvV_5DOoCBwkieNUnIwIkEYM4XGHqBvnYcAVOyGwUcM4GVC4udToytSSK18-6P4KOqESgM-uxjUQ=s2048" alt="Tab Lịch sử -> Nút Vào phòng giám sát">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 62:</strong> Truy cập Phòng giám sát từ tab Lịch sử của bài kiểm tra.</span>
+            <span><strong>Hình 63:</strong> Vào tab Lịch sử của bài kiểm tra &rarr; Nhấn "Vào phòng giám sát" tại ca thi đang diễn ra.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZEiLQml4OwuXLBXCBTRdHXO_n1smtJQzPZpX7lTG1wSkCPtDXVg8X-WXd4JkvI5029hqbecy-QPcKx50Q-tl7cokPqg65MJXMpUlr91kIBzddoJqk_eO_dnxyLjg3K2jurRBb86V53qcCv2UZt-1yj-e6-33srfMnJeLdGLQ=s2048" alt="Giao diện giám sát phòng thi">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztZEiLQml4OwuXLBXCBTRdHXO_n1smtJQzPZpX7lTG1wSkCPtDXVg8X-WXd4JkvI5029hqbecy-QPcKx50Q-tl7cokPqg65MJXMpUlr91kIBzddoJqk_eO_dnxyLjg3K2jurRBb86V53qcCv2UZt-1yj-e6-33srfMnJeLdGLQ=s2048" alt="Giao diện phòng giám sát: Danh sách thí sinh & trạng thái (Hình 1)">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 63:</strong> Màn hình theo dõi trực tiếp các ca kiểm tra đang hoạt động.</span>
+            <span><strong>Hình 64:</strong> Bảng giám sát thời gian thực: Trạng thái kết nối, tiến trình hoàn thành từng câu hỏi của thí sinh.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
-        <div class="callout success">
-          <div class="callout-title">Các chỉ số Giám thị cần theo dõi trong phòng thi</div>
-          <p>Màn hình giám sát hiển thị thời gian thực: <strong>Thời điểm bắt đầu làm bài, Tiến độ (số câu đã chọn / tổng câu), Trạng thái kết nối Internet, Số lần thoát tab/màn hình</strong> và thời điểm bấm nộp bài chính xác của từng nhân sự.</p>
-        </div>
-
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuzta4X1vcQ5hdXaPtFsrw2WmEnEZnc-j7MXquEam-Hj93L72M7xde4zQs1-tMahSKBo_vV0vN35aWyXkNJf1_byH_Kv4-4Ijl7X8vP9uxhRID_pExks_IwAe2qgfTdo-BgGSk-3Xq00oEMwaiwaSemO8ISRkM9ChmY5HPLsUHtQ=s2048" alt="Bảng chi tiết giám sát học viên">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztakiCyCT9guBRSPl29_LOOnYktaYpfjLtxmMRRTTYDHV36E11imW8H1qCwf-hGbJSu5bRMcaSrgbtMt8Deks6-pXwreAdALuh-RXvNbDqd5dWb84MrsOPimqBY5pG-UZN3XYGCX12hQ5pwE7BQDuSjSsVVnCgayY7uHfP4Odg=s2048" alt="Giao diện phòng giám sát: Theo dõi quá trình nộp bài (Hình 2)">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 64:</strong> Bảng trạng thái làm bài chi tiết của từng thí sinh trong phòng thi trực tuyến.</span>
+            <span><strong>Hình 65:</strong> Bảng theo dõi kết quả nộp bài, thời điểm hoàn thành và điểm số thi trực tiếp.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
@@ -1984,53 +1554,16 @@
           <span class="sop-badge">SOP-06</span>
         </h2>
 
-        <h3 class="sub-heading">SOP-06.1: Khai Thác Báo Cáo Tiến Độ Toàn Công Ty</h3>
-        <p>Phân hệ Báo cáo cung cấp dữ liệu phục vụ nghiệm thu chi phí đào tạo, đo lường năng lực và lưu trữ kiểm toán nội bộ. Cấp Admin có quyền truy xuất lịch sử học tập của mọi phòng ban.</p>
-
+        <h3 class="sub-heading">SOP-06.1: Khai Thác Báo Cáo Tiến Độ &amp; Xuất Kết Quả Excel</h3>
+        
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztahLfcD-0p-TApuED-k-dOchrn1M8hiNXKDsyfQkrG-K5xCE5u5U4LiGMgMnkWyfGip1TmsRnYS2vrKFHin6rX5j0q71wOLagqlHsZ7gaOPM1Dp0rqZ1ew8vT0EeyqbibmANI7C2QbDBoC9yg1Hyv1H5tItD1zhCJLBGhaJLw=s2048" alt="Báo cáo tiến độ học viên">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbyWgm7emuu6eWJ4k7zG_ooKX66iHD8fVodyFYQ2uLusT5MFZK-hIDTBfQ-G6suXcLuGKOw3pUOEkieUVRzSG4d2O6B-LHeGYTPOB5ZUb-MSMN-q6__HXtoaCqzHGMnetKhxA2hyW-Wn91h_eCr2RucHdAYOUE7mIsjgjgm6g=s2048" alt="Báo cáo tiến độ học viên">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 65:</strong> Màn hình tổng quan báo cáo tiến độ và mức độ tương tác của học viên.</span>
+            <span><strong>Hình 66:</strong> Màn hình tổng quan báo cáo tiến độ đào tạo của toàn bộ học viên.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
-        </div>
-
-        <h3 class="sub-heading">SOP-06.2: Quy Trình Lọc Điểm Thi Theo Lớp &amp; Xuất File Excel Nghiệm Thu</h3>
-        <p><strong>Nghiệp vụ thực tế:</strong> Sau khi hoàn thành lớp <strong>Đào tạo Hội nhập Online</strong>, Giảng viên tiến hành lọc kết quả bài thi cuối khóa để báo cáo cho Khối Nhân sự và Trưởng phòng chuyên môn:</p>
-        
-        <div class="sop-table-wrap">
-          <table class="sop-table">
-            <thead>
-              <tr>
-                <th style="width: 70px;">Bước</th>
-                <th>Thao tác chi tiết trên LMS</th>
-                <th style="width: 220px;">Tiêu chuẩn đầu ra</th>
-                <th style="width: 90px;">SLA</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="step-num">1</span></td>
-                <td>Vào <strong>Báo cáo &rarr; Chi tiết khóa học</strong> &rarr; Bấm <strong>Xem</strong> tại khóa học cần lấy dữ liệu.</td>
-                <td>Mở bảng dữ liệu học viên của khóa học.</td>
-                <td>2 phút</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">2</span></td>
-                <td>Lọc theo <strong>Thời gian kích hoạt</strong> của lớp &rarr; Bấm tiêu đề cột điểm để sắp xếp <strong>Điểm từ Cao xuống Thấp</strong>.</td>
-                <td>Bảng điểm được phân nhóm lớp và xếp hạng minh bạch.</td>
-                <td>3 phút</td>
-              </tr>
-              <tr>
-                <td><span class="step-num">3</span></td>
-                <td>Nhấp nút <strong>Xuất kết quả</strong> ở góc trên bên phải để tải file bảng tính <code>.xlsx</code> về máy tính.</td>
-                <td>File Excel đầy đủ Họ tên, Mã NV, Điểm số, Trạng thái Pass/Fail.</td>
-                <td>2 phút</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
 
         <div class="img-figure">
@@ -2038,38 +1571,35 @@
             <img src="https://docs.google.com/docs-images-rt/ALKuztYM8cuY2b49uqsh-lAF9yftqEI0Pg_wq7wFLvx7hY5boLNAn5yawulmWOIMxp8iS62jrLK3y-Gd-21D9MT6OrXMrPoH8ZP5TghvGc_-hEIlMMgqMsm63gqnqCx5JdEH-bib4DP1NmHCEDJBVJLGnSZqJ0MT5ORhasS7u85vxA=s2048" alt="Báo cáo chi tiết khóa học">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 66:</strong> Truy cập danh mục báo cáo chi tiết theo từng khóa học.</span>
+            <span><strong>Hình 67:</strong> Truy cập danh mục báo cáo chi tiết theo từng khóa học cụ thể.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztb_rPrYQuU6R68hKd9j-8dgt4RhOlzhWnR-4foAHdUyPYWA-aawtedyHoljVbzYf0h5YApCbQrwwPaEI5F_vEkpzBDlM45Rgq3CMFAIGoxKQlPrnqb6A7xiR_GohrfPYrH6WEkJUnXwiJrXRWnaeL-AYpUae4tFBRU86zqfkw=s2048" alt="Lọc thời gian và xếp điểm">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztb_rPrYQuU6R68hKd9j-8dgt4RhOlzhWnR-4foAHdUyPYWA-aawtedyHoljVbzYf0h5YApCbQrwwPaEI5F_vEkpzBDlM45Rgq3CMFAIGoxKQlPrnqb6A7xiR_GohrfPYrH6WEkJUnXwiJrXRWnaeL-AYpUae4tFBRU86zqfkw=s2048" alt="Lọc thời gian kích hoạt & sắp xếp điểm">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 67:</strong> Lọc dữ liệu theo đợt kích hoạt và sắp xếp bảng điểm học viên.</span>
+            <span><strong>Hình 68:</strong> Lọc theo thời gian kích hoạt của lớp học và sắp xếp điểm thi từ cao xuống thấp.</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
 
         <div class="img-figure">
           <div class="img-container">
-            <img src="https://docs.google.com/docs-images-rt/ALKuztZoFJqLGuaIQ88J6Yb59d0pfbhUM9ck-l5oWGAq2E6HVXdz1EaXTZXWdKwssBV1UhEn7064G_FZGFMf-ETsHxy2d21idhe8Bmi-02cFuIGdokg-bEWBbRxg3AoyBx1isofcMN8Wm0rOjoSANqA_tyB5deGRwJw2B3Xp0jU=s2048" alt="Xuất kết quả Excel">
+            <img src="https://docs.google.com/docs-images-rt/ALKuztbRjJ3Il-n0tGygIHJl_yufhs-lknR7ewcMLnAV3L1xLVYOl_mLDzzAg4g9kyBBRIbCrhqG5y28ASHXHLES5AwaLmuQYAStkIQ3c4qmLLYB30u1upoGDLJykDjNiWMsqM8pLVP9lj04XBRPWeP23qQQUJIHg2J_C9p4jvE=s2048" alt="Xuất kết quả bài kiểm tra sang file Excel">
           </div>
           <div class="img-caption">
-            <span><strong>Hình 68:</strong> Trích xuất kết quả bài kiểm tra ra định dạng bảng tính Excel.</span>
+            <span><strong>Hình 69:</strong> Nhấn "Xuất kết quả" để tải bảng điểm bài thi dưới định dạng file Excel (.xlsx).</span>
             <span class="hint">Nhấp ảnh để phóng to</span>
           </div>
         </div>
-
-        <h3 class="sub-heading">SOP-06.3: Phân Tích Dữ Liệu Thi Giữa Các Ca (Passing Rate)</h3>
-        <p>Đối với các bài kiểm tra chạy 2 ca (Ca 1 &amp; Ca 2), Giảng viên bắt buộc phải lọc báo cáo riêng theo từng ca để đối chiếu <strong>Tỷ lệ đạt (Passing rate) giữa lần 1 và lần 2</strong>. Số liệu này là cơ sở đánh giá độ khó của ngân hàng đề và cải tiến chất lượng giảng dạy trong đợt tiếp theo.</p>
       </section>
     </main>
   </div>
 
-  <!-- Image Lightbox Modal -->
+  <!-- Image Lightbox Modal Component -->
   <div id="imageLightbox" class="lightbox-modal">
     <div class="lightbox-content">
       <div class="lightbox-header">
@@ -2086,7 +1616,7 @@
   </button>
 
   <script>
-    // Lightbox Modal Functionality
+    // Lightbox modal logic
     const modal = document.getElementById('imageLightbox');
     const modalImg = document.getElementById('lightboxImg');
     const modalCaption = document.getElementById('lightboxCaption');
@@ -2118,10 +1648,10 @@
       }
     });
 
-    // Back to top button
+    // Scroll to Top logic
     const btnBackTop = document.getElementById('btnBackTop');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) {
+      if (window.scrollY > 350) {
         btnBackTop.classList.add('show');
       } else {
         btnBackTop.classList.remove('show');
@@ -2131,7 +1661,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Sidebar search filter
+    // Search filter in sidebar
     const searchInput = document.getElementById('sidebarSearch');
     const navItems = document.querySelectorAll('.nav-item');
 
@@ -2147,7 +1677,7 @@
       });
     });
 
-    // Active Navigation Spy on Scroll
+    // Auto-highlight active navigation link on scroll
     const sections = document.querySelectorAll('section[id]');
     window.addEventListener('scroll', () => {
       let current = '';
